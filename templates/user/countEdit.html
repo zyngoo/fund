@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑资料</title>
+</head>
+<body>
+    <form method="post" action="/user/count/edit_handle/" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            <tbody>
+            <tr>
+                <td>姓名</td>
+                <td>
+                    <input type="text" name="username">
+                </td>
+            </tr>
+            <tr>
+                <td>邮箱</td>
+                <td>
+                    <input type="text" name="email">
+                </td>
+            </tr>
+            <tr>
+                <td>手机号码</td>
+                <td>
+                    <input type="text" name="phone">
+                </td>
+            </tr>
+            <tr>
+                <td>头像</td>
+                <td>
+                    <div class="file-list"></div>
+                  <!--  <button type="button"><i>*</i>上传头像</button> -->
+                    <input type="file"  name="file">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="submit">立即提交</button>
+    </form>
+</body>
+</html>

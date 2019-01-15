@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <title>用户中心</title>
+</head>
+<body>
+    <form method="post">
+        <table>
+            <tr>
+                <td>姓名</td>
+                <td>{{ username }}</td>
+            </tr>
+            <tr>
+                <td>联系方式</td>
+                <td>{{ telephone }}</td>
+            </tr>
+            <tr>
+                <td>邮箱</td>
+                <td>{{ email }}</td>
+            </tr>
+            <tr>
+                <td>头像</td>
+{#                <td><img src="{{ head_photo }}"></td>#}
+
+                <td>
+                    <div>
+                        <img src="/static/media/{{ request.session.head_photo }}" width="50" height="50">
+                    </div>
+                </td>
+            </tr>
+
+
+
+        </table>
+    </form>
+</body>
+</html>

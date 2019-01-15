@@ -1,0 +1,57 @@
+{% extends "calender_base.html" %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/layui.css">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="/static/css/documentation.css" type="text/css" />
+    <link rel="stylesheet" href="/static/css/jalendar.css" type="text/css" />
+    <script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script><!--jQuery-->
+    <script type="text/javascript" src="/static/js/jalendar.js"></script>
+    <!-- 搜索框 -->
+    <link rel="stylesheet" type="text/css" href="/static/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/icon.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/demo.css">
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.easyui.min.js"></script>
+{% endblock %}
+
+
+
+{% block content %}
+    <div style="overflow:scroll; width:1280px; height: 710px;">
+	<!-- 日历 -->
+        <div id="myId3" class="jalendar mid" >
+            <div class="added-event" data-date="9/8/2013" data-time="Tüm Gün" data-title="WWDC 13 on San Francisco, LA"></div>
+            <div class="added-event" data-date="16/8/2013" data-time="20:45" data-title="Tarkan İstanbul Concert on Harbiye Açık Hava Tiyatrosu"></div>
+            <div class="added-event" data-date="17/8/2013" data-time="21:00" data-title="CodeCanyon İstanbul Meeting on Starbucks, Kadıköy"></div>
+            <div class="added-event" data-date="17/8/2013" data-time="22:00" data-title="Front-End Design and Javascript Conferance on Haliç Kongre Merkezi"></div>
+            <div class="added-event" data-date="17/12/2017" data-time="22:00" data-title="Lorem ipsum dolor sit amet"></div>
+        </div>
+
+		<div id="w" class="easyui-window" data-options="title:'Inline Window',inline:true,closed:true" style="width:250px;height:150px;padding:10px">
+			This window stay inside its parent
+            <button onclick="closeWind()">确定</button>
+		</div>
+
+
+  </div>
+{% endblock %}
+
+
+
+
+{% block script %}
+    <script type="text/javascript">
+    $(function () {
+        $('#myId3').jalendar({
+            color: '#023447',
+        });
+    });
+
+    function closeWind(){
+        $('#w').window('close')
+
+
+    }
+    </script>
+{% endblock %}
