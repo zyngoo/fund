@@ -3,9 +3,9 @@
 
 .jalendar {
     position: absolute;
-	left:260px;
-    top:100px;
-    width: 1000px;
+	left:0px;
+    top:0px;
+    width: 1500px;
     margin: 100 auto;
 }
 .jalendar .left {
@@ -15,7 +15,7 @@
     clear: both;
 }
 .jalendar.mid {
-    width: 420px;
+    width: 765px;
 }
 .jalendar .added-event {
     display: none;
@@ -23,6 +23,7 @@
 .jalendar-wood {
     position: relative;
     background: url('/static/images/jalendar-wood-bg.png') left top;
+    background-color: #2F4056;
     border-radius: 10px;
     box-shadow: inset 0 1px 1px rgba(255,255,255,0.7), inset 0 -2px 10px rgba(255,255,255,0.3);
     padding: 15px;
@@ -47,6 +48,7 @@
     position: absolute;
     bottom: -6px;
     background: url('/static/images/jalendar-wood-bg.png') center top;
+    background-color: #23262E;
     left: 0;
     border-radius: 10px;
     width: 100%;
@@ -90,7 +92,7 @@
     color: #fff;
     text-shadow: 0 -1px 3px rgba(0,0,0,0.5);
 }
-.jalendar-pages > .header .prv-m, 
+.jalendar-pages > .header .prv-m,
 .jalendar-pages > .header .nxt-m {
     text-decoration: none;
     width: 31px;
@@ -164,7 +166,7 @@
     position: relative;
 }
 .jalendar.mid .days .day {
-    height: 40px;
+    height: 59px;
     font-size: 18px;
     padding-top: 7px;
 }
@@ -172,7 +174,7 @@
 	background-color: #feffea;
 }
 .jalendar .days .day.selected {
-    box-shadow: inset 0 5px 15px rgba(255,255,255,0.4), inset 0 -10px 10px rgba(0,0,0,0.2);
+    box-shadow: inset 0 15px 15px rgba(255,255,255,0.4), inset 0 -10px 10px rgba(0,0,0,0.2);
     color: #fff;
     text-shadow: 0 1px 1px #000;
 }

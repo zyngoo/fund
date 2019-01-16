@@ -1,7 +1,7 @@
 import pymysql
 
 class MysqlHelper:
-    def __init__(self, host="localhost", port=3306, db="fund", user="root", passwd="123", charset="utf8"):
+    def __init__(self, host="localhost", port=3306, db="fund", user="root", passwd="123456", charset="utf8"):
         self.conn = pymysql.connect(host=host, port=port, db=db, user=user, passwd=passwd, charset=charset)
 
     def insert(self, sql, params):
