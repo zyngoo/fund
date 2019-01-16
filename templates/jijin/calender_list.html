@@ -54,6 +54,41 @@
 {#    </tr>#}
 {#  </thead>#}
 {#</table>#}
+     <div class="layui-row" id="popUpdateTest" style="display:none;">
+        <div class="layui-col-md10">
+            <form class="layui-form layui-from-pane" action="" style="margin-top:20px" >
+            <div class="layui-form-item">
+                <label class="layui-form-label">采集设备类型</label>
+                <div class="layui-input-block">
+                    <select name="eqptType" lay-filter="eqptType">
+                        <option value="0a0003biac">0a0003biac</option>
+                        <option value="0a0003ahup" selected="">0a0003ahup</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">eqptIdCode</label>
+                <div class="layui-input-block">
+                    <input type="text" name="neweqptIdCode"  required  lay-verify="required" autocomplete="off" placeholder="请输入采集设备地址" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">eqptName</label>
+                <div class="layui-input-block">
+                    <input type="text" name="neweqptName"  required  lay-verify="required" autocomplete="off" placeholder="请输入采集设备名称" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item" style="margin-top:40px">
+                <div class="layui-input-block">
+                    <button class="layui-btn  layui-btn-submit " lay-submit="" lay-filter="demo11">确认修改</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+
+        </div>
+    </div>
 
 {% endblock %}
 
@@ -64,6 +99,13 @@
       <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
       <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
+{#    <script type="text/html" id="barOption">#}
+{#    <a class="layui-btn layui-btn-mini" lay-event="detail">查看</a>#}
+{#    <a class="layui-btn layui-btn-mini layui-btn-normal" lay-event="edit">编辑</a>#}
+{#    <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="del">删除</a>#}
+{#</script>#}
+
+
 
 
 
@@ -106,20 +148,30 @@
               });
             } else if(obj.event === 'edit'){
               {#layer.alert('编辑行：<br>'+ JSON.stringify(data))#}
-                layer.prompt({
-                        formatType: 2,
-                        value: data.name,
-
-                    },
-                    function(value, index){
-                        obj.update({
-                            name:value,
-                        });
-                        layer.close(index);
+              {#  layer.prompt({#}
+              {#          formatType: 2,#}
+              {#          value: data.name,#}
+              {##}
+              {#      },#}
+              {#      function(value, index){#}
+              {#          obj.update({#}
+              {#              name:value,#}
+              {#          });#}
+              {#          layer.close(index);#}
+              {#  });#}
+                layer.open({
+                    type: 1,
+                    title: "修改日程",
+                    area:["600px","400px"],
+                    content:$("#popUpdateTest")
                 });
+                setFormValue(obj, data);
 
             }
           });
+
+
+
 
           var $ = layui.$, active = {
             getCheckData: function(){ //获取选中数据

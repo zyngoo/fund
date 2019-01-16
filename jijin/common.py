@@ -1,4 +1,3 @@
-
 import pymysql
 from django import *
 import configparser
