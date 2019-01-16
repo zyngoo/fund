@@ -496,7 +496,7 @@ a cite{font-style: normal; *cursor:pointer;}
 .layui-input, .layui-textarea, .layui-select,
 .layui-form-pane .layui-form-label, 
 .layui-form-pane .layui-form-item[pane],
-.layui-layedit, .layui-layedit-tool{border-color: #e6e6e6} 
+.layui-layedit, .layui-layedit-tool{border-color: #e6e6e6}
 
 /* 背景边框 */
 hr, .layui-timeline-item:before{background-color: #e6e6e6;}

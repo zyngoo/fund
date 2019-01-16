@@ -10,7 +10,7 @@ class Common():
             host="localhost",
             port = 3306,
             user = "root",
-            passwd = "123",
+            passwd = "123456",
             db = "fund",
             charset = "utf8"
         )
