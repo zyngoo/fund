@@ -56,36 +56,131 @@
 {#</table>#}
      <div class="layui-row" id="popUpdateTest" style="display:none;">
         <div class="layui-col-md10">
-            <form class="layui-form layui-from-pane" action="" style="margin-top:20px" >
-            <div class="layui-form-item">
-                <label class="layui-form-label">采集设备类型</label>
-                <div class="layui-input-block">
-                    <select name="eqptType" lay-filter="eqptType">
-                        <option value="0a0003biac">0a0003biac</option>
-                        <option value="0a0003ahup" selected="">0a0003ahup</option>
-                    </select>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">eqptIdCode</label>
-                <div class="layui-input-block">
-                    <input type="text" name="neweqptIdCode"  required  lay-verify="required" autocomplete="off" placeholder="请输入采集设备地址" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">eqptName</label>
-                <div class="layui-input-block">
-                    <input type="text" name="neweqptName"  required  lay-verify="required" autocomplete="off" placeholder="请输入采集设备名称" class="layui-input">
-                </div>
-            </div>
+            	<form class="layui-form" method="post" action="/jijin/calender_handle/">
 
-            <div class="layui-form-item" style="margin-top:40px">
-                <div class="layui-input-block">
-                    <button class="layui-btn  layui-btn-submit " lay-submit="" lay-filter="demo11">确认修改</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                </div>
-            </div>
-        </form>
+        <div class="layui-form-item layui-form-label">
+            <p style="font-size: 20px">新建日程</p>
+        </div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">日程名</label>
+			<div class="layui-input-block">
+				<input type="text" name="title" autocomplete="off" placeholder="请输入日程名" class="layui-input">
+			</div>
+	</div>
+
+	<div class="layui-form-item">
+	<label class="layui-form-label">参与人员</label>
+		<div class="layui-input-inline">
+			<select name="participants" lay-filter="aihao">
+			<option value=""></option>
+			<option value="0">陈桥</option>
+			<option value="1">徐菲菲</option>
+			<option value="2">赵云澜</option>
+			<option value="3">沈巍</option>
+			<option value="4">Nancy</option>
+			</select>
+		</div>
+	</div>
+
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<label class="layui-form-label">关联</label>
+			<div class="layui-input-block">
+				<select name="interest1" lay-filter="aihao">
+					<option value=""></option>
+					<option value="0">股权直投</option>
+					<option value="1" selected="">二级市场</option>
+					<option value="2">地产</option>
+				</select>
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">对方参与</label>
+				<div class="layui-input-inline">
+					<input type="text" name="participation" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+				</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">公开</label>
+				<div class="layui-input-block">
+					<input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" title="开关">
+				</div>
+		</div>
+	</div>
+
+	  <div class="layui-form-item">
+		<label class="layui-form-label">地点</label>
+		<div class="layui-input-block">
+		  <input type="text" name="address" autocomplete="off" placeholder="请输入地点" class="layui-input">
+		</div>
+	  </div>
+
+	 <div class="layui-form-item" >
+		<div class="layui-inline">
+		<label class="layui-form-label">全天事件</label>
+			<div class="layui-input-block">
+				<input type="checkbox" checked="" name="open2" lay-skin="switch" lay-filter="switchTest" title="开关">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">开始时间</label>
+				<div class="layui-input-block">
+					<input type="text" name="date1" id="date1" autocomplete="on" class="layui-input">
+				</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">结束时间</label>
+				<div class="layui-input-block">
+					<input type="text" name="date2" id="date1" autocomplete="on" class="layui-input">
+				</div>
+		</div>
+	</div>
+
+	<div class="layui-form-item" >
+		<label class="layui-form-label">重复</label>
+		<div class="layui-input-inline">
+		<select name="interest2" lay-filter="aihao">
+			<option value=""></option>
+			<option value="0">不重复</option>
+			<option value="1" >每日</option>
+			<option value="2">每周</option>
+			<option value="3">每月</option>
+			<option value="4">每年</option>
+		</select>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">直到</label>
+				<div class="layui-input-block">
+					<input type="text" name="date3" id="date1" autocomplete="on" class="layui-input">
+				</div>
+		</div>
+		<label class="layui-form-label">提醒</label>
+		<div class="layui-input-inline">
+		<select name="interest3" lay-filter="aihao">
+			<option value=""></option>
+			<option value="0">不提醒</option>
+			<option value="1">提前一小时</option>
+			<option value="2">提前一天</option>
+			<option value="3">提前一周</option>
+		</select>
+		</div>
+	</div>
+
+	<div class="layui-form-item layui-form-text">
+		<label class="layui-form-label">会议摘要</label>
+			<div class="layui-input-block">
+				<textarea placeholder="请输入内容" class="layui-textarea" name="abstract"></textarea>
+			</div>
+	</div>
+	<div class="layui-form-item">
+		<div class="layui-input-block">
+			<button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传文件</button>
+			<button class="layui-btn" lay-submit="" lay-filter="demo2">提交</button>
+			<button class="layui-btn layui-btn-primary" lay-filter type="submit" action="cache">暂存</button>
+			<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+		</div>
+	</div>
+	</form>
 
         </div>
     </div>
@@ -147,6 +242,7 @@
                 layer.close(index);
               });
             } else if(obj.event === 'edit'){
+
               {#layer.alert('编辑行：<br>'+ JSON.stringify(data))#}
               {#  layer.prompt({#}
               {#          formatType: 2,#}
@@ -162,10 +258,11 @@
                 layer.open({
                     type: 1,
                     title: "修改日程",
-                    area:["600px","400px"],
+                    area:['700px','500px'],
                     content:$("#popUpdateTest")
                 });
-                setFormValue(obj, data);
+                {#setFormValue(obj, data);#}
+
 
             }
           });
