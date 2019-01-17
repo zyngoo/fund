@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>日程表</title>
+<link rel="stylesheet" href="../src/css/layui.css">
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="../css/documentation.css" type="text/css" />
+<link rel="stylesheet" href="../css/jalendar.css" type="text/css" />
+<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script><!--jQuery-->
+<script type="text/javascript" src="../js/jalendar.js"></script>
+<!-- 搜索框 -->
+<link rel="stylesheet" type="text/css" href="../css/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../css/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="../css/demo.css">
+<script type="text/javascript" src="../easyui/jquery.min.js"></script>
+<script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
+
+<script type="text/javascript">
+$(function () {
+    $('#myId3').jalendar({
+        color: '#023447',
+    });
+});
+</script>
+
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo">基金管理平台</div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <ul class="layui-nav layui-layout-left">
+      <li class="layui-nav-item"><a href="">控制台</a></li>
+      <li class="layui-nav-item"><a href="">商品管理</a></li>
+      <li class="layui-nav-item"><a href="">用户</a></li>
+      <li class="layui-nav-item">
+        <a href="javascript:;">其它系统</a>
+        <dl class="layui-nav-child">
+          <dd><a href="">邮件管理</a></dd>
+          <dd><a href="">消息管理</a></dd>
+          <dd><a href="">授权管理</a></dd>
+        </dl>
+      </li>
+    </ul>
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a href="javascript:;">
+          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+          贤心
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="">基本资料</a></dd>
+          <dd><a href="">安全设置</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item"><a href="">退了</a></li>
+    </ul>
+  </div>
+  
+	
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        <li class="layui-nav-item layui-nav-itemed">
+          <a class="" href="javascript:;">首页</a>
+          <dl class="layui-nav-child">
+            <dd><a href="javascript:;">列表一</a></dd>
+            <dd><a href="javascript:;">列表二</a></dd>
+            <dd><a href="javascript:;">列表三</a></dd>
+            <dd><a href="">超链接</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item">
+          <a href="javascript:;">解决方案</a>
+          <dl class="layui-nav-child">
+            <dd><a href="javascript:;">列表一</a></dd>
+            <dd><a href="javascript:;">列表二</a></dd>
+            <dd><a href="">超链接</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item"><a href="">云市场</a></li>
+        <li class="layui-nav-item"><a href="">发布商品</a></li>
+      </ul>
+    </div>
+  </div>
+	
+	
+	<div style="overflow:scroll; width:1280px; height: 710px;">
+	
+	<!-- 日历 -->
+ 
+	<div id="myId3" class="jalendar mid" >
+	    <div class="added-event" data-date="9/8/2013" data-time="Tüm Gün" data-title="WWDC 13 on San Francisco, LA"></div>
+	    <div class="added-event" data-date="16/8/2013" data-time="20:45" data-title="Tarkan İstanbul Concert on Harbiye Açık Hava Tiyatrosu"></div>
+	    <div class="added-event" data-date="17/8/2013" data-time="21:00" data-title="CodeCanyon İstanbul Meeting on Starbucks, Kadıköy"></div>
+	    <div class="added-event" data-date="17/8/2013" data-time="22:00" data-title="Front-End Design and Javascript Conferance on Haliç Kongre Merkezi"></div>
+	    <div class="added-event" data-date="17/12/2017" data-time="22:00" data-title="Lorem ipsum dolor sit amet"></div>
+	</div>
+
+	
+	<!-- 搜索框 -->
+<!-- 	<div style="margin:20px 0;"></div>
+	<div class="easyui-panel">
+		<input class="easyui-searchbox" data-options="prompt:'Please Input Value',searcher:doSearch" style="width:100%;max-width:200px;padding:30px 60px;">
+	</div>
+	<script>
+		function doSearch(value){
+			alert('You input: ' + value);
+		}
+	</script> -->
+	
+
+  
+  <div>
+    <!-- 底部固定区域 -->
+    © layui.com - 底部固定区域
+  </div>
+</div>
+</div>
+<script src="../src/layui.js"></script>
+
+<script>
+//JavaScript代码区域
+layui.use('element', function(){
+  var element = layui.element;
+  
+});
+</script>
+</body>
+</html>
+
