@@ -43,12 +43,12 @@ def calender_handle(request):
 
     for key in request.POST:
         sql = sql + key + ", "
-    print(sql)
+    # print(sql)
     sql = sql.rstrip(",") + ") values ("
     for key in request.POST:
         sql = sql + "\'" + request.POST.get(key) + "\'" + ","
     sqlEnd = sql.rstrip(",") + ")"
-    print(sqlEnd)
+    # print(sqlEnd)
 
 
     inserData = "insert into schedule__schedule (schedule_name, person_id, association_id, participation," \
@@ -69,7 +69,7 @@ def calender_list(request):
 def  calender_list_handle(request):
     # sql = "SELECT schedule_id, schedule_name, person_name, association_name, start_time, end_time  from calender_list"
     sql = "SELECT schedule_id, schedule_name, person_name, association_name, date_format(start_time, '%%Y-%%m-%%d %%H:%%i:%%s'), date_format(end_time, '%%Y-%%m-%%d %%H:%%i:%%s'),is_delete  from calender_list where is_delete=0"
-    print(sql)
+    # print(sql)
     helper = MysqlHelper()
     results = helper.fetchall(sql)
     # print(results)
@@ -102,7 +102,7 @@ def  calender_list_handle(request):
     # print(jsonDatar)
     # return  HttpResponse(jsonDatar)
     #
-    print(result)
+    # print(result)
     return JsonResponse(result)
 
 
@@ -111,12 +111,16 @@ def calender_list_detail(request):
 
 def calender_delete(requset):
     id = requset.POST.get('schedule_id')
-    print(id)
-    print(type(id))
+    # print(id)
+    # print(type(id))
     sqlDelete='update schedule__schedule set is_delete=1 where schedule_id=%s'
     param = [id]
     helper = MysqlHelper().update(sqlDelete,param)
-    print(sqlDelete)
+    # print(sqlDelete)
 
     return HttpResponse(json.dumps('2'))
     # conn.execute()
+
+def calender_edit(request):
+    print(request.POST)
+    return HttpResponse("ok")

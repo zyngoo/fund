@@ -354,13 +354,7 @@
 				});
                 layer.close(index);
               });
-            } else if(obj.event === 'edit'){
-                 if (obj.event === 'del') {
-                    layer.confirm('真的删除行么', function (index) {
-                        obj.del();
-                        layer.close(index);
-                    });
-				 } else if (obj.event === 'edit') {
+            } else if (obj.event === 'edit') {
                     layer.open({
                         //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
                         type: 1,
@@ -370,9 +364,9 @@
 						shade:0
                     });
                     //动态向表传递赋值可以参看文章进行修改界面的更新前数据的显示，当然也是异步请求的要数据的修改数据的获取
-                    setFormValue(obj,data);
+                    {#setFormValue(obj,data);#}
                 }
-            }
+
             });
 
 
