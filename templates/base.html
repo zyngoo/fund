@@ -15,7 +15,7 @@
 <body class="layui-layout-body">
     <div class="layui-layout layui-layout-admin">
         <div class="layui-header">
-            <div class="layui-logo">证劵基金</div>
+            <div class="layui-logo" style="font-size: 22px; font-style: revert">证劵基金</div>
             <!-- 头部区域（可配合layui已有的水平导航） -->
 
             {% block left %}
@@ -39,8 +39,7 @@
                 </li>
                 <li class="layui-nav-item"><a href="/user/logout/">退出</a></li>
                 {% else %}
-                <li class="layui-nav-item"><a href="/user/login/">登录</a> </li>
-                <li class="layui-nav-item"><a href="/user/register/">注册</a> </li>
+                <li class="layui-nav-item" style="color: #0e90d2"><a href="/user/login/">登录 | 注册</a></li>
                 {% endif %}
             </ul>
         </div>
