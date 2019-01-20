@@ -7,30 +7,30 @@
     <title>基金管理系统</title>
 
     <link rel="stylesheet" href="{% static '/css/layui.css' %}">
-{#    <link rel="stylesheet" href="/static/css/layui.css" >#}
+    {#    <link rel="stylesheet" href="/static/css/layui.css" >#}
     {% block head %}
     {% endblock %}
 
 </head>
 <body class="layui-layout-body">
-    <div class="layui-layout layui-layout-admin">
-        <div class="layui-header">
-            <div class="layui-logo" style="font-size: 22px; font-style: revert">证劵基金</div>
-            <!-- 头部区域（可配合layui已有的水平导航） -->
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo" style="font-size: 22px; font-style: revert">证劵基金</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
 
-            {% block left %}
-            {% endblock %}
+        {% block left %}
+        {% endblock %}
 
-            <ul class="layui-nav layui-layout-right">
-                {% if request.session.user_name  %}
+        <ul class="layui-nav layui-layout-right">
+            {% if request.session.user_name %}
                 <li class="layui-nav-item">
                     <a href="javascript:;">
-                        {% if request.session.head_photo  %}
+                        {% if request.session.head_photo %}
                             <img src="/static/media/{{ request.session.head_photo }}" class="layui-nav-img">
                         {% else %}
                             <img src="/static/media/images/head.jpg" class="layui-nav-img">
                         {% endif %}
-                        {{ request.session.user_name}}
+                        {{ request.session.user_name }}
                     </a>
                     <dl class="layui-nav-child">
                         <dd><a href="/user/count">基本资料</a></dd>
@@ -38,16 +38,16 @@
                     </dl>
                 </li>
                 <li class="layui-nav-item"><a href="/user/logout/">退出</a></li>
-                {% else %}
+            {% else %}
                 <li class="layui-nav-item" style="color: #0e90d2"><a href="/user/login/">登录 | 注册</a></li>
-                {% endif %}
-            </ul>
-        </div>
+            {% endif %}
+        </ul>
+    </div>
 
-        <div class="layui-side layui-bg-black">
-            <div class="layui-side-scroll">
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
                 <li class="layui-nav-item"><a href="#">首页</a></li>
                 <li class="layui-nav-item"><a href="/jijin/calender/">日历</a></li>
                 <li class="layui-nav-item"><a href="#">事件</a></li>
@@ -91,35 +91,34 @@
                 <li class="layui-nav-item"><a href="">中介机构</a></li>
                 <li class="layui-nav-item"><a href="">消息</a></li>
             </ul>
-            </div>
-        </div>
-
-
-
-        <div class="layui-body">
-        <!-- 内容主体区域 -->
-            {% block content %}
-            {% endblock %}
-
-        </div>
-
-        <div class="layui-footer">
-        <!-- 底部固定区域 -->
-         © layui.com - 底部固定区域
         </div>
     </div>
 
-    <script src="/static/layui.js"></script>
-    <script>
-        //JavaScript代码区域
-        layui.use('element', function(){
-          var element = layui.element;
 
-        });
-    </script>
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        {% block content %}
+        {% endblock %}
 
-    {% block script %}
-    {% endblock %}
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © layui.com - 底部固定区域
+    </div>
+</div>
+
+<script src="/static/layui.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function () {
+        var element = layui.element;
+
+    });
+</script>
+
+{% block script %}
+{% endblock %}
 
 </body>
 </html>

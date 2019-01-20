@@ -20,9 +20,9 @@ class MysqlHelper:
             self.conn.commit()
             cs1.close()
             self.conn.close()
-            print(rows)
+            print("mysqlhelper: ",rows)
         except Exception as e:
-            print(e)
+            print("mysqlhelper_exception: ", e)
             self.conn.rollback()
 
 
@@ -35,7 +35,7 @@ class MysqlHelper:
             self.conn.close()
             return row
         except Exception as e:
-            print(e)
+            print("mysqlhelper_exception: ", e)
 
     def fetchall(self, sql, params=[]):
         try:
@@ -46,5 +46,5 @@ class MysqlHelper:
             self.conn.close()
             return rows
         except Exception as e:
-            print(e)
+            print("mysqlhelper_exception: ", e)
 

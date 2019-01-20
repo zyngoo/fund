@@ -65,30 +65,38 @@ def calender_list(request):
 
     return render(request, "jijin/calender_list.html")
 
+from pprint import pprint
 
 def  calender_list_handle(request):
     # sql = "SELECT schedule_id, schedule_name, person_name, association_name, start_time, end_time  from calender_list"
-    sql = "SELECT schedule_id, schedule_name, person_name, association_name, date_format(start_time, '%%Y-%%m-%%d %%H:%%i:%%s'), date_format(end_time, '%%Y-%%m-%%d %%H:%%i:%%s'),is_delete  from calender_list where is_delete=0"
-    # print(sql)
+    sql = "SELECT schedule_id, schedule_name, person_name, association_name, date_format(start_time, '%%Y-%%m-%%d %%H:%%i:%%s'), date_format(end_time, '%%Y-%%m-%%d %%H:%%i:%%s'),is_delete," \
+          "participation, is_public, address, is_all_day_event, remind_name, time_select, meeting_summary, date_format(util_time, '%%Y-%%m-%%d %%H:%%i:%%s')   from calender_list where is_delete=0"
+
+
     helper = MysqlHelper()
     results = helper.fetchall(sql)
-    # print(results)
 
+    field = ["schedule_id","schedule_name","person_name","association_name","start_time","end_time", "is_delete", "participation","is_public","address","is_all_day_event","remind_name","time_select","meeting_summary","util_time"]
     jsonData = []
+    # zip(len(field), results)
     for row in results:
+        # print(row)
         data = {}
-        data["id"] = row[0]
-        data["name"] = row[1]
-        # print(type(row[0]))
-        data["person"] = row[2]
-        data["fund"] = row[3]
-        data["start_time"] = row[4]
-        data["end_time"] = row[5]
-        data["is_dete"] = str(row[6])
-        # print(type(row[6]))
+        for key in range(len(field)):
+            data[field[key]] = row[key]
         jsonData.append(data)
+        #
+        # data["id"] = row[0]
+        # data["name"] = row[1]
+        # # print(type(row[0]))
+        # data["person"] = row[2]
+        # data["fund"] = row[3]
+        # data["start_time"] = row[4]
+        # data["end_time"] = row[5]
+        # data["is_dete"] = str(row[6])
+        # print(type(row[6]))
 
-    # print(jsonData)
+
 
     result = {}
 
@@ -111,8 +119,8 @@ def calender_list_detail(request):
 
 def calender_delete(requset):
     id = requset.POST.get('schedule_id')
-    # print(id)
-    # print(type(id))
+    print(id)
+    print(type(id))
     sqlDelete='update schedule__schedule set is_delete=1 where schedule_id=%s'
     param = [id]
     helper = MysqlHelper().update(sqlDelete,param)
