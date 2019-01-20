@@ -1,20 +1,5 @@
 {% extends "calender_base.html" %}
 
-{% block head %}
-    <link rel="stylesheet" href="/static/css/layui.css">
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="/static/css/documentation.css" type="text/css"/>
-    <link rel="stylesheet" href="/static/css/jalendar.css" type="text/css"/>
-    <script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script><!--jQuery-->
-    <script type="text/javascript" src="/static/js/jalendar.js"></script>
-    <!-- 搜索框 -->
-    <link rel="stylesheet" type="text/css" href="/static/css/easyui.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/icon.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/demo.css">
-    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/js/jquery.easyui.min.js"></script>
-{% endblock %}
-
 
 
 {% block content %}
@@ -33,9 +18,9 @@
                  data-title="Lorem ipsum dolor sit amet"></div>
         </div>
 
-        <form method="post" action="">
+        <form method="post" action="/jijin/calender_handle/">
             <div id="w" class="easyui-window" title="信息" data-options="iconCls:'icon-save'" closed='true'
-                 style="width:900px;height:550px;padding:10px;">
+                 style="width:1000px;height:550px;padding:10px;">
                 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 0;">
                     <legend>新建日程</legend>
                 </fieldset>
@@ -43,7 +28,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">日程名</label>
                     <div class="layui-input-block">
-                        <input type="text" name="addreser" autocomplete="off" placeholder="请输入" class="layui-input">
+                        <input type="text" name="title" autocomplete="off" placeholder="请输入" class="layui-input">
                     </div>
                 </div>
 
@@ -189,4 +174,5 @@
 
         }
     </script>
+
 {% endblock %}

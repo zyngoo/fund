@@ -1,19 +1,10 @@
 {% extends "calender_base.html" %}
 
-{% block head %}
-<link rel="stylesheet" href="/static/css/layui.css">
-<meta name="viewport" content="width=device-width">
-<link rel="stylesheet" href="/static/css/documentation.css" type="text/css"/>
-<link rel="stylesheet" href="/static/css/jalendar.css" type="text/css"/>
-<script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script><!--jQuery-->
-<script type="text/javascript" src="/static/js/jalendar.js"></script>
-{% endblock %}
 
 
 {% block content %}
 <!-- <div style="overflow:scroll; width:1280px; height: 1200px;"> -->
 <div style="top: 100px;">
-
 
     <!-- 新增日程-->
     <form class="layui-form" method="post" action="/jijin/calender_handle/">

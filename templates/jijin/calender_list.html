@@ -1,6 +1,8 @@
 {% extends "calender_base.html" %}
 
-{% block head %}
+
+
+{% block head_2 %}
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -30,8 +32,8 @@
             <th lay-data="{field:'schedule_name', width:100, edit:'text'}">日程名</th>
             <th lay-data="{field:'person_name', width:120, sort: true,edit:'text'}">参与人员</th>
             <th lay-data="{field:'association_name', width:120, edit:'text'}">关联</th>
-            <th lay-data="{field:'start_time', width:160}">开始时间</th>
-            <th lay-data="{field:'end_time', width:160, sort: true}">结束时间</th>
+            <th lay-data="{field:'start_time', width:200}">开始时间</th>
+            <th lay-data="{field:'end_time', width:200, sort: true}">结束时间</th>
             <th lay-data="{fixed: 'right', width:180, align:'center', toolbar: '#barDemo'}"></th>
         </tr>
         </thead>
@@ -48,16 +50,16 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">日程名</label>
                     <div class="layui-input-block">
-                        <input id="schedule_name" type="text" name="title" autocomplete="off" placeholder="请输入日程名" class="layui-input">
+                        <input id="schedule_name_2" type="text" name="title" autocomplete="off" placeholder="请输入日程名" class="layui-input">
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">参与人员</label>
                     <div class="layui-input-inline">
-                        <select name="participants" lay-filter="aihao">
+                        <select id="participant_2"  name="participants" lay-filter="aihao">
                             <option value=""></option>
-                            <option value="0">陈桥</option>
+                            <option value="0" selected>陈桥</option>
                             <option value="1">徐菲菲</option>
                             <option value="2">赵云澜</option>
                             <option value="3">沈巍</option>
@@ -70,10 +72,10 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">关联</label>
                         <div class="layui-input-block">
-                            <select name="interest1" lay-filter="aihao">
-                                <option value=""></option>
+                            <select id="association_name_2" name="interest1" lay-filter="aihao">
+                                <option value="" selected=""></option>
                                 <option value="0">股权直投</option>
-                                <option value="1" selected="">二级市场</option>
+                                <option value="1">二级市场</option>
                                 <option value="2">地产</option>
                             </select>
                         </div>
@@ -81,14 +83,14 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">对方参与</label>
                         <div class="layui-input-inline">
-                            <input id="participation" type="text" name="participation" lay-verify="required" placeholder="请输入"
+                            <input id="participation_2" type="text" name="participation" lay-verify="required" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">公开</label>
                         <div class="layui-input-block">
-                            <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest"
+                            <input id="is_public_2" type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest"
                                    title="开关">
                         </div>
                     </div>
@@ -97,7 +99,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">地点</label>
                     <div class="layui-input-block">
-                        <input type="text" name="address" autocomplete="off" placeholder="请输入地点" class="layui-input">
+                        <input id="address_2" type="text" name="address" autocomplete="off" placeholder="请输入地点" class="layui-input">
                     </div>
                 </div>
 
@@ -105,20 +107,20 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">全天事件</label>
                         <div class="layui-input-block">
-                            <input type="checkbox" checked="" name="open2" lay-skin="switch" lay-filter="switchTest"
+                            <input id="is_all_day_event_2" type="checkbox" checked="" name="open2" lay-skin="switch" lay-filter="switchTest"
                                    title="开关">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">开始时间</label>
                         <div class="layui-input-block">
-                            <input type="text" name="date1" id="start_time" autocomplete="on" class="layui-input">
+                            <input type="text" name="date1" id="start_time_2" autocomplete="on" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">结束时间</label>
                         <div class="layui-input-block">
-                            <input type="text" name="date2" id="end_time" autocomplete="on" class="layui-input">
+                            <input type="text" name="date2" id="end_time_2" autocomplete="on" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -126,7 +128,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">重复</label>
                     <div class="layui-input-inline">
-                        <select name="interest2" lay-filter="aihao">
+                        <select id="time_select_2" name="interest2" lay-filter="aihao">
                             <option value=""></option>
                             <option value="0">不重复</option>
                             <option value="1">每日</option>
@@ -137,7 +139,7 @@
                     </div>
                     <label class="layui-form-label">提醒</label>
                     <div class="layui-input-inline">
-                        <select name="interest3" lay-filter="aihao">
+                        <select id="remind_name_2" name="interest3" lay-filter="aihao">
                             <option value=""></option>
                             <option value="0">不提醒</option>
                             <option value="1">提前一小时</option>
@@ -151,7 +153,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">直到</label>
                         <div class="layui-input-inline">
-                            <input  type="text" name="date" id="util_time" lay-verify="date" placeholder="yyyy-MM-dd"
+                            <input  type="text" name="date" id="util_time_2" lay-verify="date" placeholder="yyyy-MM-dd"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -160,7 +162,7 @@
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">会议摘要</label>
                     <div class="layui-input-block">
-                        <textarea id="" placeholder="请输入内容" class="layui-textarea" name="abstract"></textarea>
+                        <textarea id="meeting_summary_2" placeholder="请输入内容" class="layui-textarea" name="abstract"></textarea>
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -366,7 +368,7 @@
                     layer.open({
                         //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
                         type: 1,
-                        title: "修改日程",
+                        {#title: "修改日程",#}
                         area: ['800px', '500px'],
                         content: $("#popUpdateTest"),//引用的弹出层的页面层的方式加载修改界面表单
                         shade: 0,
@@ -374,7 +376,7 @@
                         {
 
                             for(var key in data) {
-                                var idName='#'+key;
+                                var idName='#'+key + "_2";
                                 $(idName).val(data[key]);
                             }
                             {#$("#fund").val("二股");#}

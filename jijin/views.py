@@ -9,7 +9,7 @@ def index(request):
 
 def calender(request):
 
-    return render(request, "jijin/calender2.html")
+    return render(request, "jijin/calender.html")
 
 def calender_add(request):
 
