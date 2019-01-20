@@ -119,8 +119,8 @@ def calender_list_detail(request):
 
 def calender_delete(requset):
     id = requset.POST.get('schedule_id')
-    print(id)
-    print(type(id))
+    # print(id)
+    # print(type(id))
     sqlDelete='update schedule__schedule set is_delete=1 where schedule_id=%s'
     param = [id]
     helper = MysqlHelper().update(sqlDelete,param)
