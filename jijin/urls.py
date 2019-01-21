@@ -10,6 +10,8 @@ urlpatterns = [
     path("calender/list_handle/", views.calender_list_handle),
     path("calender/calender_delete/", views.calender_delete),
     path("calender/calender_edit/", views.calender_edit),
+    path("calender/calender_user/", views.calender_user),
+
 
 
 

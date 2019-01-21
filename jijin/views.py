@@ -132,3 +132,24 @@ def calender_delete(requset):
 def calender_edit(request):
     print(request.POST)
     return HttpResponse("ok")
+
+
+def dict_fetchall(cursor):
+    "Return all rows from a cursor as a dict"
+    columns = [col[0] for col in cursor.description]
+    return [
+        dict(zip(columns, row))
+        for row in cursor.fetchall()
+    ]
+
+def calender_user(request):
+    sql='select person_name from schedule__person'
+    conn=Common.mysqlCon()
+    cursor = conn.cursor()
+    cursor.execute(sql)
+    allname=dict_fetchall(cursor)
+    print(allname)
+    cursor.close()
+    conn.close()
+
+    return HttpResponse(json.dumps(allname))

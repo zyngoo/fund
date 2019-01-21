@@ -57,13 +57,13 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">参与人员</label>
                     <div class="layui-input-inline">
-                        <select id="participant_2"  name="participants" lay-filter="aihao">
-                            <option value=""></option>
-                            <option value="0" selected>陈桥</option>
-                            <option value="1">徐菲菲</option>
-                            <option value="2">赵云澜</option>
-                            <option value="3">沈巍</option>
-                            <option value="4">Nancy</option>
+                        <select id="participant_2"  name="participants" lay-filter="participant">
+{#                            <option value=""></option>#}
+{#                            <option value="0" selected>陈桥</option>#}
+{#                            <option value="1">徐菲菲</option>#}
+{#                            <option value="2">赵云澜</option>#}
+{#                            <option value="3">沈巍</option>#}
+{#                            <option value="4">Nancy</option>#}
                         </select>
                     </div>
                 </div>
@@ -73,10 +73,10 @@
                         <label class="layui-form-label">关联</label>
                         <div class="layui-input-block">
                             <select id="association_name_2" name="interest1" lay-filter="aihao">
-                                <option value="" selected=""></option>
-                                <option value="0">股权直投</option>
-                                <option value="1">二级市场</option>
-                                <option value="2">地产</option>
+{#                                <option value="" selected=""></option>#}
+{#                                <option value="0">股权直投</option>#}
+{#                                <option value="1">二级市场</option>#}
+{#                                <option value="2">地产</option>#}
                             </select>
                         </div>
                     </div>
@@ -129,22 +129,22 @@
                     <label class="layui-form-label">重复</label>
                     <div class="layui-input-inline">
                         <select id="time_select_2" name="interest2" lay-filter="aihao">
-                            <option value=""></option>
-                            <option value="0">不重复</option>
-                            <option value="1">每日</option>
-                            <option value="2">每周</option>
-                            <option value="3">每月</option>
-                            <option value="4">每年</option>
+{#                            <option value=""></option>#}
+{#                            <option value="0">不重复</option>#}
+{#                            <option value="1">每日</option>#}
+{#                            <option value="2">每周</option>#}
+{#                            <option value="3">每月</option>#}
+{#                            <option value="4">每年</option>#}
                         </select>
                     </div>
                     <label class="layui-form-label">提醒</label>
                     <div class="layui-input-inline">
                         <select id="remind_name_2" name="interest3" lay-filter="aihao">
-                            <option value=""></option>
-                            <option value="0">不提醒</option>
-                            <option value="1">提前一小时</option>
-                            <option value="2">提前一天</option>
-                            <option value="3">提前一周</option>
+{#                            <option value=""></option>#}
+{#                            <option value="0">不提醒</option>#}
+{#                            <option value="1">提前一小时</option>#}
+{#                            <option value="2">提前一天</option>#}
+{#                            <option value="3">提前一周</option>#}
                         </select>
                     </div>
                 </div>
@@ -365,6 +365,73 @@
                         layer.close(index);
                     });
                 } else if (obj.event === 'edit') {
+                    $.ajax({
+                        url: "/jijin/calender/calender_user/",
+                        type: "POST",
+                        dataType:"json",
+                       async:false,
+                        success: function (msg) {
+                           console.log(msg);
+                           var value='';
+                            for (var i=0;i<msg.length;i++){
+                               {#alert(msg[i])#}
+                                if(obj.data.person_name==msg[i].person_name){
+                                    value+="<option value='"+msg[i].person_name+"' selected >"+msg[i].person_name+"</option>";
+                                }else {
+                                    value+="<option value='"+msg[i].person_name+"'>"+msg[i].person_name+"</option>";
+
+                                }
+
+                            }
+                            {#alert(value);#}
+                           $("#participant_2").append(value);
+
+                           {#关联选择#}
+                           var contactList=['股权直投','二级市场','地产'];
+                           {#alert(JSON.stringify(obj.data))#}
+                            var contantVal='';
+                            for (var i=0;i<contactList.length;i++){
+                               {#alert(msg[i])#}
+                                if(obj.data.association_name==contactList[i]){
+                                    contantVal+="<option value='"+contactList[i]+"' selected >"+contactList[i]+"</option>";
+                                }else {
+                                    contantVal+="<option value='"+contactList[i]+"'>"+contactList[i]+"</option>";
+
+                                }
+
+                            }
+                            $("#association_name_2").append(contantVal);
+
+                            {#重复选择#}
+                            var repeatList = ["不重复","每日","每周","每月","每年"]
+                            var repeatVal = "";
+                            for (var i=0; i<repeatList.length; i++){
+                                if(obj.data.time_select==repeatList[i]){
+                                    repeatVal += "<option value ='" + repeatList[i] + "' selected >" + repeatList[i] + "</option>";
+                                }else{
+                                    repeatVal += "<option value ='" + repeatList[i] + "'>" + repeatList[i] + "</option>";
+                                }
+                            }
+                            $("#time_select_2").append(repeatVal)
+
+                            {#提醒选择#}
+                            var remindList = ["不提醒","提前一小时","提前一天","提前一周"]
+                            var remindVal = "";
+                            for (var i=0; i<remindList.length; i++){
+                                if(obj.data.remind_name==remindList[i]){
+                                    remindVal += "<option value ='" + remindList[i] + "' selected >" + remindList[i] + "</option>";
+                                }else{
+                                    remindVal += "<option value ='" + remindList[i] + "'>" + remindList[i] + "</option>";
+                                }
+                            }
+                            $("#remind_name_2").append(remindVal)
+
+                            {#表单渲染#}
+                           form.render();
+
+                        }
+                    });
+
                     layer.open({
                         //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
                         type: 1,
@@ -389,6 +456,10 @@
 
                         }
                     });
+
+
+
+
                     //动态向表传递赋值可以参看文章进行修改界面的更新前数据的显示，当然也是异步请求的要数据的修改数据的获取
                     //getFormValue(obj, data);
                 }
@@ -433,6 +504,15 @@
               });
               laydate.render({
                 elem: '#util_time'
+              });
+              laydate.render({
+                elem: '#start_time_2'
+              });
+              laydate.render({
+                elem: '#end_time_2'
+              });
+              laydate.render({
+                elem: '#util_time_2'
               });
 
             var $ = layui.$, active = {
