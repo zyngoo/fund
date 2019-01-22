@@ -23,11 +23,14 @@ def calender_handle(request):
     post = request.POST
     name = post.get("title")
     person = int(post.get("participants"))
+    # print("person: ", person)
     guanlian = int(post.get("interest1"))
     participant = post.get("participation")
     is_public = post.get("open")
+    # print("is_public：", is_public)
     address = post.get("address")
     is_all_day = post.get("open2")
+    # print("is_all_day_event: ", is_all_day)
     starttime = str(post.get("date1"))
     # endtime = str(post.get("date2"))
     endtime = post.get("date2")
@@ -51,13 +54,13 @@ def calender_handle(request):
     # print(sqlEnd)
 
 
-    inserData = "insert into schedule__schedule (schedule_name, person_id, association_id, participation," \
+    insertData = "insert into schedule__schedule (schedule_name, person_id, association_id, participation," \
                 "is_public, address, is_all_day_event,start_time, end_time, time_id, util_time," \
                 "remind_id, meeting_summary) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     params = [name,person,guanlian,participant,is_public,address, is_all_day,starttime, endtime,time,utiltime,remind, abstract]
 
     helper = MysqlHelper()
-    result = helper.insert(inserData, params)
+    result = helper.insert(insertData, params)
 
     return redirect("/jijin/calender/list")
 
@@ -131,12 +134,37 @@ def calender_delete(requset):
 
 def calender_edit(request):
     print(request.POST)
-    return HttpResponse("ok")
+    post = request.POST
+    keyword = ["schedule_id", "schedule_name", "person_name", "association_name", "start_time", "end_time", "participation",
+               "is_public", "address", "is_all_day_event", "remind_name", "time_select", "meeting_summary",
+               "util_time"]
+    # sql = "update calender_list set "
+    # for key, value in post.items():
+    #     if key != "schedule_id":
+    #         sql += key + "=" + value + ", "
+    #
+    # # sql = sql.rsplit(",")
+    # sql = sql[:-2] + " where schedule_id = " + post["schedule_id"]
+    # print(sql)
+
+    sql = "update schedule_schedule "
+
+    conn = Common.mysqlCon()
+    cursor = conn.cursor()
+    try:
+        cursor.execute(sql)
+    except Exception as e:
+        print("error: ", e)
+    cursor.close()
+    conn.close()
+
+
 
 
 def dict_fetchall(cursor):
     "Return all rows from a cursor as a dict"
     columns = [col[0] for col in cursor.description]
+    print(columns)
     return [
         dict(zip(columns, row))
         for row in cursor.fetchall()
@@ -153,3 +181,13 @@ def calender_user(request):
     conn.close()
 
     return HttpResponse(json.dumps(allname))
+
+def calender_test(request):
+    sql = "select * from schedule__schedule where schedule_id=1"
+    conn = Common.mysqlCon()
+    cursor = conn.cursor()
+    cursor.execute(sql)
+    data = dict_fetchall(cursor)
+    cursor.close()
+    conn.close()
+    return HttpResponse("ok")

@@ -46,24 +46,25 @@
                 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 0;">
                     <legend>修改日程</legend>
                 </fieldset>
-
+                <label id="schedule_id" style="display:none"></label>
                 <div class="layui-form-item">
                     <label class="layui-form-label">日程名</label>
                     <div class="layui-input-block">
-                        <input id="schedule_name_2" type="text" name="title" autocomplete="off" placeholder="请输入日程名" class="layui-input">
+                        <input id="schedule_name" type="text" name="title" autocomplete="off" placeholder="请输入日程名"
+                               class="layui-input">
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">参与人员</label>
                     <div class="layui-input-inline">
-                        <select id="participant_2"  name="participants" lay-filter="participant">
-{#                            <option value=""></option>#}
-{#                            <option value="0" selected>陈桥</option>#}
-{#                            <option value="1">徐菲菲</option>#}
-{#                            <option value="2">赵云澜</option>#}
-{#                            <option value="3">沈巍</option>#}
-{#                            <option value="4">Nancy</option>#}
+                        <select id="person_name" name="participants" lay-filter="participant">
+                            {#                            <option value=""></option>#}
+                            {#                            <option value="0" selected>陈桥</option>#}
+                            {#                            <option value="1">徐菲菲</option>#}
+                            {#                            <option value="2">赵云澜</option>#}
+                            {#                            <option value="3">沈巍</option>#}
+                            {#                            <option value="4">Nancy</option>#}
                         </select>
                     </div>
                 </div>
@@ -72,25 +73,27 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">关联</label>
                         <div class="layui-input-block">
-                            <select id="association_name_2" name="interest1" lay-filter="aihao">
-{#                                <option value="" selected=""></option>#}
-{#                                <option value="0">股权直投</option>#}
-{#                                <option value="1">二级市场</option>#}
-{#                                <option value="2">地产</option>#}
+                            <select id="association_name" name="interest1" lay-filter="aihao">
+                                {#                                <option value="" selected=""></option>#}
+                                {#                                <option value="0">股权直投</option>#}
+                                {#                                <option value="1">二级市场</option>#}
+                                {#                                <option value="2">地产</option>#}
                             </select>
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">对方参与</label>
                         <div class="layui-input-inline">
-                            <input id="participation_2" type="text" name="participation" lay-verify="required" placeholder="请输入"
+                            <input id="participation" type="text" name="participation" lay-verify="required"
+                                   placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">公开</label>
                         <div class="layui-input-block">
-                            <input id="is_public_2" type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest"
+                            <input id="is_public" type="checkbox" checked="" name="open" lay-skin="switch"
+                                   lay-filter="switchTest"
                                    title="开关">
                         </div>
                     </div>
@@ -99,7 +102,8 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">地点</label>
                     <div class="layui-input-block">
-                        <input id="address_2" type="text" name="address" autocomplete="off" placeholder="请输入地点" class="layui-input">
+                        <input id="address" type="text" name="address" autocomplete="off" placeholder="请输入地点"
+                               class="layui-input">
                     </div>
                 </div>
 
@@ -107,20 +111,21 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">全天事件</label>
                         <div class="layui-input-block">
-                            <input id="is_all_day_event_2" type="checkbox" checked="" name="open2" lay-skin="switch" lay-filter="switchTest"
+                            <input id="is_all_day_event" type="checkbox" name="open2" lay-skin="switch"
+                                   lay-filter="switchTest"
                                    title="开关">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">开始时间</label>
                         <div class="layui-input-block">
-                            <input type="text" name="date1" id="start_time_2" autocomplete="on" class="layui-input">
+                            <input type="text" name="date1" id="start_time" autocomplete="on" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">结束时间</label>
                         <div class="layui-input-block">
-                            <input type="text" name="date2" id="end_time_2" autocomplete="on" class="layui-input">
+                            <input type="text" name="date2" id="end_time" autocomplete="on" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -128,23 +133,23 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">重复</label>
                     <div class="layui-input-inline">
-                        <select id="time_select_2" name="interest2" lay-filter="aihao">
-{#                            <option value=""></option>#}
-{#                            <option value="0">不重复</option>#}
-{#                            <option value="1">每日</option>#}
-{#                            <option value="2">每周</option>#}
-{#                            <option value="3">每月</option>#}
-{#                            <option value="4">每年</option>#}
+                        <select id="time_select" name="interest2" lay-filter="aihao">
+                            {#                            <option value=""></option>#}
+                            {#                            <option value="0">不重复</option>#}
+                            {#                            <option value="1">每日</option>#}
+                            {#                            <option value="2">每周</option>#}
+                            {#                            <option value="3">每月</option>#}
+                            {#                            <option value="4">每年</option>#}
                         </select>
                     </div>
                     <label class="layui-form-label">提醒</label>
                     <div class="layui-input-inline">
-                        <select id="remind_name_2" name="interest3" lay-filter="aihao">
-{#                            <option value=""></option>#}
-{#                            <option value="0">不提醒</option>#}
-{#                            <option value="1">提前一小时</option>#}
-{#                            <option value="2">提前一天</option>#}
-{#                            <option value="3">提前一周</option>#}
+                        <select id="remind_name" name="interest3" lay-filter="aihao">
+                            {#                            <option value=""></option>#}
+                            {#                            <option value="0">不提醒</option>#}
+                            {#                            <option value="1">提前一小时</option>#}
+                            {#                            <option value="2">提前一天</option>#}
+                            {#                            <option value="3">提前一周</option>#}
                         </select>
                     </div>
                 </div>
@@ -153,7 +158,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">直到</label>
                         <div class="layui-input-inline">
-                            <input  type="text" name="date" id="util_time_2" lay-verify="date" placeholder="yyyy-MM-dd"
+                            <input type="text" name="date" id="util_time" lay-verify="date" placeholder="yyyy-MM-dd"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -162,13 +167,16 @@
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">会议摘要</label>
                     <div class="layui-input-block">
-                        <textarea id="meeting_summary_2" placeholder="请输入内容" class="layui-textarea" name="abstract"></textarea>
+                        <textarea id="meeting_summary" placeholder="请输入内容" class="layui-textarea"
+                                  name="abstract"></textarea>
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-input-block">
                         <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传文件</button>
-                        <button class="layui-btn layui-btn-submit" lay-submit="" lay-filter="demo2">提交</button>
+                        <button class="layui-btn layui-btn-submit" lay-submit="" lay-filter="demo2"
+                                onclick="mysubmit()">提交
+                        </button>
                         <button class="layui-btn layui-btn-primary" lay-filter type="submit" action="cache">暂存</button>
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
@@ -190,14 +198,15 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">日程名</label>
                     <div class="layui-input-block">
-                        <input id="schedule_name" type="text" name="title" autocomplete="off" placeholder="请输入日程名" class="layui-input">
+                        <input id="schedule_name_2" type="text" name="title" autocomplete="off" placeholder="请输入日程名"
+                               class="layui-input">
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">参与人员</label>
                     <div class="layui-input-inline">
-                        <input id="person_name" type="text" class="layui-input">
+                        <input id="person_name_2" type="text" class="layui-input">
                     </div>
                 </div>
 
@@ -205,20 +214,22 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">关联</label>
                         <div class="layui-input-block">
-                            <input id="association_name" type="text" class="layui-input">
+                            <input id="association_name_2" type="text" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">对方参与</label>
                         <div class="layui-input-inline">
-                            <input id="participation" type="text" name="participation" lay-verify="required" placeholder="请输入"
+                            <input id="participation_2" type="text" name="participation" lay-verify="required"
+                                   placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">公开</label>
                         <div class="layui-input-block">
-                            <input id="is_public" type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest"
+                            <input id="is_public_2" type="checkbox" checked="" name="open" lay-skin="switch"
+                                   lay-filter="switchTest"
                                    title="开关">
                         </div>
                     </div>
@@ -227,7 +238,8 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">地点</label>
                     <div class="layui-input-block">
-                        <input id="address" type="text" name="address" autocomplete="off" placeholder="请输入地点" class="layui-input">
+                        <input id="address_2" type="text" name="address" autocomplete="off" placeholder="请输入地点"
+                               class="layui-input">
                     </div>
                 </div>
 
@@ -235,20 +247,21 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">全天事件</label>
                         <div class="layui-input-block">
-                            <input id="is_all_day_event" type="checkbox" checked="" name="open2" lay-skin="switch" lay-filter="switchTest"
+                            <input id="is_all_day_event_2" type="checkbox" checked="" name="open2" lay-skin="switch"
+                                   lay-filter="switchTest"
                                    title="开关">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">开始时间</label>
                         <div class="layui-input-block">
-                            <input type="text" name="date1" id="start_time" autocomplete="on" class="layui-input">
+                            <input type="text" name="date1" id="start_time_2" autocomplete="on" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">结束时间</label>
                         <div class="layui-input-block">
-                            <input type="text" name="date2" id="end_time" autocomplete="on" class="layui-input">
+                            <input type="text" name="date2" id="end_time_2" autocomplete="on" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -256,11 +269,11 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">重复</label>
                     <div class="layui-input-inline">
-                        <input id="time_select" type="text" class="layui-input">
+                        <input id="time_select_2" type="text" class="layui-input">
                     </div>
                     <label class="layui-form-label">提醒</label>
                     <div class="layui-input-inline">
-                        <input id="remind_name" type="text" class="layui-input">
+                        <input id="remind_name_2" type="text" class="layui-input">
                     </div>
                 </div>
 
@@ -268,7 +281,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">直到</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="date" id="util_time" lay-verify="date" placeholder="yyyy-MM-dd"
+                            <input type="text" name="date" id="util_time_2" lay-verify="date" placeholder="yyyy-MM-dd"
                                    autocomplete="on" class="layui-input">
                         </div>
                     </div>
@@ -277,7 +290,8 @@
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">会议摘要</label>
                     <div class="layui-input-block">
-                        <textarea id="meeting_summary" placeholder="请输入内容" class="layui-textarea" name="abstract"></textarea>
+                        <textarea id="meeting_summary_2" placeholder="请输入内容" class="layui-textarea"
+                                  name="abstract"></textarea>
                     </div>
                 </div>
 
@@ -294,10 +308,10 @@
         {#	 <a class="layui-btn layui-btn-xs" lay-event="add">添加</a>#}
         <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
 
-    <script src="/static/layui/layui.js"></script>
 
     <script>
         layui.use(['table', "form", "laydate"], function () {
@@ -315,22 +329,17 @@
                 if (obj.event === 'detail') {
                     {#layer.msg('ID：'+ data.id + ' 的查看操作');#}
                     layer.open({
-                    		//layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
-                    		type: 1,
-                    		{#title: "查看日程",#}
-                    		area: ['800px','500px'],
-                    		content: $("#viewData"),//引用的弹出层的页面层的方式加载修改界面表单
-                    		shade:0,
-                            success:function(x,y)
-                            {
+                        //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+                        type: 1,
+                        {#title: "查看日程",#}
+                        area: ['800px', '500px'],
+                        content: $("#viewData"),//引用的弹出层的页面层的方式加载修改界面表单
+                        shade: 0,
+                        success: function (x, y) {
 
-                                for(var key in data) {
-                                    var idName='#'+key;
-                                    if(idName=="#is_all_day_event"){
-
-                                    }else{
-                                        $(idName).val(data[key]);
-                                    }
+                            for (var key in data) {
+                                var idName = '#' + key + "_2";
+                                $(idName).val(data[key]);
 
                             }
                             {#$("#fund").val("二股");#}
@@ -339,10 +348,10 @@
 
                             {#x.find("input")[0].value=data.person;#}
                             {#x.find("input")[1].value=data.title;#}
-                             {#x.find("input[name=xxx]").value=data.xxx;#}
+                            {#x.find("input[name=xxx]").value=data.xxx;#}
 
                         }
-                    	});
+                    });
                 } else if (obj.event === 'del') {
                     layer.confirm('真的删除行么', function (index) {
                         obj.del();
@@ -365,69 +374,71 @@
                         layer.close(index);
                     });
                 } else if (obj.event === 'edit') {
+                    var schedule_id = obj.data.schedule_id;
                     $.ajax({
                         url: "/jijin/calender/calender_user/",
                         type: "POST",
-                        dataType:"json",
-                       async:false,
+                        dataType: "json",
+                        async: false,
                         success: function (msg) {
-                           console.log(msg);
-                           var value='';
-                            for (var i=0;i<msg.length;i++){
-                               {#alert(msg[i])#}
-                                if(obj.data.person_name==msg[i].person_name){
-                                    value+="<option value='"+msg[i].person_name+"' selected >"+msg[i].person_name+"</option>";
-                                }else {
-                                    value+="<option value='"+msg[i].person_name+"'>"+msg[i].person_name+"</option>";
+                            {#参与人员#}
+                            console.log(msg);
+                            var value = '';
+                            for (var i = 0; i < msg.length; i++) {
+                                {#alert(msg[i])#}
+                                if (obj.data.person_name == msg[i].person_name) {
+                                    value += "<option value='" + msg[i].person_name + "' selected >" + msg[i].person_name + "</option>";
+                                } else {
+                                    value += "<option value='" + msg[i].person_name + "'>" + msg[i].person_name + "</option>";
 
                                 }
 
                             }
                             {#alert(value);#}
-                           $("#participant_2").append(value);
+                            $("#person_name").append(value);
 
-                           {#关联选择#}
-                           var contactList=['股权直投','二级市场','地产'];
-                           {#alert(JSON.stringify(obj.data))#}
-                            var contantVal='';
-                            for (var i=0;i<contactList.length;i++){
-                               {#alert(msg[i])#}
-                                if(obj.data.association_name==contactList[i]){
-                                    contantVal+="<option value='"+contactList[i]+"' selected >"+contactList[i]+"</option>";
-                                }else {
-                                    contantVal+="<option value='"+contactList[i]+"'>"+contactList[i]+"</option>";
+                            {#关联选择#}
+                            var contactList = ['股权直投', '二级市场', '地产'];
+                            {#alert(JSON.stringify(obj.data))#}
+                            var contantVal = '';
+                            for (var i = 0; i < contactList.length; i++) {
+                                {#alert(msg[i])#}
+                                if (obj.data.association_name == contactList[i]) {
+                                    contantVal += "<option value='" + contactList[i] + "' selected >" + contactList[i] + "</option>";
+                                } else {
+                                    contantVal += "<option value='" + contactList[i] + "'>" + contactList[i] + "</option>";
 
                                 }
 
                             }
-                            $("#association_name_2").append(contantVal);
+                            $("#association_name").append(contantVal);
 
                             {#重复选择#}
-                            var repeatList = ["不重复","每日","每周","每月","每年"]
+                            var repeatList = ["不重复", "每日", "每周", "每月", "每年"]
                             var repeatVal = "";
-                            for (var i=0; i<repeatList.length; i++){
-                                if(obj.data.time_select==repeatList[i]){
+                            for (var i = 0; i < repeatList.length; i++) {
+                                if (obj.data.time_select == repeatList[i]) {
                                     repeatVal += "<option value ='" + repeatList[i] + "' selected >" + repeatList[i] + "</option>";
-                                }else{
+                                } else {
                                     repeatVal += "<option value ='" + repeatList[i] + "'>" + repeatList[i] + "</option>";
                                 }
                             }
-                            $("#time_select_2").append(repeatVal)
+                            $("#time_select").append(repeatVal)
 
                             {#提醒选择#}
-                            var remindList = ["不提醒","提前一小时","提前一天","提前一周"]
+                            var remindList = ["不提醒", "提前一小时", "提前一天", "提前一周"]
                             var remindVal = "";
-                            for (var i=0; i<remindList.length; i++){
-                                if(obj.data.remind_name==remindList[i]){
+                            for (var i = 0; i < remindList.length; i++) {
+                                if (obj.data.remind_name == remindList[i]) {
                                     remindVal += "<option value ='" + remindList[i] + "' selected >" + remindList[i] + "</option>";
-                                }else{
+                                } else {
                                     remindVal += "<option value ='" + remindList[i] + "'>" + remindList[i] + "</option>";
                                 }
                             }
-                            $("#remind_name_2").append(remindVal)
+                            $("#remind_name").append(remindVal);
 
                             {#表单渲染#}
-                           form.render();
+                            form.render();
 
                         }
                     });
@@ -439,25 +450,15 @@
                         area: ['800px', '500px'],
                         content: $("#popUpdateTest"),//引用的弹出层的页面层的方式加载修改界面表单
                         shade: 0,
-                        success:function(x,y)
-                        {
+                        success: function (x, y) {
 
-                            for(var key in data) {
-                                var idName='#'+key + "_2";
+                            for (var key in data) {
+                                var idName = '#' + key;
                                 $(idName).val(data[key]);
                             }
-                            {#$("#fund").val("二股");#}
-                            {#$("#fund").find("option[value='股权直投']").prop("selected",true);#}
-                            {#form.render('select','aihao'); //刷新select选择框渲染#}
-
-                            {#x.find("input")[0].value=data.person;#}
-                            {#x.find("input")[1].value=data.title;#}
-                             {#x.find("input[name=xxx]").value=data.xxx;#}
 
                         }
                     });
-
-
 
 
                     //动态向表传递赋值可以参看文章进行修改界面的更新前数据的显示，当然也是异步请求的要数据的修改数据的获取
@@ -466,11 +467,12 @@
 
 
             });
-            function getFormValue(obj,data)
-            {
-                popForm.val("data",{"title":data.title});
-                popForm.render(null,"data");
+
+            function getFormValue(obj, data) {
+                popForm.val("data", {"title": data.title});
+                popForm.render(null, "data");
             }
+
             function setFormValue(obj, data) {
                 form.on("submit(demo2)", function () {
                     alert("ok");
@@ -481,7 +483,7 @@
                         data: {
                             "schdule_id": data.id, "schedule_name": data.name, "person_name": data.person_name,
                             "association_name": data.fund, "start_time": data.start_time, "end_time": data.end_time,
-                            dataAll:data
+                            dataAll: data
                         },
                         success: function (msg) {
                             console.log(msg);
@@ -494,26 +496,25 @@
             }
 
 
-
-              //日期
-              laydate.render({
+            //日期
+            laydate.render({
                 elem: '#start_time'
-              });
-              laydate.render({
+            });
+            laydate.render({
                 elem: '#end_time'
-              });
-              laydate.render({
+            });
+            laydate.render({
                 elem: '#util_time'
-              });
-              laydate.render({
+            });
+            laydate.render({
                 elem: '#start_time_2'
-              });
-              laydate.render({
+            });
+            laydate.render({
                 elem: '#end_time_2'
-              });
-              laydate.render({
+            });
+            laydate.render({
                 elem: '#util_time_2'
-              });
+            });
 
             var $ = layui.$, active = {
                 getCheckData: function () { //获取选中数据
@@ -537,6 +538,61 @@
                 active[type] ? active[type].call(this) : '';
             });
         });
+
+
+        function mysubmit() {
+            var schedule_id = $("#schedule_id").val();
+            var schedule_name = $("#schedule_name").val();
+            var person_name = $('#person_name').val();
+            var association_name = $('#association_name').val();
+            var participation = $('#participation').val();
+            var is_public = $('#is_public').val(this.checked ? 1 : 0);
+            var address = $('#address').val();
+            var is_all_day_event = $('#is_all_day_event').val(this.checked ? 1 : 0);
+            var start_time = $('#start_time').val();
+            var end_time = $('#end_time').val();
+            var util_time = $('#util_time').val();
+            var remind_name = $('#remind_name').val();
+            var time_select = $('#time_select').val();
+
+            var meeting_summary = $('#meeting_summary').val();
+
+            is_public = is_public[0]["checked"];
+            if (is_public) {
+                is_public = "1"
+            } else {
+                is_public = null
+            }
+            is_all_day_event = is_all_day_event[0]["checked"];
+            if (is_all_day_event) {
+                is_all_day_event = "1"
+            } else {
+                is_all_day_event = null
+            }
+
+            keyword = ["schedule_id", "schedule_name", "person_name", "association_name", "start_time", "end_time", "participation", "is_public", "address", "is_all_day_event", "remind_name", "time_select", "meeting_summary", "util_time"];
+            value = [schedule_id, schedule_name, person_name, association_name, start_time, end_time, participation, is_public, address, is_all_day_event, remind_name, time_select, meeting_summary, util_time];
+
+            var dataSend = {};
+            for (var i = 0; i < keyword.length; i++) {
+                dataSend[keyword[i]] = value[i]
+            }
+
+            alert(JSON.stringify(dataSend));
+            console.log(dataSend);
+            {#dataSend = JSON.stringify(dataSend);#}
+            $.ajax({
+                url: "/jijin/calender/calender_edit/",
+                type: "POST",
+                async: true,
+                dataType: "json",
+                data: dataSend,
+                success: function (data) {
+                    console.log(data)
+                }
+            })
+
+        }
 
 
     </script>
