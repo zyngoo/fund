@@ -73,13 +73,15 @@ from pprint import pprint
 def  calender_list_handle(request):
     # sql = "SELECT schedule_id, schedule_name, person_name, association_name, start_time, end_time  from calender_list"
     sql = "SELECT schedule_id, schedule_name, person_name, association_name, date_format(start_time, '%%Y-%%m-%%d %%H:%%i:%%s'), date_format(end_time, '%%Y-%%m-%%d %%H:%%i:%%s'),is_delete," \
-          "participation, is_public, address, is_all_day_event, remind_name, time_select, meeting_summary, date_format(util_time, '%%Y-%%m-%%d %%H:%%i:%%s')   from calender_list where is_delete=0"
+          "participation, is_public, address, is_all_day_event, remind_name, time_select, meeting_summary, date_format(util_time, '%%Y-%%m-%%d %%H:%%i:%%s'), person_id, association_id, remind_id,time_id" \
+          "   from calender_list where is_delete=0"
 
 
     helper = MysqlHelper()
     results = helper.fetchall(sql)
 
-    field = ["schedule_id","schedule_name","person_name","association_name","start_time","end_time", "is_delete", "participation","is_public","address","is_all_day_event","remind_name","time_select","meeting_summary","util_time"]
+    field = ["schedule_id","schedule_name","person_name","association_name","start_time","end_time", "is_delete", "participation","is_public","address","is_all_day_event",
+             "remind_name","time_select","meeting_summary","util_time", "person_id", "association_id", "remind_id", "time_id"]
     jsonData = []
     # zip(len(field), results)
     for row in results:
@@ -147,16 +149,16 @@ def calender_edit(request):
     # sql = sql[:-2] + " where schedule_id = " + post["schedule_id"]
     # print(sql)
 
-    sql = "update schedule_schedule "
-
-    conn = Common.mysqlCon()
-    cursor = conn.cursor()
-    try:
-        cursor.execute(sql)
-    except Exception as e:
-        print("error: ", e)
-    cursor.close()
-    conn.close()
+    # sql = "update schedule_schedule "
+    #
+    # conn = Common.mysqlCon()
+    # cursor = conn.cursor()
+    # try:
+    #     cursor.execute(sql)
+    # except Exception as e:
+    #     print("error: ", e)
+    # cursor.close()
+    # conn.close()
 
 
 
@@ -164,14 +166,14 @@ def calender_edit(request):
 def dict_fetchall(cursor):
     "Return all rows from a cursor as a dict"
     columns = [col[0] for col in cursor.description]
-    print(columns)
+    # print(columns)
     return [
         dict(zip(columns, row))
         for row in cursor.fetchall()
     ]
 
 def calender_user(request):
-    sql='select person_name from schedule__person'
+    sql='select * from schedule__person'
     conn=Common.mysqlCon()
     cursor = conn.cursor()
     cursor.execute(sql)
@@ -183,11 +185,12 @@ def calender_user(request):
     return HttpResponse(json.dumps(allname))
 
 def calender_test(request):
-    sql = "select * from schedule__schedule where schedule_id=1"
+    sql = "select * from ce where is_delete=1"
     conn = Common.mysqlCon()
     cursor = conn.cursor()
     cursor.execute(sql)
     data = dict_fetchall(cursor)
+    # print(data)
     cursor.close()
     conn.close()
     return HttpResponse("ok")

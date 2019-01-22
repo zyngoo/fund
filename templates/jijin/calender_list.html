@@ -387,9 +387,9 @@
                             for (var i = 0; i < msg.length; i++) {
                                 {#alert(msg[i])#}
                                 if (obj.data.person_name == msg[i].person_name) {
-                                    value += "<option value='" + msg[i].person_name + "' selected >" + msg[i].person_name + "</option>";
+                                    value += "<option value='" + msg[i].person_id + "' selected >" + msg[i].person_name + "</option>";
                                 } else {
-                                    value += "<option value='" + msg[i].person_name + "'>" + msg[i].person_name + "</option>";
+                                    value += "<option value='" + msg[i].person_id + "'>" + msg[i].person_name + "</option>";
 
                                 }
 
@@ -399,14 +399,15 @@
 
                             {#关联选择#}
                             var contactList = ['股权直投', '二级市场', '地产'];
+                            var contactList_id = [0, 1, 2];
                             {#alert(JSON.stringify(obj.data))#}
                             var contantVal = '';
                             for (var i = 0; i < contactList.length; i++) {
                                 {#alert(msg[i])#}
                                 if (obj.data.association_name == contactList[i]) {
-                                    contantVal += "<option value='" + contactList[i] + "' selected >" + contactList[i] + "</option>";
+                                    contantVal += "<option value='" + contactList_id[i] + "' selected >" + contactList[i] + "</option>";
                                 } else {
-                                    contantVal += "<option value='" + contactList[i] + "'>" + contactList[i] + "</option>";
+                                    contantVal += "<option value='" + contactList_id[i] + "'>" + contactList[i] + "</option>";
 
                                 }
 
@@ -414,25 +415,28 @@
                             $("#association_name").append(contantVal);
 
                             {#重复选择#}
-                            var repeatList = ["不重复", "每日", "每周", "每月", "每年"]
+                            var repeatList = ["不重复", "每日", "每周", "每月", "每年"];
+                            var repeatList_id= [0, 1, 2, 3, 4];
                             var repeatVal = "";
                             for (var i = 0; i < repeatList.length; i++) {
                                 if (obj.data.time_select == repeatList[i]) {
-                                    repeatVal += "<option value ='" + repeatList[i] + "' selected >" + repeatList[i] + "</option>";
+                                    repeatVal += "<option value ='" + repeatList_id[i] + "' selected >" + repeatList[i] + "</option>";
                                 } else {
-                                    repeatVal += "<option value ='" + repeatList[i] + "'>" + repeatList[i] + "</option>";
+                                    repeatVal += "<option value ='" + repeatList_id[i] + "'>" + repeatList[i] + "</option>";
                                 }
                             }
-                            $("#time_select").append(repeatVal)
+                            $("#time_select").append(repeatVal);
 
                             {#提醒选择#}
-                            var remindList = ["不提醒", "提前一小时", "提前一天", "提前一周"]
+                            var remindList = ["不提醒", "提前一小时", "提前一天", "提前一周"];
+                            var remindList_id = [0, 1, 2, 3];
+
                             var remindVal = "";
                             for (var i = 0; i < remindList.length; i++) {
                                 if (obj.data.remind_name == remindList[i]) {
-                                    remindVal += "<option value ='" + remindList[i] + "' selected >" + remindList[i] + "</option>";
+                                    remindVal += "<option value ='" + remindList_id[i] + "' selected >" + remindList[i] + "</option>";
                                 } else {
-                                    remindVal += "<option value ='" + remindList[i] + "'>" + remindList[i] + "</option>";
+                                    remindVal += "<option value ='" + remindList_id[i] + "'>" + remindList[i] + "</option>";
                                 }
                             }
                             $("#remind_name").append(remindVal);
@@ -553,6 +557,7 @@
             var end_time = $('#end_time').val();
             var util_time = $('#util_time').val();
             var remind_name = $('#remind_name').val();
+            
             var time_select = $('#time_select').val();
 
             var meeting_summary = $('#meeting_summary').val();
