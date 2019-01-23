@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50557
 File Encoding         : 65001
 
-Date: 2019-01-19 21:58:40
+Date: 2019-01-23 20:32:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -740,8 +740,8 @@ CREATE TABLE `auth_group_permissions` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_group_permissions_group_id_permission_id_0cd325b0_uniq` (`group_id`,`permission_id`),
   KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`),
-  CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
-  CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
+  CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
+  CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -843,8 +843,8 @@ CREATE TABLE `auth_user_user_permissions` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_user_user_permissions_user_id_permission_id_14a6b632_uniq` (`user_id`,`permission_id`),
   KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`),
-  CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
-  CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+  CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
+  CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -900,8 +900,8 @@ CREATE TABLE `django_admin_log` (
   PRIMARY KEY (`id`),
   KEY `django_admin_log_content_type_id_c4bce8eb_fk_django_co` (`content_type_id`),
   KEY `django_admin_log_user_id_c564eba6_fk` (`user_id`),
-  CONSTRAINT `django_admin_log_user_id_c564eba6_fk` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
-  CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
+  CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
+  CONSTRAINT `django_admin_log_user_id_c564eba6_fk` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -1330,10 +1330,10 @@ CREATE TABLE `guquan_management_afterinvest` (
   KEY `investor` (`investor`),
   KEY `hold_state` (`hold_state`),
   KEY `file` (`file`),
-  CONSTRAINT `guquan_management_afterinvest_ibfk_4` FOREIGN KEY (`file`) REFERENCES `fund_file` (`file_id`),
   CONSTRAINT `guquan_management_afterinvest_ibfk_1` FOREIGN KEY (`company`) REFERENCES `fund_company` (`id`),
   CONSTRAINT `guquan_management_afterinvest_ibfk_2` FOREIGN KEY (`investor`) REFERENCES `fund_fund` (`fund_id`),
-  CONSTRAINT `guquan_management_afterinvest_ibfk_3` FOREIGN KEY (`hold_state`) REFERENCES `fund_state` (`id`)
+  CONSTRAINT `guquan_management_afterinvest_ibfk_3` FOREIGN KEY (`hold_state`) REFERENCES `fund_state` (`id`),
+  CONSTRAINT `guquan_management_afterinvest_ibfk_4` FOREIGN KEY (`file`) REFERENCES `fund_file` (`file_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -1379,10 +1379,10 @@ CREATE TABLE `guquan_management_complete_dicision` (
   KEY `file2` (`file2`),
   KEY `file3` (`file3`),
   KEY `file4` (`file4`),
-  CONSTRAINT `guquan_management_complete_dicision_ibfk_4` FOREIGN KEY (`file4`) REFERENCES `fund_file` (`file_id`),
   CONSTRAINT `guquan_management_complete_dicision_ibfk_1` FOREIGN KEY (`file1`) REFERENCES `fund_file` (`file_id`),
   CONSTRAINT `guquan_management_complete_dicision_ibfk_2` FOREIGN KEY (`file2`) REFERENCES `fund_file` (`file_id`),
-  CONSTRAINT `guquan_management_complete_dicision_ibfk_3` FOREIGN KEY (`file3`) REFERENCES `fund_file` (`file_id`)
+  CONSTRAINT `guquan_management_complete_dicision_ibfk_3` FOREIGN KEY (`file3`) REFERENCES `fund_file` (`file_id`),
+  CONSTRAINT `guquan_management_complete_dicision_ibfk_4` FOREIGN KEY (`file4`) REFERENCES `fund_file` (`file_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -2283,13 +2283,13 @@ CREATE TABLE `schedule_association` (
 -- ----------------------------
 INSERT INTO `schedule_association` VALUES ('0', '股权直投');
 INSERT INTO `schedule_association` VALUES ('1', '二级市场');
-INSERT INTO `schedule_association` VALUES ('3', '地产');
+INSERT INTO `schedule_association` VALUES ('2', '地产');
 
 -- ----------------------------
--- Table structure for schedule__meeting_file
+-- Table structure for schedule_meeting_file
 -- ----------------------------
-DROP TABLE IF EXISTS `schedule__meeting_file`;
-CREATE TABLE `schedule__meeting_file` (
+DROP TABLE IF EXISTS `schedule_meeting_file`;
+CREATE TABLE `schedule_meeting_file` (
   `meeting_file_id` int(11) NOT NULL,
   `meeting_file_address` varchar(255) DEFAULT NULL,
   `meeting_file_type` varchar(255) DEFAULT NULL,
@@ -2298,52 +2298,52 @@ CREATE TABLE `schedule__meeting_file` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of schedule__meeting_file
+-- Records of schedule_meeting_file
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for schedule__person
+-- Table structure for schedule_person
 -- ----------------------------
-DROP TABLE IF EXISTS `schedule__person`;
-CREATE TABLE `schedule__person` (
+DROP TABLE IF EXISTS `schedule_person`;
+CREATE TABLE `schedule_person` (
   `person_id` int(11) NOT NULL,
   `person_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`person_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of schedule__person
+-- Records of schedule_person
 -- ----------------------------
-INSERT INTO `schedule__person` VALUES ('0', '陈桥');
-INSERT INTO `schedule__person` VALUES ('1', '徐菲菲');
-INSERT INTO `schedule__person` VALUES ('2', '赵云澜');
-INSERT INTO `schedule__person` VALUES ('3', '沈巍');
-INSERT INTO `schedule__person` VALUES ('4', 'Nancy');
-INSERT INTO `schedule__person` VALUES ('5', 'zhang');
+INSERT INTO `schedule_person` VALUES ('0', '陈桥');
+INSERT INTO `schedule_person` VALUES ('1', '徐菲菲');
+INSERT INTO `schedule_person` VALUES ('2', '赵云澜');
+INSERT INTO `schedule_person` VALUES ('3', '沈巍');
+INSERT INTO `schedule_person` VALUES ('4', 'Nancy');
+INSERT INTO `schedule_person` VALUES ('5', 'zhang');
 
 -- ----------------------------
--- Table structure for schedule__remind
+-- Table structure for schedule_remind
 -- ----------------------------
-DROP TABLE IF EXISTS `schedule__remind`;
-CREATE TABLE `schedule__remind` (
+DROP TABLE IF EXISTS `schedule_remind`;
+CREATE TABLE `schedule_remind` (
   `remind_id` int(11) NOT NULL,
   `remind_name` varchar(255) DEFAULT '',
   PRIMARY KEY (`remind_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of schedule__remind
+-- Records of schedule_remind
 -- ----------------------------
-INSERT INTO `schedule__remind` VALUES ('0', '不提醒');
-INSERT INTO `schedule__remind` VALUES ('1', '提前一小时');
-INSERT INTO `schedule__remind` VALUES ('2', '提前一天');
-INSERT INTO `schedule__remind` VALUES ('3', '提前一周');
+INSERT INTO `schedule_remind` VALUES ('0', '不提醒');
+INSERT INTO `schedule_remind` VALUES ('1', '提前一小时');
+INSERT INTO `schedule_remind` VALUES ('2', '提前一天');
+INSERT INTO `schedule_remind` VALUES ('3', '提前一周');
 
 -- ----------------------------
--- Table structure for schedule__schedule
+-- Table structure for schedule_schedule
 -- ----------------------------
-DROP TABLE IF EXISTS `schedule__schedule`;
-CREATE TABLE `schedule__schedule` (
+DROP TABLE IF EXISTS `schedule_schedule`;
+CREATE TABLE `schedule_schedule` (
   `schedule_id` int(11) NOT NULL AUTO_INCREMENT,
   `schedule_name` varchar(255) DEFAULT NULL,
   `person_id` int(11) DEFAULT NULL,
@@ -2361,58 +2361,63 @@ CREATE TABLE `schedule__schedule` (
   `meeting_file_id` int(11) DEFAULT NULL,
   `is_delete` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`schedule_id`),
-  KEY `association_id` (`association_id`),
-  KEY `time_id` (`time_id`),
-  KEY `remind_id` (`remind_id`),
-  KEY `meeting_file_id` (`meeting_file_id`),
-  KEY `person_id` (`person_id`),
+  KEY `association_id` (`association_id`) USING BTREE,
+  KEY `time_id` (`time_id`) USING BTREE,
+  KEY `remind_id` (`remind_id`) USING BTREE,
+  KEY `meeting_file_id` (`meeting_file_id`) USING BTREE,
+  KEY `person_id` (`person_id`) USING BTREE,
+  CONSTRAINT `time_id` FOREIGN KEY (`time_id`) REFERENCES `schedule_time_repeat` (`time_id`),
   CONSTRAINT `association_id` FOREIGN KEY (`association_id`) REFERENCES `schedule_association` (`association_id`),
-  CONSTRAINT `meeting_file_id` FOREIGN KEY (`meeting_file_id`) REFERENCES `schedule__meeting_file` (`meeting_file_id`),
-  CONSTRAINT `person_id` FOREIGN KEY (`person_id`) REFERENCES `schedule__person` (`person_id`),
-  CONSTRAINT `remind_id` FOREIGN KEY (`remind_id`) REFERENCES `schedule__remind` (`remind_id`),
-  CONSTRAINT `time_id` FOREIGN KEY (`time_id`) REFERENCES `schedule__time_repeat` (`time_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+  CONSTRAINT `meeting_file_id` FOREIGN KEY (`meeting_file_id`) REFERENCES `schedule_meeting_file` (`meeting_file_id`),
+  CONSTRAINT `person_id` FOREIGN KEY (`person_id`) REFERENCES `schedule_person` (`person_id`),
+  CONSTRAINT `remind_id` FOREIGN KEY (`remind_id`) REFERENCES `schedule_remind` (`remind_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of schedule__schedule
+-- Records of schedule_schedule
 -- ----------------------------
-INSERT INTO `schedule__schedule` VALUES ('1', '大幅广告', '1', '1', 'fdg', '', 'gh', '', '2019-01-16 19:35:41', '2019-01-23 19:35:46', '1', '2019-01-22 19:35:53', '1', 'fgh', null, '1');
-INSERT INTO `schedule__schedule` VALUES ('5', 'fgh', '1', '1', 'fgh', '', 'fgh', '', '2019-01-29 00:00:00', '2019-01-08 00:00:00', '3', '2019-01-08 00:00:00', '1', 'gjh', null, '1');
-INSERT INTO `schedule__schedule` VALUES ('6', 'jhk', '2', '1', 'hgj', '', 'hgj', '', '2019-01-30 00:00:00', '2019-01-08 00:00:00', '2', '2019-01-29 00:00:00', '1', 'hgj', null, '0');
-INSERT INTO `schedule__schedule` VALUES ('7', 'test', '2', '1', 'dfg', '', 'fdg ', '', '2019-01-30 00:00:00', '2019-01-21 00:00:00', '1', '2019-01-11 00:00:00', '1', 'dfgdfg', null, '0');
-INSERT INTO `schedule__schedule` VALUES ('9', 'dfgdg', '1', '1', 'dfgdfg', '', 'dfgdfg', '', '2019-01-30 00:00:00', '2019-01-28 00:00:00', '2', '2019-01-08 00:00:00', '1', 'dfg', null, '0');
-INSERT INTO `schedule__schedule` VALUES ('10', 'ghjghj', '2', '1', 'ghj', '', 'ghj', '', '2019-01-30 00:00:00', '2019-01-29 00:00:00', '3', '2019-01-11 00:00:00', '1', 'ghjghj', null, '0');
-INSERT INTO `schedule__schedule` VALUES ('11', 'dfg', '2', '1', 'dfg', '', 'dfg', '', '2019-01-30 00:00:00', '2019-01-29 00:00:00', '3', '2019-01-11 00:00:00', '1', 'ghjghj', null, '0');
-INSERT INTO `schedule__schedule` VALUES ('12', 'fghfjh', '2', '1', 'hgjhgj', '', 'ghjgj', '', '2019-01-30 00:00:00', '2019-01-29 00:00:00', '3', '2019-01-11 00:00:00', '1', 'ghjghj', null, '0');
-INSERT INTO `schedule__schedule` VALUES ('13', 'zengyong ', '2', '1', 'zhanglei', '', '', '', '2019-01-30 00:00:00', '2019-01-29 00:00:00', '3', '2019-01-11 00:00:00', '1', '测试', null, '0');
-INSERT INTO `schedule__schedule` VALUES ('14', 'zengyong ', '2', '1', 'zhanglei', '', '', '', '2019-01-30 00:00:00', '2019-01-29 00:00:00', '3', '2019-01-11 00:00:00', '1', '测试', null, '0');
-INSERT INTO `schedule__schedule` VALUES ('15', 'ytuytu', '3', '1', 'tyutyu', '', 'tyutu', '', '2019-01-09 00:00:00', '2019-01-09 00:00:00', '1', '2019-01-09 00:00:00', '2', 'ghj', null, '0');
-INSERT INTO `schedule__schedule` VALUES ('16', 'kljl', '3', '1', 'jkljl', '', 'jkljl', '', '2019-01-09 00:00:00', '2019-01-09 00:00:00', '1', '2019-01-09 00:00:00', '2', 'ghj', null, '1');
-INSERT INTO `schedule__schedule` VALUES ('17', 'hjghjghj', '3', '1', 'ghjghj', '', '', '', '2019-01-09 00:00:00', '2019-01-09 00:00:00', '1', '2019-01-09 00:00:00', '2', 'ghj', null, '1');
-INSERT INTO `schedule__schedule` VALUES ('18', '日程1', '0', '0', '张三', '', '', '', '2019-01-13 00:00:00', '2019-01-13 00:00:00', '2', '2019-01-13 00:00:00', '0', '第一次测试', null, '1');
-INSERT INTO `schedule__schedule` VALUES ('19', '日程2', '0', '0', '李四', '', '中国', '', '2019-01-15 00:00:00', '2019-01-28 00:00:00', '0', '2019-01-28 00:00:00', '0', '测试2', null, '1');
-INSERT INTO `schedule__schedule` VALUES ('20', '风格化', '1', '0', '风格化', '', '风格化', '', '2019-01-11 00:00:00', '2019-01-09 00:00:00', '2', '2019-01-08 00:00:00', '1', '风格化风格化', null, '0');
-INSERT INTO `schedule__schedule` VALUES ('21', '日程', '1', '1', '小明', '', '发给', '', '2019-01-19 00:00:00', '2019-01-19 00:00:00', '2', '2019-01-19 00:00:00', '2', '电饭锅', null, '0');
-INSERT INTO `schedule__schedule` VALUES ('22', '得分', '2', '1', '电饭锅', '1', '电饭锅', '1', '2019-01-19 00:00:00', '2019-01-19 00:00:00', '2', '2019-01-19 00:00:00', '1', '电饭锅', null, '0');
-INSERT INTO `schedule__schedule` VALUES ('23', '好好写', '4', '0', '张蕾', null, '南昌市', null, '2019-01-19 00:00:00', '2019-01-19 00:00:00', '2', '2019-01-19 00:00:00', '0', '一个会议记录', null, '0');
+INSERT INTO `schedule_schedule` VALUES ('1', '大幅广告', '1', '1', 'fdg', '', 'gh', '', '2019-01-16 19:35:41', '2019-01-23 19:35:46', '1', '2019-01-22 19:35:53', '1', 'fgh', null, '1');
+INSERT INTO `schedule_schedule` VALUES ('5', 'fgh', '1', '1', 'fgh', '', 'fgh', '', '2019-01-29 00:00:00', '2019-01-08 00:00:00', '3', '2019-01-08 00:00:00', '1', 'gjh', null, '1');
+INSERT INTO `schedule_schedule` VALUES ('6', 'jhk', '2', '1', 'hgj', '', 'hgj', '', '2019-01-30 00:00:00', '2019-01-08 00:00:00', '2', '2019-01-29 00:00:00', '1', 'hgj', null, '1');
+INSERT INTO `schedule_schedule` VALUES ('9', 'test9', '1', '1', 'dfgdfg', '1', 'dfgdfg', '', '2019-01-23 00:00:00', '2019-01-23 00:00:00', '2', '2019-01-23 00:00:00', '1', 'dfg', null, '0');
+INSERT INTO `schedule_schedule` VALUES ('10', 'test10', '2', '1', 'ghj', '1', 'ghj', '', '2019-01-23 00:00:00', '2019-01-23 00:00:00', '3', '2019-01-23 00:00:00', '1', 'ghjghj', null, '0');
+INSERT INTO `schedule_schedule` VALUES ('11', 'dfg', '2', '1', 'dfg', '', 'dfg', '', '2019-01-30 00:00:00', '2019-01-29 00:00:00', '3', '2019-01-11 00:00:00', '1', 'ghjghj', null, '1');
+INSERT INTO `schedule_schedule` VALUES ('12', 'fghfjh', '2', '1', 'hgjhgj', '', 'ghjgj', '', '2019-01-30 00:00:00', '2019-01-29 00:00:00', '3', '2019-01-11 00:00:00', '1', 'ghjghj', null, '1');
+INSERT INTO `schedule_schedule` VALUES ('13', 'zengyong ', '2', '1', 'zhanglei', '', '', '', '2019-01-30 00:00:00', '2019-01-29 00:00:00', '3', '2019-01-11 00:00:00', '1', '测试', null, '0');
+INSERT INTO `schedule_schedule` VALUES ('14', 'zengyong ', '2', '1', 'zhanglei', '', '', '', '2019-01-30 00:00:00', '2019-01-29 00:00:00', '3', '2019-01-11 00:00:00', '1', '测试', null, '0');
+INSERT INTO `schedule_schedule` VALUES ('15', 'ytuytu', '3', '1', 'tyutyu', '', 'tyutu', '', '2019-01-09 00:00:00', '2019-01-09 00:00:00', '1', '2019-01-09 00:00:00', '2', 'ghj', null, '0');
+INSERT INTO `schedule_schedule` VALUES ('16', 'kljl', '3', '1', 'jkljl', '', 'jkljl', '', '2019-01-09 00:00:00', '2019-01-09 00:00:00', '1', '2019-01-09 00:00:00', '2', 'ghj', null, '1');
+INSERT INTO `schedule_schedule` VALUES ('17', 'hjghjghj', '3', '1', 'ghjghj', '', '', '', '2019-01-09 00:00:00', '2019-01-09 00:00:00', '1', '2019-01-09 00:00:00', '2', 'ghj', null, '1');
+INSERT INTO `schedule_schedule` VALUES ('18', '日程1', '0', '0', '张三', '', '', '', '2019-01-13 00:00:00', '2019-01-13 00:00:00', '2', '2019-01-13 00:00:00', '0', '第一次测试', null, '1');
+INSERT INTO `schedule_schedule` VALUES ('19', '日程2', '0', '0', '李四', '', '中国', '', '2019-01-15 00:00:00', '2019-01-28 00:00:00', '0', '2019-01-28 00:00:00', '0', '测试2', null, '1');
+INSERT INTO `schedule_schedule` VALUES ('20', '风格化', '1', '0', '风格化', '1', '风格化', '', '2019-01-23 00:00:00', '2019-01-23 00:00:00', '2', '2019-01-23 00:00:00', '1', '风格化风格化', null, '0');
+INSERT INTO `schedule_schedule` VALUES ('21', '日程', '1', '1', '小明', '', '发给', '', '2019-01-19 00:00:00', '2019-01-19 00:00:00', '2', '2019-01-19 00:00:00', '2', '电饭锅', null, '0');
+INSERT INTO `schedule_schedule` VALUES ('22', '得分', '2', '1', '电饭锅', '1', '电饭锅', '1', '2019-01-19 00:00:00', '2019-01-19 00:00:00', '2', '2019-01-19 00:00:00', '1', '电饭锅', null, '0');
+INSERT INTO `schedule_schedule` VALUES ('23', '好好写', '4', '0', '张蕾', '1', '南昌市', '', '2019-01-23 00:00:00', '2019-01-23 00:00:00', '2', '2019-01-23 00:00:00', '0', '一个会议记录', null, '1');
+INSERT INTO `schedule_schedule` VALUES ('25', '风格化', '1', '1', '风格化', '1', '风格化', '1', '2019-01-21 00:00:00', '2019-01-21 00:00:00', '2', '2019-01-21 00:00:00', '1', '风格化', null, '0');
+INSERT INTO `schedule_schedule` VALUES ('27', '测试', '4', '2', '哈哈哈', '1', '哈哈哈', null, '2019-01-21 00:00:00', '2019-01-21 00:00:00', '4', '2019-01-21 00:00:00', '3', 'is_public:1; is_all_day_event:0', null, '0');
+INSERT INTO `schedule_schedule` VALUES ('28', '新年', '3', '2', '哈哈', '1', '第三方', null, '2019-01-21 00:00:00', '2019-01-21 00:00:00', '4', '2019-01-21 00:00:00', '3', ' 水电费', null, '0');
+INSERT INTO `schedule_schedule` VALUES ('29', '测试11', '5', '2', '哈哈', '1', '南昌', '1', '2019-01-23 00:00:00', '2019-01-23 00:00:00', '1', '2019-01-23 00:00:00', '1', '一个测试', null, '0');
+INSERT INTO `schedule_schedule` VALUES ('30', '测试12', '1', '1', '水电费', '1', '第三方', '1', '2019-01-23 00:00:00', '2019-01-23 00:00:00', '2', '2019-01-23 00:00:00', '2', '第三方', null, '0');
 
 -- ----------------------------
--- Table structure for schedule__time_repeat
+-- Table structure for schedule_time_repeat
 -- ----------------------------
-DROP TABLE IF EXISTS `schedule__time_repeat`;
-CREATE TABLE `schedule__time_repeat` (
+DROP TABLE IF EXISTS `schedule_time_repeat`;
+CREATE TABLE `schedule_time_repeat` (
   `time_id` int(11) NOT NULL,
   `time_select` varchar(255) DEFAULT '',
   PRIMARY KEY (`time_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of schedule__time_repeat
+-- Records of schedule_time_repeat
 -- ----------------------------
-INSERT INTO `schedule__time_repeat` VALUES ('0', '不重复');
-INSERT INTO `schedule__time_repeat` VALUES ('1', '每日');
-INSERT INTO `schedule__time_repeat` VALUES ('2', '每周');
-INSERT INTO `schedule__time_repeat` VALUES ('3', '每月');
+INSERT INTO `schedule_time_repeat` VALUES ('0', '不重复');
+INSERT INTO `schedule_time_repeat` VALUES ('1', '每日');
+INSERT INTO `schedule_time_repeat` VALUES ('2', '每周');
+INSERT INTO `schedule_time_repeat` VALUES ('3', '每月');
+INSERT INTO `schedule_time_repeat` VALUES ('4', '每年');
 
 -- ----------------------------
 -- Table structure for userinfor_userinfor
@@ -2446,4 +2451,4 @@ INSERT INTO `userinfor_userinfor` VALUES ('6', 'hehe', '123', '1887082156', '123
 -- View structure for calender_list
 -- ----------------------------
 DROP VIEW IF EXISTS `calender_list`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `calender_list` AS select `schedule_association`.`association_name` AS `association_name`,`schedule__schedule`.`schedule_id` AS `schedule_id`,`schedule__schedule`.`schedule_name` AS `schedule_name`,`schedule__schedule`.`participation` AS `participation`,`schedule__schedule`.`is_public` AS `is_public`,`schedule__schedule`.`address` AS `address`,`schedule__schedule`.`is_all_day_event` AS `is_all_day_event`,`schedule__schedule`.`person_id` AS `person_id`,`schedule__schedule`.`association_id` AS `association_id`,`schedule__schedule`.`start_time` AS `start_time`,`schedule__schedule`.`end_time` AS `end_time`,`schedule__schedule`.`time_id` AS `time_id`,`schedule__schedule`.`util_time` AS `util_time`,`schedule__schedule`.`remind_id` AS `remind_id`,`schedule__schedule`.`meeting_summary` AS `meeting_summary`,`schedule__schedule`.`meeting_file_id` AS `meeting_file_id`,`schedule__person`.`person_name` AS `person_name`,`schedule__schedule`.`is_delete` AS `is_delete`,`schedule__time_repeat`.`time_select` AS `time_select`,`schedule__remind`.`remind_name` AS `remind_name` from ((((`schedule_association` join `schedule__schedule` on((`schedule__schedule`.`association_id` = `schedule_association`.`association_id`))) join `schedule__person` on((`schedule__schedule`.`person_id` = `schedule__person`.`person_id`))) join `schedule__time_repeat` on((`schedule__schedule`.`time_id` = `schedule__time_repeat`.`time_id`))) join `schedule__remind` on((`schedule__schedule`.`remind_id` = `schedule__remind`.`remind_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `calender_list` AS select `schedule_association`.`association_name` AS `association_name`,`schedule_person`.`person_name` AS `person_name`,`schedule_schedule`.`schedule_id` AS `schedule_id`,`schedule_schedule`.`schedule_name` AS `schedule_name`,`schedule_schedule`.`person_id` AS `person_id`,`schedule_schedule`.`association_id` AS `association_id`,`schedule_schedule`.`participation` AS `participation`,`schedule_schedule`.`is_public` AS `is_public`,`schedule_schedule`.`address` AS `address`,`schedule_schedule`.`is_all_day_event` AS `is_all_day_event`,`schedule_schedule`.`start_time` AS `start_time`,`schedule_schedule`.`end_time` AS `end_time`,`schedule_schedule`.`time_id` AS `time_id`,`schedule_schedule`.`util_time` AS `util_time`,`schedule_schedule`.`remind_id` AS `remind_id`,`schedule_schedule`.`meeting_summary` AS `meeting_summary`,`schedule_schedule`.`meeting_file_id` AS `meeting_file_id`,`schedule_schedule`.`is_delete` AS `is_delete`,`schedule_remind`.`remind_name` AS `remind_name`,`schedule_time_repeat`.`time_select` AS `time_select` from ((((`schedule_schedule` join `schedule_association` on((`schedule_schedule`.`association_id` = `schedule_association`.`association_id`))) join `schedule_person` on((`schedule_schedule`.`person_id` = `schedule_person`.`person_id`))) join `schedule_remind` on((`schedule_schedule`.`remind_id` = `schedule_remind`.`remind_id`))) join `schedule_time_repeat` on((`schedule_schedule`.`time_id` = `schedule_time_repeat`.`time_id`))) ;
