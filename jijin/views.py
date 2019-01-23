@@ -135,30 +135,38 @@ def calender_delete(requset):
     # conn.execute()
 
 def calender_edit(request):
-    print(request.POST)
-    post = request.POST
-    keyword = ["schedule_id", "schedule_name", "person_name", "association_name", "start_time", "end_time", "participation",
-               "is_public", "address", "is_all_day_event", "remind_name", "time_select", "meeting_summary",
-               "util_time"]
-    # sql = "update calender_list set "
-    # for key, value in post.items():
-    #     if key != "schedule_id":
-    #         sql += key + "=" + value + ", "
-    #
-    # # sql = sql.rsplit(",")
-    # sql = sql[:-2] + " where schedule_id = " + post["schedule_id"]
-    # print(sql)
 
-    # sql = "update schedule_schedule "
+    sql = "update  schedule__schedule set "
+    for key in request.POST:
+        sql = sql + key + "=%s, "
+    sql = sql.rstrip(", ") + " where schedule_id=" + request.POST.get("schedule_id")
+    print(sql)
+
+    params = []
+    for key in request.POST:
+        params.append(request.POST.get(key))
+    print(params)
+
+    MysqlHelper().update(sql, params)
+
+    # sql = "update  schedule__schedule set "
+    # for key in request.POST:
+    #     sql += key + "='" + request.POST.get(key) + "', "
+    # print(sql)
+    # sql = sql.rstrip(", ") + " where schedule_id=" + request.POST.get("schedule_id")
+    # print(sql)
     #
     # conn = Common.mysqlCon()
     # cursor = conn.cursor()
     # try:
     #     cursor.execute(sql)
+    #     conn.commit()
     # except Exception as e:
-    #     print("error: ", e)
+    #     print(e)
     # cursor.close()
     # conn.close()
+
+    return HttpResponse(json.dumps('2'))
 
 
 
