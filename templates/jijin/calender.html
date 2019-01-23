@@ -18,30 +18,28 @@
                  data-title="Lorem ipsum dolor sit amet"></div>
         </div>
 
-        <form method="post" action="/jijin/calender_handle/">
+        <form method="post" action="">
             <div id="w" class="easyui-window" title="信息" data-options="iconCls:'icon-save'" closed='true'
                  style="width:1000px;height:550px;padding:10px;">
                 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 0;">
                     <legend>新建日程</legend>
                 </fieldset>
-
+{#                <label id="schedule_id" style="display:none"></label>#}
                 <div class="layui-form-item">
                     <label class="layui-form-label">日程名</label>
                     <div class="layui-input-block">
-                        <input type="text" name="title" autocomplete="off" placeholder="请输入" class="layui-input">
+                        <input id="schedule_name" type="text" name="title" autocomplete="off" placeholder="请输入" class="layui-input">
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">参与人员</label>
                     <div class="layui-input-inline">
-                        <select name="participants" lay-filter="aihao">
+                        <select id="person_name" name="participants" lay-filter="aihao">
                             <option value=""></option>
-                            <option value="0">陈桥</option>
-                            <option value="1">徐菲菲</option>
-                            <option value="2">赵云澜</option>
-                            <option value="3">沈巍</option>
-                            <option value="4">Nancy</option>
+                            {% for name in allName %}
+                                <option value="{{ name.person_id }}">{{ name.person_name }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
@@ -50,17 +48,17 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">关联</label>
                         <div class="layui-input-block">
-                            <select name="interest1" lay-filter="aihao">
+                            <select id="association_name" name="interest1" lay-filter="aihao">
                                 <option value=""></option>
-                                <option value="0">股权直投</option>
-                                <option value="1" selected="">二级市场</option>
-                                <option value="2">地产</option>
+                                {% for fund in association %}
+                                    <option value="{{ fund.association_id }}">{{ fund.association_name }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">对方参与</label>
-                        <div class="layui-input-inline">
+                        <div id="participation" class="layui-input-inline">
                             <input type="text" name="participation" lay-verify="required" placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
@@ -68,7 +66,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">公开</label>
                         <div class="layui-input-block">
-                            <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest"
+                            <input id="is_public" type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest"
                                    title="开关">
                         </div>
                     </div>
@@ -77,35 +75,32 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">地点</label>
                     <div class="layui-input-block">
-                        <input type="text" name="addreser" autocomplete="off" placeholder="请输入" class="layui-input">
+                        <input id="address" type="text" name="addreser" autocomplete="off" placeholder="请输入" class="layui-input">
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">重复</label>
                     <div class="layui-input-inline">
-                        <select name="interest2" lay-filter="aihao">
+                        <select id="time_select" name="interest2" lay-filter="aihao">
                             <option value=""></option>
-                            <option value="0">不重复</option>
-                            <option value="1">每日</option>
-                            <option value="2">每周</option>
-                            <option value="3">每月</option>
-                            <option value="4">每年</option>
+                            {% for repeat in time_repeat %}
+                                <option value="{{ repeat.time_id }}">{{ repeat.time_select }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                     <label class="layui-form-label">直到</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd"
+                        <input type="text" name="date" id="util_time" lay-verify="date" placeholder="yyyy-MM-dd"
                                autocomplete="off" class="layui-input">
                     </div>
                     <label class="layui-form-label">提醒</label>
                     <div class="layui-input-inline">
-                        <select name="interest3" lay-filter="aihao">
+                        <select id="remind_name" name="interest3" lay-filter="aihao">
                             <option value=""></option>
-                            <option value="0">不提醒</option>
-                            <option value="1">提前一小时</option>
-                            <option value="2">提前一天</option>
-                            <option value="3">提前一周</option>
+                            {% for tixing in remind %}
+                                <option value="{{ tixing.remind_id }}">{{ tixing.remind_name }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
@@ -113,16 +108,16 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">全天事件</label>
                     <div class="layui-input-inline">
-                        <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                        <input id="is_all_day_event" type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
                     </div>
                     <label class="layui-form-label">开始时间</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd"
+                        <input type="text" name="date" id="start_time" lay-verify="date" placeholder="yyyy-MM-dd"
                                autocomplete="off" class="layui-input">
                     </div>
                     <label class="layui-form-label">结束时间</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd"
+                        <input type="text" name="date" id="end_time" lay-verify="date" placeholder="yyyy-MM-dd"
                                autocomplete="off" class="layui-input">
                     </div>
                 </div>
@@ -134,20 +129,18 @@
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">会议摘要</label>
                     <div class="layui-input-block">
-                        <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                        <textarea id="meeting_summary" placeholder="请输入内容" class="layui-textarea"></textarea>
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <div class="layui-input-block">
                         <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传文件</button>
-                        <button class="layui-btn" lay-submit="" lay-filter="demo2">提交</button>
+                        <button class="layui-btn" lay-submit="" lay-filter="demo2" onclick="mysubmit()">提交</button>
                         <button class="layui-btn layui-btn-primary" lay-filter type="submit" action="cache">暂存</button>
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
-
-                <button class="layui-btn" onclick="closeWind()">确定</button>
 
             </div>
 
@@ -169,8 +162,77 @@
         });
 
         function closeWind() {
-            $('#w').window('close')
+            $('#w').window('close');
 
+
+        function mysubmit() {
+            var schedule_id = $("#schedule_id").val();
+            var schedule_name = $("#schedule_name").val();
+            var person_id = $("#person_name").val();
+            var association_id = $('#association_name').val();
+            var participation = $('#participation').val();
+            var is_public = $('#is_public').val(this.checked ? 1 : 0);
+            var is_public2 = $('#is_public').val();
+            var address = $('#address').val();
+            var is_all_day_event = $('#is_all_day_event').val(this.checked ? 1 : 0);
+            var start_time = $('#start_time').val();
+            var end_time = $('#end_time').val();
+            var util_time = $('#util_time').val();
+            var remind_id = $('#remind_name').val();
+            var time_id = $('#time_select').val();
+            var meeting_summary = $('#meeting_summary').val();
+
+            is_public = is_public[0]["checked"];
+            if (is_public) {
+                is_public = "1"
+            } else {
+                is_public = null
+            }
+            is_all_day_event = is_all_day_event[0]["checked"];
+            if (is_all_day_event) {
+                is_all_day_event = "1"
+            } else {
+                is_all_day_event = null
+            }
+
+            keyword = ["schedule_id", "schedule_name", "person_id", "association_id", "start_time", "end_time", "participation", "is_public", "address", "is_all_day_event", "remind_id", "time_id", "meeting_summary", "util_time"];
+            value = [schedule_id, schedule_name, person_id, association_id, start_time, end_time, participation, is_public, address, is_all_day_event, remind_id, time_id, meeting_summary, util_time];
+
+            var dataSend = {};
+            for (var i = 0; i < keyword.length; i++) {
+                dataSend[keyword[i]] = value[i]
+            }
+
+            {#alert(JSON.stringify(dataSend));#}
+            {#console.log(dataSend);#}
+            {#dataSend = JSON.stringify(dataSend);#}
+            $.ajax({
+                url: "/jijin/calender/calender_edit/",
+                type: "POST",
+                async: true,
+                dataType: "json",
+                data: dataSend,
+                success: function (data) {
+                    console.log(data)
+                }
+            })
+
+        }
+
+        layui.use("laydate", function () {
+            var laydate = layui.laydate;
+
+             //日期
+            laydate.render({
+                elem: '#start_time'
+            });
+            laydate.render({
+                elem: '#end_time'
+            });
+            laydate.render({
+                elem: '#util_time'
+            });
+        })
 
         }
     </script>

@@ -24,6 +24,5 @@ urlpatterns = [
     path("jijin/", include("jijin.urls")),
     path("user/", include("userInfor.urls")),
     path("index/", test.index),
-    path('selectTest/',test.selectTest)
 
 ]

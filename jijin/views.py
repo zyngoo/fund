@@ -1,107 +1,70 @@
 from django.shortcuts import *
 from django.http import HttpResponse, JsonResponse
+import json
 from .common import Common
 from .MysqlHepler import MysqlHelper
-import json
+from . import getData
+
 
 def index(request):
-    return render(request, "base.html")
+    content = getData.getCalender()
+    return render(request, "jijin/calender.html", content)
+
 
 def calender(request):
+    content = getData.getCalender()
+    return render(request, "jijin/calender.html", content)
 
-    return render(request, "jijin/calender.html")
 
 def calender_add(request):
+    content = getData.getCalender()
+    return render(request, "jijin/calender_add.html", content)
 
-    selectData = "select * from "
-    conn = Common.mysqlCon()
-    conn = conn.cursor()
-    # conn.execute()
-    return render(request, "jijin/calender_add.html")
 
+# 增加数据
 def calender_handle(request):
-    post = request.POST
-    name = post.get("title")
-    person = int(post.get("participants"))
-    # print("person: ", person)
-    guanlian = int(post.get("interest1"))
-    participant = post.get("participation")
-    is_public = post.get("open")
-    # print("is_public：", is_public)
-    address = post.get("address")
-    is_all_day = post.get("open2")
-    # print("is_all_day_event: ", is_all_day)
-    starttime = str(post.get("date1"))
-    # endtime = str(post.get("date2"))
-    endtime = post.get("date2")
-    time = int(post.get("interest2"))
-    utiltime = str(post.get("date3"))
-    remind = int(post.get("interest3"))
-    abstract = post.get("abstract")
-    # print(type(person))
-    # print(type(endtime))
-    # print(name, person, guanlian, participant, is_public, address, is_all_day, starttime, endtime, time,utiltime, remind, abstract)
-
-    sql = "insert into schedule__schedule ("
-
+    sql = "insert into schedule_schedule ("
     for key in request.POST:
         sql = sql + key + ", "
-    # print(sql)
-    sql = sql.rstrip(",") + ") values ("
+    sql = sql.rstrip(", ") + ") values ("
     for key in request.POST:
         sql = sql + "\'" + request.POST.get(key) + "\'" + ","
     sqlEnd = sql.rstrip(",") + ")"
     # print(sqlEnd)
-
-
-    insertData = "insert into schedule__schedule (schedule_name, person_id, association_id, participation," \
-                "is_public, address, is_all_day_event,start_time, end_time, time_id, util_time," \
-                "remind_id, meeting_summary) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    params = [name,person,guanlian,participant,is_public,address, is_all_day,starttime, endtime,time,utiltime,remind, abstract]
-
-    helper = MysqlHelper()
-    result = helper.insert(insertData, params)
+    # insertData = "insert into schedule_schedule (schedule_name, person_id, association_id, participation," \
+    #             "is_public, address, is_all_day_event,start_time, end_time, time_id, util_time," \
+    #             "remind_id, meeting_summary) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    # params = [name,person,guanlian,participant,is_public,address, is_all_day,starttime, endtime,time,utiltime,remind, abstract]
+    MysqlHelper().insert_sql(sqlEnd)
 
     return redirect("/jijin/calender/list")
 
-def calender_list(request):
 
+def calender_list(request):
     return render(request, "jijin/calender_list.html")
 
-from pprint import pprint
 
-def  calender_list_handle(request):
+# 取值
+def calender_list_handle(request):
     # sql = "SELECT schedule_id, schedule_name, person_name, association_name, start_time, end_time  from calender_list"
     sql = "SELECT schedule_id, schedule_name, person_name, association_name, date_format(start_time, '%%Y-%%m-%%d %%H:%%i:%%s'), date_format(end_time, '%%Y-%%m-%%d %%H:%%i:%%s'),is_delete," \
           "participation, is_public, address, is_all_day_event, remind_name, time_select, meeting_summary, date_format(util_time, '%%Y-%%m-%%d %%H:%%i:%%s'), person_id, association_id, remind_id,time_id" \
           "   from calender_list where is_delete=0"
 
-
     helper = MysqlHelper()
     results = helper.fetchall(sql)
 
-    field = ["schedule_id","schedule_name","person_name","association_name","start_time","end_time", "is_delete", "participation","is_public","address","is_all_day_event",
-             "remind_name","time_select","meeting_summary","util_time", "person_id", "association_id", "remind_id", "time_id"]
+    field = ["schedule_id", "schedule_name", "person_name", "association_name", "start_time", "end_time", "is_delete",
+             "participation", "is_public", "address", "is_all_day_event",
+             "remind_name", "time_select", "meeting_summary", "util_time", "person_id", "association_id", "remind_id",
+             "time_id"]
     jsonData = []
-    # zip(len(field), results)
     for row in results:
         # print(row)
         data = {}
         for key in range(len(field)):
             data[field[key]] = row[key]
         jsonData.append(data)
-        #
-        # data["id"] = row[0]
-        # data["name"] = row[1]
-        # # print(type(row[0]))
-        # data["person"] = row[2]
-        # data["fund"] = row[3]
-        # data["start_time"] = row[4]
-        # data["end_time"] = row[5]
-        # data["is_dete"] = str(row[6])
-        # print(type(row[6]))
-
-
 
     result = {}
 
@@ -109,7 +72,6 @@ def  calender_list_handle(request):
     result["msg"] = ""
     result["count"] = len(results)
     result["data"] = jsonData
-
 
     # jsonDatar = json.dumps(result, ensure_ascii=False)
     # print(jsonDatar)
@@ -122,21 +84,20 @@ def  calender_list_handle(request):
 def calender_list_detail(request):
     pass
 
+
+# 删除数据
 def calender_delete(requset):
     id = requset.POST.get('schedule_id')
-    # print(id)
-    # print(type(id))
-    sqlDelete='update schedule__schedule set is_delete=1 where schedule_id=%s'
+    sqlDelete = 'update schedule_schedule set is_delete=1 where schedule_id=%s'
     param = [id]
-    helper = MysqlHelper().update(sqlDelete,param)
-    # print(sqlDelete)
+    MysqlHelper().update(sqlDelete, param)
 
     return HttpResponse(json.dumps('2'))
-    # conn.execute()
 
+
+# 修改数据
 def calender_edit(request):
-
-    sql = "update  schedule__schedule set "
+    sql = "update  schedule_schedule set "
     for key in request.POST:
         sql = sql + key + "=%s, "
     sql = sql.rstrip(", ") + " where schedule_id=" + request.POST.get("schedule_id")
@@ -169,36 +130,15 @@ def calender_edit(request):
     return HttpResponse(json.dumps('2'))
 
 
-
-
-def dict_fetchall(cursor):
-    "Return all rows from a cursor as a dict"
-    columns = [col[0] for col in cursor.description]
-    # print(columns)
-    return [
-        dict(zip(columns, row))
-        for row in cursor.fetchall()
-    ]
-
+#  取出shedule_person 数据表的id 与名字 组合成字典传送回去
 def calender_user(request):
-    sql='select * from schedule__person'
-    conn=Common.mysqlCon()
-    cursor = conn.cursor()
-    cursor.execute(sql)
-    allname=dict_fetchall(cursor)
-    print(allname)
-    cursor.close()
-    conn.close()
+    sql = 'select * from schedule_person'
+    allname = MysqlHelper().dict_fetchall(sql)
 
     return HttpResponse(json.dumps(allname))
 
+
 def calender_test(request):
-    sql = "select * from ce where is_delete=1"
-    conn = Common.mysqlCon()
-    cursor = conn.cursor()
-    cursor.execute(sql)
-    data = dict_fetchall(cursor)
-    # print(data)
-    cursor.close()
-    conn.close()
+    sql = "select * from schedule_person "
+    MysqlHelper().dict_fetchall(sql)
     return HttpResponse("ok")

@@ -48,3 +48,28 @@ class MysqlHelper:
         except Exception as e:
             print("mysqlhelper_exception: ", e)
 
+    def dict_fetchall(self,sql, params=[]):
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute(sql, params)
+            columns = [col[0] for col in cursor.description]
+            results = [dict(zip(columns, row)) for row in cursor.fetchall()]
+            print("dict_fetchall: ok!")
+            cursor.close()
+            self.conn.close()
+            return results
+        except Exception as e:
+            print("mysqlhelper_exception: ", e)
+
+
+    def insert_sql(self,sql):
+        try:
+            cur = self.conn.cursor()
+            rows = cur.execute(sql)
+            self.conn.commit()
+            cur.close()
+            self.conn.close()
+            print("mysqlhelper: ", rows)
+        except Exception as e:
+            print("mysqlhelper_exception: ", e)
+            self.conn.rollback()
