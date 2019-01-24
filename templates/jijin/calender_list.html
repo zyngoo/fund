@@ -41,7 +41,7 @@
 
     <div class="layui-row" id="popUpdateTest" style="display:none;">
         <div class="layui-col-md10">
-            <form class="layui-form" method="post" action="" style="width: 800px">
+            <div class="layui-form"  style="width: 800px">
 
                 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 0;">
                     <legend>修改日程</legend>
@@ -182,7 +182,7 @@
                     </div>
                 </div>
 
-            </form>
+            </div>
 
         </div>
     </div>
@@ -545,7 +545,7 @@
 
 
         function mysubmit() {
-            var schedule_id = $("#schedule_id").val();
+             var schedule_id = $("#schedule_id").val();
             var schedule_name = $("#schedule_name").val();
             var person_id = $("#person_name").val();
             var association_id = $('#association_name').val();
@@ -587,11 +587,15 @@
             $.ajax({
                 url: "/jijin/calender/calender_edit/",
                 type: "POST",
-                async: true,
+                async:true,
                 dataType: "json",
                 data: dataSend,
                 success: function (data) {
-                    console.log(data)
+                    {#alert('成功');#}
+                    setTimeout(function(){
+                        window.location.href = "/jijin/calender/list/";
+                    });
+                    {#console.log(data)#}
                 }
             })
 
