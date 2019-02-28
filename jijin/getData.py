@@ -20,3 +20,15 @@ def getCalender():
     }
 
     return content
+
+def getFund():
+    fund_sql = "select * from fund_fund"
+    fund = MysqlHelper().dict_fetchall(fund_sql)
+    content = {"fund":fund}
+    return content
+
+
+
+
+if __name__ == "__main__":
+    getFund()

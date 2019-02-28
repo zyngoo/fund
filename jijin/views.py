@@ -6,6 +6,9 @@ from .MysqlHepler import MysqlHelper
 from . import getData
 
 
+'''
+    日程模块
+'''
 def index(request):
     content = getData.getCalender()
     return render(request, "jijin/calender.html", content)
@@ -13,6 +16,7 @@ def index(request):
 
 def calender(request):
     content = getData.getCalender()
+    # print(content)
     return render(request, "jijin/calender.html", content)
 
 
@@ -67,7 +71,7 @@ def calender_list_handle(request):
         jsonData.append(data)
 
     result = {}
-
+    # print(jsonData)
     result["code"] = 0
     result["msg"] = ""
     result["count"] = len(results)
@@ -142,3 +146,82 @@ def calender_test(request):
     sql = "select * from schedule_person "
     MysqlHelper().dict_fetchall(sql)
     return HttpResponse("ok")
+
+
+
+"""
+    事件模块
+"""
+
+def event(request):
+    # content = getData.getFund()
+    # return render(request, "event/event.html", content)
+    return render(request, "event/event_list.html")
+
+
+def event_list(request):
+    sql = "select title_id, event_name, fund_name, event_type, event_publisher, publish_date, event_status, event_content from event_list where is_delete=0"
+    data = MysqlHelper().dict_fetchall(sql)
+    result = {}
+    result["code"] = 0
+    result["msg"] = ""
+    result["count"] = len(data)
+    result["data"] = data
+
+    # print(result)
+    # {'title_id': 1, 'event_name': '事件一', 'fund_name': 'zhanglei', 'event_type': '事件', 'event_publisher': 'zyngoo', 'publish_date': '2019 - 02 - 27', 'event_status': '代办', 'event_content': '测试事件一'}
+    return JsonResponse(result)
+
+
+def event_add(request):
+    if request.method == "POST":
+        sql = "insert into event_fund_event ("
+        for key in request.POST:
+            sql =  sql + key + ", "
+
+        sql = sql.rstrip(", ") + ") values ("
+        for key in request.POST:
+            sql = sql + "\'" + request.POST.get(key) + "\'" + ", "
+        sql = sql.rstrip(", ") + ")"
+
+        MysqlHelper().insert_sql(sql)
+        # print(sql)
+        return redirect("/jijin/event")
+
+    content = getData.getFund()
+    return render(request, "event/event_add.html", content)
+
+
+def event_delete(request):
+    id = request.POST.get("title_id")
+    sqlDelete = "update event_fund_event set is_delete=1 where title_id=%s"
+    param = [id]
+    MysqlHelper().update(sqlDelete, param)
+
+    return HttpResponse(json.dumps("2"))
+
+
+def event_fund(request):
+    sql = "select * from fund_fund"
+    fund_fund = MysqlHelper().dict_fetchall(sql)
+    # print(fund_fund)
+    return HttpResponse(json.dumps(fund_fund))
+
+
+def event_edit(request):
+    # print(request.POST)
+    sql = "update event_fund_event set "
+    for key in request.POST:
+        sql = sql + key + "=%s, "
+    sql = sql.rstrip(", ") + " where title_id=" + request.POST.get("title_id")
+    print(sql)
+
+    params = []
+    for key in request.POST:
+        params.append(request.POST.get(key))
+    print(params)
+
+    MysqlHelper().update(sql, params)
+
+    return  HttpResponse(json.dumps("2"))
+

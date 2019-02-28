@@ -3,6 +3,8 @@ from . import views
 
 urlpatterns = [
     path("", views.index),
+
+    # 日程模块
     path("calender/", views.calender),
     path("calender/add/", views.calender_add),
     path("calender_handle/", views.calender_handle),
@@ -13,7 +15,13 @@ urlpatterns = [
     path("calender/calender_user/", views.calender_user),
     path("calender/calender_test/", views.calender_test),
 
-
+    # 事件模块
+    path("event/", views.event),
+    path("event/add/", views.event_add),
+    path("event/list_handle/", views.event_list),
+    path("event/event_delete/", views.event_delete),
+    path("event/event_fund/", views.event_fund),
+    path("event/event_edit/", views.event_edit),
 
 
 ]
