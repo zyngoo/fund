@@ -23,5 +23,7 @@ urlpatterns = [
     path("event/event_fund/", views.event_fund),
     path("event/event_edit/", views.event_edit),
 
+    # 基金模块
+    path("jijin/", views.jijin),
 
 ]

@@ -225,3 +225,13 @@ def event_edit(request):
 
     return  HttpResponse(json.dumps("2"))
 
+
+
+"""
+    基金模块
+"""
+def jijin(request):
+    return render(request, "jijin/jijin_base.html")
+
+def jijin_add(request):
+    return render(request, "jijin/jijin_add.html")
