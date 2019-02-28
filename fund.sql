@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50557
 File Encoding         : 65001
 
-Date: 2019-01-23 20:32:56
+Date: 2019-02-28 11:05:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -983,9 +983,11 @@ CREATE TABLE `django_session` (
 -- ----------------------------
 -- Records of django_session
 -- ----------------------------
+INSERT INTO `django_session` VALUES ('9xei2h92duin7oda8euhibhjwqakf19y', 'NTEwYmQ2NGNkOTFjNDIyMmIzNTYxOWQ1MTg4YTdhMjBlNTg1NTVjZTp7InVzZXJfaWQiOjUsInVzZXJfbmFtZSI6Inp5bmdvbyIsImhlYWRfcGhvdG8iOiJpbWFnZXNcXDQzN2ExOTJkNWI5NDcwNGIuanBnIn0=', '2019-02-07 08:23:37');
 INSERT INTO `django_session` VALUES ('j6k2jsv8qzkel5zmuc32hmjxq4prtk0r', 'ZjgxMjFlZGUwMmQxMjVhNmMzNmQyMjdkODI5YjM0ZmUzZTg1NzZmNDp7InVzZXJfaWQiOjQsInVzZXJfbmFtZSI6IjEyMyIsIl9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1Nzk4ZjQyOTdkNjMwMWRiZjkwZWJhNjZjNWY0MjNiM2M5YTYzMzBhIn0=', '2019-01-21 06:41:28');
 INSERT INTO `django_session` VALUES ('jh5dethz3ewm7aeanhpl8ase7w5u8c2z', 'ODQwYzljNzAwNTZkODNjNDI2OTE1MGMzZDM4ZjRkNTBlZDI4YjkzMDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5ZjgwY2I3ZDE3YTM3ODJkZjNhZTUxYWUxODFlM2E0MGFmNTM0NTYwIn0=', '2019-01-17 02:23:40');
 INSERT INTO `django_session` VALUES ('lbyy0atixi784txaymg82rkka5avpv4x', 'YjhiYTIzOTA5OWE4ZDE5MmYxZDkxYzRlZmE0ZGM4NzRhZGUwYTUzODp7InVzZXJfaWQiOjQsInVzZXJfbmFtZSI6InNkZiIsImhlYWRfcGhvdG8iOiJDOlxcVXNlcnNcXEFkbWluaXN0cmF0b3JcXERlc2t0b3BcXHN5c3RlbVxcZnVuZFxcc3RhdGljL21lZGlhL2ltYWdlcy80YTcxNWJhMDFkNTlkYWUzODIzNTdmNzFmMmZjMzIxYi5qcGcifQ==', '2019-01-23 03:20:58');
+INSERT INTO `django_session` VALUES ('o60bplp6lxbsffdole3wp3wmusa76wrb', 'NTEwYmQ2NGNkOTFjNDIyMmIzNTYxOWQ1MTg4YTdhMjBlNTg1NTVjZTp7InVzZXJfaWQiOjUsInVzZXJfbmFtZSI6Inp5bmdvbyIsImhlYWRfcGhvdG8iOiJpbWFnZXNcXDQzN2ExOTJkNWI5NDcwNGIuanBnIn0=', '2019-03-13 03:35:14');
 
 -- ----------------------------
 -- Table structure for event_association
@@ -1006,32 +1008,33 @@ CREATE TABLE `event_association` (
 -- ----------------------------
 DROP TABLE IF EXISTS `event_fund_event`;
 CREATE TABLE `event_fund_event` (
-  `title_id` int(11) NOT NULL COMMENT '标题',
+  `title_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `event_name` varchar(255) DEFAULT NULL,
   `event_association` int(255) DEFAULT NULL,
-  `event_type` int(255) DEFAULT NULL COMMENT '类型',
+  `event_type` varchar(255) DEFAULT NULL COMMENT '类型',
   `event_publisher` varchar(255) DEFAULT NULL COMMENT '发布人',
   `publish_date` varchar(255) DEFAULT NULL COMMENT '发布日期',
-  `event_status` int(255) DEFAULT NULL COMMENT '状态',
+  `event_status` varchar(255) DEFAULT NULL COMMENT '状态',
   `event_content` varchar(255) DEFAULT NULL COMMENT '时间内容',
   `event_annex` varchar(255) DEFAULT NULL COMMENT '附件',
-  `event_executive` int(255) DEFAULT NULL COMMENT '执行人',
+  `event_executive` varchar(255) DEFAULT NULL COMMENT '执行人',
   `file` int(11) DEFAULT NULL,
+  `is_delete` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`title_id`),
   KEY `event_association` (`event_association`),
   KEY `event_executive` (`event_executive`),
   KEY `event_status` (`event_status`),
   KEY `event_type` (`event_type`),
   KEY `file` (`file`),
-  CONSTRAINT `event_fund_event_ibfk_1` FOREIGN KEY (`event_association`) REFERENCES `event_association` (`association_id`),
-  CONSTRAINT `event_fund_event_ibfk_2` FOREIGN KEY (`event_executive`) REFERENCES `event_fund_executive` (`executive_id`),
-  CONSTRAINT `event_fund_event_ibfk_3` FOREIGN KEY (`event_status`) REFERENCES `event_status` (`status_id`),
-  CONSTRAINT `event_fund_event_ibfk_4` FOREIGN KEY (`event_type`) REFERENCES `event_type` (`type_id`),
-  CONSTRAINT `event_fund_event_ibfk_5` FOREIGN KEY (`file`) REFERENCES `direct3_file` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `event_fund_event_ibfk_1` FOREIGN KEY (`event_association`) REFERENCES `fund_fund` (`fund_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of event_fund_event
 -- ----------------------------
+INSERT INTO `event_fund_event` VALUES ('1', '事件四', '1', '事件', 'zyngoo', '2019-02-27', '代办', '测试修改事件一', null, null, null, '0');
+INSERT INTO `event_fund_event` VALUES ('2', '事件二', '1', '事件', 'zyngoo', '2019-02-27', '代办', '测试事件二', null, null, null, '0');
+INSERT INTO `event_fund_event` VALUES ('3', '事件三', '2', '事件', 'zyngoo', '2019-02-27', '完成', '测试事件三', null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for event_fund_executive
@@ -1138,7 +1141,9 @@ CREATE TABLE `fund_fund` (
 -- ----------------------------
 -- Records of fund_fund
 -- ----------------------------
+INSERT INTO `fund_fund` VALUES ('3', 'zhanglei');
 INSERT INTO `fund_fund` VALUES ('1', 'zy');
+INSERT INTO `fund_fund` VALUES ('2', 'zyngoo');
 
 -- ----------------------------
 -- Table structure for fund_industry
@@ -2366,11 +2371,11 @@ CREATE TABLE `schedule_schedule` (
   KEY `remind_id` (`remind_id`) USING BTREE,
   KEY `meeting_file_id` (`meeting_file_id`) USING BTREE,
   KEY `person_id` (`person_id`) USING BTREE,
-  CONSTRAINT `time_id` FOREIGN KEY (`time_id`) REFERENCES `schedule_time_repeat` (`time_id`),
   CONSTRAINT `association_id` FOREIGN KEY (`association_id`) REFERENCES `schedule_association` (`association_id`),
   CONSTRAINT `meeting_file_id` FOREIGN KEY (`meeting_file_id`) REFERENCES `schedule_meeting_file` (`meeting_file_id`),
   CONSTRAINT `person_id` FOREIGN KEY (`person_id`) REFERENCES `schedule_person` (`person_id`),
-  CONSTRAINT `remind_id` FOREIGN KEY (`remind_id`) REFERENCES `schedule_remind` (`remind_id`)
+  CONSTRAINT `remind_id` FOREIGN KEY (`remind_id`) REFERENCES `schedule_remind` (`remind_id`),
+  CONSTRAINT `time_id` FOREIGN KEY (`time_id`) REFERENCES `schedule_time_repeat` (`time_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -2379,7 +2384,7 @@ CREATE TABLE `schedule_schedule` (
 INSERT INTO `schedule_schedule` VALUES ('1', '大幅广告', '1', '1', 'fdg', '', 'gh', '', '2019-01-16 19:35:41', '2019-01-23 19:35:46', '1', '2019-01-22 19:35:53', '1', 'fgh', null, '1');
 INSERT INTO `schedule_schedule` VALUES ('5', 'fgh', '1', '1', 'fgh', '', 'fgh', '', '2019-01-29 00:00:00', '2019-01-08 00:00:00', '3', '2019-01-08 00:00:00', '1', 'gjh', null, '1');
 INSERT INTO `schedule_schedule` VALUES ('6', 'jhk', '2', '1', 'hgj', '', 'hgj', '', '2019-01-30 00:00:00', '2019-01-08 00:00:00', '2', '2019-01-29 00:00:00', '1', 'hgj', null, '1');
-INSERT INTO `schedule_schedule` VALUES ('9', 'test9', '1', '1', 'dfgdfg', '1', 'dfgdfg', '', '2019-01-23 00:00:00', '2019-01-23 00:00:00', '2', '2019-01-23 00:00:00', '1', 'dfg', null, '0');
+INSERT INTO `schedule_schedule` VALUES ('9', 'test9', '2', '1', 'dfgdfg', '1', 'dfgdfg', '', '2019-01-24 00:00:00', '2019-01-24 00:00:00', '2', '2019-01-24 00:00:00', '1', 'dfg', null, '0');
 INSERT INTO `schedule_schedule` VALUES ('10', 'test10', '2', '1', 'ghj', '1', 'ghj', '', '2019-01-23 00:00:00', '2019-01-23 00:00:00', '3', '2019-01-23 00:00:00', '1', 'ghjghj', null, '0');
 INSERT INTO `schedule_schedule` VALUES ('11', 'dfg', '2', '1', 'dfg', '', 'dfg', '', '2019-01-30 00:00:00', '2019-01-29 00:00:00', '3', '2019-01-11 00:00:00', '1', 'ghjghj', null, '1');
 INSERT INTO `schedule_schedule` VALUES ('12', 'fghfjh', '2', '1', 'hgjhgj', '', 'ghjgj', '', '2019-01-30 00:00:00', '2019-01-29 00:00:00', '3', '2019-01-11 00:00:00', '1', 'ghjghj', null, '1');
@@ -2390,11 +2395,11 @@ INSERT INTO `schedule_schedule` VALUES ('16', 'kljl', '3', '1', 'jkljl', '', 'jk
 INSERT INTO `schedule_schedule` VALUES ('17', 'hjghjghj', '3', '1', 'ghjghj', '', '', '', '2019-01-09 00:00:00', '2019-01-09 00:00:00', '1', '2019-01-09 00:00:00', '2', 'ghj', null, '1');
 INSERT INTO `schedule_schedule` VALUES ('18', '日程1', '0', '0', '张三', '', '', '', '2019-01-13 00:00:00', '2019-01-13 00:00:00', '2', '2019-01-13 00:00:00', '0', '第一次测试', null, '1');
 INSERT INTO `schedule_schedule` VALUES ('19', '日程2', '0', '0', '李四', '', '中国', '', '2019-01-15 00:00:00', '2019-01-28 00:00:00', '0', '2019-01-28 00:00:00', '0', '测试2', null, '1');
-INSERT INTO `schedule_schedule` VALUES ('20', '风格化', '1', '0', '风格化', '1', '风格化', '', '2019-01-23 00:00:00', '2019-01-23 00:00:00', '2', '2019-01-23 00:00:00', '1', '风格化风格化', null, '0');
-INSERT INTO `schedule_schedule` VALUES ('21', '日程', '1', '1', '小明', '', '发给', '', '2019-01-19 00:00:00', '2019-01-19 00:00:00', '2', '2019-01-19 00:00:00', '2', '电饭锅', null, '0');
+INSERT INTO `schedule_schedule` VALUES ('20', '风格化', '2', '1', '风格化', '1', '风格化', '', '2019-01-24 00:00:00', '2019-01-24 00:00:00', '2', '2019-01-24 00:00:00', '1', '风格化风格化', null, '0');
+INSERT INTO `schedule_schedule` VALUES ('21', '日程', '1', '1', '小明', '1', '发给', '', '2019-01-24 00:00:00', '2019-01-24 00:00:00', '2', '2019-01-24 00:00:00', '2', '电饭锅', null, '0');
 INSERT INTO `schedule_schedule` VALUES ('22', '得分', '2', '1', '电饭锅', '1', '电饭锅', '1', '2019-01-19 00:00:00', '2019-01-19 00:00:00', '2', '2019-01-19 00:00:00', '1', '电饭锅', null, '0');
 INSERT INTO `schedule_schedule` VALUES ('23', '好好写', '4', '0', '张蕾', '1', '南昌市', '', '2019-01-23 00:00:00', '2019-01-23 00:00:00', '2', '2019-01-23 00:00:00', '0', '一个会议记录', null, '1');
-INSERT INTO `schedule_schedule` VALUES ('25', '风格化', '1', '1', '风格化', '1', '风格化', '1', '2019-01-21 00:00:00', '2019-01-21 00:00:00', '2', '2019-01-21 00:00:00', '1', '风格化', null, '0');
+INSERT INTO `schedule_schedule` VALUES ('25', '风格化', '1', '1', '风格化', '1', '风格化', '', '2019-01-24 00:00:00', '2019-01-24 00:00:00', '2', '2019-01-24 00:00:00', '1', '风格化', null, '0');
 INSERT INTO `schedule_schedule` VALUES ('27', '测试', '4', '2', '哈哈哈', '1', '哈哈哈', null, '2019-01-21 00:00:00', '2019-01-21 00:00:00', '4', '2019-01-21 00:00:00', '3', 'is_public:1; is_all_day_event:0', null, '0');
 INSERT INTO `schedule_schedule` VALUES ('28', '新年', '3', '2', '哈哈', '1', '第三方', null, '2019-01-21 00:00:00', '2019-01-21 00:00:00', '4', '2019-01-21 00:00:00', '3', ' 水电费', null, '0');
 INSERT INTO `schedule_schedule` VALUES ('29', '测试11', '5', '2', '哈哈', '1', '南昌', '1', '2019-01-23 00:00:00', '2019-01-23 00:00:00', '1', '2019-01-23 00:00:00', '1', '一个测试', null, '0');
@@ -2427,7 +2432,7 @@ CREATE TABLE `userinfor_userinfor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userName` varchar(100) DEFAULT NULL,
   `upwd` varchar(30) DEFAULT NULL,
-  `phone` varchar(11) DEFAULT NULL,
+  `phone` varchar(11) DEFAULT '',
   `userEmail` varchar(30) DEFAULT NULL,
   `userAddress` varchar(100) DEFAULT NULL,
   `photo` varchar(100) DEFAULT NULL,
@@ -2436,19 +2441,26 @@ CREATE TABLE `userinfor_userinfor` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `phone` (`phone`),
   UNIQUE KEY `userEmail` (`userEmail`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of userinfor_userinfor
 -- ----------------------------
 INSERT INTO `userinfor_userinfor` VALUES ('1', 'zy', '123', '15797929803', '904156108@qq.com', '江西省南昌市昌北经济开发区', null, null, null);
 INSERT INTO `userinfor_userinfor` VALUES ('2', 'zhang', '123', null, '123@qq.com', null, null, null, null);
-INSERT INTO `userinfor_userinfor` VALUES ('4', 'sdf', '123', 'dfs', 'sdf', null, null, '', 'C:\\Users\\Administrator\\Desktop\\system\\fund\\static/media/images/4a715ba01d59dae382357f71f2fc321b.jpg');
-INSERT INTO `userinfor_userinfor` VALUES ('5', 'zyngoo', '123', null, '1664323211@qq.com', null, null, null, 'C:\\Users\\Administrator\\Desktop\\system\\fund\\static\\media\\images\\437a192d5b94704b.jpg');
+INSERT INTO `userinfor_userinfor` VALUES ('4', 'sdf', '123', 'dfs', 'sdf', null, null, '', 'images/4a715ba01d59dae382357f71f2fc321b.jpg');
+INSERT INTO `userinfor_userinfor` VALUES ('5', 'zyngoo', '123', null, '1664323211@qq.com', null, null, null, 'images\\437a192d5b94704b.jpg');
 INSERT INTO `userinfor_userinfor` VALUES ('6', 'hehe', '123', '1887082156', '12387@qq.com', '南昌市', 'test', 'files/437a192d5b94704b.jpg', 'images/437a192d5b94704b_MIrxqTa.jpg');
+INSERT INTO `userinfor_userinfor` VALUES ('7', '李四', '123', null, '111@qq.com', null, null, '', '');
 
 -- ----------------------------
 -- View structure for calender_list
 -- ----------------------------
 DROP VIEW IF EXISTS `calender_list`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `calender_list` AS select `schedule_association`.`association_name` AS `association_name`,`schedule_person`.`person_name` AS `person_name`,`schedule_schedule`.`schedule_id` AS `schedule_id`,`schedule_schedule`.`schedule_name` AS `schedule_name`,`schedule_schedule`.`person_id` AS `person_id`,`schedule_schedule`.`association_id` AS `association_id`,`schedule_schedule`.`participation` AS `participation`,`schedule_schedule`.`is_public` AS `is_public`,`schedule_schedule`.`address` AS `address`,`schedule_schedule`.`is_all_day_event` AS `is_all_day_event`,`schedule_schedule`.`start_time` AS `start_time`,`schedule_schedule`.`end_time` AS `end_time`,`schedule_schedule`.`time_id` AS `time_id`,`schedule_schedule`.`util_time` AS `util_time`,`schedule_schedule`.`remind_id` AS `remind_id`,`schedule_schedule`.`meeting_summary` AS `meeting_summary`,`schedule_schedule`.`meeting_file_id` AS `meeting_file_id`,`schedule_schedule`.`is_delete` AS `is_delete`,`schedule_remind`.`remind_name` AS `remind_name`,`schedule_time_repeat`.`time_select` AS `time_select` from ((((`schedule_schedule` join `schedule_association` on((`schedule_schedule`.`association_id` = `schedule_association`.`association_id`))) join `schedule_person` on((`schedule_schedule`.`person_id` = `schedule_person`.`person_id`))) join `schedule_remind` on((`schedule_schedule`.`remind_id` = `schedule_remind`.`remind_id`))) join `schedule_time_repeat` on((`schedule_schedule`.`time_id` = `schedule_time_repeat`.`time_id`))) ;
+
+-- ----------------------------
+-- View structure for event_list
+-- ----------------------------
+DROP VIEW IF EXISTS `event_list`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `event_list` AS select `fund_fund`.`fund_name` AS `fund_name`,`fund_fund`.`fund_id` AS `fund_id`,`event_fund_event`.`title_id` AS `title_id`,`event_fund_event`.`event_name` AS `event_name`,`event_fund_event`.`event_association` AS `event_association`,`event_fund_event`.`event_type` AS `event_type`,`event_fund_event`.`event_publisher` AS `event_publisher`,`event_fund_event`.`publish_date` AS `publish_date`,`event_fund_event`.`event_status` AS `event_status`,`event_fund_event`.`event_content` AS `event_content`,`event_fund_event`.`event_annex` AS `event_annex`,`event_fund_event`.`event_executive` AS `event_executive`,`event_fund_event`.`file` AS `file`,`event_fund_event`.`is_delete` AS `is_delete` from (`fund_fund` join `event_fund_event` on((`event_fund_event`.`event_association` = `fund_fund`.`fund_id`))) ;
