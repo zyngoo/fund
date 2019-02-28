@@ -11,18 +11,18 @@ from . import getData
 '''
 def index(request):
     content = getData.getCalender()
-    return render(request, "jijin/calender.html", content)
+    return render(request, "calender/calender.html", content)
 
 
 def calender(request):
     content = getData.getCalender()
     # print(content)
-    return render(request, "jijin/calender.html", content)
+    return render(request, "calender/calender.html", content)
 
 
 def calender_add(request):
     content = getData.getCalender()
-    return render(request, "jijin/calender_add.html", content)
+    return render(request, "calender/calender_add.html", content)
 
 
 # 增加数据
@@ -45,7 +45,7 @@ def calender_handle(request):
 
 
 def calender_list(request):
-    return render(request, "jijin/calender_list.html")
+    return render(request, "calender/calender_list.html")
 
 
 # 取值

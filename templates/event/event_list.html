@@ -151,7 +151,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">发布日期</label>
                         <div class="layui-input-block">
-                            <input type="text" name="date1" id="publish_date" autocomplete="on" class="layui-input">
+                            <input type="text" name="date" id="publish_date" autocomplete="on" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -348,22 +348,7 @@
 
             //日期
             laydate.render({
-                elem: '#start_time'
-            });
-            laydate.render({
-                elem: '#end_time'
-            });
-            laydate.render({
-                elem: '#util_time'
-            });
-            laydate.render({
-                elem: '#start_time_2'
-            });
-            laydate.render({
-                elem: '#end_time_2'
-            });
-            laydate.render({
-                elem: '#util_time_2'
+                elem: '#publish_date'
             });
 
             var $ = layui.$, active = {
