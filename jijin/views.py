@@ -234,4 +234,9 @@ def jijin(request):
     return render(request, "jijin/jijin_base.html")
 
 def jijin_add(request):
+    if request.method == "POST":
+        print(request.POST)
     return render(request, "jijin/jijin_add.html")
+
+def test(request):
+    return render(request, "jijin/select_test.html")
