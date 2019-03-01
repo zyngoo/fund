@@ -5,10 +5,11 @@ from .common import Common
 from .MysqlHepler import MysqlHelper
 from . import getData
 
-
 '''
     日程模块
 '''
+
+
 def index(request):
     content = getData.getCalender()
     return render(request, "calender/calender.html", content)
@@ -148,14 +149,12 @@ def calender_test(request):
     return HttpResponse("ok")
 
 
-
 """
     事件模块
 """
 
+
 def event(request):
-    # content = getData.getFund()
-    # return render(request, "event/event.html", content)
     return render(request, "event/event_list.html")
 
 
@@ -175,9 +174,10 @@ def event_list(request):
 
 def event_add(request):
     if request.method == "POST":
+        print(request.POST)
         sql = "insert into event_fund_event ("
         for key in request.POST:
-            sql =  sql + key + ", "
+            sql = sql + key + ", "
 
         sql = sql.rstrip(", ") + ") values ("
         for key in request.POST:
@@ -223,20 +223,49 @@ def event_edit(request):
 
     MysqlHelper().update(sql, params)
 
-    return  HttpResponse(json.dumps("2"))
-
+    return HttpResponse(json.dumps("2"))
 
 
 """
     基金模块
 """
+
+
 def jijin(request):
-    return render(request, "jijin/jijin_base.html")
+    return render(request, "jijin/jijin_list.html")
+
+def jijin_list(request):
+    sql = "select * from jijin_jijin where is_delete=0"
+    data = MysqlHelper().dict_fetchall(sql)
+    result = {}
+    result["code"] = 0
+    result["msg"] = ""
+    result["count"] = len(data)
+    result["data"] = data
+    return JsonResponse(result)
 
 def jijin_add(request):
     if request.method == "POST":
-        print(request.POST)
+        # data1 = {k: request.POST[k] for k in list(request.POST.keys())[:16]}
+        # # print(data1)
+        # data2 = {k: request.POST[k] for k in list(request.POST.keys())[16:-6]}
+        # # print(data2)
+        # data3 = {k: request.POST[k] for k in list(request.POST.keys())[-6:]}
+        # print(data3)
+        sql = "insert into jijin_jijin ("
+        for key in request.POST:
+            sql += key + ", "
+
+        sql = sql.rstrip(", ") + ") values ("
+        for key in request.POST:
+            sql += "\'" + request.POST.get(key) + "\'" + ", "
+        sql = sql.rstrip(", ") + ")"
+
+        # print(sql)
+        MysqlHelper().insert_sql(sql)
+
     return render(request, "jijin/jijin_add.html")
+
 
 def test(request):
     return render(request, "jijin/select_test.html")

@@ -26,6 +26,7 @@ urlpatterns = [
     # 基金模块
     path("jijin/", views.jijin),
     path("jijin/add/", views.jijin_add),
+    path("jijin/list_handle/", views.jijin_list),
     path("jijin/test/", views.test),
 
 ]
