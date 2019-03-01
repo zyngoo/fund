@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50557
 File Encoding         : 65001
 
-Date: 2019-02-28 11:05:01
+Date: 2019-03-01 17:18:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1027,7 +1027,7 @@ CREATE TABLE `event_fund_event` (
   KEY `event_type` (`event_type`),
   KEY `file` (`file`),
   CONSTRAINT `event_fund_event_ibfk_1` FOREIGN KEY (`event_association`) REFERENCES `fund_fund` (`fund_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of event_fund_event
@@ -1035,6 +1035,7 @@ CREATE TABLE `event_fund_event` (
 INSERT INTO `event_fund_event` VALUES ('1', '事件四', '1', '事件', 'zyngoo', '2019-02-27', '代办', '测试修改事件一', null, null, null, '0');
 INSERT INTO `event_fund_event` VALUES ('2', '事件二', '1', '事件', 'zyngoo', '2019-02-27', '代办', '测试事件二', null, null, null, '0');
 INSERT INTO `event_fund_event` VALUES ('3', '事件三', '2', '事件', 'zyngoo', '2019-02-27', '完成', '测试事件三', null, null, null, '0');
+INSERT INTO `event_fund_event` VALUES ('4', '尽快', '3', '事件', 'zyngoo', '2019-03-01', '完成', '会尽快', null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for event_fund_executive
@@ -1724,34 +1725,55 @@ CREATE TABLE `jijin_investment_stage` (
 DROP TABLE IF EXISTS `jijin_jijin`;
 CREATE TABLE `jijin_jijin` (
   `fund_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '简称',
+  `fund_abbreviation` varchar(255) DEFAULT NULL,
   `fundname` varchar(255) DEFAULT NULL COMMENT '全称',
   `fundscope` varchar(255) DEFAULT NULL COMMENT '基金规模',
   `presentscope` varchar(255) DEFAULT NULL COMMENT '当前规模',
-  `management_company` int(255) DEFAULT NULL,
+  `management_company` varchar(255) DEFAULT NULL,
   `builddate` varchar(255) DEFAULT NULL COMMENT '设立日期',
   `investenddate` varchar(255) DEFAULT NULL COMMENT '投资期结束日',
   `businessdate` varchar(255) DEFAULT NULL COMMENT '经营期到期日',
   `address` varchar(255) DEFAULT NULL COMMENT '注册地址',
-  `industryfocus` int(255) DEFAULT NULL COMMENT '关注行业',
-  `concernstage` int(255) DEFAULT NULL COMMENT '关注阶段',
+  `industryfocus` varchar(255) DEFAULT NULL COMMENT '关注行业',
+  `concernstage` varchar(255) DEFAULT NULL COMMENT '关注阶段',
   `fund_introduce` varchar(255) DEFAULT NULL COMMENT '基金简介',
+  `file` varchar(255) DEFAULT NULL,
   `manage_money` varchar(255) DEFAULT NULL COMMENT '管理费',
   `income_distribution` varchar(255) DEFAULT NULL COMMENT '收益分配',
   `threshold` varchar(255) DEFAULT NULL COMMENT '门槛',
   `investment_num` varchar(255) DEFAULT NULL COMMENT '已投资项目个数',
   `investment_account` varchar(255) DEFAULT NULL COMMENT '已投资项目总额',
+  `hosting_bank_name` varchar(255) DEFAULT NULL COMMENT '托管行名称',
+  `account_name` varchar(255) DEFAULT NULL,
+  `account_number` varchar(255) DEFAULT NULL,
+  `audit_institution` varchar(255) DEFAULT NULL,
+  `law_office` varchar(255) DEFAULT NULL,
+  `target_size` varchar(255) DEFAULT NULL,
+  `approved_by_the_Commission` varchar(255) DEFAULT NULL,
+  `commitment_funding_summary` varchar(255) DEFAULT NULL,
+  `scale_summary` varchar(255) DEFAULT NULL,
+  `cumulative_investment_amount` varchar(255) DEFAULT NULL,
+  `cumulative_recovery_amount` varchar(255) DEFAULT NULL,
+  `current_size_summary` varchar(255) DEFAULT NULL,
+  `current_commitment_summary` varchar(255) DEFAULT NULL,
+  `parent_fund_DPI` varchar(255) DEFAULT NULL,
+  `annual_management_rate` varchar(255) DEFAULT NULL,
+  `annual_management_fee_base` varchar(255) DEFAULT NULL,
+  `annual_inspection_result` varchar(255) DEFAULT NULL,
+  `filing_agency` varchar(255) DEFAULT NULL,
+  `filing_time` varchar(255) DEFAULT NULL,
+  `filing_result` varchar(255) DEFAULT NULL,
+  `is_delete` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`fund_id`),
   KEY `management_company` (`management_company`),
   KEY `concernstage` (`concernstage`),
-  KEY `industryfocus` (`industryfocus`),
-  CONSTRAINT `jijin_jijin_ibfk_1` FOREIGN KEY (`management_company`) REFERENCES `jijin_management_company` (`company_id`),
-  CONSTRAINT `jijin_jijin_ibfk_2` FOREIGN KEY (`concernstage`) REFERENCES `jijin_stage_of_concern` (`stage_id`),
-  CONSTRAINT `jijin_jijin_ibfk_3` FOREIGN KEY (`industryfocus`) REFERENCES `jijin_industry_of_concern` (`industry_of_concern_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `industryfocus` (`industryfocus`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of jijin_jijin
 -- ----------------------------
+INSERT INTO `jijin_jijin` VALUES ('2', '基金一', '基金项目一', '1000', '1000', '江西财大', '2019-03-01', '2019-03-26', '2019-03-31', '南昌市', 'on', '成长期', '水电费<b>水电费</b><i style=\"font-weight: bold;\">谁的风格</i><u style=\"\"><i style=\"font-weight: bold;\">大风刮过电饭锅电饭锅电饭锅<img src=\"http://127.0.0.1:8000/static/layui/images/face/26.gif\" alt=\"[怒]\"></i></u>', '', '十万元', '随机分配', '10万元门槛', null, null, '中国工商银行', '曾勇', '81721076', '南昌市审计局', '南昌市律师事务所', '10.1', '10', '10000', '10', '12', '12', '2323', '2431', '0.54', '54', '0.67', '成功', '南昌市工商局', '2019年三月一号', '成功', '0');
 
 -- ----------------------------
 -- Table structure for jijin_management_company
@@ -1772,11 +1794,11 @@ CREATE TABLE `jijin_management_company` (
 -- ----------------------------
 DROP TABLE IF EXISTS `jijin_operational_information`;
 CREATE TABLE `jijin_operational_information` (
-  `hosting_bank_id` int(11) NOT NULL,
+  `hosting_bank_id` int(11) NOT NULL AUTO_INCREMENT,
   `hosting_bank_name` varchar(255) DEFAULT NULL COMMENT '托管行名称	',
   `account_name` varchar(255) DEFAULT NULL COMMENT '户名',
-  `audit_institution` varchar(255) DEFAULT NULL COMMENT '审计机构',
   `account_number` varchar(255) DEFAULT NULL COMMENT '账号',
+  `audit_institution` varchar(255) DEFAULT NULL COMMENT '审计机构',
   `law_office` varchar(255) DEFAULT NULL COMMENT '律师事务所',
   `target_size` varchar(255) DEFAULT NULL COMMENT '目标规模',
   `approved_by_the_Commission` varchar(255) DEFAULT NULL COMMENT '投委会批准金额',
@@ -1788,19 +1810,20 @@ CREATE TABLE `jijin_operational_information` (
   `current_commitment_summary` varchar(255) DEFAULT NULL COMMENT '当前承诺汇总',
   `parent_fund_DPI` varchar(255) DEFAULT NULL COMMENT '母基金DPI',
   PRIMARY KEY (`hosting_bank_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of jijin_operational_information
 -- ----------------------------
+INSERT INTO `jijin_operational_information` VALUES ('1', '', '', '', '', '', '1.52', '20', '10', '100', '1000', '1000', '', '', '');
 
 -- ----------------------------
 -- Table structure for jijin_other_information
 -- ----------------------------
 DROP TABLE IF EXISTS `jijin_other_information`;
 CREATE TABLE `jijin_other_information` (
-  `id` int(11) NOT NULL,
-  `annual_management rate` varchar(255) DEFAULT NULL COMMENT '年度管理费率',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `annual_management_rate` varchar(255) DEFAULT NULL COMMENT '年度管理费率',
   `annual_management_fee_base` varchar(255) DEFAULT NULL COMMENT '年度管理费基数',
   `annual_inspection_result` varchar(255) DEFAULT NULL COMMENT '年检结果	',
   `filing_agency` varchar(255) DEFAULT NULL COMMENT '备案机构',
@@ -1817,11 +1840,12 @@ CREATE TABLE `jijin_other_information` (
   KEY `investment_stage` (`investment_stage`),
   CONSTRAINT `jijin_other_information_ibfk_1` FOREIGN KEY (`investment_areas`) REFERENCES `jijin_investment_areas` (`area_id`),
   CONSTRAINT `jijin_other_information_ibfk_2` FOREIGN KEY (`investment_stage`) REFERENCES `jijin_investment_stage` (`stage_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of jijin_other_information
 -- ----------------------------
+INSERT INTO `jijin_other_information` VALUES ('1', '15.5%', '', '', '', '', '', null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for jijin_stage_of_concern
