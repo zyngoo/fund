@@ -266,6 +266,13 @@ def jijin_add(request):
 
     return render(request, "jijin/jijin_add.html")
 
+def jijin_delete(request):
+    id = request.POST.get("fund_id")
+    print(request.POST)
+    sqlData = "update jijin_jijin set is_delete=1 where fund_id=%s"
+    param = [id]
+    MysqlHelper().update(sqlData, param)
+    return HttpResponse(json.dumps("2"))
 
 def test(request):
     return render(request, "jijin/select_test.html")
