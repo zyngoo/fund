@@ -56,6 +56,13 @@
         </div>
     </div>
 
+    <div class="layui-form-item">
+        <label class="layui-form-label">基金简介</label>
+        <div class="layui-input-block" >
+            <textarea id="demo2" style="display: none;"></textarea>
+        </div>
+    </div>
+
     <div class="layui-form-item" style="text-align:center;">
         <div class="layui-input-block">
             <button type="button" class="layui-btn" lay-submit="" lay-filter="demo">console.log</button>
@@ -63,6 +70,9 @@
         </div>
     </div>
 </form>
+
+
+
 
 
 <div id="btn-wrap">
@@ -80,6 +90,7 @@
     layui.use("layedit", function () {
         var layedit = layui.layedit;
         layedit.build("demo");
+        layedit.build("demo2");
     });
 
 
