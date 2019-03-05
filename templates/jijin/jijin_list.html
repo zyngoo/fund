@@ -371,12 +371,12 @@
 
     <div class="layui-row" id="popUpdateTest" style="display:none;">
         <div class="layui-col-md10">
-            <div class="layui-form" style="width: 800px">
+            <div class="layui-form" style="width: 1030px">
 
                 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 0;">
                     <legend>修改基金</legend>
                 </fieldset>
-                <label id="title_id" style="display:none"></label>
+                <label id="fund_id" style="display:none"></label>
 
                 <fieldset class="layui-elem-field site-demo-button" style="margin-top: 20px;">
                     {#                <div class="layui-form-item layui-form-label">#}
@@ -485,7 +485,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">关注阶段</label>
                             <div class="layui-input-block">
-                                <select name="concernstage" lay-filter="aihao">
+                                <select id="concernstage" name="concernstage" lay-filter="aihao">
                                     {#                                    <option value=""></option>#}
                                     {#                                    <option value="早期">早期</option>#}
                                     {#                                    <option value="成长期">成长期</option>#}
@@ -808,20 +808,7 @@
                             console.log(msg);
                             var index = layedit.build("fund_introduce");
                             layedit.setContent(index, obj.data["fund_introduce"]);
-                            var value = '';
-                            for (var i = 0; i < msg.length; i++) {
-                                {#alert(msg[i].fund_name);#}
-                                if (obj.data.fund_name == msg[i].fund_name) {
-                                    value += "<option value='" + msg[i].fund_id + "' selected >" + msg[i].fund_name + "</option>";
-                                } else {
 
-                                    value += "<option value='" + msg[i].fund_id + "'>" + msg[i].fund_name + "</option>";
-
-                                }
-
-                            }
-                            {#alert(value);#}
-                            $("#fund_name").append(value);
 
                             {#类型选择#}
                             var typeList = ['早期', '成长期', '成熟期'];
@@ -840,20 +827,6 @@
                             }
                             $("#concernstage").append(contantVal);
 
-
-                            {#状态选择#}
-                            var remindList = ["代办", "完成"];
-
-                            var remindVal = "";
-                            for (var i = 0; i < remindList.length; i++) {
-                                if (obj.data.event_status == remindList[i]) {
-                                    remindVal += "<option value ='" + remindList[i] + "' selected >" + remindList[i] + "</option>";
-                                } else {
-                                    remindVal += "<option value ='" + remindList[i] + "'>" + remindList[i] + "</option>";
-                                }
-                            }
-                            $("#event_status").append(remindVal);
-
                             {#表单渲染#}
                             form.render();
 
@@ -864,7 +837,7 @@
                         //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
                         type: 1,
                         {#title: "修改日程",#}
-                        area: ['1050px', '500px'],
+                        area: ['1030px', '500px'],
                         content: $("#popUpdateTest"),//引用的弹出层的页面层的方式加载修改界面表单
                         shade: 0,
                         success: function (x, y) {
