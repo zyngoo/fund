@@ -521,7 +521,7 @@
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">门槛</label>
                         <div class="layui-input-block">
-                        <textarea style="min-height: 50px" placeholder="请输入内容" class="layui-textarea" id="threshold_2"
+                        <textarea style="min-height: 50px" placeholder="请输入内容" class="layui-textarea" id="threshold"
                                   name="threshold"></textarea>
                         </div>
                     </div>
@@ -860,7 +860,13 @@
 
             //日期
             laydate.render({
-                elem: '#publish_date'
+                elem: '#builddate'
+            });
+            laydate.render({
+                elem: '#investenddate'
+            });
+            laydate.render({
+                elem: '#businessdate'
             });
 
             var $ = layui.$, active = {
@@ -888,17 +894,50 @@
 
 
         function mysubmit() {
-            var title_id = $("#title_id").val();
-            var event_name = $("#event_name").val();
-            var event_association = $("#fund_name").val();
-            var event_type = $("#event_type").val();
-            var event_publisher = $('#event_publisher').val();
-            var publish_date = $('#publish_date').val();
-            var event_status = $('#event_status').val();
-            var event_content = $('#event_content').val();
+            var fund_id = $("#fund_id").val();
+            var fund_abbreviation = $("#fund_abbreviation").val();
+            var fundname = $("#fundname").val();
+            var fundscope = $("#fundscope").val();
+            var presentscope = $('#presentscope').val();
+            var management_company = $('#management_company').val();
+            var builddate = $('#builddate').val();
+            var investenddate = $('#investenddate').val();
+            var businessdate = $('#businessdate').val();
+            var address = $('#address').val();
+            var concernstage = $('#concernstage').val();
+            var fund_introduce = $('#fund_introduce').val();
+            var file = $('#file').val();
+            var manage_money = $('#manage_money').val();
+            var income_distribution = $('#income_distribution').val();
+            var threshold = $('#threshold').val();
+            var hosting_bank_name = $('#hosting_bank_name').val();
+            var account_name = $('#account_name').val();
+            var account_number = $('#account_number').val();
+            var audit_institution = $('#audit_institution').val();
+            var law_office = $('#law_office').val();
+            var target_size = $('#target_size').val();
+            var approved_by_the_Commission = $('#approved_by_the_Commission').val();
+            var commitment_funding_summary = $('#commitment_funding_summary').val();
+            var scale_summary = $('#scale_summary').val();
+            var cumulative_investment_amount = $('#cumulative_investment_amount').val();
+            var cumulative_recovery_amount = $('#cumulative_recovery_amount').val();
+            var current_commitment_summary = $('#current_commitment_summary').val();
+            var parent_fund_DPI = $('#parent_fund_DPI').val();
+            var annual_management_rate = $('#annual_management_rate').val();
+            var annual_management_fee_base = $('#annual_management_fee_base').val();
+            var annual_inspection_result = $('#annual_inspection_result').val();
+            var current_size_summary = $('#current_size_summary').val();
+            var filing_agency = $('#filing_agency').val();
+            var filing_time = $('#filing_time').val();
+            var filing_result = $('#filing_result').val();
 
-            keyword = ["title_id", "event_name", "event_association", "event_type", "event_publisher", "publish_date", "event_status", "event_content"];
-            value = [title_id, event_name, event_association, event_type, event_publisher, publish_date, event_status, event_content];
+            keyword = ["fund_id", "fund_abbreviation", "fundname", "fundscope", "presentscope", "management_company", "builddate", "investenddate",
+                        "businessdate", "address", "concernstage", "fund_introduce", "file", "manage_money", "income_distribution", "threshold",
+                         "hosting_bank_name", "account_name", "account_number", "audit_institution", "investenddate", "investenddate", "investenddate", "investenddate", "investenddate",
+                         "investenddate", "investenddate", "investenddate", "investenddate", "investenddate", "investenddate", "investenddate", "investenddate", ];
+            value = [fund_id, fund_abbreviation, fundname, fundscope, presentscope, management_company, builddate, investenddate,
+                    businessdate, address, concernstage, fund_introduce, file, manage_money, income_distribution, threshold,
+                    hosting_bank_name, account_name, account_number, audit_institution,  ];
 
             var dataSend = {};
             for (var i = 0; i < keyword.length; i++) {
