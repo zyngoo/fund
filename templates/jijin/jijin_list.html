@@ -933,11 +933,14 @@
 
             keyword = ["fund_id", "fund_abbreviation", "fundname", "fundscope", "presentscope", "management_company", "builddate", "investenddate",
                         "businessdate", "address", "concernstage", "fund_introduce", "file", "manage_money", "income_distribution", "threshold",
-                         "hosting_bank_name", "account_name", "account_number", "audit_institution", "investenddate", "investenddate", "investenddate", "investenddate", "investenddate",
-                         "investenddate", "investenddate", "investenddate", "investenddate", "investenddate", "investenddate", "investenddate", "investenddate", ];
+                         "hosting_bank_name", "account_name", "account_number", "audit_institution", "law_office", "target_size", "approved_by_the_Commission", "commitment_funding_summary", "scale_summary",
+                         "cumulative_investment_amount", "cumulative_recovery_amount", "current_commitment_summary", "parent_fund_DPI", "annual_management_rate", "annual_management_fee_base", "annual_inspection_result",
+                        "current_size_summary", "filing_agency", "filing_time", "filing_result"];
             value = [fund_id, fund_abbreviation, fundname, fundscope, presentscope, management_company, builddate, investenddate,
                     businessdate, address, concernstage, fund_introduce, file, manage_money, income_distribution, threshold,
-                    hosting_bank_name, account_name, account_number, audit_institution,  ];
+                    hosting_bank_name, account_name, account_number, audit_institution, law_office, target_size, approved_by_the_Commission, commitment_funding_summary, scale_summary,
+                    cumulative_investment_amount, cumulative_recovery_amount, current_commitment_summary, parent_fund_DPI, annual_management_rate, annual_management_fee_base, annual_inspection_result,
+                    current_size_summary, filing_agency, filing_time, filing_result];
 
             var dataSend = {};
             for (var i = 0; i < keyword.length; i++) {
@@ -948,7 +951,7 @@
             {#console.log(dataSend);#}
             {#dataSend = JSON.stringify(dataSend);#}
             $.ajax({
-                url: "/jijin/event/event_edit/",
+                url: "/jijin/jijin/jijin_edit/",
                 type: "POST",
                 async: true,
                 dataType: "json",
@@ -956,7 +959,7 @@
                 success: function (data) {
                     {#alert('成功');#}
                     setTimeout(function () {
-                        window.location.href = "/jijin/event/";
+                        window.location.href = "/jijin/jijin/";
                     });
                     {#console.log(data)#}
                 }

@@ -1,6 +1,7 @@
 from django.shortcuts import *
 from django.http import HttpResponse, JsonResponse
 import json
+from pprint import pprint
 from .common import Common
 from .MysqlHepler import MysqlHelper
 from . import getData
@@ -272,6 +273,23 @@ def jijin_delete(request):
     sqlData = "update jijin_jijin set is_delete=1 where fund_id=%s"
     param = [id]
     MysqlHelper().update(sqlData, param)
+    return HttpResponse(json.dumps("2"))
+
+def jijin_edit(request):
+    # pprint(request.POST)
+    sql = "update jijin_jijin set "
+    for key in request.POST:
+        sql = sql + key + "=%s, "
+    sql = sql.rstrip(", ") + " where fund_id=" + request.POST.get("fund_id")
+    # print(sql)
+
+    params = []
+    for key in request.POST:
+        params.append(request.POST.get(key))
+    # print(params)
+
+    MysqlHelper().update(sql, params)
+
     return HttpResponse(json.dumps("2"))
 
 def test(request):
