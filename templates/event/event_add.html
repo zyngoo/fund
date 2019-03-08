@@ -36,7 +36,6 @@
                         <select name="event_association" lay-filter="aihao">
                             <option value=""></option>
                             {% for jijin in fund %}
-                                {{ jijin }}
                                 <option value="{{ jijin.fund_id }}">{{ jijin.fund_name }}</option>
                             {% endfor %}
                         </select>

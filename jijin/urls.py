@@ -31,4 +31,9 @@ urlpatterns = [
     path("jijin/jijin_edit/", views.jijin_edit),
     path("jijin/test/", views.test),
 
+    # 股权直投管理模块
+    path("guquan/", views.guquan),
+    path("guquan/add/", views.guquan_add),
+
+
 ]

@@ -294,3 +294,11 @@ def jijin_edit(request):
 
 def test(request):
     return render(request, "jijin/select_test.html")
+
+
+# 股权直投管理模块
+def guquan(request):
+    return render(request, "guquan/guquan_base.html")
+
+def guquan_add(request):
+    return render(request, "guquan/guquan_add.html")
