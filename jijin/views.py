@@ -5,6 +5,7 @@ from pprint import pprint
 from .common import Common
 from .MysqlHepler import MysqlHelper
 from . import getData
+from fund import settings
 
 '''
     日程模块
@@ -302,3 +303,22 @@ def guquan(request):
 
 def guquan_add(request):
     return render(request, "guquan/guquan_add.html")
+
+def guquan_file(request):
+    file = request.FILES["file"]
+    print("settings.MEDIA_ROOT", settings.MEDIA_ROOT)
+    print("file.name: ", file.name)
+    fname = "%s/files/%s" % (settings.MEDIA_ROOT, file.name)
+    print(fname)
+
+    with open(fname, "wb") as pic:
+        for c in file.chunks():
+            pic.write(c)
+    # return HttpResponse("ok")
+    res = {"url": fname}
+    return JsonResponse(res)
+
+def add_file(request):
+    if request.method == "POST":
+        print(request.POST)
+    return render(request, "guquan/file_upload.html")

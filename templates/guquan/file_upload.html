@@ -1,0 +1,68 @@
+{% extends "guquan/guquan_base.html" %}
+
+{% block content %}
+    <div style="top: 100px;">
+        <form class="layui-form" method="post" action="" style="top: 50px;">
+            <div class="layui-form-item">
+                <label class="layui-form-label">名称</label>
+                <div class="layui-input-block">
+                    <input name="name" lay-verify="name" autocomplete="off" placeholder="请输入标题" class="layui-input"
+                           type="text"/>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">照片</label>
+                <div class="layui-input-block">
+                    <button type="button" class="layui-btn" id="upload1">上传文件</button>
+                    <input type="hidden" id="img_url" name="img" value=""/>
+{#                    <div class="layui-upload-list">#}
+{#                        <img class="layui-upload-img" width="100px" height="80px" id="demo1"/>#}
+{#                        <p id="demoText"></p>#}
+{#                    </div>#}
+                </div>
+            </div>
+
+            <div class="layui-form-item" style="text-align: center;">
+                <button type="submit" class="layui-btn" onclick="update" value="保存">保存</button>
+                <button class="layui-btn" lay-submit="" lay-filter="*">立即提交</button>
+            </div>
+
+        </form>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        layui.use(["upload"], function () {
+            var upload = layui.upload,
+                $ = layui.jquery;
+
+            var uploadInst = upload.render({
+                elem: "#upload1",
+                accept: 'file',
+                url: "/jijin/guquan_file/",
+                before: function (obj) {
+                    obj.preview(function (index, file, result) {
+                        $("#demo1").attr("src", result);
+                    });
+                },
+                done: function (res) {
+                    if (res.code > 0) {
+                        return layer.msg("上传失败");
+                    }
+                    alert("上传成功" + res.url);
+                    layer.msg("上传成功");
+                    document.getElementById("img_url").value = res.url;
+                },
+                error: function () {
+                    var demoText = $("#demoText");
+                    demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                    demoText.find(".demo-reload").on("click", function () {
+                        uploadInst.upload();
+                    });
+                }
+            })
+        })
+    </script>
+{% endblock %}

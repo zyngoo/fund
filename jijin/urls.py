@@ -34,6 +34,8 @@ urlpatterns = [
     # 股权直投管理模块
     path("guquan/", views.guquan),
     path("guquan/add/", views.guquan_add),
+    path("guquan_file/", views.guquan_file),
+    path("guquan/add_file", views.add_file),
 
 
 ]
