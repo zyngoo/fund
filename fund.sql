@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50557
 File Encoding         : 65001
 
-Date: 2019-03-03 09:55:19
+Date: 2019-03-11 15:15:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1194,6 +1194,9 @@ CREATE TABLE `fund_person` (
 -- ----------------------------
 -- Records of fund_person
 -- ----------------------------
+INSERT INTO `fund_person` VALUES ('1', '曾勇');
+INSERT INTO `fund_person` VALUES ('2', '张蕾');
+INSERT INTO `fund_person` VALUES ('3', '杨帆');
 
 -- ----------------------------
 -- Table structure for fund_project
@@ -1483,20 +1486,6 @@ CREATE TABLE `guquan_management_grouping` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for guquan_management_industry
--- ----------------------------
-DROP TABLE IF EXISTS `guquan_management_industry`;
-CREATE TABLE `guquan_management_industry` (
-  `industry_id` int(11) NOT NULL,
-  `industry_name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`industry_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of guquan_management_industry
--- ----------------------------
-
--- ----------------------------
 -- Table structure for guquan_management_investment_intention
 -- ----------------------------
 DROP TABLE IF EXISTS `guquan_management_investment_intention`;
@@ -1560,88 +1549,53 @@ CREATE TABLE `guquan_management_priority` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for guquan_management_source
--- ----------------------------
-DROP TABLE IF EXISTS `guquan_management_source`;
-CREATE TABLE `guquan_management_source` (
-  `id` int(11) NOT NULL,
-  `process` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of guquan_management_source
--- ----------------------------
-
--- ----------------------------
--- Table structure for guquan_management_state
--- ----------------------------
-DROP TABLE IF EXISTS `guquan_management_state`;
-CREATE TABLE `guquan_management_state` (
-  `state_id` int(11) NOT NULL,
-  `state_name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`state_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of guquan_management_state
--- ----------------------------
-
--- ----------------------------
 -- Table structure for guquan_management_technology
 -- ----------------------------
 DROP TABLE IF EXISTS `guquan_management_technology`;
 CREATE TABLE `guquan_management_technology` (
-  `id` int(11) NOT NULL COMMENT '科技产业',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '科技产业',
   `project` varchar(255) DEFAULT NULL COMMENT '项目名称',
   `project_name` varchar(255) DEFAULT NULL COMMENT '项目全称',
-  `project_state` int(255) DEFAULT NULL COMMENT '项目状态',
-  `project_industry` int(11) DEFAULT NULL COMMENT '行业划分',
+  `jijin` int(11) DEFAULT NULL,
+  `project_state` varchar(255) DEFAULT NULL COMMENT '项目状态',
+  `project_industry` varchar(255) DEFAULT NULL COMMENT '行业划分',
   `project_process` varchar(255) DEFAULT NULL COMMENT '投资流程',
-  `creat_time` datetime DEFAULT NULL COMMENT '创建时间',
-  `creator` int(255) DEFAULT NULL COMMENT '创建者',
+  `creat_time` varchar(255) DEFAULT NULL COMMENT '创建时间',
+  `creator` varchar(255) DEFAULT NULL COMMENT '创建者',
   `executor` int(11) DEFAULT NULL COMMENT '执行者',
-  `project_source` int(11) DEFAULT NULL COMMENT '项目来源',
+  `project_source` varchar(255) DEFAULT NULL COMMENT '项目来源',
   `invest_money` int(11) DEFAULT NULL COMMENT '投资金额',
-  `industry` int(255) DEFAULT NULL COMMENT '行业',
-  `grouping` int(11) DEFAULT NULL COMMENT '分组',
-  `priority` int(11) DEFAULT NULL COMMENT '优先级',
-  `is_public` bit(1) DEFAULT NULL COMMENT '是否公开',
-  `label` int(11) DEFAULT NULL COMMENT '标签',
-  `project_member` int(11) DEFAULT NULL COMMENT '项目组成员',
-  `file_1` int(11) DEFAULT NULL COMMENT '附件',
-  `file_2` int(11) DEFAULT NULL COMMENT '周例会汇报',
+  `industry` varchar(255) DEFAULT NULL COMMENT '行业',
+  `grouping` varchar(255) DEFAULT NULL COMMENT '分组',
+  `priority` varchar(255) DEFAULT NULL COMMENT '优先级',
+  `is_public` tinyint(1) DEFAULT NULL COMMENT '是否公开',
+  `label` varchar(255) DEFAULT NULL COMMENT '标签',
+  `project_member` varchar(255) DEFAULT NULL COMMENT '项目组成员',
+  `BP_file` varchar(255) DEFAULT NULL COMMENT '附件',
+  `weekly_file` varchar(255) DEFAULT NULL COMMENT '周例会汇报',
   `abstract` varchar(255) DEFAULT NULL COMMENT '公司概况',
   PRIMARY KEY (`id`),
   KEY `project_state` (`project_state`),
   KEY `project_industry` (`project_industry`),
   KEY `creator` (`creator`),
-  KEY `executor` (`executor`),
   KEY `project_source` (`project_source`),
   KEY `industry` (`industry`),
   KEY `grouping` (`grouping`),
   KEY `priority` (`priority`),
   KEY `label` (`label`),
   KEY `project_member` (`project_member`),
-  KEY `file_1` (`file_1`),
-  KEY `file_2` (`file_2`),
-  CONSTRAINT `guquan_management_technology_ibfk_1` FOREIGN KEY (`project_state`) REFERENCES `guquan_management_state` (`state_id`),
-  CONSTRAINT `guquan_management_technology_ibfk_10` FOREIGN KEY (`project_member`) REFERENCES `fund_person` (`person_id`),
-  CONSTRAINT `guquan_management_technology_ibfk_11` FOREIGN KEY (`file_1`) REFERENCES `fund_file` (`file_id`),
-  CONSTRAINT `guquan_management_technology_ibfk_12` FOREIGN KEY (`file_2`) REFERENCES `fund_file` (`file_id`),
-  CONSTRAINT `guquan_management_technology_ibfk_2` FOREIGN KEY (`project_industry`) REFERENCES `guquan_management_industry` (`industry_id`),
-  CONSTRAINT `guquan_management_technology_ibfk_3` FOREIGN KEY (`creator`) REFERENCES `fund_person` (`person_id`),
-  CONSTRAINT `guquan_management_technology_ibfk_4` FOREIGN KEY (`executor`) REFERENCES `fund_person` (`person_id`),
-  CONSTRAINT `guquan_management_technology_ibfk_5` FOREIGN KEY (`project_source`) REFERENCES `guquan_management_source` (`id`),
-  CONSTRAINT `guquan_management_technology_ibfk_6` FOREIGN KEY (`industry`) REFERENCES `guquan_management_industry` (`industry_id`),
-  CONSTRAINT `guquan_management_technology_ibfk_7` FOREIGN KEY (`grouping`) REFERENCES `guquan_management_grouping` (`id`),
-  CONSTRAINT `guquan_management_technology_ibfk_8` FOREIGN KEY (`priority`) REFERENCES `guquan_management_priority` (`id`),
-  CONSTRAINT `guquan_management_technology_ibfk_9` FOREIGN KEY (`label`) REFERENCES `guquan_management_label` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `executor` (`executor`),
+  KEY `jijin` (`jijin`),
+  KEY `guquan_management_technology_ibfk_11` (`BP_file`),
+  KEY `guquan_management_technology_ibfk_12` (`weekly_file`),
+  CONSTRAINT `guquan_management_technology_ibfk_13` FOREIGN KEY (`executor`) REFERENCES `fund_person` (`person_id`),
+  CONSTRAINT `guquan_management_technology_ibfk_14` FOREIGN KEY (`jijin`) REFERENCES `jijin_jijin` (`fund_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of guquan_management_technology
 -- ----------------------------
+INSERT INTO `guquan_management_technology` VALUES ('1', '项目一', '产业项目一', '2', '审阅BP', '科技产业', '审阅BP', '2019-03-11', '曾勇', '1', '内部推荐', '15', '医疗', '', '普通(P2)', '1', '12,13', '13,15', '', '', '风格化<b>风格化<img src=\"http://127.0.0.1:8000/static/layui/images/face/13.gif\" alt=\"[偷笑]\"></b>');
 
 -- ----------------------------
 -- Table structure for hongkong_stock
@@ -1773,7 +1727,7 @@ CREATE TABLE `jijin_jijin` (
 -- ----------------------------
 -- Records of jijin_jijin
 -- ----------------------------
-INSERT INTO `jijin_jijin` VALUES ('2', '基金一', '基金项目一', '1000', '1000', '江西财大', '2019-03-01', '2019-03-26', '2019-03-31', '南昌市', 'on', '成长期', '水电费<b>水电费</b><i style=\"font-weight: bold;\">谁的风格</i><u style=\"\"><i style=\"font-weight: bold;\">大风刮过电饭锅电饭锅电饭锅<img src=\"http://127.0.0.1:8000/static/layui/images/face/26.gif\" alt=\"[怒]\"></i></u>', '', '十万元', '随机分配', '10万元门槛', null, null, '中国工商银行', '曾勇', '81721076', '南昌市审计局', '南昌市律师事务所', '10.1', '10', '10000', '10', '12', '12', '2323', '2431', '0.54', '54', '0.67', '成功', '南昌市工商局', '2019年三月一号', '成功', '0');
+INSERT INTO `jijin_jijin` VALUES ('2', '基金二', '基金项目二', '1000', '1000', '江西财大', '2019-03-01', '2019-03-26', '2019-03-31', '南昌市', 'on', '成长期', '水电费<b>水电费</b><i style=\"font-weight: bold;\">谁的风格</i><u style=\"\"><i style=\"font-weight: bold;\">大风刮过电饭锅电饭锅电饭锅<img src=\"http://127.0.0.1:8000/static/layui/images/face/26.gif\" alt=\"[怒]\"></i></u>', '', '十万元', '随机分配', '10万元门槛', null, null, '中国工商银行', '曾勇', '81721076', '南昌市审计局', '南昌市律师事务所', '10.1', '10', '10000', '10', '12', '12', '2323', '2431', '0.54', '54', '0.67', '成功', '南昌市工商局', '2019年三月一号', '成功', '0');
 
 -- ----------------------------
 -- Table structure for jijin_management_company

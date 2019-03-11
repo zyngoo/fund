@@ -314,6 +314,9 @@ def guquan_add(request):
                 sql = sql + "\'" + request.POST.get(key) + "\'" + ", "
         sql = sql.rstrip(", ") + ")"
         print(sql)
+        MysqlHelper().insert_sql(sql)
+        return redirect("/jijin/guquan")
+
 
         return HttpResponse(json.dumps("ok!"))
 

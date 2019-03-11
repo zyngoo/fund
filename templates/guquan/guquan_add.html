@@ -177,14 +177,14 @@
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">标签</label>
-                    <div class="layui-input-block" id="tag_ids1" name="label">
+                    <div class="layui-input-block" id="label" name="label">
 
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">项目组成员</label>
-                    <div class="layui-input-block" id="tag_ids2" name="project_member">
+                    <div class="layui-input-block" id="project_member" name="project_member">
 
                     </div>
                 </div>
@@ -302,7 +302,7 @@
             });
 
             //监听提交
-            form.on('submit(demo1)', function (data) {
+            form.on('submit(2)', function (data) {
                 layer.alert(JSON.stringify(data.field), {
                     title: '最终的提交信息'
                 });
@@ -328,14 +328,14 @@
                 , selectM = layui.selectM;
 
             var tagIns1 = selectM({
-                elem: "#tag_ids1",
+                elem: "#label",
                 data: tagData,
                 delimiter: ",",
                 field: {idName: "id", titleName: "name"}
             });
 
-            var tagIns1 = selectM({
-                elem: "#tag_ids2",
+            var tagIns2 = selectM({
+                elem: "#project_member",
                 data: tagData,
                 delimiter: ",",
                 field: {idName: "id", titleName: "name"}
