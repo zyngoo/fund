@@ -15,11 +15,11 @@
                 <label class="layui-form-label">照片</label>
                 <div class="layui-input-block">
                     <button type="button" class="layui-btn" id="upload1">上传文件</button>
-                    <input type="hidden" id="img_url" name="img" value=""/>
-{#                    <div class="layui-upload-list">#}
-{#                        <img class="layui-upload-img" width="100px" height="80px" id="demo1"/>#}
-{#                        <p id="demoText"></p>#}
-{#                    </div>#}
+                    <input type="hidden" id="img_url" name="file" value=""/>
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img" width="100px" height="80px" id="demo1"/>
+                        <p id="demoText"></p>
+                    </div>
                 </div>
             </div>
 
@@ -40,7 +40,7 @@
 
             var uploadInst = upload.render({
                 elem: "#upload1",
-                accept: 'file',
+                {#accept: 'file',#}
                 url: "/jijin/guquan_file/",
                 before: function (obj) {
                     obj.preview(function (index, file, result) {

@@ -302,14 +302,36 @@ def guquan(request):
     return render(request, "guquan/guquan_base.html")
 
 def guquan_add(request):
-    return render(request, "guquan/guquan_add.html")
+    if request.method == "POST":
+        print(request.POST)
+        sql = "insert into guquan_management_technology ("
+        for key in request.POST:
+            if key != "file":
+                sql = sql + key + ", "
+        sql = sql.rstrip(", ") + ") values ("
+        for key in request.POST:
+            if key != "file":
+                sql = sql + "\'" + request.POST.get(key) + "\'" + ", "
+        sql = sql.rstrip(", ") + ")"
+        print(sql)
+
+        return HttpResponse(json.dumps("ok!"))
+
+    jijin = getData.getJijin()
+    person = getData.getFundPerson()
+    content = dict(jijin, **person)
+    return render(request, "guquan/guquan_add.html", content)
+
+
+
+
 
 def guquan_file(request):
     file = request.FILES["file"]
-    print("settings.MEDIA_ROOT", settings.MEDIA_ROOT)
-    print("file.name: ", file.name)
+    # print("settings.MEDIA_ROOT", settings.MEDIA_ROOT)
+    # print("file.name: ", file.name)
     fname = "%s/files/%s" % (settings.MEDIA_ROOT, file.name)
-    print(fname)
+    # print(fname)
 
     with open(fname, "wb") as pic:
         for c in file.chunks():
