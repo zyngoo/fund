@@ -35,7 +35,8 @@ urlpatterns = [
     path("guquan/", views.guquan),
     path("guquan/add/", views.guquan_add),
     path("guquan_file/", views.guquan_file),
-    path("guquan/add_file", views.add_file),
+    path("guquan/list_handle/", views.guquan_list),
 
+    path("guquan/add_file", views.add_file),
 
 ]

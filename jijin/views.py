@@ -299,7 +299,7 @@ def test(request):
 
 # 股权直投管理模块
 def guquan(request):
-    return render(request, "guquan/guquan_base.html")
+    return render(request, "guquan/guquan_list.html")
 
 def guquan_add(request):
     if request.method == "POST":
@@ -317,14 +317,21 @@ def guquan_add(request):
         MysqlHelper().insert_sql(sql)
         return redirect("/jijin/guquan")
 
-
-        return HttpResponse(json.dumps("ok!"))
-
     jijin = getData.getJijin()
     person = getData.getFundPerson()
     content = dict(jijin, **person)
     return render(request, "guquan/guquan_add.html", content)
 
+def guquan_list(request):
+    sql = "select * from guquan_list where is_delete=0"
+    data = MysqlHelper().dict_fetchall(sql)
+    result = {}
+    result["code"] = 0
+    result["msg"] = ""
+    result["count"] = len(data)
+    result["data"] = data
+    print(result)
+    return JsonResponse(result)
 
 
 
