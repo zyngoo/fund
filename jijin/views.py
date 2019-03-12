@@ -322,6 +322,7 @@ def guquan_add(request):
     content = dict(jijin, **person)
     return render(request, "guquan/guquan_add.html", content)
 
+
 def guquan_list(request):
     sql = "select * from guquan_list where is_delete=0"
     data = MysqlHelper().dict_fetchall(sql)
@@ -330,9 +331,30 @@ def guquan_list(request):
     result["msg"] = ""
     result["count"] = len(data)
     result["data"] = data
-    print(result)
+    # print(result)
     return JsonResponse(result)
 
+
+def guquan_delete(request):
+    id = request.POST.get("id")
+    sql = "update guquan_management_technology set is_delete=1 where id=%s"
+    param = [id]
+    MysqlHelper().update(sql, param)
+    return HttpResponse(json.dumps("ok"))
+
+
+def guquan_fund(request):
+    content = {}
+    sqlPerson = "select * from fund_person"
+    person = MysqlHelper().dict_fetchall(sqlPerson)
+    content["person"] = person
+
+    sqlJijin = "select fund_id, fundname from jijin_jijin"
+    jijin = MysqlHelper().dict_fetchall(sqlJijin)
+    content["jijin"] = jijin
+
+    print(content)
+    return JsonResponse(content)
 
 
 
@@ -349,6 +371,7 @@ def guquan_file(request):
     # return HttpResponse("ok")
     res = {"url": fname}
     return JsonResponse(res)
+
 
 def add_file(request):
     if request.method == "POST":
