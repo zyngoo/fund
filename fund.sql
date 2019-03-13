@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50557
 File Encoding         : 65001
 
-Date: 2019-03-11 15:15:05
+Date: 2019-03-13 14:12:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1562,7 +1562,7 @@ CREATE TABLE `guquan_management_technology` (
   `project_process` varchar(255) DEFAULT NULL COMMENT '投资流程',
   `creat_time` varchar(255) DEFAULT NULL COMMENT '创建时间',
   `creator` varchar(255) DEFAULT NULL COMMENT '创建者',
-  `executor` int(11) DEFAULT NULL COMMENT '执行者',
+  `executor` varchar(255) DEFAULT NULL COMMENT '执行者',
   `project_source` varchar(255) DEFAULT NULL COMMENT '项目来源',
   `invest_money` int(11) DEFAULT NULL COMMENT '投资金额',
   `industry` varchar(255) DEFAULT NULL COMMENT '行业',
@@ -1574,6 +1574,7 @@ CREATE TABLE `guquan_management_technology` (
   `BP_file` varchar(255) DEFAULT NULL COMMENT '附件',
   `weekly_file` varchar(255) DEFAULT NULL COMMENT '周例会汇报',
   `abstract` varchar(255) DEFAULT NULL COMMENT '公司概况',
+  `is_delete` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `project_state` (`project_state`),
   KEY `project_industry` (`project_industry`),
@@ -1588,14 +1589,13 @@ CREATE TABLE `guquan_management_technology` (
   KEY `jijin` (`jijin`),
   KEY `guquan_management_technology_ibfk_11` (`BP_file`),
   KEY `guquan_management_technology_ibfk_12` (`weekly_file`),
-  CONSTRAINT `guquan_management_technology_ibfk_13` FOREIGN KEY (`executor`) REFERENCES `fund_person` (`person_id`),
   CONSTRAINT `guquan_management_technology_ibfk_14` FOREIGN KEY (`jijin`) REFERENCES `jijin_jijin` (`fund_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of guquan_management_technology
 -- ----------------------------
-INSERT INTO `guquan_management_technology` VALUES ('1', '项目一', '产业项目一', '2', '审阅BP', '科技产业', '审阅BP', '2019-03-11', '曾勇', '1', '内部推荐', '15', '医疗', '', '普通(P2)', '1', '12,13', '13,15', '', '', '风格化<b>风格化<img src=\"http://127.0.0.1:8000/static/layui/images/face/13.gif\" alt=\"[偷笑]\"></b>');
+INSERT INTO `guquan_management_technology` VALUES ('1', '项目一', '产业项目一', '2', '审阅BP', '科技产业', '审阅BP', '2019-03-11', '曾勇', '1', '内部推荐', '15', '医疗', '', '普通(P2)', '1', '12,13', '13,15', '', '', '风格化<b>风格化<img src=\"http://127.0.0.1:8000/static/layui/images/face/13.gif\" alt=\"[偷笑]\"></b>', '0');
 
 -- ----------------------------
 -- Table structure for hongkong_stock
@@ -2442,3 +2442,9 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- ----------------------------
 DROP VIEW IF EXISTS `event_list`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `event_list` AS select `fund_fund`.`fund_name` AS `fund_name`,`fund_fund`.`fund_id` AS `fund_id`,`event_fund_event`.`title_id` AS `title_id`,`event_fund_event`.`event_name` AS `event_name`,`event_fund_event`.`event_association` AS `event_association`,`event_fund_event`.`event_type` AS `event_type`,`event_fund_event`.`event_publisher` AS `event_publisher`,`event_fund_event`.`publish_date` AS `publish_date`,`event_fund_event`.`event_status` AS `event_status`,`event_fund_event`.`event_content` AS `event_content`,`event_fund_event`.`event_annex` AS `event_annex`,`event_fund_event`.`event_executive` AS `event_executive`,`event_fund_event`.`file` AS `file`,`event_fund_event`.`is_delete` AS `is_delete` from (`fund_fund` join `event_fund_event` on((`event_fund_event`.`event_association` = `fund_fund`.`fund_id`))) ;
+
+-- ----------------------------
+-- View structure for guquan_list
+-- ----------------------------
+DROP VIEW IF EXISTS `guquan_list`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `guquan_list` AS select `jijin_jijin`.`fund_id` AS `fund_id`,`jijin_jijin`.`fundname` AS `fundname`,`guquan_management_technology`.`id` AS `id`,`guquan_management_technology`.`project` AS `project`,`guquan_management_technology`.`project_name` AS `project_name`,`guquan_management_technology`.`jijin` AS `jijin`,`guquan_management_technology`.`project_state` AS `project_state`,`guquan_management_technology`.`project_industry` AS `project_industry`,`guquan_management_technology`.`project_process` AS `project_process`,`guquan_management_technology`.`creat_time` AS `creat_time`,`guquan_management_technology`.`creator` AS `creator`,`guquan_management_technology`.`executor` AS `executor`,`guquan_management_technology`.`project_source` AS `project_source`,`guquan_management_technology`.`invest_money` AS `invest_money`,`guquan_management_technology`.`industry` AS `industry`,`guquan_management_technology`.`grouping` AS `grouping`,`guquan_management_technology`.`priority` AS `priority`,`guquan_management_technology`.`is_public` AS `is_public`,`guquan_management_technology`.`label` AS `label`,`guquan_management_technology`.`project_member` AS `project_member`,`guquan_management_technology`.`BP_file` AS `BP_file`,`guquan_management_technology`.`weekly_file` AS `weekly_file`,`guquan_management_technology`.`abstract` AS `abstract`,`guquan_management_technology`.`is_delete` AS `is_delete` from (`guquan_management_technology` join `jijin_jijin` on((`guquan_management_technology`.`jijin` = `jijin_jijin`.`fund_id`))) ;
