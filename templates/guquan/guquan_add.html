@@ -33,7 +33,7 @@
                             <select name="jijin">
                                 <option value=""></option>
                                 {% for i in jijin %}
-                                    <option value="{{ i.fund_id }}">{{ i.fund_abbreviation }}</option>
+                                    <option value="{{ i.fund_id }}">{{ i.fundname }}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -368,7 +368,7 @@
                         return layer.msg("上传失败！");
                     }
                     layer.msg("上传成功");
-                    document.getElementById("BP_file_url").value = res.url;
+                    document.getElementById("weekly_file_url").value = res.url;
                 }
                 , error: function () {
                     var demoText = $("#demoText_2");

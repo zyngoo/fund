@@ -318,6 +318,7 @@ def guquan_add(request):
         return redirect("/jijin/guquan")
 
     jijin = getData.getJijin()
+    print(jijin)
     person = getData.getFundPerson()
     content = dict(jijin, **person)
     return render(request, "guquan/guquan_add.html", content)
@@ -343,18 +344,27 @@ def guquan_delete(request):
     return HttpResponse(json.dumps("ok"))
 
 
-def guquan_fund(request):
-    content = {}
+def guquan_person(request):
+    # content = {}
     sqlPerson = "select * from fund_person"
     person = MysqlHelper().dict_fetchall(sqlPerson)
-    content["person"] = person
+    # content["person"] = person
+    #
 
+    # content["jijin"] = jijin
+    print(person)
+
+    return HttpResponse(json.dumps(person))
+
+
+def guquan_jijin(request):
     sqlJijin = "select fund_id, fundname from jijin_jijin"
     jijin = MysqlHelper().dict_fetchall(sqlJijin)
-    content["jijin"] = jijin
 
-    print(content)
-    return JsonResponse(content)
+    print(jijin)
+    return HttpResponse(json.dumps(jijin))
+
+
 
 
 

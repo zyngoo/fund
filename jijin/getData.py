@@ -28,7 +28,7 @@ def getFund():
     return content
 
 def getJijin():
-    jijin_sql = "select fund_id, fund_abbreviation from jijin_jijin"
+    jijin_sql = "select fund_id, fundname from jijin_jijin"
     jijin = MysqlHelper().dict_fetchall(jijin_sql)
     content = {"jijin": jijin}
     return content

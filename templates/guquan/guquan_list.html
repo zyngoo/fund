@@ -47,7 +47,8 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">项目全称</label>
                         <div class="layui-input-block" style="width: 465px;">
-                            <input type="text" id="project_name_2" name="project_name" autocomplete="off" class="layui-input">
+                            <input type="text" id="project_name_2" name="project_name" autocomplete="off"
+                                   class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -86,8 +87,9 @@
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">创建时间</label>
-                        <div class="layui-input-block" >
-                            <input type="text" name="creat_time" id="creat_time_2" autocomplete="on" class="layui-input">
+                        <div class="layui-input-block">
+                            <input type="text" name="creat_time" id="creat_time_2" autocomplete="on"
+                                   class="layui-input">
                         </div>
                     </div>
 
@@ -151,49 +153,49 @@
                     <label class="layui-form-label">项目公开</label>
                     <div class="layui-input-block">
                         {% if is_public %}
-                        <input type="checkbox" checked="" value="1" name="is_public" lay-skin="switch"
-                               lay-filter="switchTest" title="开关">
+                            <input type="checkbox" checked="" value="1" name="is_public" lay-skin="switch"
+                                   lay-filter="switchTest" title="开关">
                         {% else %}
                             <input type="checkbox" value="1" name="is_public" lay-skin="switch"
-                               lay-filter="switchTest" title="开关">
+                                   lay-filter="switchTest" title="开关">
                         {% endif %}
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">标签</label>
-                    <div class="layui-input-block" >
+                    <div class="layui-input-block">
                         <input id="label_2" type="text" class="layui-input">
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">项目组成员</label>
-                    <div class="layui-input-block" >
+                    <div class="layui-input-block">
                         <input id="project_member_2" type="text" class="layui-input">
                     </div>
                 </div>
 
-{#                <div class="layui-form-item">#}
-{#                    <label class="layui-form-label">附件(BP)</label>#}
-{#                    <button type="button" class="layui-btn" id="file1">#}
-{#                        <i class="layui-icon">&#xe67c;</i>上传文件#}
-{#                    </button>#}
-{#                    <input type="hidden" id="BP_file_url" name="BP_file" value=""/>#}
-{#                    <div class="layui-upload-list">#}
-{#                        <p id="demoText"></p>#}
-{#                    </div>#}
-{#                </div>#}
-{##}
-{#                <div class="layui-form-item">#}
-{#                    <label class="layui-form-label">周例会汇报</label>#}
-{#                    <button type="button" class="layui-btn" id="file2">#}
-{#                        <i class="layui-icon">&#xe67c;</i>上传文件#}
-{#                    </button>#}
-{#                    <input type="hidden" id="weekly_file_url" name="weekly_file" value=""/>#}
-{#                    <div class="layui-upload-list">#}
-{#                        <p id="demoText_2"></p>#}
-{#                    </div>#}
-{#                </div>#}
+                {#                <div class="layui-form-item">#}
+                {#                    <label class="layui-form-label">附件(BP)</label>#}
+                {#                    <button type="button" class="layui-btn" id="file1">#}
+                {#                        <i class="layui-icon">&#xe67c;</i>上传文件#}
+                {#                    </button>#}
+                {#                    <input type="hidden" id="BP_file_url" name="BP_file" value=""/>#}
+                {#                    <div class="layui-upload-list">#}
+                {#                        <p id="demoText"></p>#}
+                {#                    </div>#}
+                {#                </div>#}
+                {##}
+                {#                <div class="layui-form-item">#}
+                {#                    <label class="layui-form-label">周例会汇报</label>#}
+                {#                    <button type="button" class="layui-btn" id="file2">#}
+                {#                        <i class="layui-icon">&#xe67c;</i>上传文件#}
+                {#                    </button>#}
+                {#                    <input type="hidden" id="weekly_file_url" name="weekly_file" value=""/>#}
+                {#                    <div class="layui-upload-list">#}
+                {#                        <p id="demoText_2"></p>#}
+                {#                    </div>#}
+                {#                </div>#}
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">公司概况</label>
@@ -239,6 +241,7 @@
                 {#                    <p style="font-size: 20px">基本信息</p>#}
                 {#                </div>#}
                 <legend>修改项目</legend>
+                <label id="id" style="display: none;"></label>
                 <div class="layui-form-item" style="margin-top: 30px">
                     <div class="layui-inline">
                         <label class="layui-form-label">项目名称</label>
@@ -249,7 +252,8 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">项目全称</label>
                         <div class="layui-input-block" style="width: 520px;">
-                            <input type="text" id="project_name" name="project_name" autocomplete="off" class="layui-input">
+                            <input type="text" id="project_name" name="project_name" autocomplete="off"
+                                   class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -259,10 +263,10 @@
                         <label class="layui-form-label">投资基金</label>
                         <div class="layui-input-block">
                             <select id="jijin" name="jijin">
-{#                                <option value=""></option>#}
-{#                                {% for i in jijin %}#}
-{#                                    <option value="{{ i.fund_id }}">{{ i.fund_abbreviation }}</option>#}
-{#                                {% endfor %}#}
+                                {#                                <option value=""></option>#}
+                                {#                                {% for i in jijin %}#}
+                                {#                                    <option value="{{ i.fund_id }}">{{ i.fund_abbreviation }}</option>#}
+                                {#                                {% endfor %}#}
                             </select>
                         </div>
                     </div>
@@ -271,13 +275,13 @@
                         <label class="layui-form-label">项目状态</label>
                         <div class="layui-input-block">
                             <select id="project_state" name="project_state" lay-filter="aihao">
-{#                                <option value=""></option>#}
-{#                                <option value="审阅BP" selected>审阅BP</option>#}
-{#                                <option value="初步接触">初步接触</option>#}
-{#                                <option value="TS/DD">TS/DD</option>#}
-{#                                <option value="过会投资">过会投资</option>#}
-{#                                <option value="投资服务">投资服务</option>#}
-{#                                <option value="项目结束">项目结束</option>#}
+                                {#                                <option value=""></option>#}
+                                {#                                <option value="审阅BP" selected>审阅BP</option>#}
+                                {#                                <option value="初步接触">初步接触</option>#}
+                                {#                                <option value="TS/DD">TS/DD</option>#}
+                                {#                                <option value="过会投资">过会投资</option>#}
+                                {#                                <option value="投资服务">投资服务</option>#}
+                                {#                                <option value="项目结束">项目结束</option>#}
                             </select>
                         </div>
                     </div>
@@ -286,10 +290,10 @@
                         <label class="layui-form-label">产业划分</label>
                         <div class="layui-input-block">
                             <select id="project_industry" name="project_industry" lay-filter="aihao">
-{#                                <option value="">请选择</option>#}
-{#                                <option value="科技产业">科技产业</option>#}
-{#                                <option value="互联网产业">互联网产业</option>#}
-{#                                <option value="医疗产业">医疗产业</option>#}
+                                {#                                <option value="">请选择</option>#}
+                                {#                                <option value="科技产业">科技产业</option>#}
+                                {#                                <option value="互联网产业">互联网产业</option>#}
+                                {#                                <option value="医疗产业">医疗产业</option>#}
                             </select>
                         </div>
                     </div>
@@ -301,7 +305,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">投资流程</label>
                         <div class="layui-input-block">
-                            <select  id="project_process" name="project_process" lay-filter="aihao">
+                            <select id="project_process" name="project_process" lay-filter="aihao">
                                 <option value="审阅BP" selected>审阅BP</option>
                             </select>
                         </div>
@@ -327,10 +331,10 @@
                         <label class="layui-form-label">执行者</label>
                         <div class="layui-input-block">
                             <select id="executor" name="executor">
-{#                                <option value=""></option>#}
-{#                                {% for i in person %}#}
-{#                                    <option value="{{ i.person_id }}">{{ i.name }}</option>#}
-{#                                {% endfor %}#}
+                                {#                                <option value=""></option>#}
+                                {#                                {% for i in person %}#}
+                                {#                                    <option value="{{ i.person_id }}">{{ i.name }}</option>#}
+                                {#                                {% endfor %}#}
                             </select>
                         </div>
                     </div>
@@ -338,13 +342,13 @@
                         <label class="layui-form-label">项目来源</label>
                         <div class="layui-input-block">
                             <select id="project_source" name="project_source">
-{#                                <option value="">请选择</option>#}
-{#                                <option value="自主开发">自主开发</option>#}
-{#                                <option value="内部推荐">内部推荐</option>#}
-{#                                <option value="FA推荐">FA推荐</option>#}
-{#                                <option value="事业部或专营机构推荐">事业部或专营机构推荐</option>#}
-{#                                <option value="非事业部机构推荐">非事业部机构推荐</option>#}
-{#                                <option value="外部投资机构推荐">外部投资机构推荐</option>#}
+                                {#                                <option value="">请选择</option>#}
+                                {#                                <option value="自主开发">自主开发</option>#}
+                                {#                                <option value="内部推荐">内部推荐</option>#}
+                                {#                                <option value="FA推荐">FA推荐</option>#}
+                                {#                                <option value="事业部或专营机构推荐">事业部或专营机构推荐</option>#}
+                                {#                                <option value="非事业部机构推荐">非事业部机构推荐</option>#}
+                                {#                                <option value="外部投资机构推荐">外部投资机构推荐</option>#}
                             </select>
                         </div>
                     </div>
@@ -363,12 +367,12 @@
                         <label class="layui-form-label">行业</label>
                         <div class="layui-input-block">
                             <select id="industry" name="industry" lay-filter="aihao">
-{#                                <option value="">请选择</option>#}
-{#                                <option value="TMT&消费">TMT&消费</option>#}
-{#                                <option value="医疗">医疗</option>#}
-{#                                <option value="高端制造">高端制造</option>#}
-{#                                <option value="新三板">新三板</option>#}
-{#                                <option value="Fintech">Fintech</option>#}
+                                {#                                <option value="">请选择</option>#}
+                                {#                                <option value="TMT&消费">TMT&消费</option>#}
+                                {#                                <option value="医疗">医疗</option>#}
+                                {#                                <option value="高端制造">高端制造</option>#}
+                                {#                                <option value="新三板">新三板</option>#}
+                                {#                                <option value="Fintech">Fintech</option>#}
                             </select>
                         </div>
                     </div>
@@ -386,9 +390,9 @@
                         <label class="layui-form-label">优先级</label>
                         <div class="layui-input-block">
                             <select id="priority" name="priority" lay-filter="aihao">
-{#                                <option value="">请选择</option>#}
-{#                                <option value="普通(P2)" selected>普通(P2)</option>#}
-{#                                <option value="紧急(P1)">紧急(P1)</option>#}
+                                {#                                <option value="">请选择</option>#}
+                                {#                                <option value="普通(P2)" selected>普通(P2)</option>#}
+                                {#                                <option value="紧急(P1)">紧急(P1)</option>#}
                             </select>
                         </div>
                     </div>
@@ -418,7 +422,7 @@
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">附件(BP)</label>
-                    <button type="button" class="layui-btn" id="file1" >
+                    <button type="button" class="layui-btn" id="file1">
                         <i class="layui-icon">&#xe67c;</i>上传文件
                     </button>
                     <input type="hidden" id="BP_file_url" name="BP_file" value=""/>
@@ -429,7 +433,7 @@
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">周例会汇报</label>
-                    <button type="button" class="layui-btn" id="file2" >
+                    <button type="button" class="layui-btn" id="file2">
                         <i class="layui-icon">&#xe67c;</i>上传文件
                     </button>
                     <input type="hidden" id="weekly_file_url" name="weekly_file" value=""/>
@@ -441,7 +445,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">公司概况</label>
                     <div class="layui-input-block">
-                        <textarea name="abstract" id="demo" style="display: none;"></textarea>
+                        <textarea name="abstract" id="abstract" style="display: none;"></textarea>
                     </div>
                 </div>
             </fieldset>
@@ -472,8 +476,8 @@
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
-{#                    <button class="layui-btn layui-btn-primary" lay-filter type="submit" action="cache">暂存</button>#}
+                    <button class="layui-btn" lay-submit="" lay-filter="demo1" onclick="mysubmit()">提交</button>
+                    {#                    <button class="layui-btn layui-btn-primary" lay-filter type="submit" action="cache">暂存</button>#}
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
@@ -497,6 +501,11 @@
                 , layer = layui.layer
                 , laydate = layui.laydate;
 
+
+            laydate.render({
+                elem: "#creat_time"
+            });
+
             table.on("checkbox(demo", function (obj) {
                 console.log(obj);
             });
@@ -504,22 +513,22 @@
             table.on("tool(demo)", function (obj) {
                 var data = obj.data;
 
-                if (obj.event === "detail"){
+                if (obj.event === "detail") {
                     layer.open({
                         type: 1,
                         area: ["1030px", "500px"],
                         content: $("#viewData"),
                         shade: 0,
-                        success:function () {
+                        success: function () {
                             var index = layedit.build("abstract_2");
-                            for(var key in data){
+                            for (var key in data) {
                                 var idName = "#" + key + "_2";
                                 $(idName).val(data[key]);
                                 layedit.setContent(index, obj.data["abstract"]);
                             }
                         }
                     })
-                } else if(obj.event === "del"){
+                } else if (obj.event === "del") {
                     layer.confirm("真的删除行么", function (index) {
                         obj.del();
                         var guquan_id = obj.data.id;
@@ -529,51 +538,127 @@
                             async: false,
                             data: {"id": guquan_id},
                             dataType: "json",
-                            success:function (data) {
-                                if(data === "ok"){
+                            success: function (data) {
+                                if (data === "ok") {
                                     layer.msg("删除成功！")
                                 }
                             }
                         })
                     })
-                } else if (obj.event === "edit"){
+                } else if (obj.event === "edit") {
                     $.ajax({
-                        url: "/jijin/guquan/guquan_fund/",
+                        url: "/jijin/guquan/guquan_person/",
                         type: "POST",
                         dataType: "json",
                         async: true,
                         success: function (msg) {
                             console.log(msg);
-                            console.log(typeof msg);
-                            {#layer.alert("fdg");#}
-                            var value = "";
-                            {#alert(msg.length);#}
-                            content = msg;
-                            alert(typeof content);
-                            {#for (var i = 0; i < msg.length; i++){#}
-                            {#    content = msg[]#}
-                            {#    for (var j = 0; j < i.length; j++){#}
-                                    {#if (obj.data.executor )#}
-                            {#    }#}
 
-                            var arr = [];
-                            arr.push(content);
-                            {#alert(arr);#}
-
-                            for(var i=0, m=arr.length; i<m; i++){
-                                {#alert("m: " + m);#}
-                                for(var key in arr[i]){
-                                    {#alert("key: " + key);#}
-                                    for(var j=0, n=arr[i][key].length; j<n; j++){
-                                        {#alert("n: " + n);#}
-                                        {#alert("arr[]: " + arr[i]);#}
-                                        alert(key + ": " + arr[i][key][j].value);
-                                    }
+                            var value2 = "";
+                            for (var i = 0; i < msg.length; i++) {
+                                if (obj.data.executor === msg[i].person_id) {
+                                    value2 += "<option value='" + msg[i].person_id + "' selectd >" + msg[i].name + "</option>";
+                                } else {
+                                    value2 += "<option value='" + msg[i].person_id + "' >" + msg[i].name + "</option>";
                                 }
                             }
 
+                            {#alert(value);#}
+
+                            $("#executor").append(value2);
+
+                            var index = layedit.build("abstract");
+                            layedit.setContent(index, obj.data["abstract"]);
+                            {#alert(typeof content);#}
+
+                            {#var arr = [];#}
+                            {#arr.push(content);#}
+                            {#alert(arr);#}
+
+                            {#for(var i=0, m=arr.length; i<m; i++){#}
+                            {#alert("m: " + m);#}
+                            {#    for(var key in arr[i]){#}
+                            {#alert("key: " + key);#}
+                            {#        for(var j=0, n=arr[i][key].length; j<n; j++){#}
+                            {#alert("n: " + n);#}
+                            {#alert("arr[]: " + arr[i]);#}
+                            {#            for(var key2 in arr[i][key][j]){#}
+                            {#alert(obj.data.jijin);#}
+                            {#                if("person_id" === key2){#}
+                            {#value += "<option value='" + #}
+                            {#                }#}
+                            {#                alert(key2 + ": " + arr[i][key][j][key2]);#}
+                            {#            }#}
+                            {#var x = arr[i][key][j].value;#}
+                            {#alert(x);#}
+                            {#alert(key + ": " + arr[i][key][j].value);#}
+                            {#        }#}
+                            {#    }#}
+
+
+                        }
+                    });
+                    $.ajax({
+                        url: "/jijin/guquan/guquan_jijin/",
+                        type: "POST",
+                        dataType: "json",
+                        async: true,
+                        success: function (msg) {
+                            console.log(msg);
+
+                            var value3 = "";
+                            for (var i = 0; i < msg.length; i++) {
+                                if (obj.data.jijin === msg[i].fund_id) {
+                                    value3 += "<option value='" + msg[i].fund_id + "' selectd >" + msg[i].fundname + "</option>";
+                                } else {
+                                    value3 += "<option value='" + msg[i].fund_id + "' >" + msg[i].fundname + "</option>";
+                                }
+                            }
+
+                            $("#jijin").append(value3);
+
+                            var project_state = ["审阅BP", "初步接触", "TS/DD", "过会投资", "投资服务", "项目结束"];
+                            var project_industry = ["科技产业", "互联网产业", "医疗产业"];
+                            var project_source = ["自主开发", "内部推荐", "FA推荐", "事业部或专营机构推荐", "非事业部机构推荐", "外部投资机构推荐"];
+                            var industry = ["TMT&消费", "医疗", "高端制造", "新三板", "Fintech"];
+                            var priority = ["普通(P2)", "紧急(P1)"];
+
+                            var list = [id, project_state, project_industry, project_source, industry, priority];
+                            var list_name = [obj.data.id, obj.data.project_state, obj.data.project_industry, obj.data.project_source, obj.data.industry, obj.data.priority];
+                            var list_Cast = ['id', 'project_state', 'project_industry', 'project_source', 'industry', 'priority'];
+
+                            for (var li in list) {
+                                var value = "";
+                                for (var ei in list[li]) {
+                                    {#alert(list_name[li]);#}
+                                    if (list_name[li] === list[li][ei]) {
+                                        value += "<option value='" + list[li][ei] + "' selectd >" + list[li][ei] + "</option>";
+                                    } else {
+                                        value += "<option value='" + list[li][ei] + "'>" + list[li][ei] + "</option>";
+                                    }
+                                }
+                                {#alert(value);#}
+                                var idCast = "#" + list_Cast[li];
+                                {#alert(idCast);#}
+                                $(idCast).append(value);
+                            }
+                            form.render();
+                        }
+                    });
+
+                    layer.open({
+                        type: 1,
+                        area: ["1030px", "500px"],
+                        content: $("#popUpdateTest"),
+                        shade: 0,
+                        success: function () {
+                            for (var key in data) {
+                                var idName = "#" + key;
+                                $(idName).val(data[key]);
+                            }
                         }
                     })
+
                 }
             });
 
@@ -596,8 +681,84 @@
                 }
             };
 
+            var tagData = [{"id": 12, "name": "长者"}, {"id": 13, "name": "工厂"}, {
+                "id": 14,
+                "name": "小学生"
+            }, {"id": 15, "name": "大学生"}, {"id": 16, "name": "研究生"}, {"id": 17, "name": "教师"}, {
+                "id": 18,
+                "name": "记者"
+            }];
 
-        })
+            layui.config({
+                base: "/static/"
+            }).extend({
+                selectM: "./layui/layui_extends/selectM"
+            }).use(["layer", "form", "jquery", "upload", "selectM"], function () {
+                $ = layui.jquery;
+                var form = layui.form
+                    , upload = layui.upload
+                    , selectM = layui.selectM;
+
+                var tagIns1 = selectM({
+                    elem: "#label",
+                    data: tagData,
+                    delimiter: ",",
+                    field: {idName: "id", titleName: "name"}
+                });
+
+                var tagIns2 = selectM({
+                    elem: "#project_member",
+                    data: tagData,
+                    delimiter: ",",
+                    field: {idName: "id", titleName: "name"}
+                });
+
+                var uploadInst = upload.render({
+                    elem: "#file1",
+                    url: "/jijin/guquan_file/",
+                    accept: "file",
+                    done: function (res) {
+                        if (res.code > 0) {
+                            return layer.msg("上传失败！");
+                        }
+                        layer.msg("上传成功");
+                        document.getElementById("BP_file_url").value = res.url;
+                    }
+                    , error: function () {
+                        var demoText = $("#demoText");
+                        demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                        demoText.find(".demo-reload").on("click", function () {
+                            uploadInst.upload();
+                        });
+                    }
+                });
+
+                var uploadInst_2 = upload.render({
+                    elem: "#file2",
+                    url: "/jijin/guquan_file/",
+                    done: function (res) {
+                        if (res.code > 0) {
+                            return layer.msg("上传失败！");
+                        }
+                        layer.msg("上传成功");
+                        document.getElementById("weekly_file_url").value = res.url;
+                    }
+                    , error: function () {
+                        var demoText = $("#demoText_2");
+                        demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                        demoText.find(".demo-reload").on("click", function () {
+                            uploadInst_2.upload();
+                        });
+                    }
+                });
+
+            })
+        });
+
+        function mysubmit() {
+            var list = ["id", "project", "project_name", "jijin", "project_status", "project_industry", "project_process",
+                "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ]
+        }
     </script>
 
 {% endblock %}
