@@ -41,7 +41,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">项目名称</label>
                         <div class="layui-input-block">
-                            <input type="text" id="project_2" name="project" autocomplete="off" class="layui-input">
+                            <input type="text" id="project_2" name="project" autocomplete="off" class="layui-input" readonly>
                         </div>
                     </div>
                     <div class="layui-inline">
@@ -57,7 +57,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">投资基金</label>
                         <div class="layui-input-block">
-                            <input id="jijin_2" type="text" class="layui-input">
+                            <input id="fundname_2" type="text" class="layui-input">
                         </div>
                     </div>
 
@@ -106,7 +106,7 @@
                         <label class="layui-form-label">执行者</label>
                         <div class="layui-input-block">
 
-                            <input id="executor_2" type="text" class="layui-input">
+                            <input id="name_2" type="text" class="layui-input">
 
                         </div>
                     </div>
@@ -520,12 +520,12 @@
                         content: $("#viewData"),
                         shade: 0,
                         success: function () {
-                            var index = layedit.build("abstract_2");
                             for (var key in data) {
                                 var idName = "#" + key + "_2";
                                 $(idName).val(data[key]);
-                                layedit.setContent(index, obj.data["abstract"]);
                             }
+                            var index = layedit.build("abstract_2");
+                            layedit.setContent(index, obj.data["abstract"]);
                         }
                     })
                 } else if (obj.event === "del") {
