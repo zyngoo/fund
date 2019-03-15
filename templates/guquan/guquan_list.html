@@ -13,7 +13,7 @@
         <button class="layui-btn" data-type="isAll">验证是否全选</button>
     </div>
 
-    <table class="layui-table" lay-data="{ url:'/jijin/guquan/list_handle/', page:true, id:'idTest'}"
+    <table class="layui-table" lay-data="{ url:'/jijin/guquan/list_handle/{{ type }}', page:true, id:'idTest'}"
            lay-filter="demo">
         <thead>
         <tr>
@@ -568,6 +568,7 @@
                             $("#executor").append(value2);
 
                             var index = layedit.build("abstract");
+
                             layedit.setContent(index, obj.data["abstract"]);
                             {#alert(typeof content);#}
 
@@ -762,6 +763,7 @@
             var value = [];
             for (var li in list){
                 li = $("#"+list[li]).val();
+                alert(li);
                 value.push(li);
             }
             alert(value);

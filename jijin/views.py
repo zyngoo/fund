@@ -277,7 +277,7 @@ def jijin_delete(request):
     return HttpResponse(json.dumps("2"))
 
 def jijin_edit(request):
-    pprint(request.POST)
+    # pprint(request.POST)
     sql = "update jijin_jijin set "
     for key in request.POST:
         sql = sql + key + "=%s, "
@@ -299,7 +299,11 @@ def test(request):
 
 # 股权直投管理模块
 def guquan(request):
-    return render(request, "guquan/guquan_list.html")
+    type = (request.path).split("/")[-2]
+    if type == "guquan":
+        type = ""
+    content = {"type": type}
+    return render(request, "guquan/guquan_list.html", content)
 
 def guquan_add(request):
     if request.method == "POST":
@@ -318,14 +322,28 @@ def guquan_add(request):
         return redirect("/jijin/guquan")
 
     jijin = getData.getJijin()
-    print(jijin)
     person = getData.getFundPerson()
     content = dict(jijin, **person)
     return render(request, "guquan/guquan_add.html", content)
 
 
 def guquan_list(request):
-    sql = "select * from guquan_list where is_delete=0"
+    # print(request.path)
+    type = (request.path).split("/")[-2]
+    if type == "technology":
+        type = "科技产业"
+        sql = "select * from guquan_list where is_delete=0 and project_industry=" + "\'" + type + "\'"
+    elif type == "internet":
+        type = "互联网产业"
+        sql = "select * from guquan_list where is_delete=0 and project_industry=" + "\'" + type + "\'"
+    elif type == "medical":
+        type = "医疗产业"
+        sql = "select * from guquan_list where is_delete=0 and project_industry=" + "\'" + type + "\'"
+    else:
+        sql = "select * from guquan_list where is_delete=0"
+
+    # print(sql)
+
     data = MysqlHelper().dict_fetchall(sql)
     result = {}
     result["code"] = 0
@@ -349,7 +367,7 @@ def guquan_edit(request):
     for key in request.POST:
         sql = sql + key + "=%s, "
     sql = sql.rstrip(", ") + " where id=" + request.POST.get("id")
-    print(sql)
+    # print(sql)
 
     params = []
     for key in request.POST:
@@ -362,14 +380,8 @@ def guquan_edit(request):
 
 
 def guquan_person(request):
-    # content = {}
     sqlPerson = "select * from fund_person"
     person = MysqlHelper().dict_fetchall(sqlPerson)
-    # content["person"] = person
-    #
-
-    # content["jijin"] = jijin
-    print(person)
 
     return HttpResponse(json.dumps(person))
 
@@ -378,7 +390,6 @@ def guquan_jijin(request):
     sqlJijin = "select fund_id, fundname from jijin_jijin"
     jijin = MysqlHelper().dict_fetchall(sqlJijin)
 
-    print(jijin)
     return HttpResponse(json.dumps(jijin))
 
 

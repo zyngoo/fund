@@ -33,13 +33,24 @@ urlpatterns = [
 
     # 股权直投管理模块
     path("guquan/", views.guquan),
+    path("guquan/technology/",views.guquan),
+    path("guquan/internet/",views.guquan),
+    path("guquan/medical/",views.guquan),
+
     path("guquan/add/", views.guquan_add),
     path("guquan_file/", views.guquan_file),
+
     path("guquan/list_handle/", views.guquan_list),
+    path("guquan/list_handle/technology/", views.guquan_list),
+    path("guquan/list_handle/internet/", views.guquan_list),
+    path("guquan/list_handle/medical/", views.guquan_list),
+
     path("guquan/guquan_delete/", views.guquan_delete),
     path("guquan/guquan_edit/", views.guquan_edit),
     path("guquan/guquan_person/", views.guquan_person),
     path("guquan/guquan_jijin/", views.guquan_jijin),
+
+    path("guquan/technology/",views.guquan),
 
     path("guquan/add_file", views.add_file),
 
