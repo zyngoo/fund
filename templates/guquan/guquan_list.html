@@ -402,7 +402,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">项目公开</label>
                     <div class="layui-input-block">
-                        <input type="checkbox" checked="" value="1" name="is_public" lay-skin="switch"
+                        <input type="checkbox" checked="" id="is_public" value="1" name="is_public" lay-skin="switch"
                                lay-filter="switchTest" title="开关">
                     </div>
                 </div>
@@ -425,7 +425,7 @@
                     <button type="button" class="layui-btn" id="file1">
                         <i class="layui-icon">&#xe67c;</i>上传文件
                     </button>
-                    <input type="hidden" id="BP_file_url" name="BP_file" value=""/>
+                    <input type="hidden" id="BP_file" name="BP_file" value=""/>
                     <div class="layui-upload-list">
                         <p id="demoText"></p>
                     </div>
@@ -436,7 +436,7 @@
                     <button type="button" class="layui-btn" id="file2">
                         <i class="layui-icon">&#xe67c;</i>上传文件
                     </button>
-                    <input type="hidden" id="weekly_file_url" name="weekly_file" value=""/>
+                    <input type="hidden" id="weekly_file" name="weekly_file" value=""/>
                     <div class="layui-upload-list">
                         <p id="demoText_2"></p>
                     </div>
@@ -722,7 +722,7 @@
                             return layer.msg("上传失败！");
                         }
                         layer.msg("上传成功");
-                        document.getElementById("BP_file_url").value = res.url;
+                        document.getElementById("BP_file").value = res.url;
                     }
                     , error: function () {
                         var demoText = $("#demoText");
@@ -741,7 +741,7 @@
                             return layer.msg("上传失败！");
                         }
                         layer.msg("上传成功");
-                        document.getElementById("weekly_file_url").value = res.url;
+                        document.getElementById("weekly_file").value = res.url;
                     }
                     , error: function () {
                         var demoText = $("#demoText_2");
@@ -757,7 +757,41 @@
 
         function mysubmit() {
             var list = ["id", "project", "project_name", "jijin", "project_status", "project_industry", "project_process",
-                "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ]
+                "creat_time", "creator", "executor", "project_source", "invest_money", "industry", "grouping", "priority",
+                "is_public", "label", "project_member", "BP_file", "weekly_file", "abstract"];
+            var value = [];
+            for (var li in list){
+                li = $("#"+list[li]).val();
+                value.push(li);
+            }
+            alert(value);
+            var dataSend = {};
+            for (var i=0; i<list.length; i++){
+                dataSend[list[i]] = value[i]
+            }
+            alert(JSON.stringify(dataSend));
+            console.log(dataSend);
+
+            $.ajax({
+                url: "/jijin/guquan/guquan_edit/",
+                type: "POST",
+                async: false,
+                dataType: "json",
+                data: dataSend,
+                success: function (data) {
+                    if (data === "ok"){
+                        layer.msg("修改成功")
+                    } else{
+                        layer.msg("修改失败")
+                    }
+                    setTimeout(function(){
+                        window.location.href = "/jijin/guquan/";
+                    });
+                    {#console.log(data)#}
+                }
+            })
+
+
         }
     </script>
 

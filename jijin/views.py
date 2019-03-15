@@ -277,7 +277,7 @@ def jijin_delete(request):
     return HttpResponse(json.dumps("2"))
 
 def jijin_edit(request):
-    # pprint(request.POST)
+    pprint(request.POST)
     sql = "update jijin_jijin set "
     for key in request.POST:
         sql = sql + key + "=%s, "
@@ -341,6 +341,23 @@ def guquan_delete(request):
     sql = "update guquan_management_technology set is_delete=1 where id=%s"
     param = [id]
     MysqlHelper().update(sql, param)
+    return HttpResponse(json.dumps("ok"))
+
+def guquan_edit(request):
+    pprint(request.POST)
+    sql = "update guquan_management_technology set "
+    for key in request.POST:
+        sql = sql + key + "=%s, "
+    sql = sql.rstrip(", ") + " where id=" + request.POST.get("id")
+    print(sql)
+
+    params = []
+    for key in request.POST:
+        params.append(request.POST.get(key))
+    print(params)
+
+    MysqlHelper().update(sql, params)
+
     return HttpResponse(json.dumps("ok"))
 
 
