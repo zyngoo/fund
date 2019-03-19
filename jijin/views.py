@@ -415,3 +415,26 @@ def add_file(request):
     if request.method == "POST":
         print(request.POST)
     return render(request, "guquan/file_upload.html")
+
+
+# 二级市场管理模块
+
+def market(request):
+    return render(request, "market/market_base.html")
+
+def market_add(request):
+    if request.method == "POST":
+        print(request.POST)
+    return render(request, "market/market_add.html")
+
+def market_addGaikuang(request):
+    if request.method == "POST":
+        print(request.path)
+        print(request.POST)
+    return render(request, "market/market_add.html")
+
+def market_addDetail(request):
+    if request.method == "POST":
+        print(request.path)
+        print(request.POST)
+    return render(request, "market/market_add.html")

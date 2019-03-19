@@ -50,8 +50,14 @@ urlpatterns = [
     path("guquan/guquan_person/", views.guquan_person),
     path("guquan/guquan_jijin/", views.guquan_jijin),
 
-    path("guquan/technology/",views.guquan),
-
     path("guquan/add_file", views.add_file),
+
+
+    # 二级市场管理模块
+    path("market/", views.market),
+    path("market/add/", views.market_add),
+    path("market/add_gaikuang/", views.market_addGaikuang),
+    path("market/add_detail/", views.market_addDetail),
+    # path("market/test/", views.market),
 
 ]
