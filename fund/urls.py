@@ -19,8 +19,8 @@ from . import test
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("index/", test.index),  # 首页
     path("jijin/", include("jijin.urls")),     # 基金模块
     path("user/", include("userInfor.urls")),  # 用户模块
-    path("index/", test.index),                # 首页
 
 ]

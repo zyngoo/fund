@@ -429,12 +429,33 @@ def market_add(request):
 
 def market_addGaikuang(request):
     if request.method == "POST":
-        print(request.path)
         print(request.POST)
+        sql = "insert into market_management_gaikuang ("
+        for key in request.POST:
+            sql = sql + key + ", "
+        sql = sql.rstrip(", ") + ") values ("
+        for key in request.POST:
+            sql = sql + "\'" + request.POST.get(key) + "\'" + ", "
+        sql = sql.rstrip(", ") + ")"
+        print(sql)
+
+        MysqlHelper().insert_sql(sql)
+
     return render(request, "market/market_add.html")
 
 def market_addDetail(request):
     if request.method == "POST":
-        print(request.path)
         print(request.POST)
+        sql = "insert into market_management_detail ("
+        for key in request.POST:
+            sql = sql + key + ", "
+        sql = sql.rstrip(", ") + ") values ("
+        for key in request.POST:
+            sql = sql + "\'" + request.POST.get(key) + "\'" + ", "
+        sql = sql.rstrip(", ") + ")"
+        print(sql)
+
+        MysqlHelper().insert_sql(sql)
     return render(request, "market/market_add.html")
+
+

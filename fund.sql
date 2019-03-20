@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50557
 File Encoding         : 65001
 
-Date: 2019-03-13 14:12:42
+Date: 2019-03-20 10:15:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1562,7 +1562,7 @@ CREATE TABLE `guquan_management_technology` (
   `project_process` varchar(255) DEFAULT NULL COMMENT '投资流程',
   `creat_time` varchar(255) DEFAULT NULL COMMENT '创建时间',
   `creator` varchar(255) DEFAULT NULL COMMENT '创建者',
-  `executor` varchar(255) DEFAULT NULL COMMENT '执行者',
+  `executor` int(11) DEFAULT NULL COMMENT '执行者',
   `project_source` varchar(255) DEFAULT NULL COMMENT '项目来源',
   `invest_money` int(11) DEFAULT NULL COMMENT '投资金额',
   `industry` varchar(255) DEFAULT NULL COMMENT '行业',
@@ -1585,17 +1585,20 @@ CREATE TABLE `guquan_management_technology` (
   KEY `priority` (`priority`),
   KEY `label` (`label`),
   KEY `project_member` (`project_member`),
-  KEY `executor` (`executor`),
   KEY `jijin` (`jijin`),
   KEY `guquan_management_technology_ibfk_11` (`BP_file`),
   KEY `guquan_management_technology_ibfk_12` (`weekly_file`),
-  CONSTRAINT `guquan_management_technology_ibfk_14` FOREIGN KEY (`jijin`) REFERENCES `jijin_jijin` (`fund_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  KEY `executor` (`executor`),
+  CONSTRAINT `guquan_management_technology_ibfk_14` FOREIGN KEY (`jijin`) REFERENCES `jijin_jijin` (`fund_id`),
+  CONSTRAINT `guquan_management_technology_ibfk_15` FOREIGN KEY (`executor`) REFERENCES `fund_person` (`person_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of guquan_management_technology
 -- ----------------------------
-INSERT INTO `guquan_management_technology` VALUES ('1', '项目一', '产业项目一', '2', '审阅BP', '科技产业', '审阅BP', '2019-03-11', '曾勇', '1', '内部推荐', '15', '医疗', '', '普通(P2)', '1', '12,13', '13,15', '', '', '风格化<b>风格化<img src=\"http://127.0.0.1:8000/static/layui/images/face/13.gif\" alt=\"[偷笑]\"></b>', '0');
+INSERT INTO `guquan_management_technology` VALUES ('1', '项目修改一', '产业项目一', '2', '审阅BP', '科技产业', '审阅BP', '2019-03-11', '曾勇', '1', '自主开发', '15', 'TMT&消费', '', '普通(P2)', '1', '12,13', '13,15', 'C:\\Users\\Administrator\\Desktop\\system\\github_fund2\\fund\\static/media/files/a7c0b6b7a74f7137ac03a4b68bfb47ea.jpeg', 'C:\\Users\\Administrator\\Desktop\\system\\github_fund2\\fund\\static/media/files/8868988375ddcb10fd31e6217893bcb6.jpg', '风格化<b>风格化<img src=\"http://127.0.0.1:8000/static/layui/images/face/13.gif\" alt=\"[偷笑]\"></b>', '0');
+INSERT INTO `guquan_management_technology` VALUES ('2', '互联网一', '互联网项目一', '2', '初步接触', '互联网产业', '审阅BP', '2019-03-15', 'zyngoo', '2', '内部推荐', '34', 'Fintech', '', '普通(P2)', '1', '14,15', '15,16', '', '', '互联网网项目测试<img src=\"http://127.0.0.1:8000/static/layui/images/face/4.gif\" alt=\"[可怜]\">', '0');
+INSERT INTO `guquan_management_technology` VALUES ('3', '医疗产业一', '医疗产业项目一', '2', '审阅BP', '医疗产业', '审阅BP', '2019-03-15', 'zyngoo', '1', '事业部或专营机构推荐', '56', '医疗', '', '普通(P2)', '1', '16,17', '14,18', '', '', '医疗项目测试<img src=\"http://127.0.0.1:8000/static/layui/images/face/39.gif\" alt=\"[鼓掌]\">', '0');
 
 -- ----------------------------
 -- Table structure for hongkong_stock
@@ -1921,7 +1924,7 @@ CREATE TABLE `land_management_invest` (
 -- ----------------------------
 DROP TABLE IF EXISTS `market_management_detail`;
 CREATE TABLE `market_management_detail` (
-  `id` int(11) NOT NULL COMMENT '二级市场管理-详细',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '二级市场管理-详细',
   `main_business` varchar(255) DEFAULT NULL COMMENT '主营业务',
   `registered_capital` float DEFAULT NULL COMMENT '注册资本',
   `company_overview` varchar(255) DEFAULT NULL COMMENT '公司概况',
@@ -1931,7 +1934,7 @@ CREATE TABLE `market_management_detail` (
   `industry_income` float DEFAULT NULL COMMENT '总计收入',
   `main_regional` varchar(255) DEFAULT NULL COMMENT '地区收入构成',
   `regional_income` float DEFAULT NULL COMMENT '总计收入',
-  `market_time` datetime DEFAULT NULL COMMENT '上市时间',
+  `market_time` varchar(255) DEFAULT NULL COMMENT '上市时间',
   `issue_price` decimal(10,2) DEFAULT NULL COMMENT '发行价格',
   `issue_number` float DEFAULT NULL COMMENT '发行价格',
   `involved_concept` varchar(255) DEFAULT NULL COMMENT '涉及概念',
@@ -1964,26 +1967,28 @@ CREATE TABLE `market_management_detail` (
   `top_ten_shareholder` varchar(255) DEFAULT NULL COMMENT '十大流通股东',
   `shareholser_name` varchar(255) DEFAULT NULL COMMENT '股东名称',
   `porprotion` float DEFAULT NULL COMMENT '占比',
-  `change` varchar(255) DEFAULT NULL COMMENT '变动',
+  `alteration` varchar(255) DEFAULT NULL COMMENT '变动',
+  `is_delete` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of market_management_detail
 -- ----------------------------
+INSERT INTO `market_management_detail` VALUES ('1', '电饭锅', '54', '规范化', '风高放火', '0', '风格化', '0', '规范化', '0', '2019-03-20', '0.00', '0', '风格化', '风格化', '546', '5454', '风格化', '2019-03-20', '0', '0', '0', '0', '0', '56', '65', '6', '56', '56', '65', '65', '65', '65', '65', '65', '65', '65', '65', '6', '56', '56', '56', '65', '风格化', '0');
 
 -- ----------------------------
 -- Table structure for market_management_gaikuang
 -- ----------------------------
 DROP TABLE IF EXISTS `market_management_gaikuang`;
 CREATE TABLE `market_management_gaikuang` (
-  `id` int(11) NOT NULL COMMENT '二级市场管理',
-  `stock_number` int(11) DEFAULT NULL COMMENT '股票编号',
-  `industry_id` int(11) DEFAULT NULL COMMENT '划分 外键 market_management_industry',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '二级市场管理',
+  `stock_number` varchar(255) DEFAULT NULL COMMENT '股票编号',
+  `stock_type` varchar(255) DEFAULT NULL COMMENT '划分 外键 market_management_industry',
   `company` varchar(255) DEFAULT NULL COMMENT '公司名称',
   `indusrty` varchar(255) DEFAULT NULL COMMENT '行业',
   `stock_money` float DEFAULT NULL COMMENT '股价',
-  `time` datetime DEFAULT NULL COMMENT '价格更新时间',
+  `time` varchar(255) DEFAULT NULL COMMENT '价格更新时间',
   `own` float DEFAULT NULL COMMENT '当前持仓',
   `market_value` float DEFAULT NULL COMMENT '市值',
   `cost` float DEFAULT NULL COMMENT '成本',
@@ -1996,28 +2001,15 @@ CREATE TABLE `market_management_gaikuang` (
   `transaction_classes` varchar(255) DEFAULT NULL COMMENT '币种',
   `transaction_price` decimal(10,2) DEFAULT NULL COMMENT '成交均价',
   `transaction_money` float DEFAULT NULL COMMENT '成交金额',
+  `is_delete` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`),
-  KEY `industry_id` (`industry_id`),
-  CONSTRAINT `market_management_gaikuang_ibfk_1` FOREIGN KEY (`industry_id`) REFERENCES `market_management_industry` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `industry_id` (`stock_type`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of market_management_gaikuang
 -- ----------------------------
-
--- ----------------------------
--- Table structure for market_management_industry
--- ----------------------------
-DROP TABLE IF EXISTS `market_management_industry`;
-CREATE TABLE `market_management_industry` (
-  `id` int(11) NOT NULL,
-  `industry` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of market_management_industry
--- ----------------------------
+INSERT INTO `market_management_gaikuang` VALUES ('1', '风格化', 'A股', '风格化', '风格化', '12', '2019-03-20 09:18:27', '0', '0', '0', '0', '0', '刚回家', null, null, null, null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for other_business_statistics
@@ -2447,4 +2439,4 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- View structure for guquan_list
 -- ----------------------------
 DROP VIEW IF EXISTS `guquan_list`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `guquan_list` AS select `jijin_jijin`.`fund_id` AS `fund_id`,`jijin_jijin`.`fundname` AS `fundname`,`guquan_management_technology`.`id` AS `id`,`guquan_management_technology`.`project` AS `project`,`guquan_management_technology`.`project_name` AS `project_name`,`guquan_management_technology`.`jijin` AS `jijin`,`guquan_management_technology`.`project_state` AS `project_state`,`guquan_management_technology`.`project_industry` AS `project_industry`,`guquan_management_technology`.`project_process` AS `project_process`,`guquan_management_technology`.`creat_time` AS `creat_time`,`guquan_management_technology`.`creator` AS `creator`,`guquan_management_technology`.`executor` AS `executor`,`guquan_management_technology`.`project_source` AS `project_source`,`guquan_management_technology`.`invest_money` AS `invest_money`,`guquan_management_technology`.`industry` AS `industry`,`guquan_management_technology`.`grouping` AS `grouping`,`guquan_management_technology`.`priority` AS `priority`,`guquan_management_technology`.`is_public` AS `is_public`,`guquan_management_technology`.`label` AS `label`,`guquan_management_technology`.`project_member` AS `project_member`,`guquan_management_technology`.`BP_file` AS `BP_file`,`guquan_management_technology`.`weekly_file` AS `weekly_file`,`guquan_management_technology`.`abstract` AS `abstract`,`guquan_management_technology`.`is_delete` AS `is_delete` from (`guquan_management_technology` join `jijin_jijin` on((`guquan_management_technology`.`jijin` = `jijin_jijin`.`fund_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `guquan_list` AS select `jijin_jijin`.`fund_id` AS `fund_id`,`jijin_jijin`.`fundname` AS `fundname`,`guquan_management_technology`.`id` AS `id`,`guquan_management_technology`.`project` AS `project`,`guquan_management_technology`.`project_name` AS `project_name`,`guquan_management_technology`.`jijin` AS `jijin`,`guquan_management_technology`.`project_state` AS `project_state`,`guquan_management_technology`.`project_industry` AS `project_industry`,`guquan_management_technology`.`project_process` AS `project_process`,`guquan_management_technology`.`creat_time` AS `creat_time`,`guquan_management_technology`.`creator` AS `creator`,`guquan_management_technology`.`executor` AS `executor`,`guquan_management_technology`.`project_source` AS `project_source`,`guquan_management_technology`.`invest_money` AS `invest_money`,`guquan_management_technology`.`industry` AS `industry`,`guquan_management_technology`.`grouping` AS `grouping`,`guquan_management_technology`.`priority` AS `priority`,`guquan_management_technology`.`is_public` AS `is_public`,`guquan_management_technology`.`label` AS `label`,`guquan_management_technology`.`project_member` AS `project_member`,`guquan_management_technology`.`BP_file` AS `BP_file`,`guquan_management_technology`.`weekly_file` AS `weekly_file`,`guquan_management_technology`.`abstract` AS `abstract`,`guquan_management_technology`.`is_delete` AS `is_delete`,`fund_person`.`name` AS `name`,`fund_person`.`person_id` AS `person_id` from ((`guquan_management_technology` join `jijin_jijin` on((`guquan_management_technology`.`jijin` = `jijin_jijin`.`fund_id`))) join `fund_person` on((`guquan_management_technology`.`executor` = `fund_person`.`person_id`))) ;

@@ -63,7 +63,7 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">价格更新时间</label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="time" id="" autocomplete="off" class="layui-input">
+                                    <input type="text"  name="time" id="time" autocomplete="off" class="layui-input">
                                 </div>
                             </div>
 
@@ -294,7 +294,7 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">除权日</label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="the_day" id="" class="layui-input">
+                                    <input type="text" name="the_day" id="the_day" class="layui-input">
                                 </div>
                             </div>
                         </div>
@@ -522,7 +522,7 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">变动</label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="change" id="" class="layui-input">
+                                    <input type="text" name="alteration" id="" class="layui-input">
                                 </div>
                             </div>
                         </div>
@@ -551,9 +551,16 @@
                 , laydate = layui.laydate;
 
             laydate.render({
+                elem: "#time",
+                type: "datetime",
+            });
+            laydate.render({
                 elem: "#market_time",
-                type: date,
-            })
+            });
+            laydate.render({
+                elem: "#the_day",
+            });
+
         })
     </script>
 {% endblock %}
