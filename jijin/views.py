@@ -420,7 +420,7 @@ def add_file(request):
 # 二级市场管理模块
 
 def market(request):
-    return render(request, "market/market_base.html")
+    return render(request, "market/market_list.html")
 
 def market_add(request):
     if request.method == "POST":
@@ -458,4 +458,23 @@ def market_addDetail(request):
         MysqlHelper().insert_sql(sql)
     return render(request, "market/market_add.html")
 
+def market_delete(request):
+    id = request.POST.get("id")
+    sql = "update market_management_gaikuang set is_delete=1 where id=%s"
+    param = [id]
+    MysqlHelper().update(sql, param)
+    return HttpResponse(json.dumps("ok"))
+
+
+def market_list(request):
+    type = (request.path).split("/")[-2]
+    sql = "select * from  market_management_gaikuang where is_delete=0"
+    data = MysqlHelper().dict_fetchall(sql)
+    result = {}
+    result["code"] = 0
+    result["msg"] = ""
+    result["count"] = len(data)
+    result["data"] = data
+    print(result)
+    return JsonResponse(result)
 

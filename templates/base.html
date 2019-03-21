@@ -1,123 +1,128 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>基金管理系统</title>
-    <link rel="stylesheet" href="/static/layui/css/layui.css" >
-    <script type="text/javascript" src="/static/layui/layui.js"></script>
-    {% block head %}
-    {% endblock %}
-
-</head>
-<body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
-    <div class="layui-header">
-        <div class="layui-logo" style="font-size: 22px; font-style: revert">证劵基金</div>
-        <!-- 头部区域（可配合layui已有的水平导航） -->
-
-        {% block left %}
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <title>基金管理系统</title>
+        <link rel="stylesheet" href="/static/layui/css/layui.css">
+        <script type="text/javascript" src="/static/layui/layui.js"></script>
+        {% block head %}
         {% endblock %}
 
-        <ul class="layui-nav layui-layout-right">
-            {% if request.session.user_name %}
-                <li class="layui-nav-item">
-                    <a href="javascript:;">
-                        {% if request.session.head_photo %}
-                            <img src="/static/media/{{ request.session.head_photo }}" class="layui-nav-img">
-                        {% else %}
-                            <img src="/static/media/images/head.jpg" class="layui-nav-img">
-                        {% endif %}
-                        {{ request.session.user_name }}
-                    </a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="/user/count">基本资料</a></dd>
-                        <dd><a href="/user/count/edit">安全设置</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="/user/logout/">退出</a></li>
-            {% else %}
-                <li class="layui-nav-item" style="color: #0e90d2"><a href="/user/login/">登录 | 注册</a></li>
-            {% endif %}
-        </ul>
-    </div>
+    </head>
 
-    <div class="layui-side layui-bg-black">
-        <div class="layui-side-scroll">
-            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item"><a href="#">首页</a></li>
-                <li class="layui-nav-item"><a href="/jijin/calender/">日历</a></li>
-                <li class="layui-nav-item"><a href="/jijin/event/">事件</a></li>
-                <li class="layui-nav-item"><a href="/jijin/jijin/">基金</a></li>
+    <body class="layui-layout-body">
 
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">股权直投管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="/jijin/guquan/technology/">科技产业</a></dd>
-                        <dd><a href="/jijin/guquan/internet/">互联网产业</a></dd>
-                        <dd><a href="/jijin/guquan/medical/">医疗产业</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">二级市场管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">港股</a></dd>
-                        <dd><a href="javascript:;">A股</a></dd>
-                        <dd><a href="javascript:;">美股</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">地产管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">中国地产</a></dd>
-                        <dd><a href="javascript:;">美国地产</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="">行业研究</a></li>
+        <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo" style="font-size: 22px; font-style: revert">证劵基金</div>
+            <!-- 头部区域（可配合layui已有的水平导航） -->
 
-                <li class="layui-nav-item">
-                    <a href="javascript:;">审批流程</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">财务审批</a></dd>
-                        <dd><a href="javascript:;">行政审批</a></dd>
-                        <dd><a href="javascript:;">人力审批</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="">合作机构</a></li>
-                <li class="layui-nav-item"><a href="">人才库</a></li>
-                <li class="layui-nav-item"><a href="">中介机构</a></li>
-                <li class="layui-nav-item"><a href="">消息</a></li>
+            {% block left %}
+            {% endblock %}
+
+            <ul class="layui-nav layui-layout-right">
+                {% if request.session.user_name %}
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            {% if request.session.head_photo %}
+                                <img src="/static/media/{{ request.session.head_photo }}" class="layui-nav-img">
+                            {% else %}
+                                <img src="/static/media/images/head.jpg" class="layui-nav-img">
+                            {% endif %}
+                            {{ request.session.user_name }}
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="/user/count">基本资料</a></dd>
+                            <dd><a href="/user/count/edit">安全设置</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item"><a href="/user/logout/">退出</a></li>
+                {% else %}
+                    <li class="layui-nav-item" style="color: #0e90d2"><a href="/user/login/">登录 | 注册</a></li>
+                {% endif %}
             </ul>
+        </div>
+
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                    <li class="layui-nav-item"><a href="#">首页</a></li>
+                    <li class="layui-nav-item"><a href="/jijin/calender/">日历</a></li>
+                    <li class="layui-nav-item"><a href="/jijin/event/">事件</a></li>
+                    <li class="layui-nav-item"><a href="/jijin/jijin/">基金</a></li>
+
+                    <li class="layui-nav-item layui-nav-itemed">
+                        <a class="" href="/jijin/guquan/">股权直投管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="/jijin/guquan/technology/">科技产业</a></dd>
+                            <dd><a href="/jijin/guquan/internet/">互联网产业</a></dd>
+                            <dd><a href="/jijin/guquan/medical/">医疗产业</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item layui-nav-itemed">
+                        <a href="/jijin/market/">二级市场管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="/jijin/market/hongkong/">港股</a></dd>
+                            <dd><a href="/jijin/market/A_share/">A股</a></dd>
+                            <dd><a href="/jijin/market/US_stocks/">美股</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">地产管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;">中国地产</a></dd>
+                            <dd><a href="javascript:;">美国地产</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item"><a href="">行业研究</a></li>
+
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">审批流程</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;">财务审批</a></dd>
+                            <dd><a href="javascript:;">行政审批</a></dd>
+                            <dd><a href="javascript:;">人力审批</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item"><a href="">合作机构</a></li>
+                    <li class="layui-nav-item"><a href="">人才库</a></li>
+                    <li class="layui-nav-item"><a href="">中介机构</a></li>
+                    <li class="layui-nav-item"><a href="">消息</a></li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            {% block content %}
+            {% endblock %}
+
+        </div>
+
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            © 底部固定区域
         </div>
     </div>
 
-
-    <div class="layui-body">
-        <!-- 内容主体区域 -->
-        {% block content %}
+        {% block mask %}
         {% endblock %}
 
-    </div>
+        <script src="/static/layui/layui.js"></script>
+        <script>
+            //JavaScript代码区域
+            layui.use('element', function () {
+                var element = layui.element;
 
-    <div class="layui-footer">
-        <!-- 底部固定区域 -->
-        © 底部固定区域
-    </div>
-</div>
+            });
+        </script>
 
-<script src="/static/layui/layui.js"></script>
-<script>
-    //JavaScript代码区域
-    layui.use('element', function () {
-        var element = layui.element;
+        {% block script %}
+        {% endblock %}
 
-    });
-</script>
-
-{% block script %}
-{% endblock %}
-
-</body>
+    </body>
 </html>

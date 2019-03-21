@@ -506,7 +506,7 @@
                 elem: "#creat_time"
             });
 
-            table.on("checkbox(demo", function (obj) {
+            table.on("checkbox(demo)", function (obj) {
                 console.log(obj);
             });
 
@@ -763,15 +763,15 @@
             var value = [];
             for (var li in list){
                 li = $("#"+list[li]).val();
-                alert(li);
+                {#alert(li);#}
                 value.push(li);
             }
-            alert(value);
+            {#alert(value);#}
             var dataSend = {};
             for (var i=0; i<list.length; i++){
                 dataSend[list[i]] = value[i]
             }
-            alert(JSON.stringify(dataSend));
+            {#alert(JSON.stringify(dataSend));#}
             console.log(dataSend);
 
             $.ajax({

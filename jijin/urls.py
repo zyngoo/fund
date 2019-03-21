@@ -58,6 +58,8 @@ urlpatterns = [
     path("market/add/", views.market_add),
     path("market/add_gaikuang/", views.market_addGaikuang),
     path("market/add_detail/", views.market_addDetail),
+    path("market/market_delete/", views.market_delete),
     # path("market/test/", views.market),
+    path("market/list_handle/", views.market_list)
 
 ]
