@@ -60,6 +60,7 @@ urlpatterns = [
     path("market/add_detail/", views.market_addDetail),
     path("market/market_delete/", views.market_delete),
     # path("market/test/", views.market),
-    path("market/list_handle/", views.market_list)
+    path("market/list_handle/", views.market_list),
+    path("market/detail_data/", views.detail_data),
 
 ]

@@ -468,7 +468,7 @@ def market_delete(request):
 
 def market_list(request):
     type = (request.path).split("/")[-2]
-    sql = "select * from  market_management_gaikuang where is_delete=0"
+    sql = "select * from  market_list where is_delete=0"
     data = MysqlHelper().dict_fetchall(sql)
     result = {}
     result["code"] = 0
@@ -478,3 +478,12 @@ def market_list(request):
     print(result)
     return JsonResponse(result)
 
+
+def detail_data(request):
+    id = request.POST.get("id")
+    sql = "SELECT * from market_management_detail LEFT JOIN market_management_gaikuang on " \
+          "market_management_detail.gaikuang_id=market_management_gaikuang.id and market_management_gaikuang.id=%s"
+    detail_data = MysqlHelper().dict_fetchall(sql, [id])
+    print(detail_data)
+
+    return HttpResponse(json.dumps(detail_data))
