@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50557
 File Encoding         : 65001
 
-Date: 2019-03-20 10:15:59
+Date: 2019-03-22 11:08:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1920,11 +1920,29 @@ CREATE TABLE `land_management_invest` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for market_management_detail
+-- Table structure for market_management
 -- ----------------------------
-DROP TABLE IF EXISTS `market_management_detail`;
-CREATE TABLE `market_management_detail` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '二级市场管理-详细',
+DROP TABLE IF EXISTS `market_management`;
+CREATE TABLE `market_management` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '二级市场管理',
+  `stock_number` varchar(255) DEFAULT NULL COMMENT '股票编号',
+  `stock_type` varchar(255) DEFAULT NULL COMMENT '划分 外键 market_management_industry',
+  `company` varchar(255) DEFAULT NULL COMMENT '公司名称',
+  `indusrty` varchar(255) DEFAULT NULL COMMENT '行业',
+  `stock_money` float DEFAULT NULL COMMENT '股价',
+  `time` varchar(255) DEFAULT NULL COMMENT '价格更新时间',
+  `own` float DEFAULT NULL COMMENT '当前持仓',
+  `market_value` float DEFAULT NULL COMMENT '市值',
+  `cost` float DEFAULT NULL COMMENT '成本',
+  `profit_loss` float DEFAULT NULL COMMENT '盈亏',
+  `porprotion` float DEFAULT NULL COMMENT '盈亏比例',
+  `abstract` varchar(255) DEFAULT NULL COMMENT '备注',
+  `transaction_date` varchar(255) DEFAULT NULL COMMENT '交易日期',
+  `transaction_type` varchar(255) DEFAULT NULL COMMENT '交易类型',
+  `transaction_number` int(11) DEFAULT NULL COMMENT '交易数量',
+  `transaction_classes` varchar(255) DEFAULT NULL COMMENT '币种',
+  `transaction_price` decimal(10,2) DEFAULT NULL COMMENT '成交均价',
+  `transaction_money` float DEFAULT NULL COMMENT '成交金额',
   `main_business` varchar(255) DEFAULT NULL COMMENT '主营业务',
   `registered_capital` float DEFAULT NULL COMMENT '注册资本',
   `company_overview` varchar(255) DEFAULT NULL COMMENT '公司概况',
@@ -1935,13 +1953,13 @@ CREATE TABLE `market_management_detail` (
   `main_regional` varchar(255) DEFAULT NULL COMMENT '地区收入构成',
   `regional_income` float DEFAULT NULL COMMENT '总计收入',
   `market_time` varchar(255) DEFAULT NULL COMMENT '上市时间',
-  `issue_price` decimal(10,2) DEFAULT NULL COMMENT '发行价格',
+  `issue_price` float(10,2) DEFAULT NULL COMMENT '发行价格',
   `issue_number` float DEFAULT NULL COMMENT '发行价格',
   `involved_concept` varchar(255) DEFAULT NULL COMMENT '涉及概念',
   `income_type` varchar(255) DEFAULT NULL COMMENT '收入方式',
   `money` float DEFAULT NULL COMMENT '金额',
   `year` varchar(255) DEFAULT NULL COMMENT '年度',
-  `progarm` varchar(255) DEFAULT NULL COMMENT '方案',
+  `progarm` varchar(255) DEFAULT '' COMMENT '方案',
   `the_day` varchar(255) DEFAULT NULL COMMENT '除权日',
   `per_share` float DEFAULT NULL COMMENT '每股收益',
   `per_asset` float DEFAULT NULL COMMENT '每股净资产',
@@ -1957,8 +1975,8 @@ CREATE TABLE `market_management_detail` (
   `total_capital_stock` varchar(255) DEFAULT NULL COMMENT '总股本',
   `toatal_A_stock` varchar(255) DEFAULT NULL COMMENT '流通A股',
   `porprotion_A_stock` float DEFAULT NULL COMMENT '流通A股占比',
-  `shareholder_number` int(11) DEFAULT NULL COMMENT '股东人数',
-  `older_shareholder_number` int(11) DEFAULT NULL COMMENT '上期股东人数',
+  `shareholder_number` float(11,0) DEFAULT NULL COMMENT '股东人数',
+  `older_shareholder_number` varchar(255) DEFAULT '' COMMENT '上期股东人数',
   `shareholder_porprotion` float DEFAULT NULL COMMENT '较上期变化',
   `chip` varchar(255) DEFAULT NULL COMMENT '筹码集中度',
   `per_capita_shares` varchar(255) DEFAULT NULL COMMENT '人均流通股',
@@ -1966,16 +1984,78 @@ CREATE TABLE `market_management_detail` (
   `investor_porprotion` float DEFAULT NULL COMMENT '机构投资者占比',
   `top_ten_shareholder` varchar(255) DEFAULT NULL COMMENT '十大流通股东',
   `shareholser_name` varchar(255) DEFAULT NULL COMMENT '股东名称',
-  `porprotion` float DEFAULT NULL COMMENT '占比',
+  `detail_porprotion` float DEFAULT NULL COMMENT '占比',
   `alteration` varchar(255) DEFAULT NULL COMMENT '变动',
   `is_delete` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of market_management
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for market_management_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `market_management_detail`;
+CREATE TABLE `market_management_detail` (
+  `detail_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '二级市场管理-详细',
+  `gaikuang_id` int(11) DEFAULT NULL,
+  `main_business` varchar(255) DEFAULT NULL COMMENT '主营业务',
+  `registered_capital` float DEFAULT NULL COMMENT '注册资本',
+  `company_overview` varchar(255) DEFAULT NULL COMMENT '公司概况',
+  `main_product` varchar(255) DEFAULT NULL COMMENT '主营产品构成',
+  `total_income` float DEFAULT NULL COMMENT '总计收入',
+  `main_industry` varchar(255) DEFAULT NULL COMMENT '行业收入构成',
+  `industry_income` float DEFAULT NULL COMMENT '总计收入',
+  `main_regional` varchar(255) DEFAULT NULL COMMENT '地区收入构成',
+  `regional_income` float DEFAULT NULL COMMENT '总计收入',
+  `market_time` varchar(255) DEFAULT NULL COMMENT '上市时间',
+  `issue_price` float(10,2) DEFAULT NULL COMMENT '发行价格',
+  `issue_number` float DEFAULT NULL COMMENT '发行价格',
+  `involved_concept` varchar(255) DEFAULT NULL COMMENT '涉及概念',
+  `income_type` varchar(255) DEFAULT NULL COMMENT '收入方式',
+  `money` float DEFAULT NULL COMMENT '金额',
+  `year` varchar(255) DEFAULT NULL COMMENT '年度',
+  `progarm` varchar(255) DEFAULT '' COMMENT '方案',
+  `the_day` varchar(255) DEFAULT NULL COMMENT '除权日',
+  `per_share` float DEFAULT NULL COMMENT '每股收益',
+  `per_asset` float DEFAULT NULL COMMENT '每股净资产',
+  `per_capital` float DEFAULT NULL COMMENT '每股资本公积',
+  `per_profit` float DEFAULT NULL COMMENT '每股分配利润',
+  `per_cash` float DEFAULT NULL COMMENT '每股经营性现金流',
+  `total_money` float DEFAULT NULL COMMENT '营业总收入',
+  `net_profit` float DEFAULT NULL COMMENT '净利润',
+  `operate_profit` float DEFAULT NULL COMMENT '营业利润',
+  `operate_profit_rate` float DEFAULT NULL COMMENT '营业利润增长率',
+  `total_money_rate` float DEFAULT NULL COMMENT '营业总收入增长率',
+  `net_profit_rate` float DEFAULT NULL COMMENT '净利润增长率',
+  `total_capital_stock` varchar(255) DEFAULT NULL COMMENT '总股本',
+  `toatal_A_stock` varchar(255) DEFAULT NULL COMMENT '流通A股',
+  `porprotion_A_stock` float DEFAULT NULL COMMENT '流通A股占比',
+  `shareholder_number` float(11,0) DEFAULT NULL COMMENT '股东人数',
+  `older_shareholder_number` varchar(255) DEFAULT '' COMMENT '上期股东人数',
+  `shareholder_porprotion` float DEFAULT NULL COMMENT '较上期变化',
+  `chip` varchar(255) DEFAULT NULL COMMENT '筹码集中度',
+  `per_capita_shares` varchar(255) DEFAULT NULL COMMENT '人均流通股',
+  `per_capita_sharehold` varchar(255) DEFAULT NULL COMMENT '人均持股金额',
+  `investor_porprotion` float DEFAULT NULL COMMENT '机构投资者占比',
+  `top_ten_shareholder` varchar(255) DEFAULT NULL COMMENT '十大流通股东',
+  `shareholser_name` varchar(255) DEFAULT NULL COMMENT '股东名称',
+  `detail_porprotion` float DEFAULT NULL COMMENT '占比',
+  `alteration` varchar(255) DEFAULT NULL COMMENT '变动',
+  `is_delete` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`detail_id`),
+  KEY `gaikuang_id` (`gaikuang_id`),
+  CONSTRAINT `market_management_detail_ibfk_1` FOREIGN KEY (`gaikuang_id`) REFERENCES `market_management_gaikuang` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of market_management_detail
 -- ----------------------------
-INSERT INTO `market_management_detail` VALUES ('1', '电饭锅', '54', '规范化', '风高放火', '0', '风格化', '0', '规范化', '0', '2019-03-20', '0.00', '0', '风格化', '风格化', '546', '5454', '风格化', '2019-03-20', '0', '0', '0', '0', '0', '56', '65', '6', '56', '56', '65', '65', '65', '65', '65', '65', '65', '65', '65', '6', '56', '56', '56', '65', '风格化', '0');
+INSERT INTO `market_management_detail` VALUES ('2', '2', '教书育人', '344343', '无', '无', '0', '无', '0', '无', '0', '2019-03-22', '0.00', '0', '无', '无', '54', '2019', '无', '2019-03-22', '0', '0', '0', '0', '0', '4545', '45', '54', '4', '54', '45', '45', '54', '45', '54', '45', '54', '54', '54', '45', '54', '54', '54', '54', '54', '0');
+INSERT INTO `market_management_detail` VALUES ('3', '3', '学习', '6655660', '良好', '良好', '0', '良好', '0', '良好', '0', '2019-03-22', '34.00', '34', '良好', '良好', '43', '2019', '良好', '2019-03-22', '0', '0', '0', '0', '0', '56', '56', '65', '65', '65', '65', '56', '65', '65', '65', '65', '65', '56', '65', '65', '65', '65', '56', '65', '良好', '0');
+INSERT INTO `market_management_detail` VALUES ('4', '4', '买书、卖书', '4554', '不错', '不错', '0', '不错', '0', '不错', '0', '2019-03-22', '54.00', '54', '不错', '不错', '56', '2019', '不错', '2019-03-22', '0', '0', '0', '0', '0', '56', '56', '56', '65', '56', '65', '65', '65', '65', '65', '65', '65', '65', '65', '65', '65', '65', '65', '65', '不错', '0');
 
 -- ----------------------------
 -- Table structure for market_management_gaikuang
@@ -1995,21 +2075,23 @@ CREATE TABLE `market_management_gaikuang` (
   `profit_loss` float DEFAULT NULL COMMENT '盈亏',
   `porprotion` float DEFAULT NULL COMMENT '盈亏比例',
   `abstract` varchar(255) DEFAULT NULL COMMENT '备注',
-  `transaction_date` datetime DEFAULT NULL COMMENT '交易日期',
+  `transaction_date` varchar(255) DEFAULT NULL COMMENT '交易日期',
   `transaction_type` varchar(255) DEFAULT NULL COMMENT '交易类型',
   `transaction_number` int(11) DEFAULT NULL COMMENT '交易数量',
   `transaction_classes` varchar(255) DEFAULT NULL COMMENT '币种',
   `transaction_price` decimal(10,2) DEFAULT NULL COMMENT '成交均价',
   `transaction_money` float DEFAULT NULL COMMENT '成交金额',
   `is_delete` tinyint(4) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `industry_id` (`stock_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of market_management_gaikuang
 -- ----------------------------
-INSERT INTO `market_management_gaikuang` VALUES ('1', '风格化', 'A股', '风格化', '风格化', '12', '2019-03-20 09:18:27', '0', '0', '0', '0', '0', '刚回家', null, null, null, null, null, null, '0');
+INSERT INTO `market_management_gaikuang` VALUES ('2', '110011', '港股', '南昌大学', '农业', '45.3', '2019-03-21 15:50:43', '0', '0', '0', '0', '0', '测试港股项目一', null, null, null, null, null, null, '0');
+INSERT INTO `market_management_gaikuang` VALUES ('3', '110012', 'A股', '江西财经大学', '农业', '23', '2019-03-21 15:53:06', '0', '0', '0', '0', '0', '测试A股项目一', null, null, null, null, null, null, '0');
+INSERT INTO `market_management_gaikuang` VALUES ('4', '110013', '美股', '江西大学', '能源', '34', '2019-03-21 15:53:59', '0', '0', '0', '0', '0', '测试美股项目一', null, null, null, null, null, null, '0');
+INSERT INTO `market_management_gaikuang` VALUES ('5', '110013', '美股', '江西大学', '能源', '34', '2019-03-21 15:53:59', '0', '0', '0', '0', '0', '测试美股项目一', null, null, null, null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for other_business_statistics
@@ -2427,7 +2509,7 @@ INSERT INTO `userinfor_userinfor` VALUES ('7', '李四', '123', null, '111@qq.co
 -- View structure for calender_list
 -- ----------------------------
 DROP VIEW IF EXISTS `calender_list`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `calender_list` AS select `schedule_association`.`association_name` AS `association_name`,`schedule_person`.`person_name` AS `person_name`,`schedule_schedule`.`schedule_id` AS `schedule_id`,`schedule_schedule`.`schedule_name` AS `schedule_name`,`schedule_schedule`.`person_id` AS `person_id`,`schedule_schedule`.`association_id` AS `association_id`,`schedule_schedule`.`participation` AS `participation`,`schedule_schedule`.`is_public` AS `is_public`,`schedule_schedule`.`address` AS `address`,`schedule_schedule`.`is_all_day_event` AS `is_all_day_event`,`schedule_schedule`.`start_time` AS `start_time`,`schedule_schedule`.`end_time` AS `end_time`,`schedule_schedule`.`time_id` AS `time_id`,`schedule_schedule`.`util_time` AS `util_time`,`schedule_schedule`.`remind_id` AS `remind_id`,`schedule_schedule`.`meeting_summary` AS `meeting_summary`,`schedule_schedule`.`meeting_file_id` AS `meeting_file_id`,`schedule_schedule`.`is_delete` AS `is_delete`,`schedule_remind`.`remind_name` AS `remind_name`,`schedule_time_repeat`.`time_select` AS `time_select` from ((((`schedule_schedule` join `schedule_association` on((`schedule_schedule`.`association_id` = `schedule_association`.`association_id`))) join `schedule_person` on((`schedule_schedule`.`person_id` = `schedule_person`.`person_id`))) join `schedule_remind` on((`schedule_schedule`.`remind_id` = `schedule_remind`.`remind_id`))) join `schedule_time_repeat` on((`schedule_schedule`.`time_id` = `schedule_time_repeat`.`time_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `calender_list` AS select `schedule_schedule`.`schedule_id` AS `schedule_id`,`schedule_schedule`.`schedule_name` AS `schedule_name`,`schedule_schedule`.`person_id` AS `person_id`,`schedule_schedule`.`association_id` AS `association_id`,`schedule_schedule`.`participation` AS `participation`,`schedule_schedule`.`is_public` AS `is_public`,`schedule_schedule`.`address` AS `address`,`schedule_schedule`.`is_all_day_event` AS `is_all_day_event`,`schedule_schedule`.`start_time` AS `start_time`,`schedule_schedule`.`end_time` AS `end_time`,`schedule_schedule`.`time_id` AS `time_id`,`schedule_schedule`.`util_time` AS `util_time`,`schedule_schedule`.`remind_id` AS `remind_id`,`schedule_schedule`.`meeting_summary` AS `meeting_summary`,`schedule_schedule`.`meeting_file_id` AS `meeting_file_id`,`schedule_schedule`.`is_delete` AS `is_delete`,`schedule_association`.`association_name` AS `association_name`,`schedule_time_repeat`.`time_select` AS `time_select`,`schedule_remind`.`remind_name` AS `remind_name`,`schedule_person`.`person_name` AS `person_name` from ((((`schedule_schedule` join `schedule_association` on((`schedule_schedule`.`association_id` = `schedule_association`.`association_id`))) join `schedule_person` on((`schedule_schedule`.`person_id` = `schedule_person`.`person_id`))) join `schedule_remind` on((`schedule_schedule`.`remind_id` = `schedule_remind`.`remind_id`))) join `schedule_time_repeat` on((`schedule_schedule`.`time_id` = `schedule_time_repeat`.`time_id`))) ;
 
 -- ----------------------------
 -- View structure for event_list
@@ -2440,3 +2522,9 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- ----------------------------
 DROP VIEW IF EXISTS `guquan_list`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `guquan_list` AS select `jijin_jijin`.`fund_id` AS `fund_id`,`jijin_jijin`.`fundname` AS `fundname`,`guquan_management_technology`.`id` AS `id`,`guquan_management_technology`.`project` AS `project`,`guquan_management_technology`.`project_name` AS `project_name`,`guquan_management_technology`.`jijin` AS `jijin`,`guquan_management_technology`.`project_state` AS `project_state`,`guquan_management_technology`.`project_industry` AS `project_industry`,`guquan_management_technology`.`project_process` AS `project_process`,`guquan_management_technology`.`creat_time` AS `creat_time`,`guquan_management_technology`.`creator` AS `creator`,`guquan_management_technology`.`executor` AS `executor`,`guquan_management_technology`.`project_source` AS `project_source`,`guquan_management_technology`.`invest_money` AS `invest_money`,`guquan_management_technology`.`industry` AS `industry`,`guquan_management_technology`.`grouping` AS `grouping`,`guquan_management_technology`.`priority` AS `priority`,`guquan_management_technology`.`is_public` AS `is_public`,`guquan_management_technology`.`label` AS `label`,`guquan_management_technology`.`project_member` AS `project_member`,`guquan_management_technology`.`BP_file` AS `BP_file`,`guquan_management_technology`.`weekly_file` AS `weekly_file`,`guquan_management_technology`.`abstract` AS `abstract`,`guquan_management_technology`.`is_delete` AS `is_delete`,`fund_person`.`name` AS `name`,`fund_person`.`person_id` AS `person_id` from ((`guquan_management_technology` join `jijin_jijin` on((`guquan_management_technology`.`jijin` = `jijin_jijin`.`fund_id`))) join `fund_person` on((`guquan_management_technology`.`executor` = `fund_person`.`person_id`))) ;
+
+-- ----------------------------
+-- View structure for market_list
+-- ----------------------------
+DROP VIEW IF EXISTS `market_list`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `market_list` AS select `market_management_detail`.`detail_id` AS `detail_id`,`market_management_detail`.`gaikuang_id` AS `gaikuang_id`,`market_management_detail`.`main_business` AS `main_business`,`market_management_detail`.`registered_capital` AS `registered_capital`,`market_management_detail`.`company_overview` AS `company_overview`,`market_management_detail`.`main_product` AS `main_product`,`market_management_detail`.`total_income` AS `total_income`,`market_management_detail`.`main_industry` AS `main_industry`,`market_management_detail`.`industry_income` AS `industry_income`,`market_management_detail`.`main_regional` AS `main_regional`,`market_management_detail`.`regional_income` AS `regional_income`,`market_management_detail`.`market_time` AS `market_time`,`market_management_detail`.`issue_price` AS `issue_price`,`market_management_detail`.`issue_number` AS `issue_number`,`market_management_detail`.`involved_concept` AS `involved_concept`,`market_management_detail`.`income_type` AS `income_type`,`market_management_detail`.`money` AS `money`,`market_management_detail`.`year` AS `year`,`market_management_detail`.`progarm` AS `progarm`,`market_management_detail`.`the_day` AS `the_day`,`market_management_detail`.`per_share` AS `per_share`,`market_management_detail`.`per_asset` AS `per_asset`,`market_management_detail`.`per_capital` AS `per_capital`,`market_management_detail`.`per_profit` AS `per_profit`,`market_management_detail`.`per_cash` AS `per_cash`,`market_management_detail`.`total_money` AS `total_money`,`market_management_detail`.`net_profit` AS `net_profit`,`market_management_detail`.`operate_profit` AS `operate_profit`,`market_management_detail`.`operate_profit_rate` AS `operate_profit_rate`,`market_management_detail`.`total_money_rate` AS `total_money_rate`,`market_management_detail`.`net_profit_rate` AS `net_profit_rate`,`market_management_detail`.`total_capital_stock` AS `total_capital_stock`,`market_management_detail`.`toatal_A_stock` AS `toatal_A_stock`,`market_management_detail`.`porprotion_A_stock` AS `porprotion_A_stock`,`market_management_detail`.`shareholder_number` AS `shareholder_number`,`market_management_detail`.`older_shareholder_number` AS `older_shareholder_number`,`market_management_detail`.`shareholder_porprotion` AS `shareholder_porprotion`,`market_management_detail`.`chip` AS `chip`,`market_management_detail`.`per_capita_shares` AS `per_capita_shares`,`market_management_detail`.`per_capita_sharehold` AS `per_capita_sharehold`,`market_management_detail`.`investor_porprotion` AS `investor_porprotion`,`market_management_detail`.`top_ten_shareholder` AS `top_ten_shareholder`,`market_management_detail`.`shareholser_name` AS `shareholser_name`,`market_management_detail`.`detail_porprotion` AS `detail_porprotion`,`market_management_detail`.`alteration` AS `alteration`,`market_management_gaikuang`.`id` AS `id`,`market_management_gaikuang`.`stock_number` AS `stock_number`,`market_management_gaikuang`.`stock_type` AS `stock_type`,`market_management_gaikuang`.`company` AS `company`,`market_management_gaikuang`.`indusrty` AS `indusrty`,`market_management_gaikuang`.`stock_money` AS `stock_money`,`market_management_gaikuang`.`time` AS `time`,`market_management_gaikuang`.`own` AS `own`,`market_management_gaikuang`.`market_value` AS `market_value`,`market_management_gaikuang`.`cost` AS `cost`,`market_management_gaikuang`.`profit_loss` AS `profit_loss`,`market_management_gaikuang`.`porprotion` AS `porprotion`,`market_management_gaikuang`.`abstract` AS `abstract`,`market_management_gaikuang`.`transaction_date` AS `transaction_date`,`market_management_gaikuang`.`transaction_type` AS `transaction_type`,`market_management_gaikuang`.`transaction_number` AS `transaction_number`,`market_management_gaikuang`.`transaction_classes` AS `transaction_classes`,`market_management_gaikuang`.`transaction_price` AS `transaction_price`,`market_management_gaikuang`.`transaction_money` AS `transaction_money`,`market_management_gaikuang`.`is_delete` AS `is_delete` from (`market_management_detail` join `market_management_gaikuang` on((`market_management_detail`.`gaikuang_id` = `market_management_gaikuang`.`id`))) ;
