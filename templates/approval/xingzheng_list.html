@@ -1,0 +1,144 @@
+{% extends "approval/caiwu_base.html" %}
+
+{% block content %}
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>工商注册变更</legend>
+    </fieldset>
+    <div>
+        <h3 class="layui-timeline-title flow-node-title">
+            <i class="layui-icon flow-node-icon"></i>
+            "1 - 发起流程"
+        </h3>
+    </div>
+
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <label class="layui-form-label">企业名称</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">企业性质</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">业务办理类型</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">注册资金</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" lay-verify="pass" placeholder="请输入" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">拟办理时间</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" lay-verify="pass" placeholder="请输入" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">经营范围</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+    </form>
+
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>股东出资情况</legend>
+    </fieldset>
+    <form>
+        <div class="layui-form-item">
+            <label class="layui-form-label">股东姓名</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">身份证号码</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">持股比例</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" placeholder="%" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">认缴金额</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" placeholder="元" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">实际出资金额</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" placeholder="元" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+            <legend>情况说明</legend>
+        </fieldset>
+        <form>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">企业设立用途/变更原因</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入" class="layui-textarea"></textarea>
+                </div>
+            </div>
+
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入" class="layui-textarea"></textarea>
+                </div>
+            </div>
+
+            <fieldset class="layui-elem-field">
+                <legend>下一步审批人</legend>
+                <div class="layui-field-box">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">单行选择框</label>
+                        <div class="layui-input-block">
+                            <select name="interest" lay-filter="aihao">
+                                <option value=""></option>
+                                <option value="0">杨帆</option>
+                                <option value="1" selected="">曾勇</option>
+                                <option value="2">周汝佳</option>
+                                <option value="3">徐泽会</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-submit" lay-submit="" lay-filter="demo2" onclick="mysubmit()">提交
+                    </button>
+                    <button class="layui-btn layui-btn-primary" lay-filter type="submit" action="cache">暂存</button>
+                </div>
+            </div>
+        </form>
+    </form>
+{% endblock %}

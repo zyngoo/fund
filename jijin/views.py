@@ -420,11 +420,16 @@ def add_file(request):
 # 二级市场管理模块
 
 def market(request):
-    return render(request, "market/market_list.html")
+    type = (request.path).split("/")[-2]
+    if type == "market":
+        type = ""
+    content = {"type": type}
+    return render(request, "market/market_list.html", content)
 
 def market_add(request):
     if request.method == "POST":
         print(request.POST)
+        return redirect("/jijin/market/")
     return render(request, "market/market_add.html")
 
 def market_addGaikuang(request):
@@ -440,7 +445,7 @@ def market_addGaikuang(request):
         print(sql)
 
         MysqlHelper().insert_sql(sql)
-
+        return redirect("/jijin/market/")
     return render(request, "market/market_add.html")
 
 def market_addDetail(request):
@@ -453,9 +458,9 @@ def market_addDetail(request):
         for key in request.POST:
             sql = sql + "\'" + request.POST.get(key) + "\'" + ", "
         sql = sql.rstrip(", ") + ")"
-        print(sql)
-
+        # print(sql)
         MysqlHelper().insert_sql(sql)
+        return redirect("/jijin/market/")
     return render(request, "market/market_add.html")
 
 def market_delete(request):
@@ -468,7 +473,19 @@ def market_delete(request):
 
 def market_list(request):
     type = (request.path).split("/")[-2]
-    sql = "select * from  market_list where is_delete=0"
+    if type == "hongkong":
+        type = "港股"
+        sql = "select * from market_list where is_delete=0 and stock_type=" + "\'" + type + "\'"
+    elif type == "A_share":
+        type = "A股"
+        sql = "select * from market_list where is_delete=0 and stock_type=" + "\'" + type + "\'"
+    elif type == "US_stocks":
+        type = "美股"
+        sql = "select * from market_list where is_delete=0 and stock_type=" + "\'" + type + "\'"
+    else:
+        sql = "select * from  market_list where is_delete=0"
+
+    print(sql)
     data = MysqlHelper().dict_fetchall(sql)
     result = {}
     result["code"] = 0
@@ -478,12 +495,77 @@ def market_list(request):
     print(result)
     return JsonResponse(result)
 
+#
+# def detail_data(request):
+#     id = request.POST.get("id")
+#     sql = "SELECT * from market_management_detail LEFT JOIN market_management_gaikuang on " \
+#           "market_management_detail.gaikuang_id=market_management_gaikuang.id and market_management_gaikuang.id=%s"
+#     detail_data = MysqlHelper().dict_fetchall(sql, [id])
+#     print(detail_data)
+#
+#     return HttpResponse(json.dumps(detail_data))
 
-def detail_data(request):
-    id = request.POST.get("id")
-    sql = "SELECT * from market_management_detail LEFT JOIN market_management_gaikuang on " \
-          "market_management_detail.gaikuang_id=market_management_gaikuang.id and market_management_gaikuang.id=%s"
-    detail_data = MysqlHelper().dict_fetchall(sql, [id])
-    print(detail_data)
+def gaikuang_edit(request):
+    print(request.POST)
+    sql = "update market_management_gaikuang set "
+    for key in request.POST:
+        sql = sql + key + "=%s, "
+    sql = sql.rstrip(", ") + " where id=" + request.POST.get("id")
+    # print(sql)
 
-    return HttpResponse(json.dumps(detail_data))
+    params = []
+    for key in request.POST:
+        params.append(request.POST.get(key))
+    print(params)
+
+    MysqlHelper().update(sql, params)
+    return HttpResponse(json.dumps("ok"))
+
+
+def detail_edit(request):
+    # print(request.POST)
+    sql = "update market_management_gaikuang set "
+    for key in request.POST:
+        sql = sql + key + "=%s, "
+    sql = sql.rstrip(", ") + " where id=" + request.POST.get("detail_id")
+    # print(sql)
+
+    params = []
+    for key in request.POST:
+        params.append(request.POST.get(key))
+    # print(params)
+
+    MysqlHelper().update(sql, params)
+    return HttpResponse(json.dumps("ok"))
+
+
+
+# 行业研究
+def industry(request):
+    return render(request, "industry/industry_add.html")
+
+
+
+
+# 审批流程
+def approval(request):
+    return render(request, "approval/approval.html")
+
+
+def finance(request):
+    return render(request, "approval/caiwu_index.html")
+
+def finance_list(request):
+    return render(request, "approval/caiwu_list.html")
+
+def administration(request):
+    return render(request, "approval/xingzheng_index.html")
+
+def administration_list(request):
+    return render(request, "approval/xingzheng_list.html")
+
+def manpower(request):
+    return render(request, "approval/renli_index.html")
+
+def manpower_list(request):
+    return render(request, "approval/renli_list.html")

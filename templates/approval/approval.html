@@ -1,0 +1,27 @@
+{% extends "approval/caiwu_base.html" %}
+
+{% block content %}
+    <div class="layui-row">
+        <div class="layui-tab">
+            <ul class="layui-tab-title">
+                <li class="layui-this">财务审批</li>
+                <li>行政审批</li>
+                <li>人力审批</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <a  class="layui-btn layui-btn-mini"  href="/jijin/approval/finance/">index页面</a>
+                    <a  class="layui-btn layui-btn-mini" href="/jijin/approval/finance/list/">list页面</a>
+                </div>
+                <div class="layui-tab-item">
+                    <a class="layui-btn layui-btn-mini" href="/jijin/approval/administration/">index页面</a>
+                    <a class="layui-btn layui-btn-mini" href="/jijin/approval/administration/list/">list页面</a>
+                </div>
+                <div class="layui-tab-item">
+                    <a class="layui-btn layui-btn-mini" href="/jijin/approval/manpower/">index页面</a>
+                    <a class="layui-btn layui-btn-mini" href="/jijin/approval/manpower/list/">list页面</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

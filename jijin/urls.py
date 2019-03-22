@@ -55,12 +55,38 @@ urlpatterns = [
 
     # 二级市场管理模块
     path("market/", views.market),
+    path("market/hongkong/", views.market),
+    path("market/A_share/", views.market),
+    path("market/US_stocks/", views.market),
+
     path("market/add/", views.market_add),
     path("market/add_gaikuang/", views.market_addGaikuang),
     path("market/add_detail/", views.market_addDetail),
-    path("market/market_delete/", views.market_delete),
     # path("market/test/", views.market),
     path("market/list_handle/", views.market_list),
-    path("market/detail_data/", views.detail_data),
+    path("market/list_handle/hongkong/", views.market_list),
+    path("market/list_handle/A_share/", views.market_list),
+    path("market/list_handle/US_stocks/", views.market_list),
+    # path("market/detail_data/", views.detail_data),
+    path("market/market_delete/", views.market_delete),
+    path("market/gaikuang_edit/", views.gaikuang_edit),
+    path("market/detail_edit/", views.detail_edit),
+
+
+    # 行业研究
+    path("industry/", views.industry),
+
+
+    # 审批流程
+    path("approval/", views.approval),
+    path("approval/finance/", views.finance),
+    path("approval/finance/list/", views.finance_list),
+
+    path("approval/administration/", views.administration),
+    path("approval/administration/list/", views.administration_list),
+
+    path("approval/manpower/", views.manpower),
+    path("approval/manpower/list/", views.manpower_list),
+    # path("approval/", views.approval),
 
 ]

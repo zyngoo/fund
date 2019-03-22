@@ -1,0 +1,300 @@
+{% extends "approval/caiwu_base.html" %}
+
+{% block content %}
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+	<legend>新员工入职</legend>
+</fieldset>
+	<div>
+	<h3 class="layui-timeline-title flow-node-title">
+		<i class="layui-icon flow-node-icon"></i>
+		"1 - 发起员工转正"
+	</h3>
+	</div>
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+<legend>员工信息</legend>
+</fieldset>
+<form class="layui-form" action="" lay-filter="example">
+   <div class="layui-form-item">
+    <label class="layui-form-label">姓名</label>
+    <div class="layui-input-block">
+      <input type="password" name="password" placeholder="请输入" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+
+	<div class="layui-form-item" pane="">
+    <label class="layui-form-label">性别</label>
+    <div class="layui-input-block">
+      <input type="radio" name="sex" value="男" title="男" checked="">
+      <input type="radio" name="sex" value="女" title="女">
+    </div>
+  </div>
+
+	<div class="layui-form-item">
+    <label class="layui-form-label">所属部门</label>
+    <div class="layui-input-block">
+      <select name="interest" lay-filter="aihao">
+        <option value=""></option>
+        <option value="0">行政部</option>
+        <option value="1" selected="">风控部</option>
+        <option value="2">投资部</option>
+        <option value="3">市场部</option>
+        <option value="4">研究部</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">部门职务</label>
+    <div class="layui-input-inline">
+      <input type="password" name="password" placeholder="请输入" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+
+	<div class="layui-form-item">
+    <label class="layui-form-label">汇报对象</label>
+    <div class="layui-input-inline">
+      <select name="interest" lay-filter="aihao">
+        <option value=""></option>
+        <option value="0">AA</option>
+        <option value="1" selected="">风控部</option>
+        <option value="2">投资部</option>
+        <option value="3">市场部</option>
+        <option value="4">研究部</option>
+      </select>
+    </div>
+  </div>
+
+	<div class="layui-form-item">
+		<label class="layui-form-label">电话号码</label>
+		<div class="layui-input-inline">
+      		<input type="password" name="password" lay-verify="pass" placeholder="请输入" autocomplete="off" class="layui-input">
+    	</div>
+  	</div>
+
+	<div class="layui-form-item">
+		<label class="layui-form-label">邮箱</label>
+		<div class="layui-input-inline">
+      		<input type="password" name="password" lay-verify="pass" placeholder="请输入" autocomplete="off" class="layui-input">
+    	</div>
+  	</div>
+
+	<div class="layui-inline">
+      <label class="layui-form-label">劳动合同开始</label>
+      <div class="layui-input-inline">
+        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+	<div class="layui-inline">
+      <label class="layui-form-label">劳动合同结束</label>
+      <div class="layui-input-inline">
+        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+	<div class="layui-form-item">
+		<div class="layui-input-block">
+		<label class="layui-form-label">身份证扫描版</label>
+		<button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传文件</button>
+		<label class="layui-form-label">一寸照片</label>
+		<button class="layui-btn" lay-submit="" lay-filter="demo2">上传文件</button>
+		</div>
+	</div>
+
+</form>
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+	<legend>个人情况</legend>
+</fieldset>
+<form>
+  <div class="layui-form-item">
+    <label class="layui-form-label">籍贯</label>
+    <div class="layui-input-inline">
+      <input type="password" name="password" placeholder="请输入" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+
+	<div class="layui-inline">
+      <label class="layui-form-label">出生日期</label>
+      <div class="layui-input-inline">
+        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+	<div class="layui-form-item">
+    <label class="layui-form-label">婚姻状况</label>
+    <div class="layui-input-inline">
+      <select name="interest" lay-filter="aihao">
+        <option value=""></option>
+        <option value="0">未婚</option>
+        <option value="1" selected="">已婚</option>
+      </select>
+    </div>
+  </div>
+
+
+	<div class="layui-form-item">
+    <label class="layui-form-label">身份证号</label>
+    <div class="layui-input-inline">
+      <input type="password" name="password" placeholder="" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+
+	<div class="layui-form-item">
+    <label class="layui-form-label">户口所在地</label>
+    <div class="layui-input-inline">
+      <input type="password" name="password" placeholder="" autocomplete="off" class="layui-input">
+    </div>
+  	</div>
+
+	<div class="layui-form-item">
+    <label class="layui-form-label">现住址</label>
+    <div class="layui-input-block">
+      <input type="password" name="password" placeholder="" autocomplete="off" class="layui-input">
+    </div>
+  	</div>
+
+	<div class="layui-form-item">
+    <label class="layui-form-label">紧急联系人姓名</label>
+    <div class="layui-input-inline">
+      <input type="password" name="password" placeholder="" autocomplete="off" class="layui-input">
+    </div>
+  	</div>
+
+	<div class="layui-form-item">
+    <label class="layui-form-label">紧急联系人电话</label>
+    <div class="layui-input-inline">
+      <input type="password" name="password" placeholder="" autocomplete="off" class="layui-input">
+    </div>
+  	</div>
+
+	<div class="layui-form-item">
+    <label class="layui-form-label">与紧急联系人的关系</label>
+    <div class="layui-input-inline">
+      <input type="password" name="password" placeholder="" autocomplete="off" class="layui-input">
+    </div>
+  	</div>
+
+	<div class="layui-form-item">
+		<div class="layui-input-block">
+		<label class="layui-form-label">资格证书</label>
+		<button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传文件</button>
+		<label class="layui-form-label">学位及学历证书</label>
+		<button class="layui-btn" lay-submit="" lay-filter="demo2">上传文件</button>
+		</div>
+	</div>
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+	<legend>教育经历（高中以上）</legend>
+</fieldset>
+<form>
+	<div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">毕业院校</label>
+    <div class="layui-input-block">
+      <textarea placeholder="请输入" class="layui-textarea"></textarea>
+    </div>
+  </div>
+
+	<div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">专业</label>
+    <div class="layui-input-inline">
+      <textarea placeholder="请输入" class="layui-textarea"></textarea>
+    </div>
+  </div>
+
+	<div class="layui-inline">
+      <label class="layui-form-label">起始日期</label>
+      <div class="layui-input-inline">
+        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+	<div class="layui-inline">
+      <label class="layui-form-label">截止日期</label>
+      <div class="layui-input-inline">
+        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+</form>
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+	<legend>工作经历</legend>
+</fieldset>
+<form>
+	<div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">公司名称</label>
+    <div class="layui-input-block">
+      <textarea placeholder="请输入" class="layui-textarea"></textarea>
+    </div>
+  </div>
+
+	<div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">职位</label>
+    <div class="layui-input-inline">
+      <textarea placeholder="请输入" class="layui-textarea"></textarea>
+    </div>
+  </div>
+
+	<div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">工作地点</label>
+    <div class="layui-input-inline">
+      <textarea placeholder="请输入" class="layui-textarea"></textarea>
+    </div>
+  </div>
+
+	<div class="layui-inline">
+      <label class="layui-form-label">起始日期</label>
+      <div class="layui-input-inline">
+        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+	<div class="layui-inline">
+      <label class="layui-form-label">截止日期</label>
+      <div class="layui-input-inline">
+        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+	<div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">证明人</label>
+    <div class="layui-input-inline">
+      <textarea placeholder="请输入" class="layui-textarea"></textarea>
+    </div>
+  </div>
+
+	<div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">证明人联系方式</label>
+    <div class="layui-input-block">
+      <textarea placeholder="请输入" class="layui-textarea"></textarea>
+    </div>
+  </div>
+
+	<fieldset class="layui-elem-field">
+  		<legend>下一步审批人</legend>
+ 		 <div class="layui-field-box">
+			  <div class="layui-form-item">
+				  <label class="layui-form-label">单行选择框</label>
+				  <div class="layui-input-block">
+					  <select name="interest" lay-filter="aihao">
+						  <option value=""></option>
+						  <option value="0">杨帆</option>
+						  <option value="1" selected="">曾勇</option>
+						  <option value="2">周汝佳</option>
+						  <option value="3">徐泽会</option>
+					  </select>
+				  </div>
+			  </div>
+		 </div>
+	</fieldset>
+
+	<div class="layui-form-item">
+		<div class="layui-input-block">
+			<button class="layui-btn layui-btn-submit" lay-submit="" lay-filter="demo2" onclick="mysubmit()">提交
+			</button>
+			<button class="layui-btn layui-btn-primary" lay-filter type="submit" action="cache">暂存</button>
+		</div>
+	</div>
+</form>
+{% endblock %}
