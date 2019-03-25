@@ -1,0 +1,588 @@
+{% extends "industry/industry_base.html" %}
+
+{% block content %}
+    <div style="margin-bottom: 5px;">
+        <ins class="adsbygoogle" style="display:inline-block;" data-ad-client="ca-pub-6111334333458862"
+             data-ad-slot="3820120620">
+        </ins>
+    </div>
+
+    <div class="layui-btn-group demoTable">
+        <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
+        <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
+        <button class="layui-btn" data-type="isAll">验证是否全选</button>
+    </div>
+
+    <table class="layui-table" lay-data="{ url:'/jijin/industry/list_handle/', page:true, id:'idTest'}"
+           lay-filter="demo">
+        <thead>
+        <tr>
+            <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
+            <th lay-data="{field:'industry_research_id', width:100, sort: true, fixed: true}">ID</th>
+            <th lay-data="{field:'industry_research_name', width:100}">项目名称</th>
+            <th lay-data="{field:'industry_research_state', width:120, sort: true,edit:'text'}">项目状态</th>
+            <th lay-data="{field:'name', width:120}">执行者</th>
+            <th lay-data="{field:'industry', width:100}">行业</th>
+            <th lay-data="{field:'publish_time', width:200, sort: true}">发布日期</th>
+            {#            <th lay-data="{field:'event_status', width:100}">状态</th>#}
+            <th lay-data="{fixed: 'right', width:180, align:'center', toolbar: '#barDemo'}"></th>
+        </tr>
+        </thead>
+    </table>
+{% endblock %}
+
+{% block mask %}
+    <div class="layui-row" id="viewData" style="display: none;">
+        <div style="top: 100px;">
+
+            <!-- 新增日程-->
+            <form class="layui-form" method="post" action="">
+
+                <fieldset class="layui-elem-field site-demo-button" style="margin-top: 20px;">
+                    {#                <div class="layui-form-item layui-form-label">#}
+                    {#                    <p style="font-size: 20px">基本信息</p>#}
+                    {#                </div>#}
+                    <legend>行业研究信息</legend>
+
+                    <div class="layui-form-item" style="margin-top: 30px">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">项目名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="industry_research_name_2" name="industry_research_name"
+                                       class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">项目状态</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="industry_research_state_2" name="industry_research_state"
+                                       class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">时间</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="publish_time_2" name="publish_time" class="layui-input">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">创建者</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="create_creater_2" value="{{ request.session.user_name }}"
+                                       readonly name="create_creater" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">执行者</label>
+                            <div class="layui-input-block">
+
+                                <input type="text" id="name_2" name="name" class="layui-input">
+
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">行业</label>
+                            <div class="layui-input-block">
+
+                                <input type="text" id="industry_2" name="industry" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">标签</label>
+                        <div class="layui-input-block" id="project_label_2" name="project_label">
+                            {#                         <input type="text" id="project_label_2" name="project_label" class="layui-input">#}
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">项目组成员</label>
+                        <div class="layui-input-block" id="project_member_2" name="project_member">
+                            {#                        <input type="text" name="project_member" class="layui-input">#}
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">纲要</label>
+                        <div class="layui-input-block">
+                            <textarea name="abstract" id="abstract_2" style="display: none;"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">后续跟进情况</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入内容" id="situation_2" class="layui-textarea"
+                                      name="situation"></textarea>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+                <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;margin-bottom: 20px;">
+
+                    <legend>研究报告</legend>
+
+                    <div class="layui-form-item" style="margin-top: 20px;">
+                        <label class="layui-form-label">研究报告</label>
+                        <button type="button" class="layui-btn" id="file1">
+                            <i class="layui-icon">&#xe67c;</i>上传文件
+                        </button>
+                        <input type="hidden" id="research_file_url" name="research_file" value=""/>
+                        <div class="layui-upload-list">
+                            <p id="demoText"></p>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">参考资料</label>
+                        <button type="button" class="layui-btn" id="file2">
+                            <i class="layui-icon">&#xe67c;</i>上传文件
+                        </button>
+                        <input type="hidden" id="reference_file_url" name="reference_file" value=""/>
+                        <div class="layui-upload-list">
+                            <p id="demoText_2"></p>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">测试文档</label>
+                        <button type="button" class="layui-btn" id="file3">
+                            <i class="layui-icon">&#xe67c;</i>上传文件
+                        </button>
+                        <input type="hidden" id="test_file_url" name="test_file" value=""/>
+                        <div class="layui-upload-list">
+                            <p id="demoText_3"></p>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+            </form>
+
+        </div>
+    </div>
+
+    <div class="layui-row" id="popUpdateTest" style="display: none;">
+        <div style="top: 100px;">
+
+            <!-- 新增日程-->
+            <form class="layui-form" method="post" action="">
+
+                <fieldset class="layui-elem-field site-demo-button" style="margin-top: 20px;">
+                    {#                <div class="layui-form-item layui-form-label">#}
+                    {#                    <p style="font-size: 20px">基本信息</p>#}
+                    {#                </div>#}
+                    <legend>行业研究信息</legend>
+                    <label id="industry_research_id" style="display: none;"></label>
+                    <div class="layui-form-item" style="margin-top: 30px">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">项目名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="industry_research_name" name="industry_research_name"
+                                       class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">项目状态</label>
+                            <div class="layui-input-block">
+                                <select id="industry_research_state" name="industry_research_state">
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">时间</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="publish_time" name="publish_time" class="layui-input">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">创建者</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="create_creater" value="{{ request.session.user_name }}"
+                                       readonly name="create_creater" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">执行者</label>
+                            <div class="layui-input-block">
+                                <select id="person_id" name="person_id">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">行业</label>
+                            <div class="layui-input-block">
+                                <select id="industry" name="industry">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">标签</label>
+                        <div class="layui-input-block" id="project_label" name="project_label">
+                            {#                         <input type="text" id="project_label_2" name="project_label" class="layui-input">#}
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">项目组成员</label>
+                        <div class="layui-input-block" id="project_member" name="project_member">
+                            {#                        <input type="text" name="project_member" class="layui-input">#}
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">纲要</label>
+                        <div class="layui-input-block">
+                            <textarea name="abstract" id="abstract" style="display: none;"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">后续跟进情况</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入内容" id="situation" class="layui-textarea"
+                                      name="situation"></textarea>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+                <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;margin-bottom: 20px;">
+
+                    <legend>研究报告</legend>
+
+                    <div class="layui-form-item" style="margin-top: 20px;">
+                        <label class="layui-form-label">研究报告</label>
+                        <button type="button" class="layui-btn" id="file1">
+                            <i class="layui-icon">&#xe67c;</i>上传文件
+                        </button>
+                        <input type="hidden" id="research_file_url" name="research_file" value=""/>
+                        <div class="layui-upload-list">
+                            <p id="demoText"></p>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">参考资料</label>
+                        <button type="button" class="layui-btn" id="file2">
+                            <i class="layui-icon">&#xe67c;</i>上传文件
+                        </button>
+                        <input type="hidden" id="reference_file_url" name="reference_file" value=""/>
+                        <div class="layui-upload-list">
+                            <p id="demoText_2"></p>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">测试文档</label>
+                        <button type="button" class="layui-btn" id="file3">
+                            <i class="layui-icon">&#xe67c;</i>上传文件
+                        </button>
+                        <input type="hidden" id="test_file_url" name="test_file" value=""/>
+                        <div class="layui-upload-list">
+                            <p id="demoText_3"></p>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit="" lay-filter="demo1" onclick="mysubmit()">提交</button>
+                        {#                    <button class="layui-btn layui-btn-primary" lay-filter type="submit" action="cache">暂存</button>#}
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+        <a class="layui-btn  layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+
+    <script>
+        layui.use(['table', "form", "laydate", "layedit"], function () {
+            var table = layui.table
+                , form = layui.form
+                , layedit = layui.layedit
+                , laydate = layui.laydate;
+
+            //监听表格复选框选择
+            table.on('checkbox(demo)', function (obj) {
+                console.log(obj); //选中行的相关数据
+            });
+
+            //监听工具条
+            table.on('tool(demo)', function (obj) {
+                var data = obj.data;
+                if (obj.event === 'detail') {
+                    layer.msg('ID：' + data.id + ' 的查看操作');
+                    layer.open({
+                        //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+                        type: 1,
+                        area: ['1030px', '500px'],
+                        content: $("#viewData"),//引用的弹出层的页面层的方式加载修改界面表单
+                        shade: 0.3,
+                        success: function () {
+                            var index = layedit.build("abstract_2");
+                            for (var key in data) {
+                                var idName = '#' + key + "_2";
+                                $(idName).val(data[key]);
+
+                            }
+                            layedit.setContent(index, obj.data["abstract"]);
+
+                        }
+                    });
+                } else if (obj.event === 'del') {
+                    layer.confirm('真的删除行么', function (index) {
+                        obj.del();
+                        var id = obj.data.industry_research_id;
+                        {#alert(index)#}
+                        $.ajax({
+                            url: "/jijin/industry/industry_delete/",
+                            type: "post",
+                            async: false,
+                            data: {'id': id},
+                            dataType: "json",
+                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',//防止乱码
+                            success: function (data) {
+                                if (data == 'ok') {
+                                    {#alert('成功');#}
+                                    layer.msg("删除成功！")
+                                }
+                            }
+
+                        });
+                        layer.close(index);
+                    });
+                } else if (obj.event === 'edit') {
+                    var title_id = obj.data.title_id;
+                    $.ajax({
+                        url: "/jijin/industry/industry_person/",
+                        type: "POST",
+                        dataType: "json",
+                        async: true,
+                        success: function (msg) {
+                            {#参与人员#}
+                            console.log(msg);
+                            var value = '';
+                            for (var i = 0; i < msg.length; i++) {
+                                {#alert(msg[i].fund_name);#}
+                                if (obj.data.name == msg[i].name) {
+                                    value += "<option value='" + msg[i].person_id + "' selected >" + msg[i].name + "</option>";
+                                } else {
+                                    value += "<option value='" + msg[i].person_id + "'>" + msg[i].name + "</option>";
+
+                                }
+
+                            }
+                            {#alert(value);#}
+                            $("#person_id").append(value);
+
+                            {#类型选择#}
+                            var typeList = ['审阅BP', '初步接触', 'TS/DD', '过会投资', '投资服务', "项目结束"];
+                            {#var contactList_id = [0, 1, 2];#}
+                            {#alert(JSON.stringify(obj.data))#}
+                            var contantVal = '';
+                            for (var i = 0; i < typeList.length; i++) {
+                                {#alert(msg[i])#}
+                                if (obj.data.industry_research_state == typeList[i]) {
+                                    contantVal += "<option value='" + typeList[i] + "' selected >" + typeList[i] + "</option>";
+                                } else {
+                                    contantVal += "<option value='" + typeList[i] + "'>" + typeList[i] + "</option>";
+
+                                }
+
+                            }
+                            $("#industry_research_state").append(contantVal);
+
+
+                            {#状态选择#}
+                            var remindList = ["TMT&消费", "医疗", "高端制造", "新三板"];
+
+                            var remindVal = "";
+                            for (var i = 0; i < remindList.length; i++) {
+                                if (obj.data.industry == remindList[i]) {
+                                    remindVal += "<option value ='" + remindList[i] + "' selected >" + remindList[i] + "</option>";
+                                } else {
+                                    remindVal += "<option value ='" + remindList[i] + "'>" + remindList[i] + "</option>";
+                                }
+                            }
+                            $("#industry").append(remindVal);
+
+                            {#表单渲染#}
+                            form.render();
+
+                        }
+                    });
+
+                    layer.open({
+                        //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+                        type: 1,
+                        area: ['1030px', '500px'],
+                        content: $("#popUpdateTest"),//引用的弹出层的页面层的方式加载修改界面表单
+                        shade: 0.3,
+                        success: function (x, y) {
+                            var index = layedit.build("abstract");
+                            layedit.setContent(index, obj.data["abstract"]);
+
+                            for (var key in data) {
+                                var idName = '#' + key;
+                                $(idName).val(data[key]);
+                            }
+
+                        }
+                    });
+
+
+                    //动态向表传递赋值可以参看文章进行修改界面的更新前数据的显示，当然也是异步请求的要数据的修改数据的获取
+                    //getFormValue(obj, data);
+                }
+
+
+            });
+
+            //日期
+            laydate.render({
+                elem: '#publish_date',
+                type: "datetime"
+            });
+
+            var tagData = [{"id": 12, "name": "长者"}, {"id": 13, "name": "工厂"}, {
+                "id": 14,
+                "name": "小学生"
+            }, {"id": 15, "name": "大学生"}, {"id": 16, "name": "研究生"}, {"id": 17, "name": "教师"}, {
+                "id": 18,
+                "name": "记者"
+            }];
+
+            layui.config({
+                base: "/static/"
+            }).extend({
+                selectM: "./layui/layui_extends/selectM"
+            }).use(["layer", "form", "jquery", "upload", "selectM"], function () {
+                $ = layui.jquery;
+                var form = layui.form
+                    , upload = layui.upload
+                    , selectM = layui.selectM;
+
+                var tagIns1 = selectM({
+                    elem: "#project_label_2",
+                    data: tagData,
+                    delimiter: ",",
+                    field: {idName: "id", titleName: "name"}
+                });
+
+                var tagIns2 = selectM({
+                    elem: "#project_member_2",
+                    data: tagData,
+                    delimiter: ",",
+                    field: {idName: "id", titleName: "name"}
+                });
+                var tagIns3 = selectM({
+                    elem: "#project_label",
+                    data: tagData,
+                    delimiter: ",",
+                    field: {idName: "id", titleName: "name"}
+                });
+
+                var tagIns4 = selectM({
+                    elem: "#project_member",
+                    data: tagData,
+                    delimiter: ",",
+                    field: {idName: "id", titleName: "name"}
+                });
+            });
+
+            var $ = layui.$, active = {
+                getCheckData: function () { //获取选中数据
+                    var checkStatus = table.checkStatus('idTest')
+                        , data = checkStatus.data;
+                    layer.alert(JSON.stringify(data));
+                }
+                , getCheckLength: function () { //获取选中数目
+                    var checkStatus = table.checkStatus('idTest')
+                        , data = checkStatus.data;
+                    layer.msg('选中了：' + data.length + ' 个');
+                }
+                , isAll: function () { //验证是否全选
+                    var checkStatus = table.checkStatus('idTest');
+                    layer.msg(checkStatus.isAll ? '全选' : '未全选')
+                }
+            };
+
+            $('.demoTable .layui-btn').on('click', function () {
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });
+        });
+
+        function mysubmit() {
+            var list = ["industry_research_id", "industry_research_name", "industry_research_state", "create_creater", "person_id", "industry", "project_label",
+                "project_member", "abstract", "situation", "project_source"];
+            var value = [];
+            for (var li in list) {
+                li = $("#" + list[li]).val();
+                {#alert(li);#}
+                value.push(li);
+            }
+            {#alert(value);#}
+            var dataSend = {};
+            for (var i = 0; i < list.length; i++) {
+                dataSend[list[i]] = value[i]
+            }
+            {#alert(JSON.stringify(dataSend));#}
+            console.log(dataSend);
+
+            $.ajax({
+                url: "/jijin/industry/industry_edit/",
+                type: "POST",
+                async: false,
+                dataType: "json",
+                data: dataSend,
+                success: function (data) {
+                    if (data === "ok") {
+                        layer.msg("修改成功")
+                    } else {
+                        layer.msg("修改失败")
+                    }
+                    setTimeout(function () {
+                        window.location.href = "/jijin/industry/";
+                    });
+                    {#console.log(data)#}
+                }
+            })
+
+
+        }
+
+    </script>
+
+{% endblock %}

@@ -542,10 +542,67 @@ def detail_edit(request):
 
 # 行业研究
 def industry(request):
-    return render(request, "industry/industry_add.html")
+    return render(request, "industry/industry_list.html")
 
+def industry_add(request):
+    if request.method == "POST":
+        print(request.POST)
+        sql = "insert into research_industry_research ("
+        for key in request.POST:
+            if key != "file":
+                sql = sql + key + ", "
+        sql = sql.rstrip(", ") + ") values ("
+        for key in request.POST:
+            if key != "file":
+                sql = sql + "\'" + request.POST.get(key) + "\'" + ", "
+        sql = sql.rstrip(", ") + ")"
+        print(sql)
+        MysqlHelper().insert_sql(sql)
+        return redirect("/jijin/industry/")
 
+    person = getData.getFundPerson()
+    return render(request, "industry/industry_add.html", person)
 
+def industry_list(request):
+    sql = "select * from industry_list where is_delete=0"
+    data = MysqlHelper().dict_fetchall(sql)
+    result = {}
+    result["code"] = 0
+    result["msg"] = ""
+    result["count"] = len(data)
+    result["data"] = data
+    # print(result)
+    return JsonResponse(result)
+
+def industry_delete(request):
+    id = request.POST.get("id")
+    print(id)
+    sql = "update research_industry_research set is_delete=1 where industry_research_id=%s"
+    param = [id]
+    MysqlHelper().update(sql, param)
+    return HttpResponse(json.dumps("ok"))
+
+def industry_person(request):
+    sqlPerson = "select * from fund_person"
+    person = MysqlHelper().dict_fetchall(sqlPerson)
+    print(person)
+    return HttpResponse(json.dumps(person))
+
+def industry_edit(request):
+    print(request.POST)
+    sql = "update research_industry_research set "
+    for key in request.POST:
+        sql = sql + key + "=%s, "
+    sql = sql.rstrip(", ") + " where industry_research_id=" + request.POST.get("industry_research_id")
+    # print(sql)
+
+    params = []
+    for key in request.POST:
+        params.append(request.POST.get(key))
+    # print(params)
+
+    MysqlHelper().update(sql, params)
+    return HttpResponse(json.dumps("ok"))
 
 # 审批流程
 def approval(request):

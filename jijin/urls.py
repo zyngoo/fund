@@ -75,6 +75,11 @@ urlpatterns = [
 
     # 行业研究
     path("industry/", views.industry),
+    path("industry/add/", views.industry_add),
+    path("industry/list_handle/", views.industry_list),
+    path("industry/industry_delete/", views.industry_delete),
+    path("industry/industry_person/", views.industry_person),
+    path("industry/industry_edit/", views.industry_edit),
 
 
     # 审批流程

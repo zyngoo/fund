@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50557
 File Encoding         : 65001
 
-Date: 2019-03-22 11:08:33
+Date: 2019-03-25 09:29:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -2252,33 +2252,35 @@ CREATE TABLE `research_industry` (
 -- ----------------------------
 DROP TABLE IF EXISTS `research_industry_research`;
 CREATE TABLE `research_industry_research` (
-  `industry_research_id` int(11) NOT NULL COMMENT '行业研究',
+  `industry_research_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '行业研究',
   `industry_research_name` varchar(255) DEFAULT NULL COMMENT '项目名称',
   `industry_research_state` varchar(255) DEFAULT NULL COMMENT '项目状态',
   `create_creater` varchar(255) DEFAULT NULL COMMENT '创建者',
   `person_id` int(11) DEFAULT NULL COMMENT '执行者',
-  `industry_id` int(11) DEFAULT NULL COMMENT '行业',
-  `project_label_id` int(11) DEFAULT NULL COMMENT '标签',
-  `project_member` int(11) DEFAULT NULL COMMENT '项目组成员',
+  `industry` varchar(255) DEFAULT NULL COMMENT '行业',
+  `project_label` varchar(255) DEFAULT NULL COMMENT '标签',
+  `project_member` varchar(255) DEFAULT NULL COMMENT '项目组成员',
   `abstract` varchar(255) DEFAULT NULL COMMENT '摘要',
   `situation` varchar(255) DEFAULT NULL COMMENT '跟进情况',
-  `research_report_id` int(11) DEFAULT NULL COMMENT '文件',
+  `research_file` varchar(255) DEFAULT NULL COMMENT '文件',
+  `reference_file` varchar(255) DEFAULT NULL,
+  `test_file` varchar(255) DEFAULT NULL,
+  `publish_time` varchar(255) DEFAULT NULL,
+  `is_delete` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`industry_research_id`),
   KEY `person_id` (`person_id`),
-  KEY `industry_id` (`industry_id`),
-  KEY `project_label_id` (`project_label_id`),
-  KEY `research_report_id` (`research_report_id`),
+  KEY `industry_id` (`industry`),
+  KEY `project_label_id` (`project_label`),
+  KEY `research_report_id` (`research_file`),
   KEY `project_member` (`project_member`),
-  CONSTRAINT `research_industry_research_ibfk_1` FOREIGN KEY (`person_id`) REFERENCES `fund_person` (`person_id`),
-  CONSTRAINT `research_industry_research_ibfk_2` FOREIGN KEY (`industry_id`) REFERENCES `research_industry` (`industry_id`),
-  CONSTRAINT `research_industry_research_ibfk_3` FOREIGN KEY (`project_label_id`) REFERENCES `research_project_label` (`project_label_id`),
-  CONSTRAINT `research_industry_research_ibfk_4` FOREIGN KEY (`research_report_id`) REFERENCES `fund_file` (`file_id`),
-  CONSTRAINT `research_industry_research_ibfk_5` FOREIGN KEY (`project_member`) REFERENCES `fund_person` (`person_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `research_industry_research_ibfk_1` FOREIGN KEY (`person_id`) REFERENCES `fund_person` (`person_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of research_industry_research
 -- ----------------------------
+INSERT INTO `research_industry_research` VALUES ('1', '热污染 修改版', '审阅BP', '', '1', '医疗', '12,13', '16,17', '<p><b>测试项目一&nbsp;&nbsp;<img src=\"http://127.0.0.1:8000/static/layui/images/face/26.gif\" alt=\"[怒]\"></b></p>', '暂无', 'C:UsersAdministratorDesktopsystemgithub_fund2fundstatic/media/files/4a715ba01d59dae382357f71f2fc321b.jpg', 'C:UsersAdministratorDesktopsystemgithub_fund2fundstatic/media/files/6aabeaf2ae0ca4e590b7977ea9c8a91b.jpeg', 'C:UsersAdministratorDesktopsystemgithub_fund2fundstatic/media/files/9cc0e53d2de4ba38897bfb4195ca250f.jpeg', '2019-03-23 11:21:1', '0');
+INSERT INTO `research_industry_research` VALUES ('2', '', '审阅BP', '', '1', '', '', '', '', '', '', '', '', '2019-03-23 11:21:11', '1');
 
 -- ----------------------------
 -- Table structure for research_people
@@ -2522,6 +2524,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- ----------------------------
 DROP VIEW IF EXISTS `guquan_list`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `guquan_list` AS select `jijin_jijin`.`fund_id` AS `fund_id`,`jijin_jijin`.`fundname` AS `fundname`,`guquan_management_technology`.`id` AS `id`,`guquan_management_technology`.`project` AS `project`,`guquan_management_technology`.`project_name` AS `project_name`,`guquan_management_technology`.`jijin` AS `jijin`,`guquan_management_technology`.`project_state` AS `project_state`,`guquan_management_technology`.`project_industry` AS `project_industry`,`guquan_management_technology`.`project_process` AS `project_process`,`guquan_management_technology`.`creat_time` AS `creat_time`,`guquan_management_technology`.`creator` AS `creator`,`guquan_management_technology`.`executor` AS `executor`,`guquan_management_technology`.`project_source` AS `project_source`,`guquan_management_technology`.`invest_money` AS `invest_money`,`guquan_management_technology`.`industry` AS `industry`,`guquan_management_technology`.`grouping` AS `grouping`,`guquan_management_technology`.`priority` AS `priority`,`guquan_management_technology`.`is_public` AS `is_public`,`guquan_management_technology`.`label` AS `label`,`guquan_management_technology`.`project_member` AS `project_member`,`guquan_management_technology`.`BP_file` AS `BP_file`,`guquan_management_technology`.`weekly_file` AS `weekly_file`,`guquan_management_technology`.`abstract` AS `abstract`,`guquan_management_technology`.`is_delete` AS `is_delete`,`fund_person`.`name` AS `name`,`fund_person`.`person_id` AS `person_id` from ((`guquan_management_technology` join `jijin_jijin` on((`guquan_management_technology`.`jijin` = `jijin_jijin`.`fund_id`))) join `fund_person` on((`guquan_management_technology`.`executor` = `fund_person`.`person_id`))) ;
+
+-- ----------------------------
+-- View structure for industry_list
+-- ----------------------------
+DROP VIEW IF EXISTS `industry_list`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `industry_list` AS select `research_industry_research`.`industry_research_id` AS `industry_research_id`,`research_industry_research`.`industry_research_name` AS `industry_research_name`,`research_industry_research`.`industry_research_state` AS `industry_research_state`,`research_industry_research`.`create_creater` AS `create_creater`,`research_industry_research`.`person_id` AS `person_id`,`research_industry_research`.`industry` AS `industry`,`research_industry_research`.`project_label` AS `project_label`,`research_industry_research`.`project_member` AS `project_member`,`research_industry_research`.`abstract` AS `abstract`,`research_industry_research`.`situation` AS `situation`,`research_industry_research`.`research_file` AS `research_file`,`research_industry_research`.`reference_file` AS `reference_file`,`research_industry_research`.`test_file` AS `test_file`,`research_industry_research`.`publish_time` AS `publish_time`,`fund_person`.`name` AS `name`,`research_industry_research`.`is_delete` AS `is_delete` from (`fund_person` join `research_industry_research` on((`research_industry_research`.`person_id` = `fund_person`.`person_id`))) ;
 
 -- ----------------------------
 -- View structure for market_list
