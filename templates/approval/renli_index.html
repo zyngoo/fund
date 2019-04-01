@@ -1,53 +1,41 @@
 {% extends "approval/caiwu_base.html" %}
 
 {% block content %}
-<div class="layui-tab">
-  <ul class="layui-tab-title">
-	  <li class="layui-this"><font size="4">人力管理</font></li>
-  </ul>
-  <div class="layui-tab-content">
-    <div class="layui-tab-item layui-show">
-		 <tr>
-		 <td width="20"><font size="4">1</font></td>
-		 <td>
-			 <a href="javascript:v('cwgl/browse/fwttudbljp/')"><font size="4">新员工转正</font></a>
-		 </td>
-		 <td>
-			  <button data-method="setTop" class="layui-btn">申请</button>
-			  <button data-method="setTop" class="layui-btn">查看</button>
-		 </td>
-	 </tr>
-	  <br>
-	  <br>
-	  <tr>
-		 <td width="20"><font size="4">2</font></td>
-		 <td>
-			 <a href="javascript:v('cwgl/browse/fwttudbljp/')"><font size="4">员工转正</font></a>
-		 </td>
-		 <td>
-			 <button data-method="setTop" class="layui-btn">申请</button>
-			 <button data-method="setTop" class="layui-btn">查看</button>
-		 </td>
-	 </tr>
-	  <br>
-	  <br>
-	  <tr>
-		 <td width="20"><font size="4">3</font></td>
-		 <td>
-			 <a href="javascript:v('cwgl/browse/fwttudbljp/')"><font size="4">请假申请</font></a>
-		 </td>
-		 <td>
-			 <button data-method="setTop" class="layui-btn">申请</button>
-			  <button data-method="setTop" class="layui-btn">查看</button>
-		 </td>
-
-	</div>
+<div class="flow-div">
+    <table class="layui-table flow-table">
+      <tbody>
+              <thead>
+          <tr>
+          <th colspan="3" ><big>人力管理</big></th>
+        </tr>
+      </thead>
+                <tr>
+          <td width="10" >1</td>
+          <td><a href="javascript:v('rlgl/browse/fwttudbd6l/')" >新员工入职</a></td>
+          <td>
+                        <a class="layui-btn " href="javascript:v('rlgl/apply/fwttudbd6l/')" >申请</a>
+                        <a class="layui-btn layui-btn-primary view_button" href="javascript:v('rlgl/browse/fwttudbd6l/')" >查看</a>
+                      </td>
+        </tr>
+                <tr>
+          <td width="10" >2</td>
+          <td><a href="javascript:v('rlgl/browse/fwttudbdos/')" >员工转正</a></td>
+          <td>
+                        <a class="layui-btn " href="javascript:v('rlgl/apply/fwttudbdos/')" >申请</a>
+                        <a class="layui-btn layui-btn-primary view_button" href="javascript:v('rlgl/browse/fwttudbdos/')" >查看</a>
+                      </td>
+        </tr>
+                <tr>
+          <td width="10" >3</td>
+          <td><a href="javascript:v('rlgl/browse/fwttudb7ou/')" >请假申请</a></td>
+          <td>
+                        <a class="layui-btn " href="javascript:v('rlgl/apply/fwttudb7ou/')" >申请</a>
+                        <a class="layui-btn layui-btn-primary view_button" href="javascript:v('rlgl/browse/fwttudb7ou/')" >查看</a>
+                      </td>
+        </tr>
+              </tbody>
+    </table>
   </div>
-</div>
-<style>
-.layui-table>thead>tr>th{padding:15px;}
-</style>
-
 {% endblock %}
 
 {% block script %}
