@@ -13,14 +13,13 @@ from fund import settings
 
 
 def index(request):
-    content = getData.getCalender()
-    return render(request, "calender/calender.html", content)
+    return render(request, "shouye.html")
 
+def shouye(request):
+    return render(request, "shouye.html")
 
 def calender(request):
-    content = getData.getCalender()
-    # print(content)
-    return render(request, "calender/calender.html", content)
+    return render(request, "calender/calender.html", {"active_nav":"calender"})
 
 
 def calender_add(request):
@@ -626,3 +625,29 @@ def manpower(request):
 
 def manpower_list(request):
     return render(request, "approval/renli_list.html")
+
+
+"""
+    合作机构
+"""
+def cooperative(request):
+    return render(request, "cooperative/cooperative_add.html")
+
+def cooperative_add(request):
+    if request.method == "POST":
+        print(request.POST)
+        sql = "insert into research_industry_research ("
+        for key in request.POST:
+            if key != "file":
+                sql = sql + key + ", "
+        sql = sql.rstrip(", ") + ") values ("
+        for key in request.POST:
+            if key != "file":
+                sql = sql + "\'" + request.POST.get(key) + "\'" + ", "
+        sql = sql.rstrip(", ") + ")"
+        print(sql)
+        MysqlHelper().insert_sql(sql)
+        return redirect("/jijin/cooperative_add/")
+
+    person = getData.getFundPerson()
+    return render(request, "industry/industry_add.html", person)

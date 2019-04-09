@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path("", views.index),
+    path("shouye/", views.shouye),
 
     # 日程模块
     path("calender/", views.calender),
@@ -92,6 +93,11 @@ urlpatterns = [
 
     path("approval/manpower/", views.manpower),
     path("approval/manpower/list/", views.manpower_list),
-    # path("approval/", views.approval),
+
+
+   # 合作机构
+    path("cooperative/", views.cooperative),
+
+
 
 ]
