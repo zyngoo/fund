@@ -1,0 +1,104 @@
+{% extends "personnel/personnel_base.html" %}
+
+{% block content %}
+    <!-- 新增日程-->
+    <form class="layui-form" method="post" action="">
+
+        <fieldset class="layui-elem-field site-demo-button" style="margin-top: 20px;">
+            {#                <div class="layui-form-item layui-form-label">#}
+            {#                    <p style="font-size: 20px">基本信息</p>#}
+            {#                </div>#}
+            <legend>基本信息</legend>
+
+            <div class="layui-form-item" style="margin-top: 30px">
+                <div class="layui-inline">
+                    <label class="layui-form-label">姓名</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="name" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">职位</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="position" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">所属公司</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="type" name="company" class="layui-input">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">联系方式</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="contact_information"></textarea>
+                </div>
+            </div>
+
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="remark"></textarea>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">简历</label>
+                <button type="button" class="layui-btn" id="file1">
+                    <i class="layui-icon">&#xe67c;</i>上传文件
+                </button>
+                <input type="hidden" id="resume_file" name="resume_file" value=""/>
+                <div class="layui-upload-list">
+                    <p id="demoText_2"></p>
+                </div>
+            </div>
+
+
+        </fieldset>
+
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
+                {#                    <button class="layui-btn layui-btn-primary" lay-filter type="submit" action="cache">暂存</button>#}
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}
+
+
+{% block script %}
+    <script>
+        layui.use(["upload"], function () {
+            var upload = layui.upload;
+
+            var uploadInst = upload.render({
+                elem: "#file1",
+                url: "/jijin/guquan_file/",
+                accept: "file",
+                done: function (res) {
+                    if (res.code > 0) {
+                        return layer.msg("上传失败！");
+                    }
+                    layer.msg("上传成功");
+                    document.getElementById("resume_file").value = res.url;
+                }
+                , error: function () {
+                    var demoText = $("#demoText");
+                    demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                    demoText.find(".demo-reload").on("click", function () {
+                        uploadInst.upload();
+                    });
+                }
+            });
+        })
+    </script>
+{% endblock %}

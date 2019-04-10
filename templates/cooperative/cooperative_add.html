@@ -4,125 +4,137 @@
     <!-- 新增日程-->
     <form class="layui-form" method="post" action="">
 
-            <fieldset class="layui-elem-field site-demo-button" style="margin-top: 20px;">
-                {#                <div class="layui-form-item layui-form-label">#}
-                {#                    <p style="font-size: 20px">基本信息</p>#}
-                {#                </div>#}
-                <legend>基本信息</legend>
+        <fieldset class="layui-elem-field site-demo-button" style="margin-top: 20px;">
+            {#                <div class="layui-form-item layui-form-label">#}
+            {#                    <p style="font-size: 20px">基本信息</p>#}
+            {#                </div>#}
+            <legend>基本信息</legend>
 
-                <div class="layui-form-item" style="margin-top: 30px">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">机构名称</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="industry_research_name" class="layui-input">
-                        </div>
-                    </div>
-
-                    <div class="layui-inline">
-                        <label class="layui-form-label">缩写</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="industry_research_name" class="layui-input">
-                        </div>
-                    </div>
-
-                    <div class="layui-inline">
-                        <label class="layui-form-label">时间</label>
-                        <div class="layui-input-block">
-                            <input type="text" id="publish_time"  name="publish_time" class="layui-input">
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">分类</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="create_creater" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">项目总数</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="create_creater" class="layui-input">
-                        </div>
-                    </div>
-
-                    <div class="layui-inline">
-                        <label class="layui-form-label">投资阶段</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="create_creater" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="layui-form-item">
-                    <label class="layui-form-label">基金规模</label>
+            <div class="layui-form-item" style="margin-top: 30px">
+                <div class="layui-inline">
+                    <label class="layui-form-label">机构名称</label>
                     <div class="layui-input-block">
-                        <input type="text" name="create_creater" class="layui-input">
+                        <input type="text" name="organization_name" class="layui-input">
                     </div>
                 </div>
 
-                <div class="layui-form-item">
-                    <label class="layui-form-label">领域</label>
+                <div class="layui-inline">
+                    <label class="layui-form-label">缩写</label>
                     <div class="layui-input-block">
-                        <input type="text" name="create_creater" class="layui-input">
+                        <input type="text" name="abbreviation" class="layui-input">
                     </div>
                 </div>
 
-            </fieldset>
-
-            <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;margin-bottom: 20px;">
-
-                <legend>机构信息</legend>
-                <div class="layui-form-item" style="margin-top: 30px">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">所在地</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="industry_research_name" class="layui-input">
-                        </div>
-                    </div>
-
-                    <div class="layui-inline">
-                        <label class="layui-form-label">成立时间</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="industry_research_name" class="layui-input">
-                        </div>
-                    </div>
-
-                    <div class="layui-inline">
-                        <label class="layui-form-label">网址</label>
-                        <div class="layui-input-block">
-                            <input type="text" id="publish_time"  name="publish_time" class="layui-input">
-                        </div>
-                    </div>
-
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">地址</label>
+                <div class="layui-inline">
+                    <label class="layui-form-label">类型</label>
                     <div class="layui-input-block">
-                        <input type="text" name="create_creater" class="layui-input">
+                        <input type="text" id="type" name="type" class="layui-input">
                     </div>
                 </div>
 
-
-                <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">知名案例</label>
-                    <div class="layui-input-block">
-                        <textarea placeholder="请输入内容" class="layui-textarea" name="income_distribution"></textarea>
-                    </div>
-                </div>
-
-
-            </fieldset>
-
+            </div>
 
             <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
-                    {#                    <button class="layui-btn layui-btn-primary" lay-filter type="submit" action="cache">暂存</button>#}
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                <div class="layui-inline">
+                    <label class="layui-form-label">分类</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="classification" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">项目总数</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="number" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">投资阶段</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="investment_step" class="layui-input">
+                    </div>
                 </div>
             </div>
-        </form>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">基金规模</label>
+                <div class="layui-input-block">
+                    <input type="text" name="fund_size" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">领域</label>
+                <div class="layui-input-block">
+                    <input type="text" name="field" class="layui-input">
+                </div>
+            </div>
+
+        </fieldset>
+
+        <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;margin-bottom: 20px;">
+
+            <legend>机构信息</legend>
+            <div class="layui-form-item" style="margin-top: 30px">
+                <div class="layui-inline">
+                    <label class="layui-form-label">所在地</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="location" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">成立时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="established_time" name="established_time" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">网址</label>
+                    <div class="layui-input-block">
+                        <input type="text" id="publish_time" name="internet_site" class="layui-input">
+                    </div>
+                </div>
+
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">地址</label>
+                <div class="layui-input-block">
+                    <input type="text" name="address" class="layui-input">
+                </div>
+            </div>
+
+
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">知名案例</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="famous_case"></textarea>
+                </div>
+            </div>
+
+
+        </fieldset>
+
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
+                {#                    <button class="layui-btn layui-btn-primary" lay-filter type="submit" action="cache">暂存</button>#}
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+{% block script %}
+    <script>
+        layui.use(["laydate"], function () {
+            var laydate = layui.laydate;
+
+            laydate.render({
+                elem: "#established_time"
+            })
+        })
+    </script>
 {% endblock %}

@@ -97,6 +97,19 @@ urlpatterns = [
 
    # 合作机构
     path("cooperative/", views.cooperative),
+    path("cooperative/add/", views.cooperative_add),
+    path("cooperative/list_handle/", views.cooperative_list),
+    path("cooperative/cooperative_delete/", views.cooperative_delete),
+    path("cooperative/cooperative_edit/", views.cooperative_edit),
+
+
+    # 人才库
+    path("personnel/",views.personnel),
+    path("personnel/add/", views.personnel_add),
+    path("personnel/list_handle/", views.personnel_list),
+    path("personnel/personnel_delete/", views.personnel_delete),
+    path("personnel/personnel_edit/", views.personnel_edit),
+
 
 
 
