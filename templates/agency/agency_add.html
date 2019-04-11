@@ -1,0 +1,105 @@
+{% extends "agency/agency_base.html" %}
+
+{% block content %}
+    <!-- 新增日程-->
+    <form class="layui-form" method="post" action="">
+
+        <fieldset class="layui-elem-field site-demo-button" style="margin-top: 20px;">
+            {#                <div class="layui-form-item layui-form-label">#}
+            {#                    <p style="font-size: 20px">基本信息</p>#}
+            {#                </div>#}
+            <legend>基本信息</legend>
+
+            <div class="layui-form-item" style="margin-top: 30px">
+                <div class="layui-inline">
+                    <label class="layui-form-label">名称</label>
+                    <div class="layui-input-block">
+                        <input style="width: 495px;" type="text" name="name" class="layui-input">
+                    </div>
+                </div>
+
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">类别</label>
+                    <div class="layui-input-block">
+                        <select name="type">
+                            <option value="">请选择</option>
+                            <option value="法律">法律</option>
+                            <option value="财务">财务</option>
+                            <option value="其他">其他</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">评级</label>
+                    <div class="layui-input-block">
+                        <select name="grade">
+                            <option value="">请选择</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">联系人</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="contact" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">联系电话</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="contact_phone" class="layui-input">
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">地址</label>
+                <div class="layui-input-block">
+                    <input type="text" name="address" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <textarea  class="layui-textarea" name="remarks"></textarea>
+                </div>
+            </div>
+
+        </fieldset>
+
+
+
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
+                {#                    <button class="layui-btn layui-btn-primary" lay-filter type="submit" action="cache">暂存</button>#}
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+{% block script %}
+    <script>
+        layui.use(["laydate", "form"], function () {
+            var laydate = layui.laydate
+                ,form = layui.form;
+
+            laydate.render({
+                elem: "#established_time"
+            })
+        })
+    </script>
+{% endblock %}

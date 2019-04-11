@@ -111,6 +111,14 @@ urlpatterns = [
     path("personnel/personnel_edit/", views.personnel_edit),
 
 
+    # 中介机构
+    path("agency/", views.agency),
+    path("agency/add/", views.agency_add),
+    path("agency/list_handle/", views.agency_list),
+    path("agency/agency_delete/", views.agency_delete),
+    path("agency/agency_edit/", views.agency_edit),
+
+
 
 
 ]

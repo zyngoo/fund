@@ -638,19 +638,16 @@ def cooperative_add(request):
         print(request.POST)
         sql = "insert into other_cooperative_organization ("
         for key in request.POST:
-            if key != "file":
-                sql = sql + key + ", "
+            sql = sql + key + ", "
         sql = sql.rstrip(", ") + ") values ("
         for key in request.POST:
-            if key != "file":
-                sql = sql + "\'" + request.POST.get(key) + "\'" + ", "
+            sql = sql + "\'" + request.POST.get(key) + "\'" + ", "
         sql = sql.rstrip(", ") + ")"
         print(sql)
         MysqlHelper().insert_sql(sql)
         return redirect("/jijin/cooperative/")
 
-    person = getData.getFundPerson()
-    return render(request, "cooperative/cooperative_add.html", person)
+    return render(request, "cooperative/cooperative_add.html")
 
 def cooperative_list(request):
     sql = "select * from other_cooperative_organization where is_delete=0"
@@ -696,19 +693,16 @@ def personnel_add(request):
         print(request.POST)
         sql = "insert into other_talent_pool ("
         for key in request.POST:
-            if key != "file":
-                sql = sql + key + ", "
+            sql = sql + key + ", "
         sql = sql.rstrip(", ") + ") values ("
         for key in request.POST:
-            if key != "file":
-                sql = sql + "\'" + request.POST.get(key) + "\'" + ", "
+            sql = sql + "\'" + request.POST.get(key) + "\'" + ", "
         sql = sql.rstrip(", ") + ")"
         print(sql)
         MysqlHelper().insert_sql(sql)
         return redirect("/jijin/personnel/")
 
-    person = getData.getFundPerson()
-    return render(request, "personnel/personnel_add.html", person)
+    return render(request, "personnel/personnel_add.html")
 
 def personnel_list(request):
     sql = "select * from other_talent_pool where is_delete=0"
@@ -741,6 +735,60 @@ def personnel_edit(request):
     for key in request.POST:
         params.append(request.POST.get(key))
     # print(params)
+
+    MysqlHelper().update(sql, params)
+    return HttpResponse(json.dumps("ok"))
+
+
+# 中介机构
+def agency(request):
+    return render(request, "agency/agency_list.html")
+
+def agency_add(request):
+    if request.method == "POST":
+        print(request.POST)
+        sql = "insert into other_intermediary_organ ("
+        for key in request.POST:
+            sql = sql + key + ", "
+        sql = sql.rstrip(", ") + ") values ("
+        for key in request.POST:
+            sql = sql + "\'" + request.POST.get(key) + "\'" + ", "
+        sql = sql.rstrip(", ") + ")"
+        print(sql)
+        MysqlHelper().insert_sql(sql)
+        return redirect("/jijin/agency/")
+
+    return render(request, "agency/agency_add.html")
+
+def agency_list(request):
+    sql = "select * from other_intermediary_organ where is_delete=0"
+    data = MysqlHelper().dict_fetchall(sql)
+    result = {}
+    result["code"] = 0
+    result["msg"] = ""
+    result["count"] = len(data)
+    result["data"] = data
+    print(result)
+    return JsonResponse(result)
+
+def agency_delete(request):
+    id = request.POST.get("id")
+    print(id)
+    sql = "update other_intermediary_organ set is_delete=1 where id=%s"
+    param = [id]
+    MysqlHelper().update(sql, param)
+    return HttpResponse(json.dumps("ok"))
+
+def agency_edit(request):
+    print(request.POST)
+    sql = "update other_intermediary_organ set "
+    for key in request.POST:
+        sql = sql + key + "=%s, "
+    sql = sql.rstrip(", ") + " where id=" + request.POST.get("id")
+
+    params = []
+    for key in request.POST:
+        params.append(request.POST.get(key))
 
     MysqlHelper().update(sql, params)
     return HttpResponse(json.dumps("ok"))

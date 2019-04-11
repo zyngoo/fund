@@ -126,7 +126,7 @@ def countEdit(request):
 
         request.session["user_name"] = user.userName
         request.session["head_photo"] = str(user.head_photo)
-        return redirect("/user/count")
+        return redirect("/user/count/")
 
     context = getUserInfo(request)
     return render(request, "user/countEdit.html", context)
