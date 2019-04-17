@@ -8,12 +8,12 @@
     </div>
 
         <div class="layui-btn-group demoTable">
-            <button class="layui-btn" data-type="getCheckData">显示未读消息</button>
+            <button class="layui-btn" data-type="getCheckData">显示全部消息</button>
 {#            <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>#}
 {#            <button class="layui-btn" data-type="isAll">验证是否全选</button>#}
         </div>
 
-    <table class="layui-table" lay-data="{ url:'/jijin/message/unread_handle/', page:true, id:'idTest'}"
+    <table class="layui-table" lay-data="{ url:'/jijin/message/all_handle/', page:true, id:'idTest'}"
            lay-filter="demo">
         <thead>
         <tr>
@@ -97,25 +97,9 @@
             table.on('tool(demo)', function (obj) {
                 var data = obj.data;
                 if (obj.event === 'set_read') {
-                    obj.del();
                     var id = obj.data.ID;
                     {#alert(index)#}
-                    $.ajax({
-                        url: "/jijin/message/SetRead/",
-                        type: "post",
-                        async: false,
-                        data: {'id': id},
-                        dataType: "json",
-                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',//防止乱码
-                        success: function (data) {
-                            if (data == 'ok') {
-                                {#alert('成功');#}
-                                {#layer.msg("删除成功！")#}
 
-                            }
-                        }
-
-                    });
 
                     layer.open({
                         //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）

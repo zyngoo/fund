@@ -796,12 +796,24 @@ def agency_edit(request):
 
 # 消息
 def message(request):
+    type = (request.path).split("/")[-2]
+    print(type)
+    # type = (request.path).split("/")[-2]
+    if type == "all":
+        return render(request, "message/message_all.html")
     return render(request, "message/message_list.html")
 
 def message_list(request):
-    sql = "SELECT box.* from msg_mail_box box, msg_mail_relation rela " \
-          "WHERE box.ID=rela.MailID and box.IsDelete=0 and rela.IsRead=0"
-
+    type = (request.path).split("/")[-2]
+    print(type)
+    if type == "unread_handle":
+        sql = "SELECT box.* from msg_mail_box box, msg_mail_relation rela " \
+              "WHERE box.ID=rela.MailID and box.IsDelete=0 and rela.IsRead=0"
+    elif type == "all_handle":
+        sql = "SELECT box.* from msg_mail_box box, msg_mail_relation rela " \
+              "WHERE box.ID=rela.MailID and box.IsDelete=0 "
+    else:
+        return JsonResponse({"msg": "data error"})
     # sql = "SELECT box.Title, box.Content, DATE_FORMAT(box.SendDate, '%%Y-%%m-%%d %%H:%%i:%%s') , rela.IsRead from msg_mail_box box, msg_mail_relation rela WHERE box.ID=rela.MailID and box.IsDelete=0"
     data = MysqlHelper().dict_fetchall(sql)
     result = {}
@@ -809,12 +821,12 @@ def message_list(request):
     result["msg"] = ""
     result["count"] = len(data)
     result["data"] = data
-    print(result)
+    # print(result)
     return JsonResponse(result)
 
 def message_delete(request):
     id = request.POST.get("id")
-    print(id)
+    # print(id)
     sql = "update msg_mail_box set IsDelete=1 where ID=%s"
     param = [id]
     MysqlHelper().update(sql, param)
@@ -822,7 +834,7 @@ def message_delete(request):
 
 def SetRead(request):
     id = request.POST.get("id")
-    print(id)
+    # print(id)
     sql = "update msg_mail_relation set IsRead=1 where ID=%s"
     param = [id]
     MysqlHelper().update(sql, param)

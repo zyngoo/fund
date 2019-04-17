@@ -121,7 +121,10 @@ urlpatterns = [
 
     # 消息
     path("message/", views.message),
-    path("message/list_handle/", views.message_list),
+    path("message/unread/", views.message),
+    path("message/all/", views.message),
+    path("message/unread_handle/", views.message_list),
+    path("message/all_handle/", views.message_list),
     path("message/message_delete/", views.message_delete),
     path("message/SetRead/", views.SetRead),
 
