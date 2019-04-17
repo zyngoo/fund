@@ -1,0 +1,225 @@
+{% extends "message/message_base.html" %}
+
+{% block content %}
+    <div style="margin-bottom: 5px;">
+        <ins class="adsbygoogle" style="display:inline-block;" data-ad-client="ca-pub-6111334333458862"
+             data-ad-slot="3820120620">
+        </ins>
+    </div>
+
+    {#    <div class="layui-btn-group demoTable">#}
+    {#        <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>#}
+    {#        <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>#}
+    {#        <button class="layui-btn" data-type="isAll">验证是否全选</button>#}
+    {#    </div>#}
+
+    <table class="layui-table" lay-data="{ url:'/jijin/message/list_handle/', page:true, id:'idTest'}"
+           lay-filter="demo">
+        <thead>
+        <tr>
+            <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
+            {#            <th lay-data="{field:'id', width:100, sort: true, fixed: true}">ID</th>#}
+            <th lay-data="{field:'Title', width:150}">标题</th>
+            <th lay-data="{field:'Content', width:500}">内容</th>
+            <th lay-data="{field:'SendDate', width:200}">时间</th>
+
+            {#            <th lay-data="{field:'field', width:100}">领域</th>#}
+            {#            <th lay-data="{field:'publish_time', width:200, sort: true}">发布日期</th>#}
+            {#            <th lay-data="{field:'event_status', width:100}">状态</th>#}
+            <th lay-data="{fixed: 'right', width:180, align:'center', toolbar: '#barDemo'}"></th>
+        </tr>
+        </thead>
+    </table>
+{% endblock %}
+
+
+{% block mask %}
+    <div class="layui-row" id="viewData" style="display: none;">
+        <div style="top: 100px;">
+            <form class="layui-form" method="post" action="">
+
+                <fieldset class="layui-elem-field site-demo-button" style="margin-top: 20px;">
+                    {#                <div class="layui-form-item layui-form-label">#}
+                    {#                    <p style="font-size: 20px">基本信息</p>#}
+                    {#                </div>#}
+                    <legend>基本信息</legend>
+
+                    <div class="layui-form-item" style="margin-top: 30px">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">消息标题</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="Title" name="name" class="layui-input">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">消息内容</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入内容" class="layui-textarea" id="Content"
+                                      name="contact_information"></textarea>
+                        </div>
+                    </div>
+
+
+                </fieldset>
+
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block script %}
+    <script type="text/html" id="barDemo">
+        {#        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail"></a>#}
+        <a class="layui-btn  layui-btn-xs" lay-event="set_read">查看</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+
+    <script>
+        layui.use(['table', "form", "laydate", "layedit", "upload"], function () {
+            var table = layui.table
+                , form = layui.form
+                , layedit = layui.layedit
+                , upload = layui.upload
+                , laydate = layui.laydate;
+
+
+            //监听表格复选框选择
+            table.on('checkbox(demo)', function (obj) {
+                console.log(obj); //选中行的相关数据
+            });
+
+            //监听工具条
+            table.on('tool(demo)', function (obj) {
+                var data = obj.data;
+                if (obj.event === 'set_read') {
+                    obj.del();
+                    var id = obj.data.ID;
+                    {#alert(index)#}
+                    $.ajax({
+                        url: "/jijin/message/SetRead/",
+                        type: "post",
+                        async: false,
+                        data: {'id': id},
+                        dataType: "json",
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',//防止乱码
+                        success: function (data) {
+                            if (data == 'ok') {
+                                {#alert('成功');#}
+                                {#layer.msg("删除成功！")#}
+
+                            }
+                        }
+
+                    });
+
+                    layer.open({
+                        //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+                        type: 1,
+                        area: ['800px', '400px'],
+                        content: $("#viewData"),//引用的弹出层的页面层的方式加载修改界面表单
+                        shade: 0.3,
+                        success: function () {
+                            for (var key in data) {
+                                var idName = '#' + key;
+                                $(idName).val(data[key]);
+                            }
+
+                        }
+                    });
+
+                } else if (obj.event === 'del') {
+                    layer.confirm('真的删除行么', function (index) {
+                        obj.del();
+                        var id = obj.data.ID;
+                        {#alert(index)#}
+                        $.ajax({
+                            url: "/jijin/message/message_delete/",
+                            type: "post",
+                            async: false,
+                            data: {'id': id},
+                            dataType: "json",
+                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',//防止乱码
+                            success: function (data) {
+                                if (data == 'ok') {
+                                    {#alert('成功');#}
+                                    layer.msg("删除成功！")
+                                }
+                            }
+
+                        });
+                        layer.close(index);
+                    });
+                }
+
+            });
+
+
+            var $ = layui.$, active = {
+                getCheckData: function () { //获取选中数据
+                    var checkStatus = table.checkStatus('idTest')
+                        , data = checkStatus.data;
+                    layer.alert(JSON.stringify(data));
+                }
+                , getCheckLength: function () { //获取选中数目
+                    var checkStatus = table.checkStatus('idTest')
+                        , data = checkStatus.data;
+                    layer.msg('选中了：' + data.length + ' 个');
+                }
+                , isAll: function () { //验证是否全选
+                    var checkStatus = table.checkStatus('idTest');
+                    layer.msg(checkStatus.isAll ? '全选' : '未全选')
+                }
+            };
+
+            $('.demoTable .layui-btn').on('click', function () {
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });
+        });
+
+        function mysubmit() {
+            var list = ["id", "name", "position", "company", "contact_information", "remark", "resume_file"];
+            var value = [];
+            for (var li in list) {
+                li = $("#" + list[li]).val();
+                {#alert(li);#}
+                value.push(li);
+            }
+            {#alert(value);#}
+            var dataSend = {};
+            for (var i = 0; i < list.length; i++) {
+                dataSend[list[i]] = value[i]
+            }
+            {#alert(JSON.stringify(dataSend));#}
+            console.log(dataSend);
+
+            $.ajax({
+                url: "/jijin/personnel/personnel_edit/",
+                type: "POST",
+                async: false,
+                dataType: "json",
+                data: dataSend,
+                success: function (data) {
+                    if (data === "ok") {
+                        layer.msg("修改成功")
+                    } else {
+                        layer.msg("修改失败")
+                    }
+                    setTimeout(function () {
+                        window.location.href = "/jijin/personnel/";
+                    });
+                    {#console.log(data)#}
+                }
+            })
+
+
+        }
+
+    </script>
+
+{% endblock %}

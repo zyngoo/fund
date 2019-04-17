@@ -119,6 +119,14 @@ urlpatterns = [
     path("agency/agency_edit/", views.agency_edit),
 
 
+    # 消息
+    path("message/", views.message),
+    path("message/list_handle/", views.message_list),
+    path("message/message_delete/", views.message_delete),
+    path("message/SetRead/", views.SetRead),
+
+
+
 
 
 ]
