@@ -1,0 +1,36 @@
+{% extends "user/user_base.html" %}
+
+{% block content %}
+    <fieldset class="layui-elem-field site-demo-button" style="margin-top: 20px;">
+        {#                <div class="layui-form-item layui-form-label">#}
+        {#                    <p style="font-size: 20px">基本信息</p>#}
+        {#                </div>#}
+        <legend>账号</legend>
+
+        <div class="layui-form-item" style="margin-top: 30px">
+            <label class="layui-form-label">姓名</label>
+            <label class="layui-form-label">{{ username }}</label>
+{#            <div>{{ username }}</div>#}
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">联系方式</label>
+            <label class="layui-form-label">{{ telephone }}</label>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">邮箱</label>
+            <label class="layui-form-label">{{ email }}</label>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">头像</label>
+{#            <div class="layui-badge">#}
+{#                <img src="/static/media/{{ request.session.head_photo }}" width="100" height="100">#}
+{#            </div>#}
+            <img src="/static/media/{{ request.session.head_photo }}" width="120" height="120">
+        </div>
+
+
+    </fieldset>
+{% endblock %}

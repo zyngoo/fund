@@ -1,6 +1,7 @@
 from django.shortcuts import *
 from django.template import RequestContext, loader
 from django.conf import settings
+from django.http import HttpResponse, JsonResponse
 from .models import userInfor
 from .getUserInfo import getUserInfo
 
@@ -73,18 +74,17 @@ def logout(request):
 
 
 def upload(request):
-    if request.method == "POST":
-        file = request.FILES["pic"]
-        fname = "%s/images/%s" % (settings.MEDIA_ROOT, file.name)
-        print(fname)
+    print(request.FILES)
+    file = request.FILES["file"]
+    fname = "%s/images/%s" % (settings.MEDIA_ROOT, file.name)
+    print("fname:",fname)
 
-        with open(fname, "wb") as pic:
-            for c in file.chunks():
-                pic.write(c)
-        return HttpResponse("ok")
-
-    return render(request, "user/upload.html")
-
+    with open(fname, "wb") as pic:
+        for c in file.chunks():
+            pic.write(c)
+    res = {"url": fname}
+    return JsonResponse(res)
+    # return HttpResponse("ok")
 
 
 def test(request):
@@ -102,7 +102,8 @@ def test(request):
 
 def count(request):
     context = getUserInfo(request)
-    return render(request, "user/userinfo.html", context)
+    # return render(request, "user/userinfo.html", context)
+    return render(request, "user/account.html", context)
 
 def countEdit(request):
     if request.method == "POST":
@@ -113,7 +114,7 @@ def countEdit(request):
         user.userEmail = post.get("email")
         user.phone = post.get("phone")
         file = request.FILES["file"]
-        print(file)
+        print("file:", file)
 
         fname = "%s/images/%s" % (settings.MEDIA_ROOT, file.name)
         print(fname)
@@ -126,9 +127,40 @@ def countEdit(request):
 
         request.session["user_name"] = user.userName
         request.session["head_photo"] = str(user.head_photo)
-        return redirect("/user/count/")
+        return redirect("/user/account/")
 
     context = getUserInfo(request)
     return render(request, "user/countEdit.html", context)
 
+def account_edit(request):
+    if request.method == "POST":
+        user = userInfor.objects.get(id=request.session["user_id"])
+        post = request.POST
 
+        user.userName = post.get("username")
+        user.userEmail = post.get("email")
+        user.phone = post.get("phone")
+        if post.get("head_photo"):
+            user.head_photo = post.get("head_photo")
+        user.save()
+
+        request.session["user_name"] = user.userName
+        request.session["head_photo"] = str(user.head_photo)
+        # print(type(user.head_photo))
+        # print("request.session['head_photo']:", request.session["head_photo"])
+        return redirect("/user/account/")
+
+    context = getUserInfo(request)
+    return render(request, "user/account_edit.html", context)
+
+def password_edit(request):
+    if request.method == "POST":
+        print(request.POST)
+        user = userInfor.objects.get(id=request.session["user_id"])
+
+        if request.POST.get("old_pwd") == user.upwd:
+            user.userName = request.POST.get("new_pwd")
+            user.save()
+
+
+    return render(request, "user/password.html")
