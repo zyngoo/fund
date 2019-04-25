@@ -154,13 +154,44 @@ def account_edit(request):
     return render(request, "user/account_edit.html", context)
 
 def password_edit(request):
-    if request.method == "POST":
-        print(request.POST)
-        user = userInfor.objects.get(id=request.session["user_id"])
-
-        if request.POST.get("old_pwd") == user.upwd:
-            user.userName = request.POST.get("new_pwd")
-            user.save()
+    # if request.method == "POST":
+    #     print("request.POST: ", request.POST)
+    #     user = userInfor.objects.get(id=request.session["user_id"])
+    #
+    #     if request.POST.get("old_pwd") == user.upwd:
+    #         user.userName = request.POST.get("new_pwd")
+    #         # user.save()
+    #         return JsonResponse("ok")
 
 
     return render(request, "user/password.html")
+
+
+def password_exist(request):
+    pwd = request.GET.get("pwd")
+    print("****"*10)
+    print(pwd)
+    user = userInfor.objects.filter(id=request.session["user_id"])
+    result = user.upwd == pwd
+    print(result)
+    return JsonResponse({"result": result})
+
+
+def password_change(request):
+    print(request.POST)
+    old_pwd = request.POST.get("old_pwd")
+    new_pwd = request.POST.get("new_pwd")
+    re_pwd = request.POST.get("re_pwd")
+    user = userInfor.objects.get(id=request.session["user_id"])
+    # user = userInfor.objects.filter(id=request.session["user_id"])
+    print(user)
+    print(user.upwd)
+
+    if old_pwd != user.upwd:
+        return HttpResponse("1")
+    elif new_pwd != re_pwd:
+        return HttpResponse("2")
+    else:
+        user.upwd = new_pwd
+        user.save()
+        return HttpResponse("3")

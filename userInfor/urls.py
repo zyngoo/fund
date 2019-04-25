@@ -7,8 +7,10 @@ urlpatterns = [
     path("register_handle/", views.register_handle),
     path("upload/", views.upload),
     path("test/", views.test),
-    path("count/",views.count),
-    path("count/edit/",views.countEdit),
-    # path("count/edit_handle/",views.countEdit_handle),
+    path("account/",views.count),
+    path("account/edit/",views.account_edit),
+    path("account/chpwd/",views.password_edit),
+    path("account/chpwd_handle/",views.password_change),
+    path("account/expwd/",views.password_exist),
 
 ]
