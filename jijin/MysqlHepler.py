@@ -70,6 +70,8 @@ class MysqlHelper:
             cur.close()
             self.conn.close()
             print("mysqlhelper: ", rows)
+            return "ok"
         except Exception as e:
             print("mysqlhelper_exception: ", e)
             self.conn.rollback()
+            return "error"

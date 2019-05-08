@@ -246,26 +246,50 @@ def jijin_list(request):
     return JsonResponse(result)
 
 def jijin_add(request):
-    if request.method == "POST":
-        # data1 = {k: request.POST[k] for k in list(request.POST.keys())[:16]}
-        # # print(data1)
-        # data2 = {k: request.POST[k] for k in list(request.POST.keys())[16:-6]}
-        # # print(data2)
-        # data3 = {k: request.POST[k] for k in list(request.POST.keys())[-6:]}
-        # print(data3)
-        sql = "insert into jijin_jijin ("
-        for key in request.POST:
-            sql += key + ", "
-
-        sql = sql.rstrip(", ") + ") values ("
-        for key in request.POST:
-            sql += "\'" + request.POST.get(key) + "\'" + ", "
-        sql = sql.rstrip(", ") + ")"
-
-        # print(sql)
-        MysqlHelper().insert_sql(sql)
+    # if request.method == "POST":
+    #     # data1 = {k: request.POST[k] for k in list(request.POST.keys())[:16]}
+    #     # # print(data1)
+    #     # data2 = {k: request.POST[k] for k in list(request.POST.keys())[16:-6]}
+    #     # # print(data2)
+    #     # data3 = {k: request.POST[k] for k in list(request.POST.keys())[-6:]}
+    #     # print(data3)
+    #     sql = "insert into jijin_jijin ("
+    #     for key in request.POST:
+    #         sql += key + ", "
+    #
+    #     sql = sql.rstrip(", ") + ") values ("
+    #     for key in request.POST:
+    #         sql += "\'" + request.POST.get(key) + "\'" + ", "
+    #     sql = sql.rstrip(", ") + ")"
+    #
+    #     # print(sql)
+    #     MysqlHelper().insert_sql(sql)
 
     return render(request, "jijin/jijin_add.html")
+
+def jijin_addHandle(request):
+    print("ajax:")
+    print(request.POST)
+    sql = "insert into jijin_jijin ("
+    for key in request.POST:
+        sql += key + ", "
+
+    sql = sql.rstrip(", ") + ") values ("
+    for key in request.POST:
+        sql += "\'" + request.POST.get(key) + "\'" + ", "
+    sql = sql.rstrip(", ") + ")"
+
+    # print(sql)
+    rows = MysqlHelper().insert_sql(sql)
+    print(rows)
+    if rows == "ok":
+        return HttpResponse("1")
+    elif rows == "error":
+        return HttpResponse("2")
+    else:
+        return HttpResponse("3")
+
+    # return render(request, "jijin/jijin_add.html")
 
 def jijin_delete(request):
     id = request.POST.get("fund_id")
@@ -273,7 +297,7 @@ def jijin_delete(request):
     sqlData = "update jijin_jijin set is_delete=1 where fund_id=%s"
     param = [id]
     MysqlHelper().update(sqlData, param)
-    return HttpResponse(json.dumps("2"))
+    return HttpResponse(json.dumps("ok"))
 
 def jijin_edit(request):
     # pprint(request.POST)

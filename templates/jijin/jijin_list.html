@@ -34,6 +34,19 @@
         </thead>
     </table>
 
+
+    {##}
+    {#    <div class="layui-form-item">#}
+    {#        <label class="layui-form-label">基金简介</label>#}
+    {#        <div class="layui-input-block" >#}
+    {#            <textarea id="demo" style="display: none;"></textarea>#}
+    {#        </div>#}
+    {#    </div>#}
+
+
+{% endblock %}
+
+{% block mask %}
     <div class="layui-row" id="viewData" style="display: none;">
 
         <form class="layui-form" method="post" action="">
@@ -126,20 +139,8 @@
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">关注行业</label>
-                    <div class="layui-input-block">
-                        {#                        <select name="event_association" lay-filter="aihao">#}
-                        {#                            <option value=""></option>#}
-                        {#                            {% for jijin in fund %}#}
-                        {#                                <option value="{{ jijin.fund_id }}">{{ jijin.fund_name }}</option>#}
-                        {#                            {% endfor %}#}
-                        {#                        </select>#}
-                        <input type="checkbox" name="industryfocus" title="医疗健康" checked>
-                        <input type="checkbox" name="industryfocus" title="文化娱乐">
-                        <input type="checkbox" name="industryfocus" title="节能环保">
-                        <input type="checkbox" name="industryfocus" title="先进制造">
-                        <input type="checkbox" name="industryfocus" title="农业">
-                        <input type="checkbox" name="industryfocus" title="消费服务">
-                        <input type="checkbox" name="industryfocus" title="信息技术及应用领域">
+                    <div class="layui-input-block" id="hangye">
+
                     </div>
                 </div>
 
@@ -464,20 +465,8 @@
 
                     <div class="layui-form-item">
                         <label class="layui-form-label">关注行业</label>
-                        <div class="layui-input-block">
-                            {#                        <select name="event_association" lay-filter="aihao">#}
-                            {#                            <option value=""></option>#}
-                            {#                            {% for jijin in fund %}#}
-                            {#                                <option value="{{ jijin.fund_id }}">{{ jijin.fund_name }}</option>#}
-                            {#                            {% endfor %}#}
-                            {#                        </select>#}
-                            <input type="checkbox" name="industryfocus" title="医疗健康" checked>
-                            <input type="checkbox" name="industryfocus" title="文化娱乐">
-                            <input type="checkbox" name="industryfocus" title="节能环保">
-                            <input type="checkbox" name="industryfocus" title="先进制造">
-                            <input type="checkbox" name="industryfocus" title="农业">
-                            <input type="checkbox" name="industryfocus" title="消费服务">
-                            <input type="checkbox" name="industryfocus" title="信息技术及应用领域">
+                        <div class="layui-input-block" id="hangye_2">
+
                         </div>
                     </div>
 
@@ -719,15 +708,6 @@
 
         </div>
     </div>
-{##}
-{#    <div class="layui-form-item">#}
-{#        <label class="layui-form-label">基金简介</label>#}
-{#        <div class="layui-input-block" >#}
-{#            <textarea id="demo" style="display: none;"></textarea>#}
-{#        </div>#}
-{#    </div>#}
-
-
 {% endblock %}
 
 {% block script %}
@@ -752,19 +732,38 @@
                 console.log(obj); //选中行的相关数据
             });
             //监听工具条
+            var count = 0;
             table.on('tool(demo)', function (obj) {
+
+
                 var data = obj.data;
+
                 if (obj.event === 'detail') {
                     {#layer.msg('ID：'+ data.id + ' 的查看操作');#}
+                    // 复选框
+                    var typeList = ['医疗健康', '文化娱乐', '节能环保', "先进制造", "农业", "消费服务", "信息技术及应用领域"];
+                    var contentVal = "";
+                    for (var i = 0; i < typeList.length; i++) {
+                        if (data.industryfocus.search(typeList[i]) != -1) {
+                            contentVal += '<input type="checkbox" name="industryfocus" value=' + typeList[i] + ' title=' + typeList[i] + ' checked>'
+                        } else {
+                            contentVal += '<input type="checkbox" name="industryfocus" value=' + typeList[i] + ' title=' + typeList[i] + '>'
+                        }
+                    }
+                    $("#hangye").append(contentVal);
+
                     layer.open({
                         //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
                         type: 1,
                         {#title: "查看日程",#}
                         area: ['1030px', '500px'],
                         content: $("#viewData"),//引用的弹出层的页面层的方式加载修改界面表单
-                        shade: 0,
+                        shade: 0.3,
                         success: function (x, y) {
                             var index = layedit.build("fund_introduce_2");
+                            var arr = data.industryfocus;
+                            var arrList = arr.split(",");
+                            console.log(arrList);
                             for (var key in data) {
                                 var idName = '#' + key + "_2";
                                 $(idName).val(data[key]);
@@ -773,8 +772,24 @@
                             }
 
                         }
-
                     });
+
+
+                    {#form.render();#}
+                    {#$("#hangye").empty();#}
+
+                    if (count === 0) {
+                        form.render()
+                        ;
+                    } else {
+                        $("#hangye").empty();
+                        $("#hangye").append(contentVal);
+                        form.render()
+                        ;
+                    }
+                    count += 1
+
+
                 } else if (obj.event === 'del') {
                     layer.confirm('真的删除行么', function (index) {
                         obj.del();
@@ -790,6 +805,7 @@
                             success: function (data) {
                                 if (data == '2') {
                                     {#alert('成功');#}
+                                    layer.msg("删除成功！")
                                 }
                             }
 
@@ -812,8 +828,6 @@
 
                             {#类型选择#}
                             var typeList = ['早期', '成长期', '成熟期'];
-                            {#var contactList_id = [0, 1, 2];#}
-                            {#alert(JSON.stringify(obj.data))#}
                             var contantVal = '';
                             for (var i = 0; i < typeList.length; i++) {
                                 {#alert(msg[i])#}
@@ -821,17 +835,40 @@
                                     contantVal += "<option value='" + typeList[i] + "' selected >" + typeList[i] + "</option>";
                                 } else {
                                     contantVal += "<option value='" + typeList[i] + "'>" + typeList[i] + "</option>";
-
                                 }
-
                             }
                             $("#concernstage").append(contantVal);
 
+                            {#关注行业#}
+                            var typeList = ['医疗健康', '文化娱乐', '节能环保', "先进制造", "农业", "消费服务", "信息技术及应用领域"];
+                            var contentVal = "";
+                            for (var i = 0; i < typeList.length; i++) {
+                                if (data.industryfocus.search(typeList[i]) != -1) {
+                                    contentVal += '<input type="checkbox" name="industryfocus" value=' + typeList[i] + ' title=' + typeList[i] + ' checked>'
+                                } else {
+                                    contentVal += '<input type="checkbox" name="industryfocus" value=' + typeList[i] + ' title=' + typeList[i] + '>'
+                                }
+                            }
+                            $("#hangye_2").append(contentVal);
+
                             {#表单渲染#}
-                            form.render();
+                            {#form.render();#}
+                            if (count === 0) {
+                                form.render()
+                                ;
+                            } else {
+                                $("#hangye_2").empty();
+                                $("#hangye_2").append(contentVal);
+                                $("#concernstage").empty();
+                                $("#concernstage").append(contantVal);
+                                form.render()
+                                ;
+                            }
+                            count += 1
 
                         }
                     });
+
 
                     layer.open({
                         //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
@@ -839,9 +876,8 @@
                         {#title: "修改日程",#}
                         area: ['1030px', '500px'],
                         content: $("#popUpdateTest"),//引用的弹出层的页面层的方式加载修改界面表单
-                        shade: 0,
+                        shade: 0.3,
                         success: function (x, y) {
-
                             for (var key in data) {
                                 var idName = '#' + key;
                                 $(idName).val(data[key]);
@@ -854,6 +890,10 @@
                     //动态向表传递赋值可以参看文章进行修改界面的更新前数据的显示，当然也是异步请求的要数据的修改数据的获取
                     //getFormValue(obj, data);
                 }
+                {#if ( count==0){#}
+                {#    form.render("checkbox", "test1")#}
+                {#;} #}
+                {#count++#}
 
 
             });
@@ -932,15 +972,15 @@
             var filing_result = $('#filing_result').val();
 
             keyword = ["fund_id", "fund_abbreviation", "fundname", "fundscope", "presentscope", "management_company", "builddate", "investenddate",
-                        "businessdate", "address", "concernstage", "fund_introduce", "file", "manage_money", "income_distribution", "threshold",
-                         "hosting_bank_name", "account_name", "account_number", "audit_institution", "law_office", "target_size", "approved_by_the_Commission", "commitment_funding_summary", "scale_summary",
-                         "cumulative_investment_amount", "cumulative_recovery_amount", "current_commitment_summary", "parent_fund_DPI", "annual_management_rate", "annual_management_fee_base", "annual_inspection_result",
-                        "current_size_summary", "filing_agency", "filing_time", "filing_result"];
+                "businessdate", "address", "concernstage", "fund_introduce", "file", "manage_money", "income_distribution", "threshold",
+                "hosting_bank_name", "account_name", "account_number", "audit_institution", "law_office", "target_size", "approved_by_the_Commission", "commitment_funding_summary", "scale_summary",
+                "cumulative_investment_amount", "cumulative_recovery_amount", "current_commitment_summary", "parent_fund_DPI", "annual_management_rate", "annual_management_fee_base", "annual_inspection_result",
+                "current_size_summary", "filing_agency", "filing_time", "filing_result"];
             value = [fund_id, fund_abbreviation, fundname, fundscope, presentscope, management_company, builddate, investenddate,
-                    businessdate, address, concernstage, fund_introduce, file, manage_money, income_distribution, threshold,
-                    hosting_bank_name, account_name, account_number, audit_institution, law_office, target_size, approved_by_the_Commission, commitment_funding_summary, scale_summary,
-                    cumulative_investment_amount, cumulative_recovery_amount, current_commitment_summary, parent_fund_DPI, annual_management_rate, annual_management_fee_base, annual_inspection_result,
-                    current_size_summary, filing_agency, filing_time, filing_result];
+                businessdate, address, concernstage, fund_introduce, file, manage_money, income_distribution, threshold,
+                hosting_bank_name, account_name, account_number, audit_institution, law_office, target_size, approved_by_the_Commission, commitment_funding_summary, scale_summary,
+                cumulative_investment_amount, cumulative_recovery_amount, current_commitment_summary, parent_fund_DPI, annual_management_rate, annual_management_fee_base, annual_inspection_result,
+                current_size_summary, filing_agency, filing_time, filing_result];
 
             var dataSend = {};
             for (var i = 0; i < keyword.length; i++) {

@@ -86,19 +86,13 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">关注行业</label>
                     <div class="layui-input-block">
-                        {#                        <select name="event_association" lay-filter="aihao">#}
-                        {#                            <option value=""></option>#}
-                        {#                            {% for jijin in fund %}#}
-                        {#                                <option value="{{ jijin.fund_id }}">{{ jijin.fund_name }}</option>#}
-                        {#                            {% endfor %}#}
-                        {#                        </select>#}
-                        <input type="checkbox" name="industryfocus" title="医疗健康" checked>
-                        <input type="checkbox" name="industryfocus" title="文化娱乐">
-                        <input type="checkbox" name="industryfocus" title="节能环保">
-                        <input type="checkbox" name="industryfocus" title="先进制造">
-                        <input type="checkbox" name="industryfocus" title="农业">
-                        <input type="checkbox" name="industryfocus" title="消费服务">
-                        <input type="checkbox" name="industryfocus" title="信息技术及应用领域">
+                        <input type="checkbox" name="industryfocus" value="医疗健康" title="医疗健康" checked>
+                        <input type="checkbox" name="industryfocus" value="文化娱乐" title="文化娱乐">
+                        <input type="checkbox" name="industryfocus" value="节能环保" title="节能环保">
+                        <input type="checkbox" name="industryfocus" value="先进制造" title="先进制造">
+                        <input type="checkbox" name="industryfocus" value="农业" title="农业">
+                        <input type="checkbox" name="industryfocus" value="消费服务" title="消费服务">
+                        <input type="checkbox" name="industryfocus" value="信息技术及应用领域" title="信息技术及应用领域">
                     </div>
                 </div>
 
@@ -119,7 +113,8 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">基金简介</label>
                     <div class="layui-input-block">
-                        <textarea name="fund_introduce" id="demo" style="display: none;"></textarea>
+                        <textarea lay-verify="article_desc" name="fund_introduce" id="demo"
+                                  style="display: none;"></textarea>
                     </div>
                 </div>
 
@@ -133,7 +128,8 @@
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">收益分配</label>
                     <div class="layui-input-block">
-                        <textarea placeholder="请输入内容" class="layui-textarea" name="income_distribution"></textarea>
+                        <textarea placeholder="请输入内容" class="layui-textarea"
+                                  name="income_distribution"></textarea>
                     </div>
                 </div>
 
@@ -194,19 +190,22 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">目标规模</label>
                         <div class="layui-input-block">
-                            <input type="text" name="target_size" placeholder="￥         亿" id="" autocomplete="on" class="layui-input">
+                            <input type="text" name="target_size" placeholder="￥         亿" id="" autocomplete="on"
+                                   class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label" style="width: 100px;padding-left: 0px;padding-right: 0px;">投资委批准金额</label>
                         <div class="layui-input-block">
-                            <input type="text" name="approved_by_the_Commission" placeholder="￥         亿" id="" autocomplete="on" class="layui-input">
+                            <input type="text" name="approved_by_the_Commission" placeholder="￥         亿" id=""
+                                   autocomplete="on" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">承诺出资汇总</label>
                         <div class="layui-input-block">
-                            <input type="text" name="commitment_funding_summary" placeholder="￥         万" id="" autocomplete="on" class="layui-input">
+                            <input type="text" name="commitment_funding_summary" placeholder="￥         万" id=""
+                                   autocomplete="on" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -215,19 +214,22 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">规模汇总</label>
                         <div class="layui-input-block">
-                            <input type="text" name="scale_summary" placeholder="￥         万" id="date" autocomplete="on" class="layui-input">
+                            <input type="text" name="scale_summary" placeholder="￥         万" id="date"
+                                   autocomplete="on" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">累计投资金额</label>
                         <div class="layui-input-block">
-                            <input type="text" name="cumulative_investment_amount" placeholder="￥         万" id="date" autocomplete="on" class="layui-input">
+                            <input type="text" name="cumulative_investment_amount" placeholder="￥         万" id="date"
+                                   autocomplete="on" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">累计回收金额</label>
                         <div class="layui-input-block">
-                            <input type="text" name="cumulative_recovery_amount" placeholder="￥         万" id="date" autocomplete="on" class="layui-input">
+                            <input type="text" name="cumulative_recovery_amount" placeholder="￥         万" id="date"
+                                   autocomplete="on" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -236,13 +238,15 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">当前规模汇总</label>
                         <div class="layui-input-block">
-                            <input type="text" name="current_size_summary" placeholder="￥         万" id="date" autocomplete="on" class="layui-input">
+                            <input type="text" name="current_size_summary" placeholder="￥         万" id="date"
+                                   autocomplete="on" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">当前承诺汇总</label>
                         <div class="layui-input-block">
-                            <input type="text" name="current_commitment_summary" placeholder="￥         万" id="date" autocomplete="on" class="layui-input">
+                            <input type="text" name="current_commitment_summary" placeholder="￥         万" id="date"
+                                   autocomplete="on" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
@@ -265,19 +269,20 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">年度管理费率</label>
                         <div class="layui-input-block">
-                            <input type="text" name="annual_management_rate" placeholder="0         %" id="" class="layui-input">
+                            <input type="text" name="annual_management_rate" placeholder="0         %" id=""
+                                   class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label" style="width: 100px;padding-left: 0px;padding-right: 0px;">年度管理费基数</label>
                         <div class="layui-input-block">
-                            <input type="text" name="annual_management_fee_base" id=""  class="layui-input">
+                            <input type="text" name="annual_management_fee_base" id="" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">年检结果</label>
                         <div class="layui-input-block">
-                            <input type="text" name="annual_inspection_result" id=""  class="layui-input">
+                            <input type="text" name="annual_inspection_result" id="" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -286,19 +291,19 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">备案机构</label>
                         <div class="layui-input-block">
-                            <input type="text" name="filing_agency" id=""  class="layui-input">
+                            <input type="text" name="filing_agency" id="" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">备案时间</label>
                         <div class="layui-input-block">
-                            <input type="text" name="filing_time"  id="" class="layui-input">
+                            <input type="text" name="filing_time" id="date4" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">备案结果</label>
                         <div class="layui-input-block">
-                            <input type="text" name="filing_result"  id="" class="layui-input">
+                            <input type="text" name="filing_result" id="" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -309,7 +314,7 @@
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit="" lay-filter="demo2">提交</button>
+                    <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
@@ -338,9 +343,12 @@
             laydate.render({
                 elem: '#date3'
             });
+            laydate.render({
+                elem: '#date4'
+            });
 
-            //创建一个编辑器
-            var editIndex = layedit.build('LAY_demo_editor');
+            //创建一个富文本编辑器
+            var editIndex = layedit.build('demo');
 
             //自定义验证规则
             form.verify({
@@ -356,6 +364,10 @@
                 , content: function (value) {
                     layedit.sync(editIndex);
                 }
+                , article_desc: function (value) {
+                    layedit.sync(editIndex);
+                }
+
             });
 
             //监听指定开关
@@ -368,9 +380,47 @@
 
             //监听提交
             form.on('submit(demo1)', function (data) {
-                layer.alert(JSON.stringify(data.field), {
-                    title: '最终的提交信息'
+                var arr = [];
+                $("input:checkbox[name='industryfocus']:checked").each(function (i) {
+                    {#console.log($(this).val());#}
+                    arr[i] = $(this).val();
                 });
+
+                data.field.industryfocus = arr.join(",");
+                {#alert(arr);#}
+                console.log(arr);
+
+
+                $.ajax({
+                    url: "/jijin/jijin/addHandle/",
+                    type: "post",
+                    data: data.field,
+                    dataType: "json",
+                    success: function (res) {
+                        {#console.log(res);#}
+                        {#console.log(typeof res);#}
+                        if (res === 2) {
+                            layer.msg("新增失败！", {
+                                time: 3000
+                            })
+                        } else if (res === 3) {
+                            layer.msg("系统出错！", {
+                                time: 3000
+                            })
+                        } else if (res === 1) {
+                            layer.msg("添加成功！", {
+                                time: 3000
+                            });
+                            window.location.href = "/jijin/jijin/"
+
+                        }
+                    }
+                });
+
+                {#layer.alert(JSON.stringify(data.field), {#}
+                {#    title: '最终的提交信息'#}
+                {#,});#}
+
                 return false;
             });
 
