@@ -22,25 +22,30 @@
         <button class="layui-btn" data-type="isAll">验证是否全选</button>
     </div>
 
-    <table class="layui-table" lay-data="{ url:'/jijin/calender/list_handle/', page:true, id:'idTest'}"
-           lay-filter="demo">
-        <thead>
-        <tr>
-            <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
-            <th lay-data="{field:'schedule_id', width:100, sort: true, fixed: true}">ID</th>
-            <th lay-data="{field:'schedule_name', width:100, edit:'text'}">日程名</th>
-            <th lay-data="{field:'person_name', width:120, sort: true,edit:'text'}">参与人员</th>
-            <th lay-data="{field:'association_name', width:120, edit:'text'}">关联</th>
-            <th lay-data="{field:'start_time', width:200}">开始时间</th>
-            <th lay-data="{field:'end_time', width:200, sort: true}">结束时间</th>
-            <th lay-data="{fixed: 'right', width:180, align:'center', toolbar: '#barDemo'}"></th>
-        </tr>
-        </thead>
-    </table>
+        <table class="layui-table" lay-data="{ url:'/jijin/calender/list_handle/', page:true, id:'idTest'}"
+               lay-filter="demo">
+            <thead>
+            <tr>
+                <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
+                <th lay-data="{field:'schedule_id', width:100, sort: true, fixed: true}">ID</th>
+                <th lay-data="{field:'schedule_name', width:100, edit:'text'}">日程名</th>
+                <th lay-data="{field:'person_name', width:120, sort: true,edit:'text'}">参与人员</th>
+                <th lay-data="{field:'association_name', width:120, edit:'text'}">关联</th>
+                <th lay-data="{field:'start_time', width:200}">开始时间</th>
+                <th lay-data="{field:'end_time', width:200, sort: true}">结束时间</th>
+                <th lay-data="{fixed: 'right', width:180, align:'center', toolbar: '#barDemo'}"></th>
+            </tr>
+            </thead>
+        </table>
 
+{#    <table class="layui-hide" id="test"></table>#}
+
+{% endblock %}
+
+{% block mask %}
     <div class="layui-row" id="popUpdateTest" style="display:none;">
         <div class="layui-col-md10">
-            <div class="layui-form"  style="width: 800px">
+            <div class="layui-form" style="width: 800px">
 
                 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 0;">
                     <legend>修改日程</legend>
@@ -68,11 +73,11 @@
                     </div>
                 </div>
 
-                <div class="layui-form-item">
+                <div class="layui-form-item" style="width: 850px">
                     <div class="layui-inline">
                         <label class="layui-form-label">关联</label>
                         <div class="layui-input-block">
-                            <select id="association_name" name="interest1" lay-filter="aihao">
+                            <select id="association_name" name="interest1">
                                 {#                                <option value="" selected=""></option>#}
                                 {#                                <option value="0">股权直投</option>#}
                                 {#                                <option value="1">二级市场</option>#}
@@ -83,20 +88,20 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">对方参与</label>
                         <div class="layui-input-inline">
-                            <input id="participation" type="text" name="participation" lay-verify="required"
+                            <input id="participation" type="text" name="participation"
                                    placeholder="请输入"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">公开</label>
-                        <div class="layui-input-block">
+                        <div class="layui-input-block" id="test3">
                             <input id="is_public" type="checkbox" checked="" name="open" lay-skin="switch"
-                                   lay-filter="switchTest"
-                                   title="开关">
+                                   lay-filter="switchTest">
                         </div>
                     </div>
                 </div>
+
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">地点</label>
@@ -109,7 +114,7 @@
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">全天事件</label>
-                        <div class="layui-input-block">
+                        <div class="layui-input-block" id="test4">
                             <input id="is_all_day_event" type="checkbox" name="open2" lay-skin="switch"
                                    lay-filter="switchTest"
                                    title="开关">
@@ -172,11 +177,11 @@
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传文件</button>
+                        {#                        <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传文件</button>#}
                         <button class="layui-btn layui-btn-submit" lay-submit="" lay-filter="demo2"
                                 onclick="mysubmit()">提交
                         </button>
-                        <button class="layui-btn layui-btn-primary" lay-filter type="submit" action="cache">暂存</button>
+                        {#                        <button class="layui-btn layui-btn-primary" lay-filter type="submit" action="cache">暂存</button>#}
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
@@ -226,10 +231,9 @@
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">公开</label>
-                        <div class="layui-input-block">
+                        <div class="layui-input-block" id="test1">
                             <input id="is_public_2" type="checkbox" checked="" name="open" lay-skin="switch"
-                                   lay-filter="switchTest"
-                                   title="开关">
+                                   lay-filter="switchTest">
                         </div>
                     </div>
                 </div>
@@ -245,10 +249,7 @@
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">全天事件</label>
-                        <div class="layui-input-block">
-                            <input id="is_all_day_event_2" type="checkbox" checked="" name="open2" lay-skin="switch"
-                                   lay-filter="switchTest"
-                                   title="开关">
+                        <div class="layui-input-block" id="test2">
                         </div>
                     </div>
                     <div class="layui-inline">
@@ -313,27 +314,69 @@
 
 
     <script>
-        layui.use(['table', "form", "laydate"], function () {
+        layui.use(['table', "form", "laydate", "laypage"], function () {
             var table = layui.table
                 , form = layui.form
+                , laypage = layui.laypage
                 , laydate = layui.laydate;
-            {#var  popForm=layui.form;#}
+
             //监听表格复选框选择
             table.on('checkbox(demo)', function (obj) {
                 console.log(obj); //选中行的相关数据
             });
+
+            {#分页#}
+            {#table.render({#}
+            {#    elem: '#test'#}
+            {#    , url: '/jijin/calender/list_handle/'#}
+            {#    , cols: [[#}
+            {#        {field:'schedule_id', width:100, sort: true, fixed: true}#}
+            {#        , {field:'schedule_name', width:100, edit:'text'}#}
+            {#        , {field:'person_name', width:120, sort: true,edit:'text'}#}
+            {#        , {field:'association_name', width:120, edit:'text'}#}
+            {#        , {field:'start_time', width:200}#}
+            {#        , {field:'end_time', width:200, sort: true}#}
+            {#        , {fixed: 'right', width:180, align:'center', toolbar: '#barDemo'}#}
+            {#        #}
+            {#    ]]#}
+            {#    , page: true#}
+            {#,});#}
+
             //监听工具条
             table.on('tool(demo)', function (obj) {
+
                 var data = obj.data;
                 if (obj.event === 'detail') {
                     {#layer.msg('ID：'+ data.id + ' 的查看操作');#}
+                    var content = "";
+                    if (data.is_public === "on") {
+                        content = ' <input id="is_public_2" type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest">'
+                    } else {
+                        content = ' <input id="is_public_2" type="checkbox" name="open" lay-skin="switch" lay-filter="switchTest">'
+                    }
+                    $("#test1").empty();
+                    $("#test1").append(content);
+
+                    var eventContent = "";
+                    if (data.is_all_day_event === "on") {
+                        eventContent = '<input id="is_all_day_event_2" type="checkbox" checked="" name="open2" lay-skin="switch" lay-filter="switchTest">'
+                        ;
+                    } else {
+                        eventContent = '<input id="is_all_day_event_2" type="checkbox"  name="open2" lay-skin="switch" lay-filter="switchTest">'
+                        ;
+                    }
+                    $("#test2").empty();
+                    $("#test2").append(eventContent);
+
+                    form.render();
+
                     layer.open({
                         //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
                         type: 1,
                         {#title: "查看日程",#}
-                        area: ['800px', '500px'],
+                        area: ['1030px', '500px'],
                         content: $("#viewData"),//引用的弹出层的页面层的方式加载修改界面表单
-                        shade: 0,
+                        shade: 0.3,
                         success: function (x, y) {
 
                             for (var key in data) {
@@ -341,13 +384,6 @@
                                 $(idName).val(data[key]);
 
                             }
-                            {#$("#fund").val("二股");#}
-                            {#$("#fund").find("option[value='股权直投']").prop("selected",true);#}
-                            {#form.render('select','aihao'); //刷新select选择框渲染#}
-
-                            {#x.find("input")[0].value=data.person;#}
-                            {#x.find("input")[1].value=data.title;#}
-                            {#x.find("input[name=xxx]").value=data.xxx;#}
 
                         }
                     });
@@ -364,8 +400,8 @@
                             dataType: "json",
                             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',//防止乱码
                             success: function (data) {
-                                if (data == '2') {
-                                    {#alert('成功');#}
+                                if (data == 'ok') {
+                                    layer.msg("删除成功！")
                                 }
                             }
 
@@ -394,6 +430,7 @@
 
                             }
                             {#alert(value);#}
+                            $("#person_name").empty();
                             $("#person_name").append(value);
 
                             {#关联选择#}
@@ -411,11 +448,12 @@
                                 }
 
                             }
+                            $("#association_name").empty();
                             $("#association_name").append(contantVal);
 
                             {#重复选择#}
                             var repeatList = ["不重复", "每日", "每周", "每月", "每年"];
-                            var repeatList_id= [0, 1, 2, 3, 4];
+                            var repeatList_id = [0, 1, 2, 3, 4];
                             var repeatVal = "";
                             for (var i = 0; i < repeatList.length; i++) {
                                 if (obj.data.time_select == repeatList[i]) {
@@ -424,6 +462,7 @@
                                     repeatVal += "<option value ='" + repeatList_id[i] + "'>" + repeatList[i] + "</option>";
                                 }
                             }
+                            $("#time_select").empty();
                             $("#time_select").append(repeatVal);
 
                             {#提醒选择#}
@@ -438,7 +477,29 @@
                                     remindVal += "<option value ='" + remindList_id[i] + "'>" + remindList[i] + "</option>";
                                 }
                             }
+                            $("#remind_name").empty();
                             $("#remind_name").append(remindVal);
+
+                            {#是否公开#}
+                            var content = "";
+                            if (data.is_public === "on") {
+                                content = ' <input id="is_public" type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest">'
+                            } else {
+                                content = ' <input id="is_public" type="checkbox" name="open" lay-skin="switch" lay-filter="switchTest">'
+                            }
+                            $("#test3").empty();
+                            $("#test3").append(content);
+
+                            var eventContent = "";
+                            if (data.is_all_day_event === "on") {
+                                eventContent = '<input id="is_all_day_event" type="checkbox" checked="" name="open2" lay-skin="switch" lay-filter="switchTest">'
+                                ;
+                            } else {
+                                eventContent = '<input id="is_all_day_event" type="checkbox"  name="open2" lay-skin="switch" lay-filter="switchTest">'
+                                ;
+                            }
+                            $("#test4").empty();
+                            $("#test4").append(eventContent);
 
                             {#表单渲染#}
                             form.render();
@@ -450,9 +511,9 @@
                         //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
                         type: 1,
                         {#title: "修改日程",#}
-                        area: ['800px', '500px'],
+                        area: ['1030px', '500px'],
                         content: $("#popUpdateTest"),//引用的弹出层的页面层的方式加载修改界面表单
-                        shade: 0,
+                        shade: 0.3,
                         success: function (x, y) {
 
                             for (var key in data) {
@@ -471,33 +532,6 @@
 
             });
 
-            function getFormValue(obj, data) {
-                popForm.val("data", {"title": data.title});
-                popForm.render(null, "data");
-            }
-
-            function setFormValue(obj, data) {
-                form.on("submit(demo2)", function () {
-                    alert("ok");
-                    alert(data);
-                    $.ajax({
-                        url: "/jijin/calender/calender_edit/",
-                        type: "POST",
-                        data: {
-                            "schdule_id": data.id, "schedule_name": data.name, "person_name": data.person_name,
-                            "association_name": data.fund, "start_time": data.start_time, "end_time": data.end_time,
-                            dataAll: data
-                        },
-                        success: function (msg) {
-                            console.log(msg);
-                            layer.closeAll()
-                        }
-                    });
-                    return false;
-                })
-
-            }
-
 
             //日期
             laydate.render({
@@ -511,6 +545,7 @@
             });
             laydate.render({
                 elem: '#start_time_2'
+                ,
             });
             laydate.render({
                 elem: '#end_time_2'
@@ -549,9 +584,11 @@
             var person_id = $("#person_name").val();
             var association_id = $('#association_name').val();
             var participation = $('#participation').val();
-            var is_public = $('#is_public').val(this.checked ? 1 : 0);
+            {#var is_public = $('#is_public').val(this.checked ? 1 : 0);#}
+            var is_public = $('#is_public').val();
             var address = $('#address').val();
-            var is_all_day_event = $('#is_all_day_event').val(this.checked ? 1 : 0);
+            {#var is_all_day_event = $('#is_all_day_event').val(this.checked ? 1 : 0);#}
+            var is_all_day_event = $('#is_all_day_event').val();
             var start_time = $('#start_time').val();
             var end_time = $('#end_time').val();
             var util_time = $('#util_time').val();
@@ -559,18 +596,6 @@
             var time_id = $('#time_select').val();
             var meeting_summary = $('#meeting_summary').val();
 
-            is_public = is_public[0]["checked"];
-            if (is_public) {
-                is_public = "1"
-            } else {
-                is_public = null
-            }
-            is_all_day_event = is_all_day_event[0]["checked"];
-            if (is_all_day_event) {
-                is_all_day_event = "1"
-            } else {
-                is_all_day_event = null
-            }
 
             keyword = ["schedule_id", "schedule_name", "person_id", "association_id", "start_time", "end_time", "participation", "is_public", "address", "is_all_day_event", "remind_id", "time_id", "meeting_summary", "util_time"];
             value = [schedule_id, schedule_name, person_id, association_id, start_time, end_time, participation, is_public, address, is_all_day_event, remind_id, time_id, meeting_summary, util_time];
@@ -586,12 +611,12 @@
             $.ajax({
                 url: "/jijin/calender/calender_edit/",
                 type: "POST",
-                async:false,
+                async: false,
                 dataType: "json",
                 data: dataSend,
                 success: function (data) {
                     {#alert('成功');#}
-                    setTimeout(function(){
+                    setTimeout(function () {
                         window.location.href = "/jijin/calender/list/";
                     });
                     {#console.log(data)#}

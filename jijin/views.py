@@ -15,11 +15,13 @@ from fund import settings
 def index(request):
     return render(request, "shouye.html")
 
+
 def shouye(request):
     return render(request, "shouye.html")
 
+
 def calender(request):
-    return render(request, "calender/calender.html", {"active_nav":"calender"})
+    return render(request, "calender/calender.html", {"active_nav": "calender"})
 
 
 def calender_add(request):
@@ -53,31 +55,37 @@ def calender_list(request):
 # 取值
 def calender_list_handle(request):
     # sql = "SELECT schedule_id, schedule_name, person_name, association_name, start_time, end_time  from calender_list"
-    sql = "SELECT schedule_id, schedule_name, person_name, association_name, date_format(start_time, '%%Y-%%m-%%d %%H:%%i:%%s'), date_format(end_time, '%%Y-%%m-%%d %%H:%%i:%%s'),is_delete," \
-          "participation, is_public, address, is_all_day_event, remind_name, time_select, meeting_summary, date_format(util_time, '%%Y-%%m-%%d %%H:%%i:%%s'), person_id, association_id, remind_id,time_id" \
-          "   from calender_list where is_delete=0"
+    # sql = "SELECT schedule_id, schedule_name, person_name, association_name, date_format(start_time, '%%Y-%%m-%%d %%H:%%i:%%s'), date_format(end_time, '%%Y-%%m-%%d %%H:%%i:%%s'),is_delete," \
+    #       "participation, is_public, address, is_all_day_event, remind_name, time_select, meeting_summary, date_format(util_time, '%%Y-%%m-%%d %%H:%%i:%%s'), person_id, association_id, remind_id,time_id" \
+    #       "   from calender_list where is_delete=0"
+    # sql = "select * from calender_list where is_delete=0"
+    #
+    # helper = MysqlHelper()
+    # results = helper.dict_fetchall(sql)
+    # print(request.path)
 
-    helper = MysqlHelper()
-    results = helper.fetchall(sql)
+    count, data = MysqlHelper().pagePagAll(request, "calender_list", "")
+    # print("count: ", count)
+    # print("data: ", data)
 
-    field = ["schedule_id", "schedule_name", "person_name", "association_name", "start_time", "end_time", "is_delete",
-             "participation", "is_public", "address", "is_all_day_event",
-             "remind_name", "time_select", "meeting_summary", "util_time", "person_id", "association_id", "remind_id",
-             "time_id"]
-    jsonData = []
-    for row in results:
-        # print(row)
-        data = {}
-        for key in range(len(field)):
-            data[field[key]] = row[key]
-        jsonData.append(data)
+    # field = ["schedule_id", "schedule_name", "person_name", "association_name", "start_time", "end_time", "is_delete",
+    #          "participation", "is_public", "address", "is_all_day_event",
+    #          "remind_name", "time_select", "meeting_summary", "util_time", "person_id", "association_id", "remind_id",
+    #          "time_id"]
+    # jsonData = []
+    # for row in results:
+    #     # print(row)
+    #     data = {}
+    #     for key in range(len(field)):
+    #         data[field[key]] = row[key]
+    #     jsonData.append(data)
 
     result = {}
     # print(jsonData)
     result["code"] = 0
     result["msg"] = ""
-    result["count"] = len(results)
-    result["data"] = jsonData
+    result["count"] = count
+    result["data"] = data
 
     # jsonDatar = json.dumps(result, ensure_ascii=False)
     # print(jsonDatar)
@@ -87,10 +95,6 @@ def calender_list_handle(request):
     return JsonResponse(result)
 
 
-def calender_list_detail(request):
-    pass
-
-
 # 删除数据
 def calender_delete(requset):
     id = requset.POST.get('schedule_id')
@@ -98,7 +102,7 @@ def calender_delete(requset):
     param = [id]
     MysqlHelper().update(sqlDelete, param)
 
-    return HttpResponse(json.dumps('2'))
+    return HttpResponse(json.dumps('ok'))
 
 
 # 修改数据
@@ -116,22 +120,6 @@ def calender_edit(request):
 
     MysqlHelper().update(sql, params)
 
-    # sql = "update  schedule__schedule set "
-    # for key in request.POST:
-    #     sql += key + "='" + request.POST.get(key) + "', "
-    # print(sql)
-    # sql = sql.rstrip(", ") + " where schedule_id=" + request.POST.get("schedule_id")
-    # print(sql)
-    #
-    # conn = Common.mysqlCon()
-    # cursor = conn.cursor()
-    # try:
-    #     cursor.execute(sql)
-    #     conn.commit()
-    # except Exception as e:
-    #     print(e)
-    # cursor.close()
-    # conn.close()
 
     return HttpResponse(json.dumps('2'))
 
@@ -162,6 +150,7 @@ def event(request):
 def event_list(request):
     sql = "select title_id, event_name, fund_name, event_type, event_publisher, publish_date, event_status, event_content from event_list where is_delete=0"
     data = MysqlHelper().dict_fetchall(sql)
+
     result = {}
     result["code"] = 0
     result["msg"] = ""
@@ -235,15 +224,22 @@ def event_edit(request):
 def jijin(request):
     return render(request, "jijin/jijin_list.html")
 
+
 def jijin_list(request):
-    sql = "select * from jijin_jijin where is_delete=0"
-    data = MysqlHelper().dict_fetchall(sql)
+    # sql = "select * from jijin_jijin where is_delete=0"
+    # data = MysqlHelper().dict_fetchall(sql)
+    print(request.path)
+
+    count, data = MysqlHelper().pagePagAll(request, "jijin_jijin")
+    print("count: ", count)
+    print("data: ", data)
     result = {}
     result["code"] = 0
     result["msg"] = ""
-    result["count"] = len(data)
+    result["count"] = count
     result["data"] = data
     return JsonResponse(result)
+
 
 def jijin_add(request):
     # if request.method == "POST":
@@ -266,6 +262,7 @@ def jijin_add(request):
     #     MysqlHelper().insert_sql(sql)
 
     return render(request, "jijin/jijin_add.html")
+
 
 def jijin_addHandle(request):
     print("ajax:")
@@ -291,6 +288,7 @@ def jijin_addHandle(request):
 
     # return render(request, "jijin/jijin_add.html")
 
+
 def jijin_delete(request):
     id = request.POST.get("fund_id")
     print(request.POST)
@@ -299,8 +297,9 @@ def jijin_delete(request):
     MysqlHelper().update(sqlData, param)
     return HttpResponse(json.dumps("ok"))
 
+
 def jijin_edit(request):
-    # pprint(request.POST)
+    pprint(request.POST)
     sql = "update jijin_jijin set "
     for key in request.POST:
         sql = sql + key + "=%s, "
@@ -316,6 +315,7 @@ def jijin_edit(request):
 
     return HttpResponse(json.dumps("2"))
 
+
 def test(request):
     return render(request, "jijin/select_test.html")
 
@@ -327,6 +327,7 @@ def guquan(request):
         type = ""
     content = {"type": type}
     return render(request, "guquan/guquan_list.html", content)
+
 
 def guquan_add(request):
     if request.method == "POST":
@@ -384,6 +385,7 @@ def guquan_delete(request):
     MysqlHelper().update(sql, param)
     return HttpResponse(json.dumps("ok"))
 
+
 def guquan_edit(request):
     pprint(request.POST)
     sql = "update guquan_management_technology set "
@@ -416,9 +418,6 @@ def guquan_jijin(request):
     return HttpResponse(json.dumps(jijin))
 
 
-
-
-
 def guquan_file(request):
     file = request.FILES["file"]
     # print("settings.MEDIA_ROOT", settings.MEDIA_ROOT)
@@ -449,11 +448,13 @@ def market(request):
     content = {"type": type}
     return render(request, "market/market_list.html", content)
 
+
 def market_add(request):
     if request.method == "POST":
         print(request.POST)
         return redirect("/jijin/market/")
     return render(request, "market/market_add.html")
+
 
 def market_addGaikuang(request):
     if request.method == "POST":
@@ -471,6 +472,7 @@ def market_addGaikuang(request):
         return redirect("/jijin/market/")
     return render(request, "market/market_add.html")
 
+
 def market_addDetail(request):
     if request.method == "POST":
         print(request.POST)
@@ -485,6 +487,7 @@ def market_addDetail(request):
         MysqlHelper().insert_sql(sql)
         return redirect("/jijin/market/")
     return render(request, "market/market_add.html")
+
 
 def market_delete(request):
     id = request.POST.get("id")
@@ -517,6 +520,7 @@ def market_list(request):
     result["data"] = data
     print(result)
     return JsonResponse(result)
+
 
 #
 # def detail_data(request):
@@ -562,10 +566,10 @@ def detail_edit(request):
     return HttpResponse(json.dumps("ok"))
 
 
-
 # 行业研究
 def industry(request):
     return render(request, "industry/industry_list.html")
+
 
 def industry_add(request):
     if request.method == "POST":
@@ -586,6 +590,7 @@ def industry_add(request):
     person = getData.getFundPerson()
     return render(request, "industry/industry_add.html", person)
 
+
 def industry_list(request):
     sql = "select * from industry_list where is_delete=0"
     data = MysqlHelper().dict_fetchall(sql)
@@ -597,6 +602,7 @@ def industry_list(request):
     # print(result)
     return JsonResponse(result)
 
+
 def industry_delete(request):
     id = request.POST.get("id")
     print(id)
@@ -605,11 +611,13 @@ def industry_delete(request):
     MysqlHelper().update(sql, param)
     return HttpResponse(json.dumps("ok"))
 
+
 def industry_person(request):
     sqlPerson = "select * from fund_person"
     person = MysqlHelper().dict_fetchall(sqlPerson)
     print(person)
     return HttpResponse(json.dumps(person))
+
 
 def industry_edit(request):
     print(request.POST)
@@ -627,6 +635,7 @@ def industry_edit(request):
     MysqlHelper().update(sql, params)
     return HttpResponse(json.dumps("ok"))
 
+
 # 审批流程
 def approval(request):
     return render(request, "approval/approval.html")
@@ -635,17 +644,22 @@ def approval(request):
 def finance(request):
     return render(request, "approval/caiwu_index.html")
 
+
 def finance_list(request):
     return render(request, "approval/caiwu_list.html")
+
 
 def administration(request):
     return render(request, "approval/xingzheng_index.html")
 
+
 def administration_list(request):
     return render(request, "approval/xingzheng_list.html")
 
+
 def manpower(request):
     return render(request, "approval/renli_index.html")
+
 
 def manpower_list(request):
     return render(request, "approval/renli_list.html")
@@ -654,8 +668,11 @@ def manpower_list(request):
 """
     合作机构
 """
+
+
 def cooperative(request):
     return render(request, "cooperative/cooperative_list.html")
+
 
 def cooperative_add(request):
     if request.method == "POST":
@@ -673,6 +690,7 @@ def cooperative_add(request):
 
     return render(request, "cooperative/cooperative_add.html")
 
+
 def cooperative_list(request):
     sql = "select * from other_cooperative_organization where is_delete=0"
     data = MysqlHelper().dict_fetchall(sql)
@@ -684,6 +702,7 @@ def cooperative_list(request):
     # print(result)
     return JsonResponse(result)
 
+
 def cooperative_delete(request):
     id = request.POST.get("id")
     print(id)
@@ -691,6 +710,7 @@ def cooperative_delete(request):
     param = [id]
     MysqlHelper().update(sql, param)
     return HttpResponse(json.dumps("ok"))
+
 
 def cooperative_edit(request):
     print(request.POST)
@@ -712,6 +732,7 @@ def cooperative_edit(request):
 def personnel(request):
     return render(request, "personnel/personnel_list.html")
 
+
 def personnel_add(request):
     if request.method == "POST":
         print(request.POST)
@@ -728,6 +749,7 @@ def personnel_add(request):
 
     return render(request, "personnel/personnel_add.html")
 
+
 def personnel_list(request):
     sql = "select * from other_talent_pool where is_delete=0"
     data = MysqlHelper().dict_fetchall(sql)
@@ -739,6 +761,7 @@ def personnel_list(request):
     # print(result)
     return JsonResponse(result)
 
+
 def personnel_delete(request):
     id = request.POST.get("id")
     print(id)
@@ -746,6 +769,7 @@ def personnel_delete(request):
     param = [id]
     MysqlHelper().update(sql, param)
     return HttpResponse(json.dumps("ok"))
+
 
 def personnel_edit(request):
     print(request.POST)
@@ -768,6 +792,7 @@ def personnel_edit(request):
 def agency(request):
     return render(request, "agency/agency_list.html")
 
+
 def agency_add(request):
     if request.method == "POST":
         print(request.POST)
@@ -784,6 +809,7 @@ def agency_add(request):
 
     return render(request, "agency/agency_add.html")
 
+
 def agency_list(request):
     sql = "select * from other_intermediary_organ where is_delete=0"
     data = MysqlHelper().dict_fetchall(sql)
@@ -795,6 +821,7 @@ def agency_list(request):
     print(result)
     return JsonResponse(result)
 
+
 def agency_delete(request):
     id = request.POST.get("id")
     # print(id)
@@ -802,6 +829,7 @@ def agency_delete(request):
     param = [id]
     MysqlHelper().update(sql, param)
     return HttpResponse(json.dumps("ok"))
+
 
 def agency_edit(request):
     print(request.POST)
@@ -827,6 +855,7 @@ def message(request):
         return render(request, "message/message_all.html")
     return render(request, "message/message_list.html")
 
+
 def message_list(request):
     type = (request.path).split("/")[-2]
     print(type)
@@ -848,6 +877,7 @@ def message_list(request):
     # print(result)
     return JsonResponse(result)
 
+
 def message_delete(request):
     id = request.POST.get("id")
     # print(id)
@@ -856,6 +886,7 @@ def message_delete(request):
     MysqlHelper().update(sql, param)
     return HttpResponse(json.dumps("ok"))
 
+
 def SetRead(request):
     id = request.POST.get("id")
     # print(id)
@@ -863,4 +894,3 @@ def SetRead(request):
     param = [id]
     MysqlHelper().update(sql, param)
     return HttpResponse(json.dumps("ok"))
-

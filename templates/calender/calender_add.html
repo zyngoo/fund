@@ -54,8 +54,8 @@
                 <div class="layui-inline">
                     <label class="layui-form-label">公开</label>
                     <div class="layui-input-block">
-                        <input type="checkbox" checked="" value="1" name="is_public" lay-skin="switch"
-                               lay-filter="switchTest" title="开关">
+                        <input type="checkbox" checked="" name="is_public" lay-skin="switch"
+                               lay-filter="switchTest" >
                     </div>
                 </div>
             </div>
@@ -71,8 +71,8 @@
                 <div class="layui-inline">
                     <label class="layui-form-label">全天事件</label>
                     <div class="layui-input-block">
-                        <input type="checkbox" checked="" value="1" name="is_all_day_event" lay-skin="switch"
-                               lay-filter="switchTest" title="开关">
+                        <input type="checkbox" checked="" name="is_all_day_event" lay-skin="switch"
+                               lay-filter="switchTest">
                     </div>
                 </div>
                 <div class="layui-inline">
@@ -124,7 +124,7 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传文件</button>
+{#                    <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传文件</button>#}
                     <button class="layui-btn" lay-submit="" lay-filter="demo2">提交</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
@@ -178,30 +178,20 @@
 
             //监听指定开关
             form.on('switch(switchTest)', function (data) {
-                layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                    offset: '6px'
-                });
-                layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+                {#layer.msg('开关checked：' + (this.checked ? '1' : '0'), {#}
+                {#    offset: '6px'#}
+                {#, });#}
+
+                {#layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)#}
             });
 
             //监听提交
             form.on('submit(demo1)', function (data) {
                 layer.alert(JSON.stringify(data.field), {
                     title: '最终的提交信息'
-                })
+                });
                 return false;
             });
-
-            //表单初始赋值
-            form.val('example', {
-                "username": "贤心" // "name": "value"
-                , "password": "123456"
-                , "interest": 1
-                , "like[write]": true //复选框选中状态
-                , "close": true //开关状态
-                , "sex": "女"
-                , "desc": "我爱 layui"
-            })
 
 
         });

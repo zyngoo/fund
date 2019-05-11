@@ -1,5 +1,6 @@
 import pymysql
 
+
 class MysqlHelper:
     def __init__(self, host="localhost", port=3306, db="fund", user="root", passwd="123456", charset="utf8"):
         self.conn = pymysql.connect(host=host, port=port, db=db, user=user, passwd=passwd, charset=charset)
@@ -20,7 +21,8 @@ class MysqlHelper:
             self.conn.commit()
             cs1.close()
             self.conn.close()
-            print("mysqlhelper: ",rows)
+            print("MysqlHelper to get Data Number: ",rows)
+            return rows
         except Exception as e:
             print("mysqlhelper_exception: ", e)
             self.conn.rollback()
@@ -69,9 +71,35 @@ class MysqlHelper:
             self.conn.commit()
             cur.close()
             self.conn.close()
-            print("mysqlhelper: ", rows)
+            print("MysqlHelper to get Data Number: ", rows)
             return "ok"
         except Exception as e:
             print("mysqlhelper_exception: ", e)
             self.conn.rollback()
             return "error"
+
+    # 分页数据取值
+    @staticmethod
+    def pagePagAll(requset, tableName, tableAtrr):
+        # print(requset)
+        # print(requset.GET)
+        pageIdx = requset.GET.get('page', 1)  # 默认第一页
+        pageSize = requset.GET.get('limit', 10)  # 默认每页十条
+        pageIdx = int(pageIdx)
+        pageSize = int(pageSize)
+
+        if tableAtrr == '':
+            sql = "select * from %s where is_delete=0 limit %d,%d " % (tableName, (pageIdx - 1) * pageSize, pageSize)
+            sqlCount = "select * from %s where is_delete=0" % (tableName)
+        else:
+            sql = "select %s from %s where is_delete=0 limit %d,%d " % (tableAtrr, tableName, (pageIdx - 1) * pageSize, pageSize)
+            sqlCount = "select %s from %s where is_delete=0" % (tableAtrr, tableName)
+
+        # count = Common.countLength(sqlCount)
+        print(sql)
+        count = MysqlHelper().__cud(sqlCount)
+
+        # select_paging = Common.mysqlExcute(sql)
+        select_paging = MysqlHelper().dict_fetchall(sql)
+
+        return count, select_paging

@@ -750,7 +750,9 @@
                             contentVal += '<input type="checkbox" name="industryfocus" value=' + typeList[i] + ' title=' + typeList[i] + '>'
                         }
                     }
+                    $("#hangye").empty();
                     $("#hangye").append(contentVal);
+
 
                     layer.open({
                         //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
@@ -774,20 +776,7 @@
                         }
                     });
 
-
-                    {#form.render();#}
-                    {#$("#hangye").empty();#}
-
-                    if (count === 0) {
-                        form.render()
-                        ;
-                    } else {
-                        $("#hangye").empty();
-                        $("#hangye").append(contentVal);
-                        form.render()
-                        ;
-                    }
-                    count += 1
+                    form.render();
 
 
                 } else if (obj.event === 'del') {
@@ -803,8 +792,7 @@
                             dataType: "json",
                             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',//防止乱码
                             success: function (data) {
-                                if (data == '2') {
-                                    {#alert('成功');#}
+                                if (data == 'ok') {
                                     layer.msg("删除成功！")
                                 }
                             }
@@ -837,6 +825,7 @@
                                     contantVal += "<option value='" + typeList[i] + "'>" + typeList[i] + "</option>";
                                 }
                             }
+                            $("#concernstage").empty();
                             $("#concernstage").append(contantVal);
 
                             {#关注行业#}
@@ -844,30 +833,28 @@
                             var contentVal = "";
                             for (var i = 0; i < typeList.length; i++) {
                                 if (data.industryfocus.search(typeList[i]) != -1) {
-                                    contentVal += '<input type="checkbox" name="industryfocus" value=' + typeList[i] + ' title=' + typeList[i] + ' checked>'
+                                    contentVal += '<input type="checkbox" name="industryfocus" value=' + typeList[i] + ' title=' + typeList[i] + ' lay-filter="test1" ' + ' checked>'
                                 } else {
-                                    contentVal += '<input type="checkbox" name="industryfocus" value=' + typeList[i] + ' title=' + typeList[i] + '>'
+                                    contentVal += '<input type="checkbox" name="industryfocus" value=' + typeList[i] + ' lay-filter="test1" ' + ' title=' + typeList[i] + '>'
                                 }
                             }
+                            $("#hangye_2").empty();
                             $("#hangye_2").append(contentVal);
 
                             {#表单渲染#}
-                            {#form.render();#}
-                            if (count === 0) {
-                                form.render()
-                                ;
-                            } else {
-                                $("#hangye_2").empty();
-                                $("#hangye_2").append(contentVal);
-                                $("#concernstage").empty();
-                                $("#concernstage").append(contantVal);
-                                form.render()
-                                ;
-                            }
-                            count += 1
-
+                            form.render();
                         }
                     });
+
+                    {#     var arr = [];#}
+                    {#$("input:checkbox[name='industryfocus']:checked").each(function (i) {#}
+                    {#console.log($(this).val());#}
+                    {#    arr[i] = $(this).val()#}
+                    {#    ; });#}
+                    {##}
+                    {#data.field.industryfocus = arr.join(",");#}
+                    {#alert(arr);#}
+                    {#console.log(arr);#}
 
 
                     layer.open({
@@ -934,6 +921,7 @@
 
 
         function mysubmit() {
+
             var fund_id = $("#fund_id").val();
             var fund_abbreviation = $("#fund_abbreviation").val();
             var fundname = $("#fundname").val();
@@ -970,6 +958,7 @@
             var filing_agency = $('#filing_agency').val();
             var filing_time = $('#filing_time').val();
             var filing_result = $('#filing_result').val();
+
 
             keyword = ["fund_id", "fund_abbreviation", "fundname", "fundscope", "presentscope", "management_company", "builddate", "investenddate",
                 "businessdate", "address", "concernstage", "fund_introduce", "file", "manage_money", "income_distribution", "threshold",
