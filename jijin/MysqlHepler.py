@@ -96,7 +96,7 @@ class MysqlHelper:
             sqlCount = "select %s from %s where is_delete=0" % (tableAtrr, tableName)
 
         # count = Common.countLength(sqlCount)
-        print(sql)
+        # print(sql)
         count = MysqlHelper().__cud(sqlCount)
 
         # select_paging = Common.mysqlExcute(sql)

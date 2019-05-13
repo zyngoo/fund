@@ -616,6 +616,11 @@
                 data: dataSend,
                 success: function (data) {
                     {#alert('成功');#}
+                    if (data === "ok") {
+                        layer.msg("修改成功")
+                    } else {
+                        layer.msg("修改失败")
+                    }
                     setTimeout(function () {
                         window.location.href = "/jijin/calender/list/";
                     });

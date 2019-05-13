@@ -81,7 +81,6 @@ def calender_list_handle(request):
     #     jsonData.append(data)
 
     result = {}
-    # print(jsonData)
     result["code"] = 0
     result["msg"] = ""
     result["count"] = count
@@ -121,7 +120,7 @@ def calender_edit(request):
     MysqlHelper().update(sql, params)
 
 
-    return HttpResponse(json.dumps('2'))
+    return HttpResponse(json.dumps('ok'))
 
 
 #  取出shedule_person 数据表的id 与名字 组合成字典传送回去
@@ -148,13 +147,15 @@ def event(request):
 
 
 def event_list(request):
-    sql = "select title_id, event_name, fund_name, event_type, event_publisher, publish_date, event_status, event_content from event_list where is_delete=0"
-    data = MysqlHelper().dict_fetchall(sql)
+    # sql = "select title_id, event_name, fund_name, event_type, event_publisher, publish_date, event_status, event_content from event_list where is_delete=0"
+    # data = MysqlHelper().dict_fetchall(sql)
+
+    count, data = MysqlHelper().pagePagAll(request, "event_list", "")
 
     result = {}
     result["code"] = 0
     result["msg"] = ""
-    result["count"] = len(data)
+    result["count"] = count
     result["data"] = data
 
     # print(result)
