@@ -98,7 +98,10 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传文件</button>
+                     <button type="button" class="layui-btn" id="file1">
+                        <i class="layui-icon">&#xe67c;</i>上传文件
+                    </button>
+                    <input type="hidden" id="event_file" name="event_file" value=""/>
                     <button class="layui-btn" lay-submit="" lay-filter="demo2">提交</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
@@ -110,10 +113,11 @@
 
 {% block script %}
     <script>
-        layui.use(['form', 'layedit', 'laydate'], function () {
+        layui.use(['form', 'layedit', 'laydate', "upload"], function () {
             var form = layui.form
                 , layer = layui.layer
                 , layedit = layui.layedit
+                , upload = layui.upload
                 , laydate = layui.laydate;
 
             //日期
@@ -140,12 +144,18 @@
                 }
             });
 
-            //监听指定开关
-            form.on('switch(switchTest)', function (data) {
-                layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                    offset: '6px'
-                });
-                layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+            //上传文件
+            var uploadInst = upload.render({
+                elem: "#file1",
+                url: "/jijin/guquan_file/",
+                accept: "file",
+                done: function (res) {
+                    if (res.code > 0) {
+                        return layer.msg("上传失败！");
+                    }
+                    layer.msg("上传成功");
+                    document.getElementById("event_file").value = res.url;
+                }
             });
 
             //监听提交

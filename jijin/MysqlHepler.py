@@ -71,7 +71,7 @@ class MysqlHelper:
             self.conn.commit()
             cur.close()
             self.conn.close()
-            print("MysqlHelper to get Data Number: ", rows)
+            print("MysqlHelper to insert Data Number: ", rows)
             return "ok"
         except Exception as e:
             print("mysqlhelper_exception: ", e)
@@ -80,7 +80,7 @@ class MysqlHelper:
 
     # 分页数据取值
     @staticmethod
-    def pagePagAll(requset, tableName, tableAtrr):
+    def pagePagAll(requset, tableName, tableAtrr, qualificate):
         # print(requset)
         # print(requset.GET)
         pageIdx = requset.GET.get('page', 1)  # 默认第一页
@@ -88,15 +88,18 @@ class MysqlHelper:
         pageIdx = int(pageIdx)
         pageSize = int(pageSize)
 
-        if tableAtrr == '':
+        if tableAtrr == '' and qualificate == "":
             sql = "select * from %s where is_delete=0 limit %d,%d " % (tableName, (pageIdx - 1) * pageSize, pageSize)
             sqlCount = "select * from %s where is_delete=0" % (tableName)
+        elif tableAtrr == '' and qualificate != "":
+            sql = "select * from %s where is_delete=0 and %s limit %d,%d " % (tableName, qualificate, (pageIdx - 1) * pageSize, pageSize)
+            sqlCount = "select * from %s where is_delete=0 and %s" % (tableName, qualificate)
         else:
             sql = "select %s from %s where is_delete=0 limit %d,%d " % (tableAtrr, tableName, (pageIdx - 1) * pageSize, pageSize)
             sqlCount = "select %s from %s where is_delete=0" % (tableAtrr, tableName)
 
         # count = Common.countLength(sqlCount)
-        # print(sql)
+        print(sql)
         count = MysqlHelper().__cud(sqlCount)
 
         # select_paging = Common.mysqlExcute(sql)

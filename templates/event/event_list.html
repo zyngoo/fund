@@ -178,11 +178,11 @@
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传文件</button>
+{#                        <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传文件</button>#}
                         <button class="layui-btn layui-btn-submit" lay-submit="" lay-filter="demo2"
                                 onclick="mysubmit()">提交
                         </button>
-                        <button class="layui-btn layui-btn-primary" lay-filter type="submit" action="cache">暂存</button>
+{#                        <button class="layui-btn layui-btn-primary" lay-filter type="submit" action="cache">暂存</button>#}
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
@@ -249,8 +249,9 @@
                             dataType: "json",
                             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',//防止乱码
                             success: function (data) {
-                                if (data == '2') {
+                                if (data == 'ok') {
                                     {#alert('成功');#}
+                                    layer.msg("删除成功！")
                                 }
                             }
 
@@ -266,7 +267,7 @@
                         async: true,
                         success: function (msg) {
                             {#参与人员#}
-                            console.log(msg);
+                            {#console.log(msg);#}
                             var value = '';
                             for (var i = 0; i < msg.length; i++) {
                                 {#alert(msg[i].fund_name);#}
@@ -279,6 +280,7 @@
 
                             }
                             {#alert(value);#}
+                            $("#fund_name").empty();
                             $("#fund_name").append(value);
 
                             {#类型选择#}
@@ -296,6 +298,7 @@
                                 }
 
                             }
+                            $("#event_type").empty();
                             $("#event_type").append(contantVal);
 
 
@@ -310,6 +313,7 @@
                                     remindVal += "<option value ='" + remindList[i] + "'>" + remindList[i] + "</option>";
                                 }
                             }
+                            $("#event_status").empty();
                             $("#event_status").append(remindVal);
 
                             {#表单渲染#}
@@ -401,6 +405,11 @@
                 data: dataSend,
                 success: function (data) {
                     {#alert('成功');#}
+                    if (data === "ok") {
+                        layer.msg("修改成功")
+                    } else {
+                        layer.msg("修改失败")
+                    }
                     setTimeout(function(){
                         window.location.href = "/jijin/event/";
                     });

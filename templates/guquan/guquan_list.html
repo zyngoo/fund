@@ -207,25 +207,25 @@
 
             <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;margin-bottom: 20px;">
 
-                <legend>联系人信息</legend>
-                <div class="layui-form-item">
-                    <label class="layui-form-label"></label>
-                    <button class="layui-btn" type="button">
-                        <i class="layui-icon">&#xe608;</i> 添加
-                    </button>
-                </div>
+                <legend style="margin-top: 30px;margin-bottom: 20px;">联系人信息</legend>
+{#                <div class="layui-form-item">#}
+{#                    <label class="layui-form-label"></label>#}
+{#                    <button class="layui-btn" type="button">#}
+{#                        <i class="layui-icon">&#xe608;</i> 添加#}
+{#                    </button>#}
+{#                </div>#}
 
             </fieldset>
 
             <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;margin-bottom: 20px;">
 
-                <legend>合作投资方信息</legend>
-                <div class="layui-form-item">
-                    <label class="layui-form-label"></label>
-                    <button class="layui-btn" type="button">
-                        <i class="layui-icon">&#xe608;</i> 添加
-                    </button>
-                </div>
+                <legend style="margin-top: 30px;margin-bottom: 20px;">合作投资方信息</legend>
+{#                <div class="layui-form-item">#}
+{#                    <label class="layui-form-label"></label>#}
+{#                    <button class="layui-btn" type="button">#}
+{#                        <i class="layui-icon">&#xe608;</i> 添加#}
+{#                    </button>#}
+{#                </div>#}
 
             </fieldset>
 
@@ -452,25 +452,25 @@
 
             <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;margin-bottom: 20px;">
 
-                <legend>联系人信息</legend>
-                <div class="layui-form-item">
-                    <label class="layui-form-label"></label>
-                    <button class="layui-btn" type="button">
-                        <i class="layui-icon">&#xe608;</i> 添加
-                    </button>
-                </div>
+                <legend style="margin-top: 30px;margin-bottom: 20px;">联系人信息</legend>
+{#                <div class="layui-form-item">#}
+{#                    <label class="layui-form-label"></label>#}
+{#                    <button class="layui-btn" type="button">#}
+{#                        <i class="layui-icon">&#xe608;</i> 添加#}
+{#                    </button>#}
+{#                </div>#}
 
             </fieldset>
 
             <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;margin-bottom: 20px;">
 
-                <legend>合作投资方信息</legend>
-                <div class="layui-form-item">
-                    <label class="layui-form-label"></label>
-                    <button class="layui-btn" type="button">
-                        <i class="layui-icon">&#xe608;</i> 添加
-                    </button>
-                </div>
+                <legend style="margin-top: 30px;margin-bottom: 20px;">合作投资方信息</legend>
+{#                <div class="layui-form-item">#}
+{#                    <label class="layui-form-label"></label>#}
+{#                    <button class="layui-btn" type="button">#}
+{#                        <i class="layui-icon">&#xe608;</i> 添加#}
+{#                    </button>#}
+{#                </div>#}
 
             </fieldset>
 
@@ -564,7 +564,7 @@
                             }
 
                             {#alert(value);#}
-
+                            $("#executor").empty();
                             $("#executor").append(value2);
 
                             var index = layedit.build("abstract");
@@ -615,7 +615,7 @@
                                     value3 += "<option value='" + msg[i].fund_id + "' >" + msg[i].fundname + "</option>";
                                 }
                             }
-
+                            $("#jijin").empty();
                             $("#jijin").append(value3);
 
                             var project_state = ["审阅BP", "初步接触", "TS/DD", "过会投资", "投资服务", "项目结束"];
@@ -641,6 +641,7 @@
                                 {#alert(value);#}
                                 var idCast = "#" + list_Cast[li];
                                 {#alert(idCast);#}
+                                $(idCast).empty();
                                 $(idCast).append(value);
                             }
                             form.render();

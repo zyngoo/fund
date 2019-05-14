@@ -64,7 +64,7 @@ def calender_list_handle(request):
     # results = helper.dict_fetchall(sql)
     # print(request.path)
 
-    count, data = MysqlHelper().pagePagAll(request, "calender_list", "")
+    count, data = MysqlHelper().pagePagAll(request, "calender_list", "", "")
     # print("count: ", count)
     # print("data: ", data)
 
@@ -150,7 +150,7 @@ def event_list(request):
     # sql = "select title_id, event_name, fund_name, event_type, event_publisher, publish_date, event_status, event_content from event_list where is_delete=0"
     # data = MysqlHelper().dict_fetchall(sql)
 
-    count, data = MysqlHelper().pagePagAll(request, "event_list", "")
+    count, data = MysqlHelper().pagePagAll(request, "event_list", "", "")
 
     result = {}
     result["code"] = 0
@@ -165,14 +165,15 @@ def event_list(request):
 
 def event_add(request):
     if request.method == "POST":
-        print(request.POST)
+        # print(request.POST)
         sql = "insert into event_fund_event ("
         for key in request.POST:
-            sql = sql + key + ", "
-
+            if key != "file":
+                sql = sql + key + ", "
         sql = sql.rstrip(", ") + ") values ("
         for key in request.POST:
-            sql = sql + "\'" + request.POST.get(key) + "\'" + ", "
+            if key != "file":
+                sql = sql + "\'" + request.POST.get(key) + "\'" + ", "
         sql = sql.rstrip(", ") + ")"
 
         MysqlHelper().insert_sql(sql)
@@ -189,7 +190,7 @@ def event_delete(request):
     param = [id]
     MysqlHelper().update(sqlDelete, param)
 
-    return HttpResponse(json.dumps("2"))
+    return HttpResponse(json.dumps("ok"))
 
 
 def event_fund(request):
@@ -214,7 +215,7 @@ def event_edit(request):
 
     MysqlHelper().update(sql, params)
 
-    return HttpResponse(json.dumps("2"))
+    return HttpResponse(json.dumps("ok"))
 
 
 """
@@ -229,11 +230,11 @@ def jijin(request):
 def jijin_list(request):
     # sql = "select * from jijin_jijin where is_delete=0"
     # data = MysqlHelper().dict_fetchall(sql)
-    print(request.path)
+    # print(request.path)
 
-    count, data = MysqlHelper().pagePagAll(request, "jijin_jijin")
-    print("count: ", count)
-    print("data: ", data)
+    count, data = MysqlHelper().pagePagAll(request, "jijin_jijin", "", "")
+    # print("count: ", count)
+    # print("data: ", data)
     result = {}
     result["code"] = 0
     result["msg"] = ""
@@ -358,22 +359,27 @@ def guquan_list(request):
     if type == "technology":
         type = "科技产业"
         sql = "select * from guquan_list where is_delete=0 and project_industry=" + "\'" + type + "\'"
+        count, data = MysqlHelper().pagePagAll(request, "guquan_list", "", "project_industry='科技产业'")
     elif type == "internet":
         type = "互联网产业"
         sql = "select * from guquan_list where is_delete=0 and project_industry=" + "\'" + type + "\'"
+        count, data = MysqlHelper().pagePagAll(request, "guquan_list", "", "project_industry='互联网产业'")
     elif type == "medical":
         type = "医疗产业"
         sql = "select * from guquan_list where is_delete=0 and project_industry=" + "\'" + type + "\'"
+        count, data = MysqlHelper().pagePagAll(request, "guquan_list", "", "project_industry='医疗产业'")
     else:
         sql = "select * from guquan_list where is_delete=0"
+        count, data = MysqlHelper().pagePagAll(request, "guquan_list", "", "")
 
     # print(sql)
 
-    data = MysqlHelper().dict_fetchall(sql)
+    # count, data = MysqlHelper().pagePagAll(request, "guquan_list", "")
+    # data = MysqlHelper().dict_fetchall(sql)
     result = {}
     result["code"] = 0
     result["msg"] = ""
-    result["count"] = len(data)
+    result["count"] = count
     result["data"] = data
     # print(result)
     return JsonResponse(result)
