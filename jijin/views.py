@@ -414,7 +414,7 @@ def guquan_edit(request):
 def guquan_person(request):
     sqlPerson = "select * from fund_person"
     person = MysqlHelper().dict_fetchall(sqlPerson)
-
+    print(person)
     return HttpResponse(json.dumps(person))
 
 
