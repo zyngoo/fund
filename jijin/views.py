@@ -99,9 +99,9 @@ def calender_delete(requset):
     id = requset.POST.get('schedule_id')
     sqlDelete = 'update schedule_schedule set is_delete=1 where schedule_id=%s'
     param = [id]
-    MysqlHelper().update(sqlDelete, param)
+    result = MysqlHelper().update(sqlDelete, param)
 
-    return HttpResponse(json.dumps('ok'))
+    return HttpResponse(json.dumps(result))
 
 
 # 修改数据
@@ -117,10 +117,10 @@ def calender_edit(request):
         params.append(request.POST.get(key))
     print(params)
 
-    MysqlHelper().update(sql, params)
+    result = MysqlHelper().update(sql, params)
 
 
-    return HttpResponse(json.dumps('ok'))
+    return HttpResponse(json.dumps(result))
 
 
 #  取出shedule_person 数据表的id 与名字 组合成字典传送回去
@@ -188,9 +188,9 @@ def event_delete(request):
     id = request.POST.get("title_id")
     sqlDelete = "update event_fund_event set is_delete=1 where title_id=%s"
     param = [id]
-    MysqlHelper().update(sqlDelete, param)
+    result = MysqlHelper().update(sqlDelete, param)
 
-    return HttpResponse(json.dumps("ok"))
+    return HttpResponse(json.dumps(result))
 
 
 def event_fund(request):
@@ -213,9 +213,9 @@ def event_edit(request):
         params.append(request.POST.get(key))
     print(params)
 
-    MysqlHelper().update(sql, params)
+    result = MysqlHelper().update(sql, params)
 
-    return HttpResponse(json.dumps("ok"))
+    return HttpResponse(json.dumps(result))
 
 
 """
@@ -296,8 +296,8 @@ def jijin_delete(request):
     print(request.POST)
     sqlData = "update jijin_jijin set is_delete=1 where fund_id=%s"
     param = [id]
-    MysqlHelper().update(sqlData, param)
-    return HttpResponse(json.dumps("ok"))
+    result = MysqlHelper().update(sqlData, param)
+    return HttpResponse(json.dumps(result))
 
 
 def jijin_edit(request):
@@ -313,9 +313,9 @@ def jijin_edit(request):
         params.append(request.POST.get(key))
     # print(params)
 
-    MysqlHelper().update(sql, params)
+    resutl = MysqlHelper().update(sql, params)
 
-    return HttpResponse(json.dumps("2"))
+    return HttpResponse(json.dumps(resutl))
 
 
 def test(request):
@@ -389,8 +389,8 @@ def guquan_delete(request):
     id = request.POST.get("id")
     sql = "update guquan_management_technology set is_delete=1 where id=%s"
     param = [id]
-    MysqlHelper().update(sql, param)
-    return HttpResponse(json.dumps("ok"))
+    result = MysqlHelper().update(sql, param)
+    return HttpResponse(json.dumps(result))
 
 
 def guquan_edit(request):
@@ -406,9 +406,9 @@ def guquan_edit(request):
         params.append(request.POST.get(key))
     print(params)
 
-    MysqlHelper().update(sql, params)
+    result = MysqlHelper().update(sql, params)
 
-    return HttpResponse(json.dumps("ok"))
+    return HttpResponse(json.dumps(result))
 
 
 def guquan_person(request):
@@ -459,14 +459,7 @@ def market(request):
 def market_add(request):
     if request.method == "POST":
         print(request.POST)
-        return redirect("/jijin/market/")
-    return render(request, "market/market_add.html")
-
-
-def market_addGaikuang(request):
-    if request.method == "POST":
-        print(request.POST)
-        sql = "insert into market_management_gaikuang ("
+        sql = "insert into market_management ("
         for key in request.POST:
             sql = sql + key + ", "
         sql = sql.rstrip(", ") + ") values ("
@@ -480,52 +473,73 @@ def market_addGaikuang(request):
     return render(request, "market/market_add.html")
 
 
-def market_addDetail(request):
-    if request.method == "POST":
-        print(request.POST)
-        sql = "insert into market_management_detail ("
-        for key in request.POST:
-            sql = sql + key + ", "
-        sql = sql.rstrip(", ") + ") values ("
-        for key in request.POST:
-            sql = sql + "\'" + request.POST.get(key) + "\'" + ", "
-        sql = sql.rstrip(", ") + ")"
-        # print(sql)
-        MysqlHelper().insert_sql(sql)
-        return redirect("/jijin/market/")
-    return render(request, "market/market_add.html")
+# def market_addGaikuang(request):
+#     if request.method == "POST":
+#         print(request.POST)
+#         sql = "insert into market_management_gaikuang ("
+#         for key in request.POST:
+#             sql = sql + key + ", "
+#         sql = sql.rstrip(", ") + ") values ("
+#         for key in request.POST:
+#             sql = sql + "\'" + request.POST.get(key) + "\'" + ", "
+#         sql = sql.rstrip(", ") + ")"
+#         print(sql)
+#
+#         MysqlHelper().insert_sql(sql)
+#         return redirect("/jijin/market/")
+#     return render(request, "market/market_add.html")
+#
+#
+# def market_addDetail(request):
+#     if request.method == "POST":
+#         print(request.POST)
+#         sql = "insert into market_management_detail ("
+#         for key in request.POST:
+#             sql = sql + key + ", "
+#         sql = sql.rstrip(", ") + ") values ("
+#         for key in request.POST:
+#             sql = sql + "\'" + request.POST.get(key) + "\'" + ", "
+#         sql = sql.rstrip(", ") + ")"
+#         # print(sql)
+#         MysqlHelper().insert_sql(sql)
+#         return redirect("/jijin/market/")
+#     return render(request, "market/market_add.html")
 
 
 def market_delete(request):
     id = request.POST.get("id")
-    sql = "update market_management_gaikuang set is_delete=1 where id=%s"
+    sql = "update market_management set is_delete=1 where id=%s"
     param = [id]
-    MysqlHelper().update(sql, param)
-    return HttpResponse(json.dumps("ok"))
+    result = MysqlHelper().update(sql, param)
+    return HttpResponse(json.dumps(result))
 
 
 def market_list(request):
     type = (request.path).split("/")[-2]
     if type == "hongkong":
-        type = "港股"
-        sql = "select * from market_list where is_delete=0 and stock_type=" + "\'" + type + "\'"
+        # type = "港股"
+        # sql = "select * from market_list where is_delete=0 and stock_type=" + "\'" + type + "\'"
+        count, data = MysqlHelper().pagePagAll(request, "market_management", "", "stock_type='港股'")
     elif type == "A_share":
-        type = "A股"
-        sql = "select * from market_list where is_delete=0 and stock_type=" + "\'" + type + "\'"
+        # type = "A股"
+        # sql = "select * from market_list where is_delete=0 and stock_type=" + "\'" + type + "\'"
+        count, data = MysqlHelper().pagePagAll(request, "market_management", "", "stock_type='A股'")
     elif type == "US_stocks":
-        type = "美股"
-        sql = "select * from market_list where is_delete=0 and stock_type=" + "\'" + type + "\'"
+        # type = "美股"
+        # sql = "select * from market_list where is_delete=0 and stock_type=" + "\'" + type + "\'"
+        count, data = MysqlHelper().pagePagAll(request, "market_management", "", "stock_type='美股'")
     else:
-        sql = "select * from  market_list where is_delete=0"
+        # sql = "select * from  market_list where is_delete=0"
+        count, data = MysqlHelper().pagePagAll(request, "market_management", "", "")
 
-    print(sql)
-    data = MysqlHelper().dict_fetchall(sql)
+    # data = MysqlHelper().dict_fetchall(sql)
+    print("count", count)
     result = {}
     result["code"] = 0
     result["msg"] = ""
-    result["count"] = len(data)
+    result["count"] = count
     result["data"] = data
-    print(result)
+    # print(result)
     return JsonResponse(result)
 
 
@@ -539,9 +553,9 @@ def market_list(request):
 #
 #     return HttpResponse(json.dumps(detail_data))
 
-def gaikuang_edit(request):
+def market_edit(request):
     print(request.POST)
-    sql = "update market_management_gaikuang set "
+    sql = "update market_management set "
     for key in request.POST:
         sql = sql + key + "=%s, "
     sql = sql.rstrip(", ") + " where id=" + request.POST.get("id")
@@ -552,25 +566,25 @@ def gaikuang_edit(request):
         params.append(request.POST.get(key))
     print(params)
 
-    MysqlHelper().update(sql, params)
-    return HttpResponse(json.dumps("ok"))
+    result = MysqlHelper().update(sql, params)
+    return HttpResponse(json.dumps(result))
 
 
-def detail_edit(request):
-    # print(request.POST)
-    sql = "update market_management_gaikuang set "
-    for key in request.POST:
-        sql = sql + key + "=%s, "
-    sql = sql.rstrip(", ") + " where id=" + request.POST.get("detail_id")
-    # print(sql)
-
-    params = []
-    for key in request.POST:
-        params.append(request.POST.get(key))
-    # print(params)
-
-    MysqlHelper().update(sql, params)
-    return HttpResponse(json.dumps("ok"))
+# def detail_edit(request):
+#     # print(request.POST)
+#     sql = "update market_management_gaikuang set "
+#     for key in request.POST:
+#         sql = sql + key + "=%s, "
+#     sql = sql.rstrip(", ") + " where id=" + request.POST.get("detail_id")
+#     # print(sql)
+#
+#     params = []
+#     for key in request.POST:
+#         params.append(request.POST.get(key))
+#     # print(params)
+#
+#     MysqlHelper().update(sql, params)
+#     return HttpResponse(json.dumps("ok"))
 
 
 # 行业研究
@@ -615,8 +629,8 @@ def industry_delete(request):
     print(id)
     sql = "update research_industry_research set is_delete=1 where industry_research_id=%s"
     param = [id]
-    MysqlHelper().update(sql, param)
-    return HttpResponse(json.dumps("ok"))
+    result = MysqlHelper().update(sql, param)
+    return HttpResponse(json.dumps(result))
 
 
 def industry_person(request):
@@ -639,8 +653,8 @@ def industry_edit(request):
         params.append(request.POST.get(key))
     # print(params)
 
-    MysqlHelper().update(sql, params)
-    return HttpResponse(json.dumps("ok"))
+    result = MysqlHelper().update(sql, params)
+    return HttpResponse(json.dumps(result))
 
 
 # 审批流程
@@ -715,8 +729,8 @@ def cooperative_delete(request):
     print(id)
     sql = "update other_cooperative_organization set is_delete=1 where id=%s"
     param = [id]
-    MysqlHelper().update(sql, param)
-    return HttpResponse(json.dumps("ok"))
+    result = MysqlHelper().update(sql, param)
+    return HttpResponse(json.dumps(result))
 
 
 def cooperative_edit(request):
@@ -732,8 +746,8 @@ def cooperative_edit(request):
         params.append(request.POST.get(key))
     # print(params)
 
-    MysqlHelper().update(sql, params)
-    return HttpResponse(json.dumps("ok"))
+    result = MysqlHelper().update(sql, params)
+    return HttpResponse(json.dumps(result))
 
 
 def personnel(request):
@@ -774,8 +788,8 @@ def personnel_delete(request):
     print(id)
     sql = "update other_talent_pool set is_delete=1 where id=%s"
     param = [id]
-    MysqlHelper().update(sql, param)
-    return HttpResponse(json.dumps("ok"))
+    result = MysqlHelper().update(sql, param)
+    return HttpResponse(json.dumps(result))
 
 
 def personnel_edit(request):
@@ -791,8 +805,8 @@ def personnel_edit(request):
         params.append(request.POST.get(key))
     # print(params)
 
-    MysqlHelper().update(sql, params)
-    return HttpResponse(json.dumps("ok"))
+    result = MysqlHelper().update(sql, params)
+    return HttpResponse(json.dumps(result))
 
 
 # 中介机构
@@ -834,8 +848,8 @@ def agency_delete(request):
     # print(id)
     sql = "update other_intermediary_organ set is_delete=1 where id=%s"
     param = [id]
-    MysqlHelper().update(sql, param)
-    return HttpResponse(json.dumps("ok"))
+    result = MysqlHelper().update(sql, param)
+    return HttpResponse(json.dumps(result))
 
 
 def agency_edit(request):
@@ -849,8 +863,8 @@ def agency_edit(request):
     for key in request.POST:
         params.append(request.POST.get(key))
 
-    MysqlHelper().update(sql, params)
-    return HttpResponse(json.dumps("ok"))
+        result = MysqlHelper().update(sql, params)
+    return HttpResponse(json.dumps(result))
 
 
 # 消息
@@ -890,8 +904,8 @@ def message_delete(request):
     # print(id)
     sql = "update msg_mail_box set IsDelete=1 where ID=%s"
     param = [id]
-    MysqlHelper().update(sql, param)
-    return HttpResponse(json.dumps("ok"))
+    result = MysqlHelper().update(sql, param)
+    return HttpResponse(json.dumps(result))
 
 
 def SetRead(request):
@@ -899,5 +913,5 @@ def SetRead(request):
     # print(id)
     sql = "update msg_mail_relation set IsRead=1 where ID=%s"
     param = [id]
-    MysqlHelper().update(sql, param)
-    return HttpResponse(json.dumps("ok"))
+    result = MysqlHelper().update(sql, param)
+    return HttpResponse(json.dumps(result))

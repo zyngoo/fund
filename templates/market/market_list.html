@@ -18,7 +18,7 @@
         <thead>
         <tr>
             <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
-            <th lay-data="{field:'id', width:100, sort: true, fixed: true}">序号</th>
+            {#            <th lay-data="{field:'id', width:100, sort: true, fixed: true}">序号</th>#}
             <th lay-data="{field:'stock_number', sort: true, width:120}">股票编号</th>
             <th lay-data="{field:'stock_type', width:120}">中惠划分</th>
             <th lay-data="{field:'company', width:120}">公司名称</th>
@@ -38,1144 +38,1059 @@
 
 {% block mask %}
     <div class="layui-row" id="viewData" style="display: none">
-        <div class="layui-tab">
-            <ul class="layui-tab-title">
-                <li class="laui-this">概况</li>
-                <li>详细</li>
-            </ul>
 
-            <div class="layui-tab-content">
-                <div class="layui-tab-item layui-show">
-                    <form class="layui-form" method="post" action="">
+        <div style="top: 100px;">
 
-                        <fieldset class="layui-elem-field site-demo-button" style="margin-top: 20px;">
-                            {#                <div class="layui-form-item layui-form-label">#}
-                            {#                    <p style="font-size: 20px">基本信息</p>#}
-                            {#                </div>#}
-                            <legend>基本信息</legend>
-                            <div class="layui-form-item" style="margin-top: 30px">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">股票编号</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" id="stock_number_2" name="stock_number" autocomplete="off"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">中惠划分</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" id="stock_type_2" name="stock_type"
-                                               class="layui-input">
-                                    </div>
-                                </div>
+            <form class="layui-form" method="post" action="">
 
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">公司名称</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" id="company_2" name="company" class="layui-input">
-                                    </div>
-                                </div>
+                <fieldset class="layui-elem-field site-demo-button" style="margin-top: 20px;">
+                    {#                <div class="layui-form-item layui-form-label">#}
+                    {#                    <p style="font-size: 20px">基本信息</p>#}
+                    {#                </div>#}
+                    <legend>基本信息</legend>
+                    <div class="layui-form-item" style="margin-top: 30px">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">股票编号</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="stock_number_2" name="stock_number" autocomplete="off"
+                                       class="layui-input">
                             </div>
-
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">行业</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" id="indusrty_2" name="indusrty" class="layui-input"
-                                               style="float:right">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">股价</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" id="stock_money_2" name="stock_money"
-                                               placeholder="￥           元"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">价格更新时间</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="time" id="time_2" autocomplete="off"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">中惠划分</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="stock_type_2" name="stock_type"
+                                       class="layui-input">
                             </div>
+                        </div>
 
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">当前持仓</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="own" value="0" id="own_2" autocomplete="on" readonly
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">市值</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="market_value" id="market_value_2" value="0" readonly
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">成本</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="cost" id="cost_2" readonly value="0"
-                                               class="layui-input">
-                                    </div>
-                                </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">公司名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="company_2" name="company" class="layui-input">
                             </div>
+                        </div>
+                    </div>
 
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">盈亏</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" value="0" name="profit_loss" id="profit_loss_2" readonly
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">盈亏比例</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" value="0" name="porprotion" id="porprotion_2" readonly
-                                               class="layui-input">
-                                    </div>
-                                </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">行业</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="indusrty_2" name="indusrty" class="layui-input"
+                                       style="float:right">
                             </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">股价</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="stock_money_2" name="stock_money"
+                                       placeholder="￥           元"
+                                       class="layui-input">
+                            </div>
+                        </div>
 
-                            <div class="layui-form-item layui-form-text">
-                                <label class="layui-form-label">备注</label>
-                                <div class="layui-input-block">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">价格更新时间</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="time" id="time_2" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">当前持仓</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="own" value="0" id="own_2" autocomplete="on" readonly
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">市值</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="market_value" id="market_value_2" value="0" readonly
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">成本</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="cost" id="cost_2" readonly value="0"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">盈亏</label>
+                            <div class="layui-input-block">
+                                <input type="text" value="0" name="profit_loss" id="profit_loss_2" readonly
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">盈亏比例</label>
+                            <div class="layui-input-block">
+                                <input type="text" value="0" name="porprotion" id="porprotion_2" readonly
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">备注</label>
+                        <div class="layui-input-block">
                                     <textarea placeholder="请输入内容" id="abstract_2" class="layui-textarea"
                                               name="abstract"></textarea>
-                                </div>
-                            </div>
-                        </fieldset>
+                        </div>
+                    </div>
+                </fieldset>
 
-                        <fieldset class="layui-elem-field site-demo-button"
-                                  style="margin-top: 30px;margin-bottom: 20px;">
-
-                            <legend>交易明细</legend>
-                            <div class="layui-form-item" style="margin-top: 20px; bottom: 30px">
-                                <label class="layui-form-label"></label>
-                                <button class="layui-btn" type="button">
-                                    <i class="layui-icon">&#xe608;</i> 添加
-                                </button>
-                            </div>
-
-                        </fieldset>
-
-                    </form>
-                </div>
-
-
-                <div class="layui-tab-item">
-                    <form class="layui-form" method="post" action="">
-
-                        <fieldset class="layui-elem-field site-demo-button" style="margin-top: 20px;">
-                            {#                <div class="layui-form-item layui-form-label">#}
-                            {#                    <p style="font-size: 20px">基本信息</p>#}
-                            {#                </div>#}
-                            <legend>公司简介</legend>
-                            <div class="layui-form-item layui-form-text" style="margin-top: 30px">
-                                <label class="layui-form-label">主营业务</label>
-                                <div class="layui-input-block">
+                <fieldset class="layui-elem-field site-demo-button" style="margin-top: 20px;">
+                    {#                <div class="layui-form-item layui-form-label">#}
+                    {#                    <p style="font-size: 20px">基本信息</p>#}
+                    {#                </div>#}
+                    <legend>公司简介</legend>
+                    <div class="layui-form-item layui-form-text" style="margin-top: 30px">
+                        <label class="layui-form-label">主营业务</label>
+                        <div class="layui-input-block">
                                     <textarea placeholder="请输入内容" class="layui-textarea"
                                               id="main_business_2" name="main_business"></textarea>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">注册资金（人民币元）</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="registered_capital_2" name="registered_capital"
+                                       autocomplete="off"
+                                       class="layui-input">
                             </div>
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">注册资金（人民币元）</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" id="registered_capital_2" name="registered_capital"
-                                               autocomplete="off"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="layui-form-item layui-form-text">
-                                <label class="layui-form-label">公司概况</label>
-                                <div class="layui-input-block">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">公司概况</label>
+                        <div class="layui-input-block">
                                     <textarea placeholder="请输入内容" class="layui-textarea"
                                               id="company_overview_2" name="company_overview"></textarea>
-                                </div>
-                            </div>
+                        </div>
+                    </div>
 
-                        </fieldset>
+                </fieldset>
 
-                        <fieldset class="layui-elem-field site-demo-button"
-                                  style="margin-top: 30px;margin-bottom: 20px;">
-                            {#                <div class="layui-form-item layui-form-label">#}
-                            {#                    <p style="font-size: 20px">基本信息</p>#}
-                            {#                </div>#}
-                            <legend>主营收入构成</legend>
-                            <div class="layui-form-item layui-form-text" style="margin-top: 30px">
-                                <label class="layui-form-label">主营产品构成</label>
-                                <div class="layui-input-block">
+                <fieldset class="layui-elem-field site-demo-button"
+                          style="margin-top: 30px;margin-bottom: 20px;">
+                    {#                <div class="layui-form-item layui-form-label">#}
+                    {#                    <p style="font-size: 20px">基本信息</p>#}
+                    {#                </div>#}
+                    <legend>主营收入构成</legend>
+                    <div class="layui-form-item layui-form-text" style="margin-top: 30px">
+                        <label class="layui-form-label">主营产品构成</label>
+                        <div class="layui-input-block">
                                     <textarea placeholder="请输入内容" id="main_product_2" class="layui-textarea"
                                               name="main_product"></textarea>
-                                </div>
-                            </div>
+                        </div>
+                    </div>
 
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">总计收入</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" id="total_income_2" name="total_income" value="0"
-                                               autocomplete="off"
-                                               class="layui-input">
-                                    </div>
-                                </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">总计收入</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="total_income_2" name="total_income" value="0"
+                                       autocomplete="off"
+                                       class="layui-input">
                             </div>
+                        </div>
+                    </div>
 
-                            <div class="layui-form-item layui-form-text">
-                                <label class="layui-form-label">行业收入构成</label>
-                                <div class="layui-input-block">
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">行业收入构成</label>
+                        <div class="layui-input-block">
                                     <textarea placeholder="请输入内容" class="layui-textarea"
                                               id="main_industry_2" name="main_industry"></textarea>
-                                </div>
-                            </div>
+                        </div>
+                    </div>
 
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">总计收入</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="industry_income" value="0" autocomplete="off"
-                                               id="industry_income_2" class="layui-input">
-                                    </div>
-                                </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">总计收入</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="industry_income" value="0" autocomplete="off"
+                                       id="industry_income_2" class="layui-input">
                             </div>
+                        </div>
+                    </div>
 
-                            <div class="layui-form-item layui-form-text">
-                                <label class="layui-form-label">地区收入构成</label>
-                                <div class="layui-input-block">
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">地区收入构成</label>
+                        <div class="layui-input-block">
                                     <textarea placeholder="请输入内容" class="layui-textarea"
                                               id="main_regional_2" name="main_regional"></textarea>
-                                </div>
-                            </div>
+                        </div>
+                    </div>
 
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">总计收入</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="regional_income" value="0" autocomplete="off"
-                                               id="regional_income_2" class="layui-input">
-                                    </div>
-                                </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">总计收入</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="regional_income" value="0" autocomplete="off"
+                                       id="regional_income_2" class="layui-input">
                             </div>
-                        </fieldset>
+                        </div>
+                    </div>
+                </fieldset>
 
-                        <fieldset class="layui-elem-field site-demo-button"
-                                  style="margin-top: 30px;margin-bottom: 20px;">
-                            {#                <div class="layui-form-item layui-form-label">#}
-                            {#                    <p style="font-size: 20px">基本信息</p>#}
-                            {#                </div>#}
-                            <legend>分红配送</legend>
+                <fieldset class="layui-elem-field site-demo-button"
+                          style="margin-top: 30px;margin-bottom: 20px;">
+                    {#                <div class="layui-form-item layui-form-label">#}
+                    {#                    <p style="font-size: 20px">基本信息</p>#}
+                    {#                </div>#}
+                    <legend>分红配送</legend>
 
-                            <div class="layui-form-item" style="margin-top: 30px">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">上市时间</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="market_time" id="market_time_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">发行价格（元）</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" value="0" name="issue_price" id="issue_price_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">发行数量</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" value="0" name="issue_number" id="issue_number_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
+                    <div class="layui-form-item" style="margin-top: 30px">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">上市时间</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="market_time" id="market_time_2"
+                                       class="layui-input">
                             </div>
-                            <div class="layui-form-item layui-form-text">
-                                <label class="layui-form-label">涉及概念</label>
-                                <div class="layui-input-block">
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">发行价格（元）</label>
+                            <div class="layui-input-block">
+                                <input type="text" value="0" name="issue_price" id="issue_price_2"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">发行数量</label>
+                            <div class="layui-input-block">
+                                <input type="text" value="0" name="issue_number" id="issue_number_2"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">涉及概念</label>
+                        <div class="layui-input-block">
                                     <textarea placeholder="请输入内容" class="layui-textarea"
                                               id="involved_concept_2" name="involved_concept"></textarea>
-                                </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">收入方式</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="income_type" id="income_type_2" class="layui-input">
                             </div>
-
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">收入方式</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="income_type" id="income_type_2" class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">金额</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" placeholder="￥           万" name="money" id="money_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">年度</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="year" id="year_2" class="layui-input">
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">金额</label>
+                            <div class="layui-input-block">
+                                <input type="text" placeholder="￥           万" name="money" id="money_2"
+                                       class="layui-input">
                             </div>
-
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">方案</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="progarm" id="progarm_2" class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">除权日</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="the_day" id="the_day_2" class="layui-input">
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">年度</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="year" id="year_2" class="layui-input">
                             </div>
+                        </div>
+                    </div>
 
-                        </fieldset>
-
-                        <fieldset class="layui-elem-field site-demo-button"
-                                  style="margin-top: 30px;margin-bottom: 20px;">
-                            {#                <div class="layui-form-item layui-form-label">#}
-                            {#                    <p style="font-size: 20px">基本信息</p>#}
-                            {#                </div>#}
-                            <legend>关键指标</legend>
-
-                            <div class="layui-form-item" style="margin-top: 30px">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">每股收益</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" value="0" name="per_share" id="per_share_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">每股净资产</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" value="0" name="per_asset" id="per_asset_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">每股资本公积</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" value="0" name="per_capital" id="per_capital_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">方案</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="progarm" id="progarm_2" class="layui-input">
                             </div>
-
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label"
-                                           style="width: 100px;padding-left: 0px;padding-right: 0px;">每股末分配利润</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" value="0" name="per_profit" id="per_profit_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label"
-                                           style="width: 100px;padding-left: 0px;padding-right: 0px;">每股经营性现金流</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" value="0" name="per_cash" id="per_cash_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">除权日</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="the_day" id="the_day_2" class="layui-input">
                             </div>
-                        </fieldset>
-                        <fieldset class="layui-elem-field site-demo-button"
-                                  style="margin-top: 30px;margin-bottom: 20px;">
-                            {#                <div class="layui-form-item layui-form-label">#}
-                            {#                    <p style="font-size: 20px">基本信息</p>#}
-                            {#                </div>#}
-                            <legend>利润表</legend>
+                        </div>
+                    </div>
 
-                            <div class="layui-form-item" style="margin-top: 30px">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">营业总收入</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" placeholder="￥           万" name="total_money"
-                                               id="total_money_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">净利润</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" placeholder="￥           万" name="net_profit"
-                                               id="net_profit_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">营业利润</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" placeholder="￥           万" name="operate_profit"
-                                               id="operate_profit_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
+                </fieldset>
+
+                <fieldset class="layui-elem-field site-demo-button"
+                          style="margin-top: 30px;margin-bottom: 20px;">
+                    {#                <div class="layui-form-item layui-form-label">#}
+                    {#                    <p style="font-size: 20px">基本信息</p>#}
+                    {#                </div>#}
+                    <legend>关键指标</legend>
+
+                    <div class="layui-form-item" style="margin-top: 30px">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">每股收益</label>
+                            <div class="layui-input-block">
+                                <input type="text" value="0" name="per_share" id="per_share_2"
+                                       class="layui-input">
                             </div>
-
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label"
-                                           style="width: 100px;padding-left: 0px;padding-right: 0px;">营业利润增长率</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" placeholder="             %" name="operate_profit_rate"
-                                               id="operate_profit_rate_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label"
-                                           style="width: 100px;padding-left: 0px;padding-right: 0px;">营业总收入增长率</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" placeholder="             %" name="total_money_rate"
-                                               id="total_money_rate_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label"
-                                           style="width: 100px;padding-left: 0px;padding-right: 0px;">净利润增长率</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" placeholder="             %" name="net_profit_rate"
-                                               id="net_profit_rate_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">每股净资产</label>
+                            <div class="layui-input-block">
+                                <input type="text" value="0" name="per_asset" id="per_asset_2"
+                                       class="layui-input">
                             </div>
-                        </fieldset>
-
-                        <fieldset class="layui-elem-field site-demo-button"
-                                  style="margin-top: 30px;margin-bottom: 20px;">
-                            {#                <div class="layui-form-item layui-form-label">#}
-                            {#                    <p style="font-size: 20px">基本信息</p>#}
-                            {#                </div>#}
-                            <legend>股本</legend>
-
-                            <div class="layui-form-item" style="margin-top: 30px">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">总股本</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="total_capital_stock" id="total_capital_stock_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">流通A股</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="toatal_A_stock" id="toatal_A_stock_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">流通A股占比</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" placeholder="            %" name="porprotion_A_stock"
-                                               id="porprotion_A_stock_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">每股资本公积</label>
+                            <div class="layui-input-block">
+                                <input type="text" value="0" name="per_capital" id="per_capital_2"
+                                       class="layui-input">
                             </div>
-                        </fieldset>
-                        <fieldset class="layui-elem-field site-demo-button"
-                                  style="margin-top: 30px;margin-bottom: 20px;">
-                            {#                <div class="layui-form-item layui-form-label">#}
-                            {#                    <p style="font-size: 20px">基本信息</p>#}
-                            {#                </div>#}
-                            <legend>股东</legend>
+                        </div>
+                    </div>
 
-                            <div class="layui-form-item" style="margin-top: 30px">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">股东人数</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="shareholder_number" id="shareholder_number_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">上期股东人数</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="older_shareholder_number"
-                                               id="older_shareholder_number_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">较上期变化</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" placeholder="             %" name="shareholder_porprotion"
-                                               id="shareholder_porprotion_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label"
+                                   style="width: 100px;padding-left: 0px;padding-right: 0px;">每股末分配利润</label>
+                            <div class="layui-input-block">
+                                <input type="text" value="0" name="per_profit" id="per_profit_2"
+                                       class="layui-input">
                             </div>
-
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">筹码集中度</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="chip" id="chip_2" class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">人均流通股</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="per_capita_shares" id="per_capita_shares_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">人均持股金额</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="per_capita_sharehold" id="per_capita_sharehold_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label"
+                                   style="width: 100px;padding-left: 0px;padding-right: 0px;">每股经营性现金流</label>
+                            <div class="layui-input-block">
+                                <input type="text" value="0" name="per_cash" id="per_cash_2"
+                                       class="layui-input">
                             </div>
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label"
-                                           style="width: 100px;padding-left: 0px;padding-right: 0px;">机构投资者占比</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" placeholder="               %" name="investor_porprotion"
-                                               id="investor_porprotion_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">十大流通股东</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="top_ten_shareholder" id="top_ten_shareholder_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">股东名称</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="shareholser_name" id="shareholser_name_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="layui-elem-field site-demo-button"
+                          style="margin-top: 30px;margin-bottom: 20px;">
+
+                    <legend>利润表</legend>
+
+                    <div class="layui-form-item" style="margin-top: 30px">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">营业总收入</label>
+                            <div class="layui-input-block">
+                                <input type="text" placeholder="￥           万" name="total_money"
+                                       id="total_money_2"
+                                       class="layui-input">
                             </div>
-
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">占比</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="detail_porprotion" placeholder="           %"
-                                               id="detail_porprotion_2"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">变动</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="alteration" id="alteration_2" class="layui-input">
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">净利润</label>
+                            <div class="layui-input-block">
+                                <input type="text" placeholder="￥           万" name="net_profit"
+                                       id="net_profit_2"
+                                       class="layui-input">
                             </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">营业利润</label>
+                            <div class="layui-input-block">
+                                <input type="text" placeholder="￥           万" name="operate_profit"
+                                       id="operate_profit_2"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
 
-                        </fieldset>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label"
+                                   style="width: 100px;padding-left: 0px;padding-right: 0px;">营业利润增长率</label>
+                            <div class="layui-input-block">
+                                <input type="text" placeholder="             %" name="operate_profit_rate"
+                                       id="operate_profit_rate_2"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label"
+                                   style="width: 100px;padding-left: 0px;padding-right: 0px;">营业总收入增长率</label>
+                            <div class="layui-input-block">
+                                <input type="text" placeholder="             %" name="total_money_rate"
+                                       id="total_money_rate_2"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label"
+                                   style="width: 100px;padding-left: 0px;padding-right: 0px;">净利润增长率</label>
+                            <div class="layui-input-block">
+                                <input type="text" placeholder="             %" name="net_profit_rate"
+                                       id="net_profit_rate_2"
+                                       class="layui-input">
+                            </div>
+                        </div>
 
-                    </form>
-                </div>
-            </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="layui-elem-field site-demo-button"
+                          style="margin-top: 30px;margin-bottom: 20px;">
+
+                    <legend>股本</legend>
+
+                    <div class="layui-form-item" style="margin-top: 30px">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">总股本</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="total_capital_stock" id="total_capital_stock_2"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">流通A股</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="toatal_A_stock" id="toatal_A_stock_2"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">流通A股占比</label>
+                            <div class="layui-input-block">
+                                <input type="text" placeholder="            %" name="porprotion_A_stock"
+                                       id="porprotion_A_stock_2"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="layui-elem-field site-demo-button"
+                          style="margin-top: 30px;margin-bottom: 20px;">
+
+                    <legend>股东</legend>
+
+                    <div class="layui-form-item" style="margin-top: 30px">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">股东人数</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="shareholder_number" id="shareholder_number_2"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">上期股东人数</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="older_shareholder_number"
+                                       id="older_shareholder_number_2"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">较上期变化</label>
+                            <div class="layui-input-block">
+                                <input type="text" placeholder="             %" name="shareholder_porprotion"
+                                       id="shareholder_porprotion_2"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">筹码集中度</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="chip" id="chip_2" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">人均流通股</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="per_capita_shares" id="per_capita_shares_2"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">人均持股金额</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="per_capita_sharehold" id="per_capita_sharehold_2"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label"
+                                   style="width: 100px;padding-left: 0px;padding-right: 0px;">机构投资者占比</label>
+                            <div class="layui-input-block">
+                                <input type="text" placeholder="               %" name="investor_porprotion"
+                                       id="investor_porprotion_2"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">十大流通股东</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="top_ten_shareholder" id="top_ten_shareholder_2"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">股东名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="shareholser_name" id="shareholser_name_2"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">占比</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="detail_porprotion" placeholder="           %"
+                                       id="detail_porprotion_2"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">变动</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="alteration" id="alteration_2" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+            </form>
         </div>
+
     </div>
 
     <div class="layui-row" id="popUpdateTest" style="display: none">
-        <div class="layui-tab">
-            <ul class="layui-tab-title">
-                <li class="laui-this">概况</li>
-                <li>详细</li>
-            </ul>
+        <div style="top: 100px;">
+            <form class="layui-form" method="post" action="">
 
-            <div class="layui-tab-content">
-                <div class="layui-tab-item layui-show">
-                    <form class="layui-form" method="post">
+                <fieldset class="layui-elem-field site-demo-button" style="margin-top: 20px;">
 
-                        <fieldset class="layui-elem-field site-demo-button" style="margin-top: 20px;">
-                            {#                <div class="layui-form-item layui-form-label">#}
-                            {#                    <p style="font-size: 20px">基本信息</p>#}
-                            {#                </div>#}
-                            <label id="id" style="display:none"></label>
-                            <legend>基本信息</legend>
-                            <div class="layui-form-item" style="margin-top: 30px">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">股票编号</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" id="stock_number" name="stock_number" class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">中惠划分</label>
-                                    <div class="layui-input-block">
-                                        <select id="stock_type" name="stock_type" style="width: 97px;">
-                                            {#                                            <option value="">请选择</option>#}
-                                            {#                                            <option value="港股">港股</option>#}
-                                            {#                                            <option value="A股">A股</option>#}
-                                            {#                                            <option value="美股">美股</option>#}
-
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">公司名称</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" id="company" name="company" class="layui-input">
-                                    </div>
-                                </div>
+                    <label id="id" style="display:none"></label>
+                    <legend>基本信息</legend>
+                    <div class="layui-form-item" style="margin-top: 30px">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">股票编号</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="stock_number" name="stock_number" class="layui-input">
                             </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">中惠划分</label>
+                            <div class="layui-input-block">
+                                <select id="stock_type" name="stock_type" style="width: 97px;">
+                                    {#                                            <option value="">请选择</option>#}
+                                    {#                                            <option value="港股">港股</option>#}
+                                    {#                                            <option value="A股">A股</option>#}
+                                    {#                                            <option value="美股">美股</option>#}
 
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">行业</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" id="indusrty" name="indusrty" class="layui-input"
-                                               style="float:right">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">股价</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" id="stock_money" name="stock_money"
-                                               placeholder="￥           元"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">价格更新时间</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="time" id="time" autocomplete="off" class="layui-input">
-                                    </div>
-                                </div>
-
+                                </select>
                             </div>
+                        </div>
 
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">当前持仓</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="own" value="0" id="own" autocomplete="on" readonly
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">市值</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="market_value" id="market_value" value="0" readonly
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">成本</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="cost" id="cost" readonly value="0"
-                                               class="layui-input">
-                                    </div>
-                                </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">公司名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="company" name="company" class="layui-input">
                             </div>
+                        </div>
+                    </div>
 
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">盈亏</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" value="0" name="profit_loss" id="profit_loss" readonly
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">盈亏比例</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" value="0" name="porprotion" id="porprotion" readonly
-                                               class="layui-input">
-                                    </div>
-                                </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">行业</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="indusrty" name="indusrty" class="layui-input"
+                                       style="float:right">
                             </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">股价</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="stock_money" name="stock_money"
+                                       placeholder="￥           元"
+                                       class="layui-input">
+                            </div>
+                        </div>
 
-                            <div class="layui-form-item layui-form-text">
-                                <label class="layui-form-label">备注</label>
-                                <div class="layui-input-block">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">价格更新时间</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="time" id="time" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">当前持仓</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="own" value="0" id="own" autocomplete="on" readonly
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">市值</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="market_value" id="market_value" value="0" readonly
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">成本</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="cost" id="cost" readonly value="0"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">盈亏</label>
+                            <div class="layui-input-block">
+                                <input type="text" value="0" name="profit_loss" id="profit_loss" readonly
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">盈亏比例</label>
+                            <div class="layui-input-block">
+                                <input type="text" value="0" name="porprotion" id="porprotion" readonly
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">备注</label>
+                        <div class="layui-input-block">
                                     <textarea placeholder="请输入内容" id="abstract" class="layui-textarea"
                                               name="abstract"></textarea>
-                                </div>
-                            </div>
-                        </fieldset>
-
-                        <fieldset class="layui-elem-field site-demo-button"
-                                  style="margin-top: 30px;margin-bottom: 20px;">
-
-                            <legend>交易明细</legend>
-                            <div class="layui-form-item" style="margin-top: 20px; bottom: 30px">
-                                <label class="layui-form-label"></label>
-                                <button class="layui-btn" type="button">
-                                    <i class="layui-icon">&#xe608;</i> 添加
-                                </button>
-                            </div>
-
-                        </fieldset>
-
-                        <div class="layui-form-item">
-                            <div class="layui-input-block">
-                                <button class="layui-btn" onclick="mysubmit_gaikuang()" lay-submit=""
-                                        lay-filter="demo2">提交
-                                </button>
-                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                            </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="layui-elem-field site-demo-button" style="margin-top: 20px;">
 
 
-                <div class="layui-tab-item">
-                    <form class="layui-form" method="post">
-
-                        <fieldset class="layui-elem-field site-demo-button" style="margin-top: 20px;">
-                            {#                <div class="layui-form-item layui-form-label">#}
-                            {#                    <p style="font-size: 20px">基本信息</p>#}
-                            {#                </div>#}
-                            <label id="detail_id" style="display:none"></label>
-                            <legend>公司简介</legend>
-                            <div class="layui-form-item layui-form-text" style="margin-top: 30px">
-                                <label class="layui-form-label">主营业务</label>
-                                <div class="layui-input-block">
+                    <legend>公司简介</legend>
+                    <div class="layui-form-item layui-form-text" style="margin-top: 30px">
+                        <label class="layui-form-label">主营业务</label>
+                        <div class="layui-input-block">
                                     <textarea placeholder="请输入内容" class="layui-textarea"
                                               id="main_business" name="main_business"></textarea>
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">注册资金（人民币元）</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="registered_capital" id="registered_capital"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="layui-form-item layui-form-text">
-                                <label class="layui-form-label">公司概况</label>
-                                <div class="layui-input-block">
-                                    <textarea placeholder="请输入内容" class="layui-textarea"
-                                              id="company_overview" name="company_overview"></textarea>
-                                </div>
-                            </div>
-
-                        </fieldset>
-
-                        <fieldset class="layui-elem-field site-demo-button"
-                                  style="margin-top: 30px;margin-bottom: 20px;">
-                            {#                <div class="layui-form-item layui-form-label">#}
-                            {#                    <p style="font-size: 20px">基本信息</p>#}
-                            {#                </div>#}
-                            <legend>主营收入构成</legend>
-                            <div class="layui-form-item layui-form-text" style="margin-top: 30px">
-                                <label class="layui-form-label">主营产品构成</label>
-                                <div class="layui-input-block">
-                                    <textarea placeholder="请输入内容" id="main_product" class="layui-textarea"
-                                              name="main_product"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">总计收入</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" id="total_income" name="total_income" autocomplete="off"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="layui-form-item layui-form-text">
-                                <label class="layui-form-label">行业收入构成</label>
-                                <div class="layui-input-block">
-                                    <textarea placeholder="请输入内容" class="layui-textarea"
-                                              id="main_industry" name="main_industry"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">总计收入</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="industry_income" value="0" autocomplete="off"
-                                               id="industry_income" class="layui-input">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="layui-form-item layui-form-text">
-                                <label class="layui-form-label">地区收入构成</label>
-                                <div class="layui-input-block">
-                                    <textarea placeholder="请输入内容" class="layui-textarea"
-                                              id="main_regional" name="main_regional"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">总计收入</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="regional_income" value="0" autocomplete="off"
-                                               id="regional_income" class="layui-input">
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-
-                        <fieldset class="layui-elem-field site-demo-button"
-                                  style="margin-top: 30px;margin-bottom: 20px;">
-                            {#                <div class="layui-form-item layui-form-label">#}
-                            {#                    <p style="font-size: 20px">基本信息</p>#}
-                            {#                </div>#}
-                            <legend>分红配送</legend>
-
-                            <div class="layui-form-item" style="margin-top: 30px">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">上市时间</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="market_time" id="market_time"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label"
-                                           style="width: 100px;padding-left: 0px;padding-right: 0px;">发行价格（元）</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="issue_price" id="issue_price"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">发行数量</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="issue_number" id="issue_number"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="layui-form-item layui-form-text">
-                                <label class="layui-form-label">涉及概念</label>
-                                <div class="layui-input-block">
-                                    <textarea placeholder="请输入内容" class="layui-textarea"
-                                              id="involved_concept" name="involved_concept"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">收入方式</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="income_type" id="income_type" class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">金额</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" placeholder="￥           万" name="money" id="money"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">年度</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="year" id="year" class="layui-input">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">方案</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="progarm" id="progarm" class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">除权日</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="the_day" id="the_day" class="layui-input">
-                                    </div>
-                                </div>
-                            </div>
-
-                        </fieldset>
-
-                        <fieldset class="layui-elem-field site-demo-button"
-                                  style="margin-top: 30px;margin-bottom: 20px;">
-                            {#                <div class="layui-form-item layui-form-label">#}
-                            {#                    <p style="font-size: 20px">基本信息</p>#}
-                            {#                </div>#}
-                            <legend>关键指标</legend>
-
-                            <div class="layui-form-item" style="margin-top: 30px">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">每股收益</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="per_share" id="per_share"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">每股净资产</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" value="0" name="per_asset" id="per_asset"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">每股资本公积</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="per_capital" id="per_capital"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label"
-                                           style="width: 100px;padding-left: 0px;padding-right: 0px;">每股末分配利润</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="per_profit" id="per_profit" class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label"
-                                           style="width: 100px;padding-left: 0px;padding-right: 0px;">每股经营性现金流</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="per_cash" id="per_cash" class="layui-input">
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="layui-elem-field site-demo-button"
-                                  style="margin-top: 30px;margin-bottom: 20px;">
-                            {#                <div class="layui-form-item layui-form-label">#}
-                            {#                    <p style="font-size: 20px">基本信息</p>#}
-                            {#                </div>#}
-                            <legend>利润表</legend>
-
-                            <div class="layui-form-item" style="margin-top: 30px">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">营业总收入</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" placeholder="￥           万" name="total_money"
-                                               id="total_money"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">净利润</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" placeholder="￥           万" name="net_profit" id="net_profit"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">营业利润</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" placeholder="￥           万" name="operate_profit"
-                                               id="operate_profit"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label"
-                                           style="width: 100px;padding-left: 0px;padding-right: 0px;">营业利润增长率</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" placeholder="             %" name="operate_profit_rate"
-                                               id="operate_profit_rate"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label"
-                                           style="width: 100px;padding-left: 0px;padding-right: 0px;">营业总收入增长率</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" placeholder="             %" name="total_money_rate"
-                                               id="total_money_rate"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label"
-                                           style="width: 100px;padding-left: 0px;padding-right: 0px;">净利润增长率</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" placeholder="             %" name="net_profit_rate"
-                                               id="net_profit_rate"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-
-                            </div>
-                        </fieldset>
-
-                        <fieldset class="layui-elem-field site-demo-button"
-                                  style="margin-top: 30px;margin-bottom: 20px;">
-                            {#                <div class="layui-form-item layui-form-label">#}
-                            {#                    <p style="font-size: 20px">基本信息</p>#}
-                            {#                </div>#}
-                            <legend>股本</legend>
-
-                            <div class="layui-form-item" style="margin-top: 30px">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">总股本</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="total_capital_stock" id="total_capital_stock"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">流通A股</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="toatal_A_stock" id="toatal_A_stock"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">流通A股占比</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" placeholder="            %" name="porprotion_A_stock"
-                                               id="porprotion_A_stock"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="layui-elem-field site-demo-button"
-                                  style="margin-top: 30px;margin-bottom: 20px;">
-                            {#                <div class="layui-form-item layui-form-label">#}
-                            {#                    <p style="font-size: 20px">基本信息</p>#}
-                            {#                </div>#}
-                            <legend>股东</legend>
-
-                            <div class="layui-form-item" style="margin-top: 30px">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">股东人数</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="shareholder_number" id="shareholder_number"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">上期股东人数</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="older_shareholder_number" id="older_shareholder_number"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">较上期变化</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" placeholder="             %" name="shareholder_porprotion"
-                                               id="shareholder_porprotion"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">筹码集中度</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="chip" id="chip" class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">人均流通股</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="per_capita_shares" id="per_capita_shares"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">人均持股金额</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="per_capita_sharehold" id="per_capita_sharehold"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label"
-                                           style="width: 100px;padding-left: 0px;padding-right: 0px;">机构投资者占比</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" placeholder="               %" name="investor_porprotion"
-                                               id="investor_porprotion"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">十大流通股东</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="top_ten_shareholder" id="top_ten_shareholder"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">股东名称</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="shareholser_name" id="shareholser_name"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">占比</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="detail_porprotion" placeholder="           %"
-                                               id="detail_porprotion"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">变动</label>
-                                    <div class="layui-input-block">
-                                        <input type="text" name="alteration" id="alteration" class="layui-input">
-                                    </div>
-                                </div>
-                            </div>
-
-                        </fieldset>
-
-                        <div class="layui-form-item">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">注册资金（人民币元）</label>
                             <div class="layui-input-block">
-                                <button class="layui-btn" onclick="mysubmit_detail()" lay-submit="" lay-filter="demo2">
-                                    提交
-                                </button>
-                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                <input type="text" name="registered_capital" id="registered_capital"
+                                       class="layui-input">
                             </div>
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">公司概况</label>
+                        <div class="layui-input-block">
+                                    <textarea placeholder="请输入内容" class="layui-textarea"
+                                              id="company_overview" name="company_overview"></textarea>
+                        </div>
+                    </div>
 
+                </fieldset>
+
+                <fieldset class="layui-elem-field site-demo-button"
+                          style="margin-top: 30px;margin-bottom: 20px;">
+
+                    <legend>主营收入构成</legend>
+                    <div class="layui-form-item layui-form-text" style="margin-top: 30px">
+                        <label class="layui-form-label">主营产品构成</label>
+                        <div class="layui-input-block">
+                                    <textarea placeholder="请输入内容" id="main_product" class="layui-textarea"
+                                              name="main_product"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">总计收入</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="total_income" name="total_income" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">行业收入构成</label>
+                        <div class="layui-input-block">
+                                    <textarea placeholder="请输入内容" class="layui-textarea"
+                                              id="main_industry" name="main_industry"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">总计收入</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="industry_income" value="0" autocomplete="off"
+                                       id="industry_income" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">地区收入构成</label>
+                        <div class="layui-input-block">
+                                    <textarea placeholder="请输入内容" class="layui-textarea"
+                                              id="main_regional" name="main_regional"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">总计收入</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="regional_income" value="0" autocomplete="off"
+                                       id="regional_income" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="layui-elem-field site-demo-button"
+                          style="margin-top: 30px;margin-bottom: 20px;">
+
+                    <legend>分红配送</legend>
+
+                    <div class="layui-form-item" style="margin-top: 30px">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">上市时间</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="market_time" id="market_time"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label"
+                                   style="width: 100px;padding-left: 0px;padding-right: 0px;">发行价格（元）</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="issue_price" id="issue_price"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">发行数量</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="issue_number" id="issue_number"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">涉及概念</label>
+                        <div class="layui-input-block">
+                                    <textarea placeholder="请输入内容" class="layui-textarea"
+                                              id="involved_concept" name="involved_concept"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">收入方式</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="income_type" id="income_type" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">金额</label>
+                            <div class="layui-input-block">
+                                <input type="text" placeholder="￥           万" name="money" id="money"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">年度</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="year" id="year" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">方案</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="progarm" id="progarm" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">除权日</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="the_day" id="the_day" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+                <fieldset class="layui-elem-field site-demo-button"
+                          style="margin-top: 30px;margin-bottom: 20px;">
+
+                    <legend>关键指标</legend>
+
+                    <div class="layui-form-item" style="margin-top: 30px">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">每股收益</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="per_share" id="per_share"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">每股净资产</label>
+                            <div class="layui-input-block">
+                                <input type="text" value="0" name="per_asset" id="per_asset"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">每股资本公积</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="per_capital" id="per_capital"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label"
+                                   style="width: 100px;padding-left: 0px;padding-right: 0px;">每股末分配利润</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="per_profit" id="per_profit" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label"
+                                   style="width: 100px;padding-left: 0px;padding-right: 0px;">每股经营性现金流</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="per_cash" id="per_cash" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="layui-elem-field site-demo-button"
+                          style="margin-top: 30px;margin-bottom: 20px;">
+
+                    <legend>利润表</legend>
+
+                    <div class="layui-form-item" style="margin-top: 30px">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">营业总收入</label>
+                            <div class="layui-input-block">
+                                <input type="text" placeholder="￥           万" name="total_money"
+                                       id="total_money"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">净利润</label>
+                            <div class="layui-input-block">
+                                <input type="text" placeholder="￥           万" name="net_profit" id="net_profit"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">营业利润</label>
+                            <div class="layui-input-block">
+                                <input type="text" placeholder="￥           万" name="operate_profit"
+                                       id="operate_profit"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label"
+                                   style="width: 100px;padding-left: 0px;padding-right: 0px;">营业利润增长率</label>
+                            <div class="layui-input-block">
+                                <input type="text" placeholder="             %" name="operate_profit_rate"
+                                       id="operate_profit_rate"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label"
+                                   style="width: 100px;padding-left: 0px;padding-right: 0px;">营业总收入增长率</label>
+                            <div class="layui-input-block">
+                                <input type="text" placeholder="             %" name="total_money_rate"
+                                       id="total_money_rate"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label"
+                                   style="width: 100px;padding-left: 0px;padding-right: 0px;">净利润增长率</label>
+                            <div class="layui-input-block">
+                                <input type="text" placeholder="             %" name="net_profit_rate"
+                                       id="net_profit_rate"
+                                       class="layui-input">
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+
+                <fieldset class="layui-elem-field site-demo-button"
+                          style="margin-top: 30px;margin-bottom: 20px;">
+
+                    <legend>股本</legend>
+
+                    <div class="layui-form-item" style="margin-top: 30px">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">总股本</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="total_capital_stock" id="total_capital_stock"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">流通A股</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="toatal_A_stock" id="toatal_A_stock"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">流通A股占比</label>
+                            <div class="layui-input-block">
+                                <input type="text" placeholder="            %" name="porprotion_A_stock"
+                                       id="porprotion_A_stock"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="layui-elem-field site-demo-button"
+                          style="margin-top: 30px;margin-bottom: 20px;">
+
+                    <legend>股东</legend>
+
+                    <div class="layui-form-item" style="margin-top: 30px">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">股东人数</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="shareholder_number" id="shareholder_number"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">上期股东人数</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="older_shareholder_number" id="older_shareholder_number"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">较上期变化</label>
+                            <div class="layui-input-block">
+                                <input type="text" placeholder="             %" name="shareholder_porprotion"
+                                       id="shareholder_porprotion"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">筹码集中度</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="chip" id="chip" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">人均流通股</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="per_capita_shares" id="per_capita_shares"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">人均持股金额</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="per_capita_sharehold" id="per_capita_sharehold"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label"
+                                   style="width: 100px;padding-left: 0px;padding-right: 0px;">机构投资者占比</label>
+                            <div class="layui-input-block">
+                                <input type="text" placeholder="               %" name="investor_porprotion"
+                                       id="investor_porprotion"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">十大流通股东</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="top_ten_shareholder" id="top_ten_shareholder"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">股东名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="shareholser_name" id="shareholser_name"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">占比</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="detail_porprotion" placeholder="           %"
+                                       id="detail_porprotion"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">变动</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="alteration" id="alteration" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" onclick="mysubmit_gaikuang()" lay-submit=""
+                                lay-filter="demo2">提交
+                        </button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 {% endblock %}
 
@@ -1207,23 +1122,6 @@
                 var data = obj.data;
 
                 if (obj.event === "detail") {
-                    {#$.ajax({#}
-                    {#    url: "/jijin/market/detail_data/",#}
-                    {#    type: "POST",#}
-                    {#    data: {"id": data.id},#}
-                    {#    dataType: "json",#}
-                    {#    async: true,#}
-                    {#    success: function (detail_data) {#}
-                    {#        console.log(detail_data);#}
-                    {#layer.alert(JSON.stringify(detail_data));#}
-                    {#        for (var num in detail_data){#}
-                    {#            for(var key in detail_data[num]){#}
-                    {#                var idName = "#" + key + "_2";#}
-                    {#                $(idName).val(detail_data[num][key]);#}
-                    {#            }#}
-                    {#        }#}
-                    {#    }#}
-
 
                     layer.open({
                         type: 1,
@@ -1265,7 +1163,7 @@
                             contantVal += "<option value='" + type[i] + "'>" + type[i] + "</option>";
                         }
                     }
-
+                    $("#stock_type").empty();
                     $("#stock_type").append(contantVal);
                     form.render();
 
@@ -1273,7 +1171,7 @@
                         type: 1,
                         area: ["1030px", "500px"],
                         content: $("#popUpdateTest"),
-                        shade: 0,
+                        shade: 0.3,
                         success: function () {
                             for (var key in data) {
                                 var idName = "#" + key;
@@ -1311,7 +1209,12 @@
 
         function mysubmit_gaikuang() {
             var list = ["id", "stock_number", "stock_type", "company", "indusrty", "stock_money", "time",
-                "own", "market_value", "cost", "profit_loss", "porprotion", "abstract"];
+                "own", "market_value", "cost", "profit_loss", "porprotion", "abstract",  "main_business", "registered_capital", "company_overview", "main_product", "total_income", "main_industry",
+                "industry_income", "main_regional", "regional_income", "market_time", "issue_price", "issue_number",
+                "involved_concept", "income_type", "money", "year", "progarm", "the_day", "per_share", "per_asset", "per_capital", "per_profit", "per_cash",
+                "total_money", "net_profit", "operate_profit", "operate_profit_rate", "total_money_rate", "net_profit_rate", "total_capital_stock",
+                "toatal_A_stock", "porprotion_A_stock", "shareholder_number", "older_shareholder_number", "shareholder_porprotion", "chip",
+                "per_capita_shares", "per_capita_sharehold", "investor_porprotion", "top_ten_shareholder", "shareholser_name", "detail_porprotion", "alteration"];
             var value = [];
             for (var li in list) {
                 li = $("#" + list[li]).val();
@@ -1327,7 +1230,7 @@
             console.log(dataSend);
 
             $.ajax({
-                url: "/jijin/market/gaikuang_edit/",
+                url: "/jijin/market/market_edit/",
                 type: "POST",
                 async: false,
                 dataType: "json",
@@ -1339,7 +1242,7 @@
                         layer.msg("修改失败")
                     }
                     setTimeout(function () {
-                        window.location.href = "/jijin/guquan/";
+                        window.location.href = "/jijin/market/";
                     });
                     {#console.log(data)#}
                 }
@@ -1388,10 +1291,8 @@
                 }
             })
 
-
         }
 
     </script>
-
 
 {% endblock %}

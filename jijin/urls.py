@@ -62,8 +62,8 @@ urlpatterns = [
     path("market/US_stocks/", views.market),
 
     path("market/add/", views.market_add),
-    path("market/add_gaikuang/", views.market_addGaikuang),
-    path("market/add_detail/", views.market_addDetail),
+    # path("market/add_gaikuang/", views.market_addGaikuang),
+    # path("market/add_detail/", views.market_addDetail),
     # path("market/test/", views.market),
     path("market/list_handle/", views.market_list),
     path("market/list_handle/hongkong/", views.market_list),
@@ -71,8 +71,8 @@ urlpatterns = [
     path("market/list_handle/US_stocks/", views.market_list),
     # path("market/detail_data/", views.detail_data),
     path("market/market_delete/", views.market_delete),
-    path("market/gaikuang_edit/", views.gaikuang_edit),
-    path("market/detail_edit/", views.detail_edit),
+    path("market/market_edit/", views.market_edit),
+    # path("market/detail_edit/", views.detail_edit),
 
 
     # 行业研究

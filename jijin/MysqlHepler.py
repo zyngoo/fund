@@ -21,11 +21,26 @@ class MysqlHelper:
             self.conn.commit()
             cs1.close()
             self.conn.close()
+            print("MysqlHelper to CURD Data Number: ",rows)
+            return "ok"
+        except Exception as e:
+            print("mysqlhelper_exception: ", e)
+            self.conn.rollback()
+            return "error"
+
+    def retrieve(self, sql, params=[]):
+        try:
+            cs1 = self.conn.cursor()
+            rows = cs1.execute(sql, params)
+            self.conn.commit()
+            cs1.close()
+            self.conn.close()
             print("MysqlHelper to get Data Number: ",rows)
             return rows
         except Exception as e:
             print("mysqlhelper_exception: ", e)
             self.conn.rollback()
+            return 0
 
 
     def fetchone(self, sql, params=[]):
@@ -100,7 +115,7 @@ class MysqlHelper:
 
         # count = Common.countLength(sqlCount)
         print(sql)
-        count = MysqlHelper().__cud(sqlCount)
+        count = MysqlHelper().retrieve(sqlCount)
 
         # select_paging = Common.mysqlExcute(sql)
         select_paging = MysqlHelper().dict_fetchall(sql)

@@ -2,15 +2,9 @@
 
 {% block content %}
 
-    <div class="layui-tab">
-        <ul class="layui-tab-title">
-            <li class="laui-this">概况</li>
-            <li>详细</li>
-        </ul>
+   <div style="top: 100px;">
 
-        <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show">
-                <form class="layui-form" method="post" action="/jijin/market/add_gaikuang/">
+       <form class="layui-form" method="post" action="">
 
                     <fieldset class="layui-elem-field site-demo-button" style="margin-top: 20px;">
                         {#                <div class="layui-form-item layui-form-label">#}
@@ -116,35 +110,18 @@
                         </div>
                     </fieldset>
 
-                    <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;margin-bottom: 20px;">
-
-                        <legend>交易明细</legend>
-                        <div class="layui-form-item"  style="margin-top: 20px; bottom: 30px">
-                            <label class="layui-form-label"></label>
-                            <button class="layui-btn" type="button">
-                                <i class="layui-icon">&#xe608;</i> 添加
-                            </button>
-                        </div>
-
-                    </fieldset>
-
-                    <div class="layui-form-item">
-                        <div class="layui-input-block">
-                            <button class="layui-btn" lay-submit="" lay-filter="demo2">提交</button>
-                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-
-            <div class="layui-tab-item">
-                <form class="layui-form" method="post" action="/jijin/market/add_detail/">
-
+{#                    <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;margin-bottom: 20px;">#}
+{##}
+{#                        <legend>交易明细</legend>#}
+{#                        <div class="layui-form-item"  style="margin-top: 20px; bottom: 30px">#}
+{#                            <label class="layui-form-label"></label>#}
+{#                            <button class="layui-btn" type="button">#}
+{#                                <i class="layui-icon">&#xe608;</i> 添加#}
+{#                            </button>#}
+{#                        </div>#}
+{##}
+{#                    </fieldset>#}
                     <fieldset class="layui-elem-field site-demo-button" style="margin-top: 20px;">
-                        {#                <div class="layui-form-item layui-form-label">#}
-                        {#                    <p style="font-size: 20px">基本信息</p>#}
-                        {#                </div>#}
                         <legend>公司简介</legend>
                         <div class="layui-form-item layui-form-text" style="margin-top: 30px">
                             <label class="layui-form-label">主营业务</label>
@@ -170,9 +147,6 @@
                     </fieldset>
 
                     <fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;margin-bottom: 20px;">
-                        {#                <div class="layui-form-item layui-form-label">#}
-                        {#                    <p style="font-size: 20px">基本信息</p>#}
-                        {#                </div>#}
                         <legend>主营收入构成</legend>
                         <div class="layui-form-item layui-form-text" style="margin-top: 30px">
                             <label class="layui-form-label">主营产品构成</label>
@@ -529,6 +503,7 @@
 
                     </fieldset>
 
+
                     <div class="layui-form-item">
                         <div class="layui-input-block">
                             <button class="layui-btn" lay-submit="" lay-filter="demo2">提交</button>
@@ -536,8 +511,7 @@
                         </div>
                     </div>
                 </form>
-            </div>
-        </div>
+
     </div>
 
 {% endblock %}
