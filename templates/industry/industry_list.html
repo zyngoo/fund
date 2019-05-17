@@ -278,29 +278,24 @@
                     <legend>研究报告</legend>
 
                     <div class="layui-form-item" style="margin-top: 20px;">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">研究报告</label>
-                            <div class="layui-input-block">
-                                <input type="text" id="research_file_2" name="research_file_2" class="layui-input">
-                            </div>
+                        <label class="layui-form-label">研究报告</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="research_file_2" name="research_file_2" class="layui-input">
                         </div>
                     </div>
 
                     <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">参考资料</label>
-                            <div class="layui-input-block">
-                                <input type="text" id="reference_file_2" name="reference_file_2" class="layui-input">
-                            </div>
+                        <label class="layui-form-label">参考资料</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="reference_file_2" name="reference_file_2" class="layui-input">
                         </div>
                     </div>
 
+
                     <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">测试文档</label>
-                            <div class="layui-input-block">
-                                <input type="text" id="test_file_2" name="test_file_2" class="layui-input">
-                            </div>
+                        <label class="layui-form-label">测试文档</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="test_file_2" name="test_file_2" class="layui-input">
                         </div>
                     </div>
 
@@ -626,7 +621,7 @@
 
         function mysubmit() {
             var list = ["industry_research_id", "industry_research_name", "industry_research_state", "create_creater", "person_id", "industry", "project_label",
-                "project_member", "abstract", "situation", "project_source","research_file", "reference_file", "test_file"];
+                "project_member", "abstract", "situation", "project_source", "research_file", "reference_file", "test_file"];
             var value = [];
             for (var li in list) {
                 li = $("#" + list[li]).val();

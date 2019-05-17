@@ -613,12 +613,13 @@ def industry_add(request):
 
 
 def industry_list(request):
-    sql = "select * from industry_list where is_delete=0"
-    data = MysqlHelper().dict_fetchall(sql)
+    # sql = "select * from industry_list where is_delete=0"
+    # data = MysqlHelper().dict_fetchall(sql)
+    count, data = MysqlHelper().pagePagAll(request, "industry_list", "", "")
     result = {}
     result["code"] = 0
     result["msg"] = ""
-    result["count"] = len(data)
+    result["count"] = count
     result["data"] = data
     # print(result)
     return JsonResponse(result)
@@ -705,7 +706,7 @@ def cooperative_add(request):
         for key in request.POST:
             sql = sql + "\'" + request.POST.get(key) + "\'" + ", "
         sql = sql.rstrip(", ") + ")"
-        print(sql)
+        # print(sql)
         MysqlHelper().insert_sql(sql)
         return redirect("/jijin/cooperative/")
 
@@ -713,12 +714,13 @@ def cooperative_add(request):
 
 
 def cooperative_list(request):
-    sql = "select * from other_cooperative_organization where is_delete=0"
-    data = MysqlHelper().dict_fetchall(sql)
+    # sql = "select * from other_cooperative_organization where is_delete=0"
+    # data = MysqlHelper().dict_fetchall(sql)
+    count, data = MysqlHelper().pagePagAll(request, "other_cooperative_organization", "", "")
     result = {}
     result["code"] = 0
     result["msg"] = ""
-    result["count"] = len(data)
+    result["count"] = count
     result["data"] = data
     # print(result)
     return JsonResponse(result)
@@ -759,10 +761,12 @@ def personnel_add(request):
         print(request.POST)
         sql = "insert into other_talent_pool ("
         for key in request.POST:
-            sql = sql + key + ", "
+            if key != "file":
+                sql = sql + key + ", "
         sql = sql.rstrip(", ") + ") values ("
         for key in request.POST:
-            sql = sql + "\'" + request.POST.get(key) + "\'" + ", "
+            if key != "file":
+                sql = sql + "\'" + request.POST.get(key) + "\'" + ", "
         sql = sql.rstrip(", ") + ")"
         print(sql)
         MysqlHelper().insert_sql(sql)
@@ -772,12 +776,13 @@ def personnel_add(request):
 
 
 def personnel_list(request):
-    sql = "select * from other_talent_pool where is_delete=0"
-    data = MysqlHelper().dict_fetchall(sql)
+    # sql = "select * from other_talent_pool where is_delete=0"
+    # data = MysqlHelper().dict_fetchall(sql)
+    count, data = MysqlHelper().pagePagAll(request, "other_talent_pool", "", "")
     result = {}
     result["code"] = 0
     result["msg"] = ""
-    result["count"] = len(data)
+    result["count"] = count
     result["data"] = data
     # print(result)
     return JsonResponse(result)
@@ -832,12 +837,13 @@ def agency_add(request):
 
 
 def agency_list(request):
-    sql = "select * from other_intermediary_organ where is_delete=0"
-    data = MysqlHelper().dict_fetchall(sql)
+    # sql = "select * from other_intermediary_organ where is_delete=0"
+    # data = MysqlHelper().dict_fetchall(sql)
+    count, data = MysqlHelper().pagePagAll(request, "other_intermediary_organ", "", "")
     result = {}
     result["code"] = 0
     result["msg"] = ""
-    result["count"] = len(data)
+    result["count"] = count
     result["data"] = data
     print(result)
     return JsonResponse(result)

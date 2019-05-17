@@ -84,12 +84,8 @@
 
                     <div class="layui-form-item">
                         <label class="layui-form-label">简历</label>
-                        <button type="button" class="layui-btn" id="file1">
-                            <i class="layui-icon">&#xe67c;</i>上传文件
-                        </button>
-                        <input type="hidden" id="resume_file_2" name="resume_file" value=""/>
-                        <div class="layui-upload-list">
-                            <p id="demoText_2"></p>
+                        <div class="layui-input-block">
+                            <input type="text" id="resume_2" name="resume_2" class="layui-input">
                         </div>
                     </div>
 
@@ -193,7 +189,6 @@
                 , laydate = layui.laydate;
 
 
-
             //监听表格复选框选择
             table.on('checkbox(demo)', function (obj) {
                 console.log(obj); //选中行的相关数据
@@ -202,6 +197,7 @@
             //监听工具条
             table.on('tool(demo)', function (obj) {
                 var data = obj.data;
+                var resume = data.resume_file.substring(data.resume_file.lastIndexOf("/") + 1);
                 if (obj.event === 'detail') {
                     {#layer.msg('ID：' + data.id + ' 的查看操作');#}
                     layer.open({
@@ -215,6 +211,7 @@
                                 var idName = '#' + key + "_2";
                                 $(idName).val(data[key]);
                             }
+                            $(resume_2).val(resume);
 
                         }
                     });
@@ -274,7 +271,6 @@
                                     });
                                 }
                             });
-
 
 
                         }
