@@ -499,10 +499,13 @@
     <script>
 
 
+
+
+
         var label = [{"id": 1, "name": "电力"}, {"id": 2, "name": "热力"}, {"id": 3, "name": "燃气及水产"}, {
             "id": 4,
             "name": "供应业"
-        }, {"id": 5, "name": "能源业"}];
+        }, {"id": 5, "name": "能源业"}, {"id": 6, "name": "应试教育"}, {"id": 7, "name": "新车汽车"}, {"id": 8, "name": "二手汽车"}, {"id": 9, "name": "手游"}, {"id": 10, "name": "电商"}, {"id": 11, "name": "视频"}, {"id": 12, "name": "旅游"}, {"id": 13, "name": "二次元"}, {"id": 14, "name": "互联网金融"}];
 
         function getPersonData() {
 
@@ -567,24 +570,6 @@
                 elem: "#creat_time"
             });
 
-            var $ = layui.$, active = {
-                getCheckData: function () {
-                    var checkStatus = table.checkStatus("idTest")
-                        , data = checkStatus.data;
-                    layer.alert(JSON.stringify(data));
-                }
-
-                , getCheckLength: function () {
-                    var checkStatus = table.checkStatus("idTest")
-                        , data = checkStatus.data;
-                    layer.msg("选中了：" + data.length + " 个");
-                }
-
-                , isAll: function () {
-                    var checkStatus = table.checkStatus("idTest");
-                    layer.msg(checkStatus.isAll ? "全选" : "未全选")
-                }
-            };
 
             {#var test ;#}
             {#function test_fun(){#}
@@ -769,6 +754,25 @@
 
             {#console.log(labelData);#}
             {#console.log(projectMemberData);#}
+
+            var $ = layui.$, active = {
+                getCheckData: function () {
+                    var checkStatus = table.checkStatus("idTest")
+                        , data = checkStatus.data;
+                    layer.alert(JSON.stringify(data));
+                }
+
+                , getCheckLength: function () {
+                    var checkStatus = table.checkStatus("idTest")
+                        , data = checkStatus.data;
+                    layer.msg("选中了：" + data.length + " 个");
+                }
+
+                , isAll: function () {
+                    var checkStatus = table.checkStatus("idTest");
+                    layer.msg(checkStatus.isAll ? "全选" : "未全选")
+                }
+            };
 
 
             var uploadInst = upload.render({

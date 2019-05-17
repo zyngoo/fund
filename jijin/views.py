@@ -636,7 +636,7 @@ def industry_delete(request):
 def industry_person(request):
     sqlPerson = "select * from fund_person"
     person = MysqlHelper().dict_fetchall(sqlPerson)
-    print(person)
+    # print(person)
     return HttpResponse(json.dumps(person))
 
 
