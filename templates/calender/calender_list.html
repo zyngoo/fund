@@ -22,23 +22,23 @@
         <button class="layui-btn" data-type="isAll">验证是否全选</button>
     </div>
 
-        <table class="layui-table" lay-data="{ url:'/jijin/calender/list_handle/', page:true, id:'idTest'}"
-               lay-filter="demo">
-            <thead>
-            <tr>
-                <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
-                <th lay-data="{field:'schedule_id', width:100, sort: true, fixed: true}">ID</th>
-                <th lay-data="{field:'schedule_name', width:100, edit:'text'}">日程名</th>
-                <th lay-data="{field:'person_name', width:120, sort: true,edit:'text'}">参与人员</th>
-                <th lay-data="{field:'association_name', width:120, edit:'text'}">关联</th>
-                <th lay-data="{field:'start_time', width:200}">开始时间</th>
-                <th lay-data="{field:'end_time', width:200, sort: true}">结束时间</th>
-                <th lay-data="{fixed: 'right', width:180, align:'center', toolbar: '#barDemo'}"></th>
-            </tr>
-            </thead>
-        </table>
+    <table class="layui-table" lay-data="{ url:'/jijin/calender/list_handle/', page:true, id:'idTest'}"
+           lay-filter="demo">
+        <thead>
+        <tr>
+            <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
+            <th lay-data="{field:'schedule_id', width:100, sort: true, fixed: true}">ID</th>
+            <th lay-data="{field:'schedule_name', width:100, edit:'text'}">日程名</th>
+            <th lay-data="{field:'person_name', width:120, sort: true,edit:'text'}">参与人员</th>
+            <th lay-data="{field:'association_name', width:120, edit:'text'}">关联</th>
+            <th lay-data="{field:'start_time', width:200}">开始时间</th>
+            <th lay-data="{field:'end_time', width:200, sort: true}">结束时间</th>
+            <th lay-data="{fixed: 'right', width:180, align:'center', toolbar: '#barDemo'}"></th>
+        </tr>
+        </thead>
+    </table>
 
-{#    <table class="layui-hide" id="test"></table>#}
+    {#    <table class="layui-hide" id="test"></table>#}
 
 {% endblock %}
 
@@ -314,6 +314,23 @@
 
 
     <script>
+
+        function getCalenderData() {
+            $.ajax({
+                url: "/jijin/calender/calender_user/",
+                type: "POST",
+                dataType: "json",
+                async: false,
+                success: function (msg) {
+                    CalenderData = msg
+                }
+            });
+            return CalenderData;
+        }
+
+        var CalenderData = getCalenderData();
+
+
         layui.use(['table', "form", "laydate", "laypage"], function () {
             var table = layui.table
                 , form = layui.form
@@ -410,102 +427,92 @@
                     });
                 } else if (obj.event === 'edit') {
                     var schedule_id = obj.data.schedule_id;
-                    $.ajax({
-                        url: "/jijin/calender/calender_user/",
-                        type: "POST",
-                        dataType: "json",
-                        async: true,
-                        success: function (msg) {
-                            {#参与人员#}
-                            console.log(msg);
-                            var value = '';
-                            for (var i = 0; i < msg.length; i++) {
-                                {#alert(msg[i])#}
-                                if (obj.data.person_name == msg[i].person_name) {
-                                    value += "<option value='" + msg[i].person_id + "' selected >" + msg[i].person_name + "</option>";
-                                } else {
-                                    value += "<option value='" + msg[i].person_id + "'>" + msg[i].person_name + "</option>";
 
-                                }
-
-                            }
-                            {#alert(value);#}
-                            $("#person_name").empty();
-                            $("#person_name").append(value);
-
-                            {#关联选择#}
-                            var contactList = ['股权直投', '二级市场', '地产'];
-                            var contactList_id = [0, 1, 2];
-                            {#alert(JSON.stringify(obj.data))#}
-                            var contantVal = '';
-                            for (var i = 0; i < contactList.length; i++) {
-                                {#alert(msg[i])#}
-                                if (obj.data.association_name == contactList[i]) {
-                                    contantVal += "<option value='" + contactList_id[i] + "' selected >" + contactList[i] + "</option>";
-                                } else {
-                                    contantVal += "<option value='" + contactList_id[i] + "'>" + contactList[i] + "</option>";
-
-                                }
-
-                            }
-                            $("#association_name").empty();
-                            $("#association_name").append(contantVal);
-
-                            {#重复选择#}
-                            var repeatList = ["不重复", "每日", "每周", "每月", "每年"];
-                            var repeatList_id = [0, 1, 2, 3, 4];
-                            var repeatVal = "";
-                            for (var i = 0; i < repeatList.length; i++) {
-                                if (obj.data.time_select == repeatList[i]) {
-                                    repeatVal += "<option value ='" + repeatList_id[i] + "' selected >" + repeatList[i] + "</option>";
-                                } else {
-                                    repeatVal += "<option value ='" + repeatList_id[i] + "'>" + repeatList[i] + "</option>";
-                                }
-                            }
-                            $("#time_select").empty();
-                            $("#time_select").append(repeatVal);
-
-                            {#提醒选择#}
-                            var remindList = ["不提醒", "提前一小时", "提前一天", "提前一周"];
-                            var remindList_id = [0, 1, 2, 3];
-
-                            var remindVal = "";
-                            for (var i = 0; i < remindList.length; i++) {
-                                if (obj.data.remind_name == remindList[i]) {
-                                    remindVal += "<option value ='" + remindList_id[i] + "' selected >" + remindList[i] + "</option>";
-                                } else {
-                                    remindVal += "<option value ='" + remindList_id[i] + "'>" + remindList[i] + "</option>";
-                                }
-                            }
-                            $("#remind_name").empty();
-                            $("#remind_name").append(remindVal);
-
-                            {#是否公开#}
-                            var content = "";
-                            if (data.is_public === "on") {
-                                content = ' <input id="is_public" type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest">'
-                            } else {
-                                content = ' <input id="is_public" type="checkbox" name="open" lay-skin="switch" lay-filter="switchTest">'
-                            }
-                            $("#test3").empty();
-                            $("#test3").append(content);
-
-                            var eventContent = "";
-                            if (data.is_all_day_event === "on") {
-                                eventContent = '<input id="is_all_day_event" type="checkbox" checked="" name="open2" lay-skin="switch" lay-filter="switchTest">'
-                                ;
-                            } else {
-                                eventContent = '<input id="is_all_day_event" type="checkbox"  name="open2" lay-skin="switch" lay-filter="switchTest">'
-                                ;
-                            }
-                            $("#test4").empty();
-                            $("#test4").append(eventContent);
-
-                            {#表单渲染#}
-                            form.render();
+                    var value = '';
+                    for (var i = 0; i < CalenderData.length; i++) {
+                        {#alert(msg[i])#}
+                        if (obj.data.person_name == CalenderData[i].person_name) {
+                            value += "<option value='" + CalenderData[i].person_id + "' selected >" + CalenderData[i].person_name + "</option>";
+                        } else {
+                            value += "<option value='" + CalenderData[i].person_id + "'>" + CalenderData[i].person_name + "</option>";
 
                         }
-                    });
+
+                    }
+                    {#alert(value);#}
+                    $("#person_name").empty();
+                    $("#person_name").append(value);
+
+                    {#关联选择#}
+                    var contactList = ['股权直投', '二级市场', '地产'];
+                    var contactList_id = [0, 1, 2];
+                    {#alert(JSON.stringify(obj.data))#}
+                    var contantVal = '';
+                    for (var i = 0; i < contactList.length; i++) {
+                        {#alert(msg[i])#}
+                        if (obj.data.association_name == contactList[i]) {
+                            contantVal += "<option value='" + contactList_id[i] + "' selected >" + contactList[i] + "</option>";
+                        } else {
+                            contantVal += "<option value='" + contactList_id[i] + "'>" + contactList[i] + "</option>";
+
+                        }
+
+                    }
+                    $("#association_name").empty();
+                    $("#association_name").append(contantVal);
+
+                    {#重复选择#}
+                    var repeatList = ["不重复", "每日", "每周", "每月", "每年"];
+                    var repeatList_id = [0, 1, 2, 3, 4];
+                    var repeatVal = "";
+                    for (var i = 0; i < repeatList.length; i++) {
+                        if (obj.data.time_select == repeatList[i]) {
+                            repeatVal += "<option value ='" + repeatList_id[i] + "' selected >" + repeatList[i] + "</option>";
+                        } else {
+                            repeatVal += "<option value ='" + repeatList_id[i] + "'>" + repeatList[i] + "</option>";
+                        }
+                    }
+                    $("#time_select").empty();
+                    $("#time_select").append(repeatVal);
+
+                    {#提醒选择#}
+                    var remindList = ["不提醒", "提前一小时", "提前一天", "提前一周"];
+                    var remindList_id = [0, 1, 2, 3];
+
+                    var remindVal = "";
+                    for (var i = 0; i < remindList.length; i++) {
+                        if (obj.data.remind_name == remindList[i]) {
+                            remindVal += "<option value ='" + remindList_id[i] + "' selected >" + remindList[i] + "</option>";
+                        } else {
+                            remindVal += "<option value ='" + remindList_id[i] + "'>" + remindList[i] + "</option>";
+                        }
+                    }
+                    $("#remind_name").empty();
+                    $("#remind_name").append(remindVal);
+
+                    {#是否公开#}
+                    var content = "";
+                    if (data.is_public === "on") {
+                        content = ' <input id="is_public" type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest">'
+                    } else {
+                        content = ' <input id="is_public" type="checkbox" name="open" lay-skin="switch" lay-filter="switchTest">'
+                    }
+                    $("#test3").empty();
+                    $("#test3").append(content);
+
+                    var eventContent = "";
+                    if (data.is_all_day_event === "on") {
+                        eventContent = '<input id="is_all_day_event" type="checkbox" checked="" name="open2" lay-skin="switch" lay-filter="switchTest">'
+                        ;
+                    } else {
+                        eventContent = '<input id="is_all_day_event" type="checkbox"  name="open2" lay-skin="switch" lay-filter="switchTest">'
+                        ;
+                    }
+                    $("#test4").empty();
+                    $("#test4").append(eventContent);
+
+                    {#表单渲染#}
+                    form.render();
 
                     layer.open({
                         //layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
@@ -515,18 +522,12 @@
                         content: $("#popUpdateTest"),//引用的弹出层的页面层的方式加载修改界面表单
                         shade: 0.3,
                         success: function (x, y) {
-
                             for (var key in data) {
                                 var idName = '#' + key;
                                 $(idName).val(data[key]);
                             }
-
                         }
                     });
-
-
-                    //动态向表传递赋值可以参看文章进行修改界面的更新前数据的显示，当然也是异步请求的要数据的修改数据的获取
-                    //getFormValue(obj, data);
                 }
 
 
