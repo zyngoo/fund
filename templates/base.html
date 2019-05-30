@@ -87,19 +87,55 @@
                 {% endif %}
 
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="/jijin/guquan/">股权直投管理</a>
+                    {% if active_nav == "guanquan" %}
+                        <a class="layui-this" href="javascript:;">股权直投管理</a>
+                    {% else %}
+                        <a class="" href="javascript:;">股权直投管理</a>
+                    {% endif %}
+                    {#                    <a  href="javascript:;">股权直投管理</a>#}
+
                     <dl class="layui-nav-child">
-                        <dd><a href="/jijin/guquan/technology/">科技产业</a></dd>
-                        <dd><a href="/jijin/guquan/internet/">互联网产业</a></dd>
-                        <dd><a href="/jijin/guquan/medical/">医疗产业</a></dd>
+                        {% if active_nav == "technology" %}
+                            <dd class="layui-this"><a href="/jijin/guquan/technology/">科技产业</a></dd>
+                        {% else %}
+                            <dd><a href="/jijin/guquan/technology/">科技产业</a></dd>
+                        {% endif %}
+                        {% if active_nav == "internet" %}
+                            <dd class="layui-this"><a href="/jijin/guquan/internet/">互联网产业</a></dd>
+                        {% else %}
+                            <dd><a href="/jijin/guquan/internet/">互联网产业</a></dd>
+                        {% endif %}
+                        {% if active_nav == "medical" %}
+                            <dd class="layui-this"><a href="/jijin/guquan/medical/">医疗产业</a></dd>
+                        {% else %}
+                            <dd><a href="/jijin/guquan/medical/">医疗产业</a></dd>
+                        {% endif %}
                     </dl>
                 </li>
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a href="/jijin/market/">二级市场管理</a>
+
+                <li class="layui-nav-item ">
+                    {% if active_nav == "market" %}
+                        <a class="layui-this" href="javascript:;">二级市场管理</a>
+                    {% else %}
+                        <a class="" href="javascript:;">二级市场管理</a>
+                    {% endif %}
+
                     <dl class="layui-nav-child">
-                        <dd><a href="/jijin/market/hongkong/">港股</a></dd>
-                        <dd><a href="/jijin/market/A_share/">A股</a></dd>
-                        <dd><a href="/jijin/market/US_stocks/">美股</a></dd>
+                        {% if active_nav == "hongkong" %}
+                            <dd class="layui-this"><a href="/jijin/market/hongkong/">港股</a></dd>
+                        {% else %}
+                            <dd><a href="/jijin/market/hongkong/">港股</a></dd>
+                        {% endif %}
+                        {% if active_nav == "A_share" %}
+                            <dd class="layui-this"><a href="/jijin/market/A_share/">A股</a></dd>
+                        {% else %}
+                            <dd><a href="/jijin/market/A_share/">A股</a></dd>
+                        {% endif %}
+                        {% if active_nav == "US_stocks" %}
+                            <dd class="layui-this"><a href="/jijin/market/US_stocks/">美股</a></dd>
+                        {% else %}
+                            <dd><a href="/jijin/market/US_stocks/">美股</a></dd>
+                        {% endif %}
                     </dl>
                 </li>
                 {#                    <li class="layui-nav-item">#}
@@ -109,7 +145,12 @@
                 {#                            <dd><a href="javascript:;">美国地产</a></dd>#}
                 {#                        </dl>#}
                 {#                    </li>#}
-                <li class="layui-nav-item"><a href="/jijin/industry/">行业研究</a></li>
+
+                {% if active_nav == "industry" %}
+                   <li class="layui-nav-item layui-this"><a href="/jijin/industry/">行业研究</a></li>
+                {% else %}
+                    <li class="layui-nav-item"><a href="/jijin/industry/">行业研究</a></li>
+                {% endif %}
 
                 <li class="layui-nav-item">
                     <a href="javascript:;">审批流程</a>
@@ -119,11 +160,36 @@
                         <dd><a href="/jijin/approval/manpower/">人力审批</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="/jijin/cooperative/">合作机构</a></li>
-                <li class="layui-nav-item"><a href="/jijin/personnel/">人才库</a></li>
-                <li class="layui-nav-item"><a href="/jijin/agency/">中介机构</a></li>
-                <li class="layui-nav-item"><a href="/jijin/message/">消息</a></li>
-                <li class="layui-nav-item"><a href="/user/account/">账号</a></li>
+
+                {% if active_nav == "cooperative" %}
+                    <li class="layui-nav-item layui-this"><a href="/jijin/cooperative/">合作机构</a></li>
+                {% else %}
+                    <li class="layui-nav-item"><a href="/jijin/cooperative/">合作机构</a></li>
+                {% endif %}
+
+                {% if active_nav == "personnel" %}
+                    <li class="layui-nav-item layui-this"><a href="/jijin/personnel/">人才库</a></li>
+                {% else %}
+                    <li class="layui-nav-item"><a href="/jijin/personnel/">人才库</a></li>
+                {% endif %}
+
+                {% if active_nav == "agency" %}
+                    <li class="layui-nav-item layui-this"><a href="/jijin/agency/">中介机构</a></li>
+                {% else %}
+                    <li class="layui-nav-item"><a href="/jijin/agency/">中介机构</a></li>
+                {% endif %}
+
+                {% if active_nav == "message" %}
+                    <li class="layui-nav-item layui-this"><a href="/jijin/message/">消息</a></li>
+                {% else %}
+                    <li class="layui-nav-item"><a href="/jijin/message/">消息</a></li>
+                {% endif %}
+
+                {% if active_nav == "account" %}
+                    <li class="layui-nav-item layui-this"><a href="/user/account/">账号</a></li>
+                {% else %}
+                    <li class="layui-nav-item"><a href="/user/account/">账号</a></li>
+                {% endif %}
             </ul>
 
         </div>
@@ -151,7 +217,7 @@
     //JavaScript代码区域
     layui.use('element', function () {
         var element = layui.element;
-         element.init()
+        element.init()
 
     });
 </script>

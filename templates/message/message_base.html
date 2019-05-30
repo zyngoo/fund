@@ -19,7 +19,17 @@
 
 {% block left %}
     <ul class="layui-nav layui-layout-left">
-        <li class="layui-nav-item"><a href="/jijin/message/unread/">未读消息</a></li>
-        <li class="layui-nav-item"><a href="/jijin/message/all/">全部消息</a></li>
+
+        {% if tab_nav == "unread" %}
+            <li class="layui-nav-item layui-this"><a href="/jijin/message/unread/">未读消息</a></li>
+        {% else %}
+            <li class="layui-nav-item"><a href="/jijin/message/unread/">未读消息</a></li>
+        {% endif %}
+        {% if tab_nav == "all" %}
+            <li class="layui-nav-item layui-this"><a href="/jijin/message/all/">全部消息</a></li>
+        {% else %}
+            <li class="layui-nav-item"><a href="/jijin/message/all/">全部消息</a></li>
+        {% endif %}
+
     </ul>
 {% endblock %}

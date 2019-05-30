@@ -102,8 +102,10 @@ def test(request):
 
 def count(request):
     context = getUserInfo(request)
+    nav = {"active_nav": "account", "tab_nav": "account"}
+    content = dict(context, **nav)
     # return render(request, "user/userinfo.html", context)
-    return render(request, "user/account.html", context)
+    return render(request, "user/account.html", content)
 
 def countEdit(request):
     if request.method == "POST":
@@ -130,7 +132,9 @@ def countEdit(request):
         return redirect("/user/account/")
 
     context = getUserInfo(request)
-    return render(request, "user/countEdit.html", context)
+    nav = {"active_nav": "account", "tab_nav": "edit"}
+    content = dict(context, **nav)
+    return render(request, "user/countEdit.html", content)
 
 def account_edit(request):
     if request.method == "POST":
@@ -151,7 +155,9 @@ def account_edit(request):
         return redirect("/user/account/")
 
     context = getUserInfo(request)
-    return render(request, "user/account_edit.html", context)
+    nav = {"active_nav": "account", "tab_nav": "edit"}
+    content = dict(context, **nav)
+    return render(request, "user/account_edit.html", content)
 
 def password_edit(request):
     # if request.method == "POST":
@@ -163,8 +169,8 @@ def password_edit(request):
     #         # user.save()
     #         return JsonResponse("ok")
 
-
-    return render(request, "user/password.html")
+    nav = {"active_nav": "account", "tab_nav": "chpwd"}
+    return render(request, "user/password.html", nav)
 
 
 def password_exist(request):

@@ -146,7 +146,7 @@ def calender_test(request):
 
 
 def event(request):
-    return render(request, "event/event_list.html", {"active_nav": "jijin"})
+    return render(request, "event/event_list.html", {"active_nav": "event", "tab_nav": "show"})
 
 
 def event_list(request):
@@ -184,6 +184,8 @@ def event_add(request):
         return redirect("/jijin/event")
 
     content = getData.getFund()
+    content["tab_nav"] = "add"
+    content["active_nav"] = "event"
     return render(request, "event/event_add.html", content)
 
 
@@ -227,7 +229,7 @@ def event_edit(request):
 
 
 def jijin(request):
-    return render(request, "jijin/jijin_list.html", {"active_nav": "jijin"})
+    return render(request, "jijin/jijin_list.html", {"active_nav": "jijin", "tab_nav": "show"})
 
 
 def jijin_list(request):
@@ -266,7 +268,7 @@ def jijin_add(request):
     #     # print(sql)
     #     MysqlHelper().insert_sql(sql)
 
-    return render(request, "jijin/jijin_add.html")
+    return render(request, "jijin/jijin_add.html", {"active_nav": "jijin", "tab_nav": "add"})
 
 
 def jijin_addHandle(request):
@@ -328,9 +330,10 @@ def test(request):
 # 股权直投管理模块
 def guquan(request):
     type = (request.path).split("/")[-2]
+    print(type)
     if type == "guquan":
         type = ""
-    content = {"type": type}
+    content = {"type": type, "active_nav": type, "tab_nav": "show"}
     return render(request, "guquan/guquan_list.html", content)
 
 
@@ -352,7 +355,9 @@ def guquan_add(request):
 
     jijin = getData.getJijin()
     person = getData.getFundPerson()
-    content = dict(jijin, **person)
+    nav = {"active_nav": "guanquan", "tab_nav": "add"}
+    content = dict(jijin, **person, **nav)
+    print(content)
     return render(request, "guquan/guquan_add.html", content)
 
 
@@ -455,7 +460,7 @@ def market(request):
     type = (request.path).split("/")[-2]
     if type == "market":
         type = ""
-    content = {"type": type}
+    content = {"type": type, "active_nav": type, "tab_nav": "show"}
     return render(request, "market/market_list.html", content)
 
 
@@ -473,7 +478,9 @@ def market_add(request):
 
         MysqlHelper().insert_sql(sql)
         return redirect("/jijin/market/")
-    return render(request, "market/market_add.html")
+
+    content = {"active_nav": "market", "tab_nav": "add"}
+    return render(request, "market/market_add.html", content)
 
 
 # def market_addGaikuang(request):
@@ -592,7 +599,8 @@ def market_edit(request):
 
 # 行业研究
 def industry(request):
-    return render(request, "industry/industry_list.html")
+    content = {"active_nav": "industry", "tab_nav": "show"}
+    return render(request, "industry/industry_list.html", content)
 
 
 def industry_add(request):
@@ -612,7 +620,9 @@ def industry_add(request):
         return redirect("/jijin/industry/")
 
     person = getData.getFundPerson()
-    return render(request, "industry/industry_add.html", person)
+    nav = {"active_nav": "industry", "tab_nav": "add"}
+    content = dict(person, **nav)
+    return render(request, "industry/industry_add.html", content)
 
 
 def industry_list(request):
@@ -696,7 +706,8 @@ def manpower_list(request):
 
 
 def cooperative(request):
-    return render(request, "cooperative/cooperative_list.html")
+    content = {"active_nav": "cooperative", "tab_nav": "show"}
+    return render(request, "cooperative/cooperative_list.html", content)
 
 
 def cooperative_add(request):
@@ -713,7 +724,8 @@ def cooperative_add(request):
         MysqlHelper().insert_sql(sql)
         return redirect("/jijin/cooperative/")
 
-    return render(request, "cooperative/cooperative_add.html")
+    content = {"active_nav": "cooperative", "tab_nav": "add"}
+    return render(request, "cooperative/cooperative_add.html", content)
 
 
 def cooperative_list(request):
@@ -755,8 +767,13 @@ def cooperative_edit(request):
     return HttpResponse(json.dumps(result))
 
 
+'''
+    人才库
+'''
+
 def personnel(request):
-    return render(request, "personnel/personnel_list.html")
+    content = {"active_nav": "personnel", "tab_nav": "show"}
+    return render(request, "personnel/personnel_list.html", content)
 
 
 def personnel_add(request):
@@ -775,7 +792,8 @@ def personnel_add(request):
         MysqlHelper().insert_sql(sql)
         return redirect("/jijin/personnel/")
 
-    return render(request, "personnel/personnel_add.html")
+    content = {"active_nav": "personnel", "tab_nav": "add"}
+    return render(request, "personnel/personnel_add.html", content)
 
 
 def personnel_list(request):
@@ -819,8 +837,8 @@ def personnel_edit(request):
 
 # 中介机构
 def agency(request):
-    return render(request, "agency/agency_list.html")
-
+    content = {"active_nav": "agency", "tab_nav": "show"}
+    return render(request, "agency/agency_list.html", content)
 
 def agency_add(request):
     if request.method == "POST":
@@ -836,7 +854,8 @@ def agency_add(request):
         MysqlHelper().insert_sql(sql)
         return redirect("/jijin/agency/")
 
-    return render(request, "agency/agency_add.html")
+    content = {"active_nav": "agency", "tab_nav": "add"}
+    return render(request, "agency/agency_add.html", content)
 
 
 def agency_list(request):
@@ -882,8 +901,10 @@ def message(request):
     print(type)
     # type = (request.path).split("/")[-2]
     if type == "all":
-        return render(request, "message/message_all.html")
-    return render(request, "message/message_list.html")
+        content = {"active_nav": "message", "tab_nav": "all"}
+        return render(request, "message/message_all.html", content)
+    content = {"active_nav": "message", "tab_nav": "unread"}
+    return render(request, "message/message_list.html", content)
 
 
 def message_list(request):

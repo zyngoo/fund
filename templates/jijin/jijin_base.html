@@ -19,7 +19,17 @@
 
 {% block left %}
     <ul class="layui-nav layui-layout-left">
-        <li class="layui-nav-item"><a href="/jijin/jijin">浏览</a></li>
-        <li class="layui-nav-item"><a href="/jijin/jijin/add/">新增</a></li>
+        {% if tab_nav == "show" %}
+            <li class="layui-nav-item layui-this"><a href="/jijin/jijin">浏览</a></li>
+        {% else %}
+            <li class="layui-nav-item"><a href="/jijin/jijin">浏览</a></li>
+        {% endif %}
+        {% if tab_nav == "add" %}
+            <li class="layui-nav-item layui-this"><a href="/jijin/jijin/add/">新增</a></li>
+        {% else %}
+            <li class="layui-nav-item"><a href="/jijin/jijin/add/">新增</a></li>
+        {% endif %}
+
+
     </ul>
 {% endblock %}

@@ -19,8 +19,23 @@
 
 {% block left %}
     <ul class="layui-nav layui-layout-left">
-        <li class="layui-nav-item"><a href="/user/account/">账号</a></li>
-        <li class="layui-nav-item"><a href="/user/account/edit/">编辑资料</a></li>
-        <li class="layui-nav-item"><a href="/user/account/chpwd/">修改密码</a></li>
+
+        {% if tab_nav == "account" %}
+            <li class="layui-nav-item layui-this"><a href="/user/account/">账号</a></li>
+        {% else %}
+            <li class="layui-nav-item"><a href="/user/account/">账号</a></li>
+        {% endif %}
+        {% if tab_nav == "edit" %}
+            <li class="layui-nav-item layui-this"><a href="/user/account/edit/">编辑资料</a></li>
+        {% else %}
+            <li class="layui-nav-item"><a href="/user/account/edit/">编辑资料</a></li>
+        {% endif %}
+        {% if tab_nav == "chpwd" %}
+            <li class="layui-nav-item layui-this"><a href="/user/account/chpwd/">修改密码</a></li>
+        {% else %}
+            <li class="layui-nav-item"><a href="/user/account/chpwd/">修改密码</a></li>
+        {% endif %}
+
+
     </ul>
 {% endblock %}
