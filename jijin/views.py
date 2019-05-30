@@ -13,19 +13,22 @@ from fund import settings
 
 
 def index(request):
-    return render(request, "shouye.html")
+    return render(request, "shouye.html", {"active_nav":"shouye"})
 
 
 def shouye(request):
-    return render(request, "shouye.html")
+    return render(request, "shouye.html", {"active_nav":"shouye"})
 
 
 def calender(request):
-    return render(request, "calender/calender.html", {"active_nav": "calender"})
+    return render(request, "calender/calender.html", {"active_nav": "calender", "tab_nav": ""})
 
 
 def calender_add(request):
     content = getData.getCalender()
+    content["tab_nav"] = "add"
+    content["active_nav"] = "calender"
+    # print(content)
     return render(request, "calender/calender_add.html", content)
 
 
@@ -49,7 +52,7 @@ def calender_handle(request):
 
 
 def calender_list(request):
-    return render(request, "calender/calender_list.html")
+    return render(request, "calender/calender_list.html", {"active_nav": "calender", "tab_nav": "show"})
 
 
 # 取值
@@ -143,7 +146,7 @@ def calender_test(request):
 
 
 def event(request):
-    return render(request, "event/event_list.html")
+    return render(request, "event/event_list.html", {"active_nav": "jijin"})
 
 
 def event_list(request):
@@ -224,7 +227,7 @@ def event_edit(request):
 
 
 def jijin(request):
-    return render(request, "jijin/jijin_list.html")
+    return render(request, "jijin/jijin_list.html", {"active_nav": "jijin"})
 
 
 def jijin_list(request):

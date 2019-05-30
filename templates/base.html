@@ -50,27 +50,27 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
                 {% if active_nav == "shouye" %}
-                    <li class="layui-nav-item"><a href="/jijin/">首页</a></li>
+                    <li class="layui-nav-item layui-this"><a href="/jijin/">首页</a></li>
                 {% else %}
                     <li class="layui-nav-item"><a href="/jijin/">首页</a></li>
                 {% endif %}
 
-                {% if active_nav == "" %}
-                    <li class="layui-nav-item "><a href="/jijin/calender/">日历</a></li>
+                {% if active_nav == "calender" %}
+                    <li class="layui-nav-item layui-this"><a href="/jijin/calender/">日历</a></li>
                 {% else %}
                     <li class="layui-nav-item "><a href="/jijin/calender/">日历</a></li>
                 {% endif %}
 
 
 
-                {% if active_nav == "" %}
-                    <li class="layui-nav-item"><a href="/jijin/event/">事件</a></li>
+                {% if active_nav == "event" %}
+                    <li class="layui-nav-item layui-this"><a href="/jijin/event/">事件</a></li>
                 {% else %}
                     <li class="layui-nav-item"><a href="/jijin/event/">事件</a></li>
                 {% endif %}
 
-                {% if active_nav == "" %}
-                    <li class="layui-nav-item"><a href="/jijin/jijin/">基金</a></li>
+                {% if active_nav == "jijin" %}
+                    <li class="layui-nav-item layui-this"><a href="/jijin/jijin/">基金</a></li>
                 {% else %}
                     <li class="layui-nav-item"><a href="/jijin/jijin/">基金</a></li>
                 {% endif %}
@@ -151,6 +151,7 @@
     //JavaScript代码区域
     layui.use('element', function () {
         var element = layui.element;
+         element.init()
 
     });
 </script>
