@@ -105,7 +105,10 @@ def count(request):
     nav = {"active_nav": "account", "tab_nav": "account"}
     content = dict(context, **nav)
     # return render(request, "user/userinfo.html", context)
-    return render(request, "user/account.html", content)
+    if context["user"]:
+        return render(request, "user/account.html", content)
+    else:
+        return redirect("/user/login/")
 
 def countEdit(request):
     if request.method == "POST":
